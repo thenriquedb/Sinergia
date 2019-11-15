@@ -1,4 +1,14 @@
 export default {
   primary: '#098972',
-  lightGray: '#FCFCFC',
+  white: '#FCFCFC',
+  darkGray1: '#707070',
+  darkGray2: '#838383',
+  darkGray3: '#6A6868',
+  darkGray4: '#6A6868',
+  darkGray5: '#525252',
+  darkGray5: '#757575',
+  black: '#000',
+  low: '#238823',
+  medium: '#F7B71D',
+  high: '#D2222D',
 };

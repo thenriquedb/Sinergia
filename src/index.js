@@ -1,12 +1,6 @@
-import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import React from 'react';
+import Routes from './routes';
 
-export default class src extends Component {
-  render() {
-    return (
-      <View>
-        <Text> Ok</Text>
-      </View>
-    );
-  }
+export default function App() {
+  return <Routes />;
 }
