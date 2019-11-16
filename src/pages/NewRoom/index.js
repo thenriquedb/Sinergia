@@ -32,6 +32,7 @@ NewRoom.navigationOptions = () => {
 const mapStateToProps = state => {
   return {rooms: state.houseReducer.rooms};
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     addNewRoom: name => dispatch({type: 'ADD_ROOM', payload: {name}}),

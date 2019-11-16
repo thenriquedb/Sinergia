@@ -1,8 +1,7 @@
 import React from 'react';
-
 import {View, TouchableOpacity} from 'react-native';
-import {Container, TotalPrice, Details} from './styles';
 
+import {Container, TotalPrice, Details} from './styles';
 import {Text, TextLight, TextBold} from '../../styles/fonts';
 
 const CardRoom = props => {
@@ -21,7 +20,14 @@ const CardRoom = props => {
 
         <TotalPrice>
           <TextLight fontSize="h5"> Valor total</TextLight>
-          <TextBold fontSize="h3"> R$ {props.totalAmount.toFixed(2)}</TextBold>
+          <TextBold fontSize="h3">
+            {' '}
+            R${' '}
+            {props.totalAmount
+              .toFixed(2)
+              .toString()
+              .replace('.', ',')}
+          </TextBold>
         </TotalPrice>
       </Container>
     </TouchableOpacity>

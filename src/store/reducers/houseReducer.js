@@ -15,7 +15,7 @@ export default function houseReducer(state = INITIAL_STATE, action) {
             id: Math.random(),
             name: action.payload.name,
             totalKw: 10,
-            totalAmount: 0,
+            totalAmount: 1.5,
             equipaments: [],
             equipmentHigherConsumption: '',
           },

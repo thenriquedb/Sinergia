@@ -21,7 +21,11 @@ const Header = props => {
         <View>
           <TextBold color="#FFF"> Valor total </TextBold>
           <TextLight color="#fff" fontSize="h4">
-            {props.totalAmount}
+            R${' '}
+            {props.totalAmount
+              .toFixed(2)
+              .toString()
+              .replace('.', ',')}
           </TextLight>
         </View>
 
