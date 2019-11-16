@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {View, TouchableOpacity} from 'react-native';
-import {Container, TotalPrice} from './styles';
+import {Container, TotalPrice, Details} from './styles';
 
 import {Text, TextLight, TextBold} from '../../styles/fonts';
 
@@ -9,13 +9,15 @@ const CardRoom = props => {
   return (
     <TouchableOpacity activeOpacity={0.6}>
       <Container>
-        <View>
+        <Details>
           <TextLight fontSize="h4"> {props.name} </TextLight>
+
           <TextLight fontSize="h5">
-            {props.equipamentsAmount} Equipamentos
+            {' '}
+            {props.equipamentsAmount} equipamentos
           </TextLight>
           <TextLight fontSize="h5"> {props.totalKw} KW </TextLight>
-        </View>
+        </Details>
 
         <TotalPrice>
           <TextLight fontSize="h5"> Valor total</TextLight>

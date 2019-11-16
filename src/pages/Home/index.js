@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, Text} from 'react-native';
 
 //Redux
@@ -13,10 +13,23 @@ import {Container, Tasks} from './style';
 import Header from './Header/index';
 import CardRoom from '../../components/CardRoom/index';
 
-const Home = (props, {navigation}) => {
+const Home = props => {
+  const [totalKw, setTotalKw] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+
+  useEffect(() => {
+    setTotalKw(
+      props.rooms.reduce((prevVal, elem) => prevVal + elem.totalKw, 0),
+    );
+
+    setTotalAmount(
+      props.rooms.reduce((prevVal, elem) => prevVal + elem.totalAmount, 0),
+    );
+  });
+
   return (
     <Container>
-      <Header />
+      <Header totalKw={totalKw} totalAmount={totalAmount} />
       <Tasks>
         <FlatList
           data={props.rooms}
@@ -34,7 +47,7 @@ const Home = (props, {navigation}) => {
       </Tasks>
       <ActionButton
         size={55}
-        onPress={() => navigation.navigate('NewRoom')}
+        onPress={() => props.navigation.navigate('NewRoom')}
         buttonColor={Colors.primary}
       />
     </Container>

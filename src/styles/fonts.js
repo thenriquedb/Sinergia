@@ -93,6 +93,7 @@ const TextLight = styled.Text`
     }
   }};
   font-family: 'Roboto-Light';
+  margin: 0;
   color: ${props => (props.color ? props.color : '#000')};
 `;
 

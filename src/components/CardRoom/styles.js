@@ -29,6 +29,11 @@ export const Status = styled.View`
   width: 3;
 `;
 
+export const Details = styled.View`
+  flex: 1;
+  /* background-color: red; */
+`;
+
 export const TotalPrice = styled.View`
   align-items: center;
   justify-content: center;

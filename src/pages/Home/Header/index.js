@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import {Text, TextLight, TextThin, TextBold} from '../../../styles/fonts';
 import {Container, Details} from './style';
 
-const Header = () => {
+const Header = props => {
   return (
     <Container>
       <View>
@@ -13,7 +13,7 @@ const Header = () => {
         </TextBold>
 
         <TextThin color="#fff" fontSize="h1">
-          150
+          {props.totalKw}
         </TextThin>
       </View>
 
@@ -21,14 +21,14 @@ const Header = () => {
         <View>
           <TextBold color="#FFF"> Valor total </TextBold>
           <TextLight color="#fff" fontSize="h4">
-            R$ 80,00
+            {props.totalAmount}
           </TextLight>
         </View>
 
         <View>
           <TextBold color="#FFF"> Maior consumo </TextBold>
           <TextLight color="#fff" fontSize="h4">
-            Banheiro{' '}
+            Sala de jantar
           </TextLight>
         </View>
 
