@@ -1,27 +1,43 @@
 import React from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {FlatList, Text} from 'react-native';
 
-import styles from './style';
+//Redux
+import {connect} from 'react-redux';
+
+// Style
+import Colors from '../../styles/colors';
 
 // Components
+import ActionButton from 'react-native-action-button';
+import {Container, Tasks} from './style';
 import Header from './Header/index';
 import CardRoom from '../../components/CardRoom/index';
 
-const DATA = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}];
-
-const Home = ({navigation}) => {
+const Home = (props, {navigation}) => {
   return (
-    <View style={styles.container}>
+    <Container>
       <Header />
-      <View style={styles.content}>
+      <Tasks>
         <FlatList
-          data={DATA}
+          data={props.rooms}
           showsVerticalScrollIndicator={false}
-          keyExtractor={item => item.id}
-          renderItem={() => <CardRoom />}
+          keyExtractor={room => room.id}
+          renderItem={({item}) => (
+            <CardRoom
+              equipamentsAmount={item.equipaments.length}
+              totalKw={item.totalKw}
+              totalAmount={item.totalAmount}
+              name={item.name}
+            />
+          )}
         />
-      </View>
-    </View>
+      </Tasks>
+      <ActionButton
+        size={55}
+        onPress={() => navigation.navigate('NewRoom')}
+        buttonColor={Colors.primary}
+      />
+    </Container>
   );
 };
 
@@ -29,4 +45,12 @@ Home.navigationOptions = () => {
   return {header: null};
 };
 
-export default Home;
+const mapStateToProps = state => {
+  return {rooms: state.houseReducer.rooms};
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

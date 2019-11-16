@@ -31,4 +31,5 @@ export const Status = styled.View`
 
 export const TotalPrice = styled.View`
   align-items: center;
+  justify-content: center;
 `;

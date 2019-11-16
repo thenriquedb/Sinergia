@@ -5,9 +5,9 @@ const DEFAULT_FONT_SIZE = 16;
 const DEFAULT_H1_SIZE = 40;
 const DEFAULT_H2_SIZE = 34;
 const DEFAULT_H3_SIZE = 28;
-const DEFAULT_H4_SIZE = 22;
-const DEFAULT_H5_SIZE = 16;
-const DEFAULT_H6_SIZE = 12;
+const DEFAULT_H4_SIZE = 24;
+const DEFAULT_H5_SIZE = 18;
+const DEFAULT_H6_SIZE = 16;
 
 const Text = styled.Text`
   font-size: ${props => {
