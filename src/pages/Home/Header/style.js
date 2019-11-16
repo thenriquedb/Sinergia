@@ -5,10 +5,14 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  /* align-items: center; */
+  margin-top: 30;
   padding-left: 15;
   padding-right: 15;
-  justify-content: space-between;
+`;
+
+export const TotalConsumeKW = styled.View`
+  align-items: center;
+  margin-bottom: 15;
 `;
 
 export const Details = styled.View`

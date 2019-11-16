@@ -2,20 +2,20 @@ import React from 'react';
 import {View} from 'react-native';
 
 import {Text, TextLight, TextThin, TextBold} from '../../../styles/fonts';
-import {Container, Details} from './style';
+import {Container, Details, TotalConsumeKW} from './style';
 
 const Header = props => {
   return (
     <Container>
-      <View>
+      <TotalConsumeKW>
         <TextBold color="#fff" fontSize="h5">
-          Consumo Total (KW/h)
+          Consumo Total
         </TextBold>
 
         <TextThin color="#fff" fontSize="h1">
-          {props.totalKw}
+          {props.totalKw} KW
         </TextThin>
-      </View>
+      </TotalConsumeKW>
 
       <Details>
         <View>

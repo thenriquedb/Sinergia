@@ -10,10 +10,11 @@ export const Container = styled.View`
 `;
 
 export const Tasks = styled.View`
-  flex: 2;
+  flex: 3;
   background-color: ${Colors.white};
   border-top-left-radius: 15;
   border-top-right-radius: 15;
+  margin-top: 30;
   padding-top: 15;
   padding-left: 10;
   padding-right: 10;
