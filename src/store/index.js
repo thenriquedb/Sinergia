@@ -4,7 +4,7 @@ import {persistStore, persistReducer} from 'redux-persist';
 
 import reducers from './reducers/index';
 
-const persistreducer = persistReducer(
+const persistConfig = persistReducer(
   {
     key: 'root',
     storage: AsyncStoreage,
@@ -12,7 +12,8 @@ const persistreducer = persistReducer(
   },
   reducers,
 );
-const store = createStore(persistreducer);
+
+const store = createStore(persistConfig);
 const persistor = persistStore(store);
 
 export {store, persistor};

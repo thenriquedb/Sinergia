@@ -1,16 +1,17 @@
 import React from 'react';
-import {View, TouchableOpacity} from 'react-native';
-
+import {View, TouchableHighlight} from 'react-native';
 import {Container, TotalPrice, Details} from './styles';
 import {Text, TextLight, TextBold} from '../../styles/fonts';
 
 const CardRoom = props => {
   return (
-    <TouchableOpacity activeOpacity={0.6}>
+    <TouchableHighlight
+      style={{marginBottom: 15}}
+      onPress={() => {}}
+      underlayColor="#FDFDFD">
       <Container>
         <Details>
           <TextLight fontSize="h4"> {props.name} </TextLight>
-
           <TextLight fontSize="h5">
             {' '}
             {props.equipamentsAmount} equipamentos
@@ -30,7 +31,7 @@ const CardRoom = props => {
           </TextBold>
         </TotalPrice>
       </Container>
-    </TouchableOpacity>
+    </TouchableHighlight>
   );
 };
 

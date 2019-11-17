@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Text} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
+import {SwipeListView} from 'react-native-swipe-list-view';
 
 //Redux
 import {connect} from 'react-redux';
@@ -31,10 +32,17 @@ const Home = props => {
     <Container>
       <Header totalKw={totalKw} totalAmount={totalAmount} />
       <Tasks>
-        <FlatList
+        <SwipeListView
           data={props.rooms}
           showsVerticalScrollIndicator={false}
           keyExtractor={room => room.id}
+          rightOpenValue={-70}
+          disableRightSwipe={true}
+          renderHiddenItem={({item}) => (
+            <View>
+              <Text>DIREITA </Text>
+            </View>
+          )}
           renderItem={({item}) => (
             <CardRoom
               equipamentsAmount={item.equipaments.length}
