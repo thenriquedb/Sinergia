@@ -6,6 +6,7 @@ export default StyleSheet.create({
     borderBottomWidth: 2,
     fontSize: 20,
     paddingVertical: 10,
+    marginTop: 20,
     marginBottom: 20,
     borderBottomColor: Colors.lightGray,
   },

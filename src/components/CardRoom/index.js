@@ -1,7 +1,9 @@
 import React from 'react';
-import {View, TouchableHighlight} from 'react-native';
+import {TouchableHighlight} from 'react-native';
+
+// styles
 import {Container, TotalPrice, Details} from './styles';
-import {Text, TextLight, TextBold} from '../../styles/fonts';
+import {TextLight, TextBold} from '../../styles/fonts';
 
 const CardRoom = props => {
   return (

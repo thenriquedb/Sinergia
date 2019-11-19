@@ -10,7 +10,7 @@ export const Container = styled.View`
   border-left-color: ${colors.high};
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-background-color: ${colors.white}
+  background-color: ${colors.white};
   padding-top: 10;
   padding-bottom: 10;
   padding-right: 15;

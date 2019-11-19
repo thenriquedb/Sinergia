@@ -7,6 +7,9 @@ import Colors from '../../styles/colors';
 const Input = props => {
   return (
     <TextInput
+      value={props.value}
+      onChangeText={props.onChangeText}
+      maxLength={18}
       style={styles.input}
       placeholderTextColor={Colors.lightGray}
       placeholder={props.placeholder}
