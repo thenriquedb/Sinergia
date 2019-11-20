@@ -32,7 +32,7 @@ const Header = props => {
         <View>
           <TextBold color="#FFF"> Maior consumo </TextBold>
           <TextLight color="#fff" fontSize="h4">
-            Sala de jantar
+            {props.roomHigherConsumption}
           </TextLight>
         </View>
 

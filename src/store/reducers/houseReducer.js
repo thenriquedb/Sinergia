@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   totalKw: {},
   totalAmount: {},
+  roomHigherConsumption: '',
   rooms: [],
 };
 

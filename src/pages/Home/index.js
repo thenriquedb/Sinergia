@@ -24,11 +24,14 @@ const Home = props => {
 
   useEffect(() => {
     setTotalKw(
-      props.rooms.reduce((prevVal, elem) => prevVal + elem.totalKw, 0),
+      props.house.rooms.reduce((prevVal, elem) => prevVal + elem.totalKw, 0),
     );
 
     setTotalAmount(
-      props.rooms.reduce((prevVal, elem) => prevVal + elem.totalAmount, 0),
+      props.house.rooms.reduce(
+        (prevVal, elem) => prevVal + elem.totalAmount,
+        0,
+      ),
     );
   });
 
@@ -43,10 +46,14 @@ const Home = props => {
 
   return (
     <Container>
-      <Header totalKw={totalKw} totalAmount={totalAmount} />
+      <Header
+        roomHigherConsumption={props.house.roomHigherConsumption}
+        totalKw={totalKw}
+        totalAmount={totalAmount}
+      />
       <Tasks>
         <SwipeListView
-          data={props.rooms}
+          data={props.house.rooms}
           showsVerticalScrollIndicator={false}
           keyExtractor={room => room.id}
           rightOpenValue={-100}
@@ -58,6 +65,7 @@ const Home = props => {
               index={index}
               idRoom={item.id}
               name={item.name}
+              selectedRoom={item.typeRoom}
             />
           )}
           renderItem={({item}) => (
@@ -89,11 +97,7 @@ Home.navigationOptions = () => {
 };
 
 const mapStateToProps = state => ({
-  rooms: state.houseReducer.rooms,
+  house: state.houseReducer,
 });
 
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, null)(Home);

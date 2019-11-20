@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Modal from 'react-native-modal';
 import {Picker, Alert} from 'react-native';
 import {connect} from 'react-redux';
@@ -17,10 +17,18 @@ const EditRoomModal = props => {
   const [name, setName] = useState(props.name);
   const [selectedRoom, setSelectedRoom] = useState('');
 
+  useEffect(() => {
+    if (props.isVisible) {
+      setName(props.name);
+      setSelectedRoom('');
+    }
+  }, [props.isVisible]);
+
   const toggleEditBtn = () => {
-    if (name.length >= 0) {
+    if (name.length >= 4) {
       try {
         props.editRoom(props.idRoom, name, selectedRoom);
+        // setSelectedRoom(props.selectedRoom);
         props.refreshList();
       } catch (error) {
         Alert.alert('Não foi atualizar cômodo ' + name + '.');
@@ -38,7 +46,7 @@ const EditRoomModal = props => {
 
       setName('');
     } else {
-      Alert.alert('O nome precisa possuir no mínimo 4 caracteres');
+      Alert.alert('O novo nome precisa possuir no mínimo 4 caracteres.');
     }
   };
 
@@ -46,16 +54,19 @@ const EditRoomModal = props => {
     <Modal
       isVisible={props.isVisible}
       swipeDirection={['down']}
-      onSwipeComplete={props.toggleModal}
+      onSwipeComplete={() => {
+        props.toggleModal(), setName(name);
+      }}
       style={{justifyContent: 'flex-end', margin: 0}}>
       <Container>
+        <TextBold>name: {name}</TextBold>
         <Input
           value={name}
           onChangeText={name => setName(name)}
           placeholder="Novo nome"
         />
         <Picker
-          selectedValue={props.selectedRoom}
+          selectedValue={selectedRoom}
           onValueChange={(itemValue, itemIndex) => {
             setSelectedRoom(itemValue);
           }}>
