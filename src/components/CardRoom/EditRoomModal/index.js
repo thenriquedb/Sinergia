@@ -59,7 +59,6 @@ const EditRoomModal = props => {
       }}
       style={{justifyContent: 'flex-end', margin: 0}}>
       <Container>
-        <TextBold>name: {name}</TextBold>
         <Input
           value={name}
           onChangeText={name => setName(name)}

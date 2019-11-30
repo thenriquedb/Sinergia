@@ -13,13 +13,10 @@ import ActionButton from 'react-native-action-button';
 import Header from './Header/index';
 import CardRoom from '../../components/CardRoom/index';
 import HiddenCard from '../../components/CardRoom/HiddenCardRoom/index';
-import NewRoomModal from './NewRoomModal/index';
 
 const Home = props => {
   const [totalKw, setTotalKw] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
-
-  const [newRoomModalIsVisible, setNewRoomModalIsVisible] = useState(false);
   const [updateList, setUpdateList] = useState(false);
 
   useEffect(() => {
@@ -40,8 +37,11 @@ const Home = props => {
   };
 
   const toggleNewRoomModal = () => {
-    const t = !newRoomModalIsVisible;
-    setNewRoomModalIsVisible(t);
+    props.navigation.navigate('NewRoom');
+  };
+
+  const toggleRoomCard = () => {
+    props.navigation.navigate('Room');
   };
 
   return (
@@ -70,6 +70,7 @@ const Home = props => {
           )}
           renderItem={({item}) => (
             <CardRoom
+              toggleRoomCard={toggleRoomCard}
               equipamentsAmount={item.equipaments.length}
               totalKw={item.totalKw}
               totalAmount={item.totalAmount}
@@ -83,17 +84,8 @@ const Home = props => {
         onPress={() => toggleNewRoomModal()}
         buttonColor={Colors.primary}
       />
-
-      <NewRoomModal
-        toggleModal={toggleNewRoomModal}
-        isVisible={newRoomModalIsVisible}
-      />
     </Container>
   );
-};
-
-Home.navigationOptions = () => {
-  return {header: null};
 };
 
 const mapStateToProps = state => ({

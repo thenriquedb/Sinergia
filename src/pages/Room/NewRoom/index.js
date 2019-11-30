@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import Modal from 'react-native-modal';
 import {Picker, Alert} from 'react-native';
+
+// redux
 import {connect} from 'react-redux';
 
 // components
@@ -13,7 +14,7 @@ import {TextBold} from '../../../styles/fonts';
 // utilities
 import roomsList from '../../../utilities/roomsList';
 
-const NewRoomModal = props => {
+const NewRoom = props => {
   const [name, setName] = useState('');
   const [selectedRoom, setSelectedRoom] = useState('');
 
@@ -32,35 +33,28 @@ const NewRoomModal = props => {
   };
 
   return (
-    <Modal
-      isVisible={props.isVisible}
-      swipeDirection={['down']}
-      onSwipeComplete={props.toggleModal}
-      style={{justifyContent: 'flex-end', margin: 0}}>
-      <Container>
-        <TextBold fontSize="h3"> Novo cômodo </TextBold>
-        <Input
-          value={name}
-          onChangeText={name => setName(name)}
-          placeholder="Nome"
-        />
-        <Picker
-          selectedValue={selectedRoom}
-          onValueChange={(itemValue, itemIndex) => {
-            setSelectedRoom(itemValue);
-          }}>
-          {roomsList.map((value, key) => {
-            return <Picker.Item key={key} value={key} label={value.name} />;
-          })}
-        </Picker>
-        <SaveBtn onPress={() => toggleSaveBtn()}>
-          <TextBold fontSize="h5" color="#fff">
-            {' '}
-            Salvar{' '}
-          </TextBold>
-        </SaveBtn>
-      </Container>
-    </Modal>
+    <Container>
+      <Input
+        value={name}
+        onChangeText={name => setName(name)}
+        placeholder="Nome"
+      />
+      <Picker
+        selectedValue={selectedRoom}
+        onValueChange={(itemValue, itemIndex) => {
+          setSelectedRoom(itemValue);
+        }}>
+        {roomsList.map((value, key) => {
+          return <Picker.Item key={key} value={key} label={value.name} />;
+        })}
+      </Picker>
+      <SaveBtn onPress={() => toggleSaveBtn()}>
+        <TextBold fontSize="h5" color="#fff">
+          {' '}
+          Salvar{' '}
+        </TextBold>
+      </SaveBtn>
+    </Container>
   );
 };
 
@@ -75,4 +69,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewRoomModal);
+export default connect(mapStateToProps, mapDispatchToProps)(NewRoom);

@@ -8,8 +8,8 @@ import {TextLight, TextBold} from '../../styles/fonts';
 const CardRoom = props => {
   return (
     <TouchableHighlight
+      onPress={props.toggleRoomCard}
       style={{marginBottom: 15}}
-      onPress={() => {}}
       underlayColor="#FDFDFD">
       <Container>
         <Details>
