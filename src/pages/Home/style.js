@@ -19,3 +19,21 @@ export const Tasks = styled.View`
   justify-content: center;
   align-content: center;
 `;
+
+export const Header = styled.View`
+  flex: 1;
+  margin-top: 30;
+  padding-left: 15;
+  padding-right: 15;
+`;
+
+export const TotalConsumeKW = styled.View`
+  align-items: center;
+  margin-bottom: 15;
+`;
+
+export const Details = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+`;

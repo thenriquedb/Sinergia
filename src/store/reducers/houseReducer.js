@@ -1,22 +1,14 @@
-const INITIAL_STATE = {
-  totalKw: {},
-  totalAmount: {},
-  roomHigherConsumption: '',
-  rooms: [],
-};
+import INITIAL_STATE from '../store/index';
 
 export default function houseReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'ADD_ROOM':
-      console.log('Action type: ', action.type);
-      console.log('Payload  name: ', action.payload.name);
-      console.log('Payload type room: ', action.payload.typeRoom);
       return {
         ...state,
         rooms: [
           ...state.rooms,
           {
-            id: Math.random(),
+            id: Date.getTime(),
             name: action.payload.name,
             typeRoom: action.payload.typeRoom,
             totalKw: 0,
@@ -36,7 +28,6 @@ export default function houseReducer(state = INITIAL_STATE, action) {
       break;
 
     case 'EDIT_ROOM':
-      console.log('edit');
       state.rooms.forEach((item, index) => {
         console.log('item.id: ' + item.id);
         console.log('action.id: ' + action.payload.id);
@@ -49,6 +40,11 @@ export default function houseReducer(state = INITIAL_STATE, action) {
           };
         }
       });
+    case 'GET_EQUIPMENTS':
+      console.log('roomId: ', action.payload.roomId);
+      return state.rooms[0].equipments;
+      // return state.rooms.find(room => room.id === action.payload.roomId);
+      break;
 
     default:
       return state;

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {View} from 'react-native';
 import {SwipeListView} from 'react-native-swipe-list-view';
 
 //Redux
@@ -6,13 +7,13 @@ import {connect} from 'react-redux';
 
 // Style
 import Colors from '../../styles/colors';
-import {Container, Tasks} from './style';
+import {Container, Tasks, Details, TotalConsumeKW, Header} from './style';
+import {Text, TextLight, TextThin, TextBold} from '../../styles/fonts';
 
 // Components
 import ActionButton from 'react-native-action-button';
-import Header from './Header/index';
-import CardRoom from '../../components/CardRoom/index';
-import HiddenCard from '../../components/CardRoom/HiddenCardRoom/index';
+import CardRoom from '../../components/Cards/CardRoom/index';
+import HiddenCard from '../../components/Cards/CardRoom/HiddenCardRoom';
 
 const Home = props => {
   const [totalKw, setTotalKw] = useState(0);
@@ -40,17 +41,51 @@ const Home = props => {
     props.navigation.navigate('NewRoom');
   };
 
-  const toggleRoomCard = () => {
-    props.navigation.navigate('Room');
+  const toggleRoomCard = room => {
+    props.navigation.navigate('Room', {room: room});
   };
 
   return (
     <Container>
-      <Header
-        roomHigherConsumption={props.house.roomHigherConsumption}
-        totalKw={totalKw}
-        totalAmount={totalAmount}
-      />
+      <Header>
+        <TotalConsumeKW>
+          <TextBold color="#fff" fontSize="h5">
+            Consumo Total
+          </TextBold>
+
+          <TextThin color="#fff" fontSize="h1">
+            {totalKw} KW
+          </TextThin>
+        </TotalConsumeKW>
+
+        <Details>
+          <View>
+            <TextBold color="#FFF"> Valor total </TextBold>
+            <TextLight color="#fff" fontSize="h4">
+              R${' '}
+              {totalAmount
+                .toFixed(2)
+                .toString()
+                .replace('.', ',')}
+            </TextLight>
+          </View>
+
+          <View>
+            <TextBold color="#FFF"> Maior consumo </TextBold>
+            <TextLight color="#fff" fontSize="h4">
+              Sala
+            </TextLight>
+          </View>
+
+          <View>
+            <TextBold color="#FFF"> Bandeira </TextBold>
+            <TextLight color="#fff" fontSize="h4">
+              Amarela
+            </TextLight>
+          </View>
+        </Details>
+      </Header>
+
       <Tasks>
         <SwipeListView
           data={props.house.rooms}
@@ -71,7 +106,8 @@ const Home = props => {
           renderItem={({item}) => (
             <CardRoom
               toggleRoomCard={toggleRoomCard}
-              equipamentsAmount={item.equipaments.length}
+              room={item}
+              equipamentsAmount={item.equipments.length}
               totalKw={item.totalKw}
               totalAmount={item.totalAmount}
               name={item.name}
