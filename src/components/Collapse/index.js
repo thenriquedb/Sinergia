@@ -1,32 +1,27 @@
 import React, {useState} from 'react';
 
 import {View, Text, TouchableOpacity} from 'react-native';
-import {is} from '@babel/types';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-// import { Container } from './styles';
-
-const Collapse = () => {
-  const [isVisible, setIsVisible] = useState(false);
+const Collapse = props => {
+  const [isVisible, setIsVisible] = useState(true);
 
   function render(params) {
-    if (isVisible) {
-      return (
-        <View>
-          <Text> view ok</Text>
-        </View>
-      );
-    } else {
-      return null;
-    }
+    return isVisible ? props.visible : props.hidden;
   }
 
   return (
     <View>
-      <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
-        <Text>Clique aqui</Text>
-      </TouchableOpacity>
-
       {render()}
+      <TouchableOpacity
+        style={{alignItems: 'center'}}
+        onPress={() => setIsVisible(!isVisible)}>
+        {isVisible ? (
+          <MaterialCommunityIcons name="chevron-up" size={45} color="#fff" />
+        ) : (
+          <MaterialCommunityIcons name="chevron-down" size={45} color="#fff" />
+        )}
+      </TouchableOpacity>
     </View>
   );
 };

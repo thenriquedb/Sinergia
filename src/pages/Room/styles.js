@@ -7,12 +7,28 @@ export const Container = styled.View`
   background-color: ${Colors.primary};
 `;
 
+export const HeaderContainer = styled.View`
+  margin-top: -10;
+  padding-left: 15;
+  padding-right: 15;
+`;
+
+export const HeaderInfosContainer = styled.View`
+  flex-direction: row;
+  margin-top: 10px;
+  justify-content: space-between;
+`;
+
+export const HeaderInfo = styled.View`
+  flex-direction: column;
+`;
+
 export const EquipmentsList = styled.View`
   flex: 3;
   background-color: ${Colors.white};
   border-top-left-radius: 15;
   border-top-right-radius: 15;
-  margin-top: 30;
+  margin-top: 5;
   padding-top: 15;
   padding-left: 10;
   padding-right: 10;

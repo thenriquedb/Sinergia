@@ -24,6 +24,8 @@ const mainStack = createStackNavigator({
       },
       headerStyle: {
         backgroundColor: Colors.primary,
+        shadowColor: 'transparent',
+        elevation: 0,
       },
     },
   },

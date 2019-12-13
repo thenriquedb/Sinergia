@@ -1,26 +1,74 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 
 // components
 import Collapse from '../../components/Collapse/index';
 import CardEquipment from '../../components/Cards/CardEquipment/index';
-import {EquipmentsList, Container} from './styles';
 import HiddenCard from '../../components/Cards/CardEquipment/HiddenCard';
-
 import {SwipeListView} from 'react-native-swipe-list-view';
 
-// import { Container } from './styles';
-
+// estilos
+import {
+  EquipmentsList,
+  Container,
+  HeaderContainer,
+  HeaderInfo,
+  HeaderInfosContainer,
+} from './styles';
+import {TextBold, TextLight, Text, TextThin} from '../../styles/fonts';
 export default class Room extends Component {
   constructor(props) {
     super(props);
     this.state = {room: this.props.navigation.getParam('room')};
+    this.collapseVisible = this.collapseVisible.bind(this);
+  }
+
+  collapseVisible() {
+    return (
+      <HeaderContainer>
+        <TextBold textAlign={'center'} color={'#fff'} fontSize={'h1'}>
+          {this.state.room.name}
+        </TextBold>
+
+        <HeaderInfosContainer>
+          <HeaderInfo>
+            <Text color={'#fff'} fontSize={'h6'}>
+              Gasto Mensal
+            </Text>
+            <TextLight color={'#fff'} fontSize={'h5'}>
+              R$ 11,40
+            </TextLight>
+          </HeaderInfo>
+
+          <HeaderInfo>
+            <Text color={'#fff'} fontSize={'h6'}>
+              Consumo Total
+            </Text>
+            <TextLight color={'#fff'} fontSize={'h5'}>
+              227 W
+            </TextLight>
+          </HeaderInfo>
+
+          <HeaderInfo>
+            <Text color={'#fff'} fontSize={'h6'}>
+              Maior Consumo
+            </Text>
+            <TextLight color={'#fff'} fontSize={'h5'}>
+              Geladeira
+            </TextLight>
+          </HeaderInfo>
+        </HeaderInfosContainer>
+      </HeaderContainer>
+    );
   }
 
   render() {
     return (
       <Container>
-        <Text> {this.state.room.name}</Text>
+        <Collapse
+          visible={this.collapseVisible()}
+          hidden={<Text> Nao visivel </Text>}
+        />
         <EquipmentsList>
           <SwipeListView
             data={this.state.room.equipments}

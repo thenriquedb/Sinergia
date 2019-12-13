@@ -120,6 +120,7 @@ const TextBold = styled.Text`
     }
   }};
   font-family: 'Roboto-Bold';
+  text-align: ${props => (props.textAlign ? props.textAlign : 'left')};
   color: ${props => (props.color ? props.color : '#000')};
 `;
 
