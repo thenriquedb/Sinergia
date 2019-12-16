@@ -6,27 +6,28 @@ import {Container, TotalPrice, Details} from './styles';
 import {TextLight, TextBold} from '../../../styles/fonts';
 
 const CardRoom = props => {
+  const {room} = props;
+  console.log('room ', room);
   return (
     <TouchableHighlight
-      onPress={() => props.toggleRoomCard(props.room)}
+      onPress={() => props.toggleRoomCard(room)}
       style={{marginBottom: 15}}
       underlayColor="#FDFDFD">
       <Container>
         <Details>
-          <TextLight fontSize="h4"> {props.name} </TextLight>
+          <TextLight fontSize="h4"> {room.name} </TextLight>
           <TextLight fontSize="h5">
             {' '}
-            {props.equipamentsAmount} equipamentos
+            {room.equipments.length} equipamentos
           </TextLight>
-          <TextLight fontSize="h5"> {props.totalKw} KW </TextLight>
+          <TextLight fontSize="h5"> {room.totalKw} KW </TextLight>
         </Details>
 
         <TotalPrice>
           <TextLight fontSize="h5"> Valor total</TextLight>
           <TextBold fontSize="h3">
-            {' '}
             R${' '}
-            {props.totalAmount
+            {room.totalAmount
               .toFixed(2)
               .toString()
               .replace('.', ',')}

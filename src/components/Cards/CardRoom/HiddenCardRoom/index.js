@@ -7,11 +7,8 @@ import {connect} from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Container, DeleteButton, EditButton} from './styles';
 
-// component
-import EditRoomModal from '../EditRoomModal/index';
-
 const HiddenCard = props => {
-  const [modalIsVisible, setmodalIsVisible] = useState(false);
+  const {room} = props;
 
   const toggleDeleteBtn = () => {
     Alert.alert(
@@ -28,30 +25,16 @@ const HiddenCard = props => {
     );
   };
 
-  const toggleModal = () => {
-    const t = !modalIsVisible;
-    setmodalIsVisible(t);
-    props.refreshList(false);
-  };
-
   return (
     <Container>
       <DeleteButton underlayColor="#f79292" onPress={() => toggleDeleteBtn()}>
         <MaterialCommunityIcons name="delete" size={30} color="#fff" />
       </DeleteButton>
-      <EditButton underlayColor="#ffdd67" onPress={toggleModal}>
+      <EditButton
+        underlayColor="#ffdd67"
+        onPress={() => props.toggleEditRoom(room)}>
         <MaterialCommunityIcons name="pencil" size={30} color="#fff" />
       </EditButton>
-
-      <EditRoomModal
-        refreshList={props.refreshList}
-        idRoom={props.idRoom}
-        name={props.name}
-        selectedRoom={props.selectedRoom}
-        toggleModal={toggleModal}
-        isVisible={modalIsVisible}
-        index={props.index}
-      />
     </Container>
   );
 };

@@ -1,13 +1,3 @@
-import React from 'react';
+import styled from 'styled-components/native';
 
-import {View} from 'react-native';
-
-// import { Container } from './styles';
-
-const NewEquipment = () => {
-  <View>
-    <View></View>
-  </View>;
-};
-
-export default NewEquipment;
+export const Container = styled.View``;

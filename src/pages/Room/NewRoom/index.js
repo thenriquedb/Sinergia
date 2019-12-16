@@ -16,7 +16,7 @@ import roomsList from '../../../utilities/roomsList';
 
 const NewRoom = props => {
   const [name, setName] = useState('');
-  const [selectedRoom, setSelectedRoom] = useState('');
+  const [selectedRoom, setSelectedRoom] = useState('f');
 
   const toggleSaveBtn = () => {
     if (name.length >= 4) {
@@ -25,6 +25,7 @@ const NewRoom = props => {
         Alert.alert('O cômodo ' + name + ' foi cadastrado com sucesso!');
         setName('');
       } catch (error) {
+        console.log('error: ', error);
         Alert.alert('Não foi possivel cadastrar o cômodo ' + name + '.');
       }
     } else {
@@ -58,10 +59,6 @@ const NewRoom = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {rooms: state.houseReducer.rooms};
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     addNewRoom: (name, typeRoom) =>
@@ -69,4 +66,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewRoom);
+export default connect(null, mapDispatchToProps)(NewRoom);

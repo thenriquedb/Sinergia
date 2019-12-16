@@ -36,12 +36,12 @@ const CardEquipment = props => {
 
             <DetailsLabels>
               <TextLight> KW/h Mensal </TextLight>
-              <TextLight> {equipment.kwMensal} KW </TextLight>
+              <TextLight> {equipment.kwDay} KW </TextLight>
             </DetailsLabels>
 
             <DetailsLabels>
               <TextLight> Gasto mensal </TextLight>
-              <TextLight> R$ {equipment.mensalAmount}</TextLight>
+              <TextLight> R$ {(equipment.dayAmount * 30).toFixed(2)}</TextLight>
             </DetailsLabels>
           </InfoContainer>
         </Details>

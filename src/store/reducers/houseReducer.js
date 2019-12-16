@@ -8,13 +8,23 @@ export default function houseReducer(state = INITIAL_STATE, action) {
         rooms: [
           ...state.rooms,
           {
-            id: Date.getTime(),
+            id: new Date().getTime().toString(),
             name: action.payload.name,
             typeRoom: action.payload.typeRoom,
             totalKw: 0,
             totalAmount: 0,
-            equipaments: [],
+            equipments: [],
             equipmentHigherConsumption: '',
+
+            tarifaBranca: {
+              dailySpend: 0,
+              kwDaily: 0,
+            },
+
+            tarifaConvencional: {
+              dailySpend: 0,
+              kwDaily: 0,
+            },
           },
         ],
       };
@@ -28,22 +38,18 @@ export default function houseReducer(state = INITIAL_STATE, action) {
       break;
 
     case 'EDIT_ROOM':
-      state.rooms.forEach((item, index) => {
-        console.log('item.id: ' + item.id);
-        console.log('action.id: ' + action.payload.id);
-        if (item.id == action.payload.id) {
-          console.log('éeeeeee igual!');
-          state.rooms[index] = {
-            ...item,
-            name: action.payload.name,
-            typeRoom: action.payload.typeRoom,
-          };
-        }
-      });
-    case 'GET_EQUIPMENTS':
-      console.log('roomId: ', action.payload.roomId);
-      return state.rooms[0].equipments;
-      // return state.rooms.find(room => room.id === action.payload.roomId);
+      return {
+        ...state,
+        rooms: state.rooms.map((item, index) => {
+          if (item.id == action.payload.id) {
+            return (state.rooms[index] = {
+              ...item,
+              name: action.payload.name,
+              typeRoom: action.payload.typeRoom,
+            });
+          }
+        }),
+      };
       break;
 
     default:

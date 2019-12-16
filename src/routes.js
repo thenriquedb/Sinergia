@@ -5,8 +5,12 @@ import Colors from './styles/colors';
 
 // screens
 import Home from './pages/Home/index';
-import NewRoom from './pages/Room/NewRoom/index';
+
 import Room from './pages/Room/index';
+import NewRoom from './pages/Room/NewRoom/index';
+import EditRoom from './pages/Room/EditRoom/index';
+
+import NewEquipment from './pages/Equipment/NewEquipment/index';
 
 const mainStack = createStackNavigator({
   Home: {
@@ -15,6 +19,7 @@ const mainStack = createStackNavigator({
       header: null,
     },
   },
+
   Room: {
     screen: Room,
     navigationOptions: {
@@ -29,10 +34,39 @@ const mainStack = createStackNavigator({
       },
     },
   },
+
   NewRoom: {
     screen: NewRoom,
     navigationOptions: {
       title: 'Novo cômodo',
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerStyle: {
+        backgroundColor: Colors.primary,
+      },
+    },
+  },
+
+  EditRoom: {
+    screen: EditRoom,
+    navigationOptions: {
+      title: 'Editar cômodo',
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerStyle: {
+        backgroundColor: Colors.primary,
+      },
+    },
+  },
+
+  NewEquipment: {
+    screen: NewEquipment,
+    navigationOptions: {
+      title: 'Novo equipamento',
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',

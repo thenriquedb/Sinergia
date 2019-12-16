@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
-import {SwipeListView} from 'react-native-swipe-list-view';
 
 //Redux
 import {connect} from 'react-redux';
@@ -12,6 +11,7 @@ import {Text, TextLight, TextThin, TextBold} from '../../styles/fonts';
 
 // Components
 import ActionButton from 'react-native-action-button';
+import {SwipeListView} from 'react-native-swipe-list-view';
 import CardRoom from '../../components/Cards/CardRoom/index';
 import HiddenCard from '../../components/Cards/CardRoom/HiddenCardRoom';
 
@@ -37,8 +37,12 @@ const Home = props => {
     setUpdateList(!updateList);
   };
 
-  const toggleNewRoomModal = () => {
+  const toggleNewRoomBtn = () => {
     props.navigation.navigate('NewRoom');
+  };
+
+  const toggleEditRoom = data => {
+    props.navigation.navigate('EditRoom', {room: data});
   };
 
   const toggleRoomCard = room => {
@@ -97,27 +101,18 @@ const Home = props => {
           renderHiddenItem={({item, index}) => (
             <HiddenCard
               refreshList={reRender}
-              index={index}
-              idRoom={item.id}
-              name={item.name}
-              selectedRoom={item.typeRoom}
+              room={item}
+              toggleEditRoom={toggleEditRoom}
             />
           )}
           renderItem={({item}) => (
-            <CardRoom
-              toggleRoomCard={toggleRoomCard}
-              room={item}
-              equipamentsAmount={item.equipments.length}
-              totalKw={item.totalKw}
-              totalAmount={item.totalAmount}
-              name={item.name}
-            />
+            <CardRoom toggleRoomCard={toggleRoomCard} room={item} />
           )}
         />
       </Tasks>
       <ActionButton
         size={55}
-        onPress={() => toggleNewRoomModal()}
+        onPress={() => toggleNewRoomBtn()}
         buttonColor={Colors.primary}
       />
     </Container>

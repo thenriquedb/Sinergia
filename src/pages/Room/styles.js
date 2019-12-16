@@ -8,7 +8,7 @@ export const Container = styled.View`
 `;
 
 export const HeaderContainer = styled.View`
-  margin-top: -10;
+  /* margin-top: -10; */
   padding-left: 15;
   padding-right: 15;
 `;

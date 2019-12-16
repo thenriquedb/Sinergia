@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Component} from 'react';
 import {Picker, Alert} from 'react-native';
 
 // redux
@@ -14,78 +14,83 @@ import {TextBold} from '../../../styles/fonts';
 // utilities
 import roomsList from '../../../utilities/roomsList';
 
-const EditRoom = props => {
-  const [name, setName] = useState(props.name);
-  const [selectedRoom, setSelectedRoom] = useState('');
+class EditRoom extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      oldName: this.props.navigation.getParam('room').name,
+      newName: this.props.navigation.getParam('room').name,
+      idRoom: this.props.navigation.getParam('room').id,
+      selectedRoom: '',
+    };
+    this.toggleEditBtn = this.toggleEditBtn.bind(this);
+  }
 
-  useEffect(() => {
-    if (props.isVisible) {
-      setName(props.name);
-      setSelectedRoom('');
-    }
-  }, [props.isVisible]);
-
-  const toggleEditBtn = () => {
-    if (name.length >= 4) {
-      try {
-        props.editRoom(props.idRoom, name, selectedRoom);
-        // setSelectedRoom(props.selectedRoom);
-        props.refreshList();
-      } catch (error) {
-        Alert.alert('Não foi atualizar cômodo ' + name + '.');
+  toggleEditBtn() {
+    if (this.state.newName.length >= 4) {
+      if (this.state.newName === this.state.oldName) {
+        Alert('Novo nome não pode ser igual ao original.');
+        return;
       }
 
-      Alert.alert(
-        'O cômodo ' +
-          props.name +
-          ' foi atualizado para ' +
-          name +
-          ' com sucesso!',
-      );
-      props.toggleModal();
-      // onRowOpen(props.index);
+      try {
+        this.props.editRoom(
+          this.state.idRoom,
+          this.state.newName,
+          this.state.selectedRoom,
+        );
+        // props.refreshList();
 
-      setName('');
+        Alert.alert(
+          'O cômodo ' +
+            this.state.oldName +
+            ' foi atualizado para ' +
+            this.state.newName +
+            ' com sucesso!',
+        );
+        this.props.navigation.goBack();
+        setName('');
+      } catch (error) {
+        Alert.alert('Não foi atualizar cômodo ' + this.state.oldName + '.');
+      }
     } else {
       Alert.alert('O novo nome precisa possuir no mínimo 4 caracteres.');
     }
-  };
+  }
 
-  return (
-    <Container>
-      <Input
-        value={name}
-        onChangeText={name => setName(name)}
-        placeholder="Novo nome"
-      />
-      <Picker
-        selectedValue={selectedRoom}
-        onValueChange={(itemValue, itemIndex) => {
-          setSelectedRoom(itemValue);
-        }}>
-        {roomsList.map((value, key) => {
-          return <Picker.Item key={key} value={key} label={value.name} />;
-        })}
-      </Picker>
-      <SaveBtn onPress={() => toggleEditBtn(props.idRoom, name, selectedRoom)}>
-        <TextBold fontSize="h5" color="#fff">
-          {' '}
-          Atualizar{' '}
-        </TextBold>
-      </SaveBtn>
-    </Container>
-  );
-};
+  render() {
+    return (
+      <Container>
+        <Input
+          value={this.state.newName}
+          onChangeText={newName => this.setState({newName})}
+          placeholder="Novo nome"
+        />
+        <Picker
+          selectedValue={this.state.selectedRoom}
+          onValueChange={(itemValue, itemIndex) => {
+            setSelectedRoom(itemValue);
+          }}>
+          {roomsList.map((value, key) => {
+            return <Picker.Item key={key} value={key} label={value.name} />;
+          })}
+        </Picker>
 
-const mapStateToProps = state => {
-  return {rooms: state.houseReducer.rooms};
-};
+        <SaveBtn onPress={() => this.toggleEditBtn()}>
+          <TextBold fontSize="h5" color="#fff">
+            Atualizar
+          </TextBold>
+        </SaveBtn>
+      </Container>
+    );
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
-    addNewRoom: (name, typeRoom) =>
-      dispatch({type: 'ADD_ROOM', payload: {name, typeRoom}}),
+    editRoom: (id, name, typeRoom) => {
+      dispatch({type: 'EDIT_ROOM', payload: {id, name, typeRoom}});
+    },
   };
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewRoom);
+export default connect(null, mapDispatchToProps)(EditRoom);
