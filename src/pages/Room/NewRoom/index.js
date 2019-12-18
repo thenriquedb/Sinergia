@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
-import {Picker, Alert} from 'react-native';
+import React, { useState } from 'react';
+import { Picker, Alert } from 'react-native';
 
 // redux
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 // components
 import Input from '../../../components/Input/index';
 
 // styles
-import {Container, SaveBtn} from './styles';
-import {TextBold} from '../../../styles/fonts';
+import { Container, SaveBtn } from './styles';
+import { TextBold } from '../../../styles/fonts';
 
 // utilities
 import roomsList from '../../../utilities/roomsList';
@@ -51,8 +51,7 @@ const NewRoom = props => {
       </Picker>
       <SaveBtn onPress={() => toggleSaveBtn()}>
         <TextBold fontSize="h5" color="#fff">
-          {' '}
-          Salvar{' '}
+          Salvar
         </TextBold>
       </SaveBtn>
     </Container>
@@ -62,7 +61,7 @@ const NewRoom = props => {
 const mapDispatchToProps = dispatch => {
   return {
     addNewRoom: (name, typeRoom) =>
-      dispatch({type: 'ADD_ROOM', payload: {name, typeRoom}}),
+      dispatch({ type: 'ADD_ROOM', payload: { name, typeRoom } }),
   };
 };
 

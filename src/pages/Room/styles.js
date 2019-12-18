@@ -7,6 +7,15 @@ export const Container = styled.View`
   background-color: ${Colors.primary};
 `;
 
+export const ContainerNoEquipment = styled.View`
+  flex: 1;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${Colors.white};
+`;
+
 export const HeaderContainer = styled.View`
   /* margin-top: -10; */
   padding-left: 15;

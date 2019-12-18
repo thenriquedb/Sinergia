@@ -35,6 +35,7 @@ const Text = styled.Text`
     }
   }};
   font-family: 'Roboto-Regular';
+  text-align: ${props => (props.textAlign ? props.textAlign : 'left')};
   color: ${props => (props.color ? props.color : '#000')};
 `;
 
@@ -64,6 +65,7 @@ const TextThin = styled.Text`
     }
   }};
   font-family: 'Roboto-Thin';
+  text-align: ${props => (props.textAlign ? props.textAlign : 'left')};
   color: ${props => (props.color ? props.color : '#000')};
 `;
 
@@ -94,6 +96,7 @@ const TextLight = styled.Text`
   }};
   font-family: 'Roboto-Light';
   margin: 0;
+  text-align: ${props => (props.textAlign ? props.textAlign : 'left')};
   color: ${props => (props.color ? props.color : '#000')};
 `;
 

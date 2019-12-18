@@ -12,14 +12,14 @@ const HiddenCard = props => {
 
   const toggleDeleteBtn = () => {
     Alert.alert(
-      'Você deseja excluir o cômodo ' + props.name + '?',
+      'Você deseja excluir o cômodo ' + room.name + '?',
       ' Esta ação não poderá ser desfeita futuramente.',
       [
         {
           text: 'Cancel',
           style: 'cancel',
         },
-        {text: 'Confirmar', onPress: () => props.deleteRoom(props.idRoom)},
+        {text: 'Confirmar', onPress: () => props.deleteRoom(room.id)},
       ],
       {cancelable: false},
     );

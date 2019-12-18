@@ -7,7 +7,7 @@ export const Container = styled.View`
 
 export const SaveBtn = styled.TouchableOpacity`
   background-color: ${colors.primary};
-  height: 60px;
+  height: 50px;
   padding: 10px;
   margin-top: 30;
   align-items: center;

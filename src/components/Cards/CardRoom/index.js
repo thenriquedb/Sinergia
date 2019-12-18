@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {TouchableHighlight} from 'react-native';
 
 // styles
@@ -7,7 +7,11 @@ import {TextLight, TextBold} from '../../../styles/fonts';
 
 const CardRoom = props => {
   const {room} = props;
-  console.log('room ', room);
+  const [totalAmount, setTotalAmount] = useState(
+    room.tarifaConvencional.kwMonthly,
+  );
+  const [totalKw, setTotalKw] = useState(50);
+
   return (
     <TouchableHighlight
       onPress={() => props.toggleRoomCard(room)}
