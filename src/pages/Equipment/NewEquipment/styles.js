@@ -7,13 +7,17 @@ export const Container = styled.View`
   flex: 1;
   flex-direction: column;
   background-color: ${Colors.white};
-  padding: 10px 10px 0px 10px;
+`;
+
+export const EquipmentContainer = styled.View`
+  padding: 5px 0px 0px 10px;
+  flex: 1;
 `;
 
 export const EquipmentCard = styled.View`
   flex: 1;
-
-  flex-direction: column;
+  height: 115;
+  width: 115;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -21,27 +25,34 @@ export const EquipmentCard = styled.View`
   border: 1px;
   border-color: ${Colors.lightGray1};
   border-radius: 5px;
-  margin: 2px;
-  padding: 10px;
+  margin-bottom: 5px;
 `;
 
-export const SelectedEquipmentCard = styled.View`
-  flex: 1;
-  flex-direction: column;
+export const ConitnueButton = styled.View`
+  height: 40;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  background-color: ${Colors.white};
-  border: 4px;
-  border-color: ${Colors.primary};
-  border-radius: 5px;
-  margin: 2px;
   padding: 10px;
+  background-color: ${Colors.primary};
 `;
 
-// export const styles = StyleSheet.create({
-//   SelectedEquipmentCard: {
-//     borderWidth: 5,
-//     borderColor: Colors.primary,
-//   },
-// });
+export const Footer = styled.View`
+  background-color: red;
+`;
+
+export const FooterTextContainer = styled.View`
+  padding: 5px 0px 5px 5px;
+`;
+
+export const styles = StyleSheet.create({
+  SelectedEquipmentCard: {
+    flex: 1,
+    color: Colors.primary,
+    borderWidth: 5,
+    borderColor: Colors.primary,
+  },
+
+  ConitnueButton: {
+    backgroundColor: Colors.lightGray1,
+  },
+});
