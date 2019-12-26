@@ -10,7 +10,8 @@ import Room from './pages/Room/index';
 import NewRoom from './pages/Room/NewRoom/index';
 import EditRoom from './pages/Room/EditRoom/index';
 
-import NewEquipment from './pages/Equipment/NewEquipment/index';
+import NewEquipment1 from './pages/Equipment/NewEquipment/Screen1/index';
+import NewEquipment2 from './pages/Equipment/NewEquipment/Screen2/index';
 
 const mainStack = createStackNavigator({
   Home: {
@@ -63,8 +64,8 @@ const mainStack = createStackNavigator({
     },
   },
 
-  NewEquipment: {
-    screen: NewEquipment,
+  NewEquipment1: {
+    screen: NewEquipment1,
     navigationOptions: {
       title: 'Novo equipamento',
       headerTintColor: '#fff',
@@ -73,6 +74,22 @@ const mainStack = createStackNavigator({
       },
       headerStyle: {
         backgroundColor: Colors.primary,
+      },
+    },
+  },
+
+  NewEquipment2: {
+    screen: NewEquipment2,
+    navigationOptions: {
+      // title: 'Novo equipamento',
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerStyle: {
+        backgroundColor: Colors.primary,
+        shadowColor: 'transparent',
+        elevation: 0,
       },
     },
   },

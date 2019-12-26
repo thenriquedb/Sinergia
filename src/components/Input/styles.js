@@ -3,11 +3,10 @@ import Colors from '../../styles/colors';
 
 export default StyleSheet.create({
   input: {
-    borderBottomWidth: 2,
-    fontSize: 20,
-    paddingVertical: 10,
-    marginTop: 20,
-    marginBottom: 20,
-    borderBottomColor: Colors.lightGray,
+    borderWidth: 1.5,
+    fontSize: 18,
+    padding: 5,
+    borderRadius: 5,
+    borderColor: Colors.lightGray1,
   },
 });

@@ -7,7 +7,7 @@ const Select = props => {
   const x = '';
   return (
     <Picker
-      style={{width: 100}}
+      style={{width: 400}}
       selectedValue={x}
       style={{height: 50, width: 100}}>
       <Picker.Item label="Sala" value="java" />

@@ -135,7 +135,7 @@ class Room extends Component {
   }
 
   toggleNewEquipment() {
-    this.props.navigation.navigate('NewEquipment');
+    this.props.navigation.navigate('NewEquipment1');
   }
 
   renderNoEquipment() {

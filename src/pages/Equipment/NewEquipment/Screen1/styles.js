@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 import styled from 'styled-components/native';
-import Colors from '../../../styles/colors';
+import Colors from '../../../../styles/colors';
 
 export const Container = styled.View`
   flex: 1;
@@ -28,7 +28,7 @@ export const EquipmentCard = styled.View`
   margin-bottom: 5px;
 `;
 
-export const ConitnueButton = styled.View`
+export const ContinueButton = styled.View`
   height: 40;
   align-items: center;
   justify-content: center;

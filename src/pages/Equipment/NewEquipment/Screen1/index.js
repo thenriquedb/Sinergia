@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-  View,
   FlatList,
   TouchableOpacity,
   TouchableHighlight,
@@ -10,20 +9,19 @@ import {
 import {
   Container,
   EquipmentCard,
-  ConitnueButton,
+  ContinueButton,
   EquipmentContainer,
   Footer,
-  FooterTextContainer,
   styles,
 } from './styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Lista de equipamentos
-import equipmentsList from '../../../utilities/equipmentsList';
+import equipmentsList from '../../../../utilities/equipmentsList';
 
 // styles
-import {TextBold, TextThin, TextLight, Text} from '../../../styles/fonts';
-import Colors from '../../../styles/colors';
+import {TextLight, Text} from '../../../../styles/fonts';
+import Colors from '../../../../styles/colors';
 
 export default class NewEquipment extends Component {
   constructor(props) {
@@ -41,11 +39,12 @@ export default class NewEquipment extends Component {
         .sort((a, b) => {
           return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
         }),
-      selectedEquipment: null,
+      selectedEquipment: -1,
     };
 
     this.equipmentCard = this.equipmentCard.bind(this);
     this.toggleSelectEquipment = this.toggleSelectEquipment.bind(this);
+    this.toggleContinueButton = this.toggleContinueButton.bind(this);
   }
 
   equipmentCard(item, index) {
@@ -76,7 +75,7 @@ export default class NewEquipment extends Component {
     let s = this.state;
 
     // Se nenhum equipamento estiver selecionado
-    if (!this.state.selectedEquipment) {
+    if (this.state.selectedEquipment === -1) {
       s.selectedEquipment = index;
       s.equipments[s.selectedEquipment].select = true;
     }
@@ -86,7 +85,7 @@ export default class NewEquipment extends Component {
       s.equipments[s.selectedEquipment].select = !s.equipments[
         s.selectedEquipment
       ].select;
-      s.selectedEquipment = false;
+      s.selectedEquipment = -1;
     }
 
     // Se ja tiver um equipamento selecionado
@@ -102,6 +101,22 @@ export default class NewEquipment extends Component {
     }
 
     this.setState(s);
+  }
+
+  toggleContinueButton() {
+    if (this.state.selectedEquipment != -1) {
+      this.props.navigation.navigate('NewEquipment2', {
+        equipment: this.state.equipments[this.state.selectedEquipment],
+      });
+    } else {
+      ToastAndroid.showWithGravityAndOffset(
+        'É necessário selecionar um cômodo para continuar',
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+        25,
+        50,
+      );
+    }
   }
 
   render() {
@@ -121,26 +136,17 @@ export default class NewEquipment extends Component {
         </EquipmentContainer>
 
         <Footer>
-          <TouchableHighlight
-            onPress={() => {
-              this.state.selectedEquipment
-                ? alert()
-                : ToastAndroid.showWithGravityAndOffset(
-                    'É necessário selecionar um cômodo para continuar',
-                    ToastAndroid.SHORT,
-                    ToastAndroid.BOTTOM,
-                    25,
-                    50,
-                  );
-            }}>
-            <ConitnueButton
-              style={this.state.selectedEquipment ? '' : styles.ConitnueButton}>
+          <TouchableHighlight onPress={() => this.toggleContinueButton()}>
+            <ContinueButton
+              style={
+                this.state.selectedEquipment != -1 ? '' : styles.ConitnueButton
+              }>
               <TextLight
-                color={this.state.selectedEquipment ? '#fff' : '#000'}
+                color={this.state.selectedEquipment === -1 ? '#000' : '#fff'}
                 fontSize={'h5'}>
                 Continuar
               </TextLight>
-            </ConitnueButton>
+            </ContinueButton>
           </TouchableHighlight>
         </Footer>
       </Container>

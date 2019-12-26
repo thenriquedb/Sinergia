@@ -9,7 +9,8 @@ const Input = props => {
     <TextInput
       value={props.value}
       onChangeText={props.onChangeText}
-      maxLength={18}
+      maxLength={props.maxLength ? props.maxLength : 18}
+      keyboardType={props.keyboardType ? props.keyboardType : 'text'}
       style={styles.input}
       placeholderTextColor={Colors.lightGray}
       placeholder={props.placeholder}
