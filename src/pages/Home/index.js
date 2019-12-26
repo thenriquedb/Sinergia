@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 
 //Redux
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 // Style
 import Colors from '../../styles/colors';
-import {Container, Tasks, Details, TotalConsumeKW, Header} from './style';
-import {Text, TextLight, TextThin, TextBold} from '../../styles/fonts';
+import { Container, Tasks, Details, TotalConsumeKW, Header } from './style';
+import { Text, TextLight, TextThin, TextBold } from '../../styles/fonts';
 
 // Components
 import ActionButton from 'react-native-action-button';
-import {SwipeListView} from 'react-native-swipe-list-view';
+import { SwipeListView } from 'react-native-swipe-list-view';
 import CardRoom from '../../components/Cards/CardRoom/index';
 import HiddenCard from '../../components/Cards/CardRoom/HiddenCardRoom';
 
@@ -42,11 +42,11 @@ const Home = props => {
   };
 
   const toggleEditRoom = data => {
-    props.navigation.navigate('EditRoom', {room: data});
+    props.navigation.navigate('EditRoom', { room: data });
   };
 
   const toggleRoomCard = room => {
-    props.navigation.navigate('Room', {room: room});
+    props.navigation.navigate('Room', { room: room });
   };
 
   return (
@@ -98,14 +98,14 @@ const Home = props => {
           rightOpenValue={-100}
           disableRightSwipe={true}
           extraData={updateList}
-          renderHiddenItem={({item, index}) => (
+          renderHiddenItem={({ item, index }) => (
             <HiddenCard
               refreshList={reRender}
               room={item}
               toggleEditRoom={toggleEditRoom}
             />
           )}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <CardRoom toggleRoomCard={toggleRoomCard} room={item} />
           )}
         />

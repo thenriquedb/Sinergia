@@ -40,33 +40,30 @@ export default function houseReducer(state = INITIAL_STATE, action) {
     case 'EDIT_ROOM':
       return {
         ...state,
-        rooms: state.rooms.map((item, index) => item.id == action.payload.id ?
-          {
-            ...item, name: action.payload.name,
-            typeRoom: action.payload.typeRoom,
-          } : item
-        )
-      }
+        rooms: state.rooms.map((item, index) =>
+          item.id == action.payload.id
+            ? {
+              ...item,
+              name: action.payload.name,
+              typeRoom: action.payload.typeRoom,
+            }
+            : item,
+        ),
+      };
       break;
 
-    case 'CALCULATE_EXPENSES':
-      return {
+    case 'ADD_EQUIPMENT':
+      const temp = {
         ...state,
-        rooms: state.rooms.map((item, index) => {
-          if (item.id == action.payload.id) {
-            return (state.rooms[index] = {
-              ...item,
-              tarifaConvencional: {
-                kwMonthly: state.rooms[index].equipments.map((preVal, elem) => {
-                  return (preVal + (elem.power * elem.numberDaysInOperation * elem.hoursOnPerDay));
-                }, 0),
-              },
-            });
-          } else {
-            return state.rooms[index];
-          }
-        }),
+        rooms: state.rooms.filter(item =>
+          item.id === action.payload.id
+            ? item.equipments.push(action.payload.newEquipment)
+            : item,
+        ),
       };
+
+
+      return temp;
       break;
 
     default:

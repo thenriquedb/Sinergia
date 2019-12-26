@@ -1,27 +1,14 @@
-import React, {Component} from 'react';
-import {
-  FlatList,
-  TouchableOpacity,
-  TouchableHighlight,
-  ToastAndroid,
-} from 'react-native';
-
-import {
-  Container,
-  EquipmentCard,
-  ContinueButton,
-  EquipmentContainer,
-  Footer,
-  styles,
-} from './styles';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { Component } from 'react';
+import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid } from 'react-native';
 
 // Lista de equipamentos
 import equipmentsList from '../../../../utilities/equipmentsList';
 
 // styles
-import {TextLight, Text} from '../../../../styles/fonts';
+import { TextLight } from '../../../../styles/fonts';
 import Colors from '../../../../styles/colors';
+import { Container, EquipmentCard, ContinueButton, EquipmentContainer, Footer, styles } from './styles';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class NewEquipment extends Component {
   constructor(props) {
@@ -51,7 +38,7 @@ export default class NewEquipment extends Component {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        style={{flex: 1 / 3}}
+        style={{ flex: 1 / 3 }}
         onPress={() => this.toggleSelectEquipment(index)}>
         <EquipmentCard style={item.select ? item.class : ''}>
           <MaterialCommunityIcons
@@ -82,22 +69,16 @@ export default class NewEquipment extends Component {
 
     // Se o equipamento ja estiver selecionado ele sera desmarcado
     else if (this.state.selectedEquipment === index) {
-      s.equipments[s.selectedEquipment].select = !s.equipments[
-        s.selectedEquipment
-      ].select;
+      s.equipments[s.selectedEquipment].select = !s.equipments[s.selectedEquipment].select;
       s.selectedEquipment = -1;
     }
 
     // Se ja tiver um equipamento selecionado
     else if (this.state.selectedEquipment) {
-      s.equipments[s.selectedEquipment].select = !s.equipments[
-        s.selectedEquipment
-      ].select;
+      s.equipments[s.selectedEquipment].select = !s.equipments[s.selectedEquipment].select;
 
       s.selectedEquipment = index;
-      s.equipments[s.selectedEquipment].select = !s.equipments[
-        s.selectedEquipment
-      ].select;
+      s.equipments[s.selectedEquipment].select = !s.equipments[s.selectedEquipment].select;
     }
 
     this.setState(s);
@@ -107,6 +88,7 @@ export default class NewEquipment extends Component {
     if (this.state.selectedEquipment != -1) {
       this.props.navigation.navigate('NewEquipment2', {
         equipment: this.state.equipments[this.state.selectedEquipment],
+        idRoom: this.props.navigation.getParam('idRoom'),
       });
     } else {
       ToastAndroid.showWithGravityAndOffset(
@@ -129,7 +111,7 @@ export default class NewEquipment extends Component {
             keyExtractor={item => item.name}
             numColumns={3}
             showsVerticalScrollIndicator={false}
-            renderItem={({item, index}) => {
+            renderItem={({ item, index }) => {
               return this.equipmentCard(item, index);
             }}
           />

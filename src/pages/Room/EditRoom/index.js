@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
-import {Picker, Alert} from 'react-native';
+import React, { Component } from 'react';
+import { Picker, Alert } from 'react-native';
 
 // redux
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 // components
 import Input from '../../../components/Input/index';
 
 // styles
-import {Container, SaveBtn} from './styles';
-import {TextBold} from '../../../styles/fonts';
+import { Container, SaveBtn } from './styles';
+import { TextBold } from '../../../styles/fonts';
 
 // utilities
 import roomsList from '../../../utilities/roomsList';
@@ -39,15 +39,10 @@ class EditRoom extends Component {
           this.state.newName,
           this.state.selectedRoom,
         );
-        // props.refreshList();
 
-        Alert.alert(
-          'O cômodo ' +
-            this.state.oldName +
-            ' foi atualizado para ' +
-            this.state.newName +
-            ' com sucesso!',
-        );
+        Alert.alert('O cômodo ' + this.state.oldName + ' foi atualizado para ' + this.state.newName +
+          ' com sucesso!');
+
         this.props.navigation.goBack();
         setName('');
       } catch (error) {
@@ -63,7 +58,7 @@ class EditRoom extends Component {
       <Container>
         <Input
           value={this.state.newName}
-          onChangeText={newName => this.setState({newName})}
+          onChangeText={newName => this.setState({ newName })}
           placeholder="Novo nome"
         />
         <Picker
@@ -89,7 +84,7 @@ class EditRoom extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     editRoom: (id, name, typeRoom) => {
-      dispatch({type: 'EDIT_ROOM', payload: {id, name, typeRoom}});
+      dispatch({ type: 'EDIT_ROOM', payload: { id, name, typeRoom } });
     },
   };
 };

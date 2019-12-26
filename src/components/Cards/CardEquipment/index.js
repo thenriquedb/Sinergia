@@ -36,7 +36,7 @@ const CardEquipment = props => {
 
             <DetailsLabels>
               <TextLight> KW/h Mensal </TextLight>
-              <TextLight> {equipment.kwDay} KW </TextLight>
+              <TextLight> {equipment.kwMonthly} KW </TextLight>
             </DetailsLabels>
 
             <DetailsLabels>

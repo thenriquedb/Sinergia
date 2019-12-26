@@ -25,7 +25,6 @@ const NewRoom = props => {
         Alert.alert('O cômodo ' + name + ' foi cadastrado com sucesso!');
         setName('');
       } catch (error) {
-        console.log('error: ', error);
         Alert.alert('Não foi possivel cadastrar o cômodo ' + name + '.');
       }
     } else {

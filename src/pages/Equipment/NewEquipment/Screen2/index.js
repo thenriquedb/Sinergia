@@ -1,34 +1,24 @@
-import React, {useState} from 'react';
-import {
-  View,
-  Picker,
-  CheckBox,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import React, { useState } from 'react';
+import { View, Picker, CheckBox, TouchableOpacity, ScrollView } from 'react-native';
 
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Input from '../../../../components/Input/index';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import {
-  Container,
-  RegisteredContainer,
-  Header,
-  SetOperation,
-  SelectTime,
-} from './styles';
-import Colors from '../../../../styles/colors';
-
 import ActionButton from 'react-native-action-button';
+import { connect } from 'react-redux';
+import moment from "moment"
 
-import {TextBold, TextThin, TextLight, Text} from '../../../../styles/fonts';
+// styles
+import { Container, RegisteredContainer, Header, SetOperation, SelectTime, } from './styles';
+
+import Colors from '../../../../styles/colors';
+import { TextBold, TextLight, Text } from '../../../../styles/fonts';
 
 const NewEquipment2 = props => {
   const equipment = props.navigation.getParam('equipment');
 
-  const [selectedModel, setSelectedModel] = useState('');
-  const [amount, setAmount] = useState('1');
+  const [selectedModel, setSelectedModel] = useState(equipment.models[0]);
+  const [quantity, setQuantity] = useState('1');
   const [on24Hours, setOn24Hours] = useState(false);
 
   // Hour pickers
@@ -38,19 +28,13 @@ const NewEquipment2 = props => {
     currentDate.setMinutes(currentDate.getMinutes() + 15);
     return currentDate;
   });
-  const [startTimeDefined, setStartTimeDefined] = useState(false);
 
   const [startTimePickerVisible, setStartTimePickerVisible] = useState(false);
   const [endTimePickerVisible, setEndTimePickerVisible] = useState(false);
-  const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(0);
-  const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(0);
+  const [weekendUsageTime, setWeekendUsageTime] = useState(false);
 
-  const [equipmentData, setEquipmentData] = useState({
-    model: '',
-    quantity: 1,
-    frequencyOfUseOnWeekdays: {},
-    frequencyOfUseOnWeekend: {},
-  });
+  const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(1);
+  const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(1);
 
   const renderHasModels = () => {
     return (
@@ -60,10 +44,10 @@ const NewEquipment2 = props => {
         </TextBold>
         <Picker
           selectedValue={selectedModel}
-          style={{width: 350}}
-          onValueChange={(itemValue, itemIndex) => setSelectedModel(itemValue)}>
+          style={{ width: 350 }}
+          onValueChange={itemValue => setSelectedModel(itemValue)}>
           {equipment.models.map((value, key) => {
-            return <Picker.Item key={key} value={key} label={value.name} />;
+            return <Picker.Item key={key} value={value} label={value.name} />;
           })}
         </Picker>
       </View>
@@ -71,38 +55,29 @@ const NewEquipment2 = props => {
   };
 
   const toggleSaveBtn = () => {
-    alert('salvou');
-  };
+    const totalTimeOn = moment.duration(moment(endTime).diff(startTime));
 
-  const handleStartTime = date => {
-    if (date.getTime() > endTime.getTime()) {
-      alert('A hora de inicio nao pode ser maior q a hora de termino');
-    } else if (endTime.getTime() === date.getTime()) {
-      alert('A hora de termino nao pode ser igual a hora de inicio');
-    } else {
-      setStartTime(date);
-    }
+    const power = !selectedModel ? equipment.models[0].power : selectedModel.power
+    const kwMonthly = power * quantity * (frequencyOfUseOnWeekdays + frequencyOfUseOnWeekend) * totalTimeOn.asHours()
 
-    setStartTimeDefined(true);
-    setStartTimePickerVisible(!startTimePickerVisible);
-  };
+    const newEquipment = {
+      name: selectedModel.name,
+      power,
+      quantity,
+      totalTimeOn,
+      kwMonthly,
+      frequencyOfUseOnWeekdays,
+      frequencyOfUseOnWeekend,
+    };
 
-  const handleEndTime = date => {
-    if (date.getTime() < startTime.getTime()) {
-      alert('A hora de termino nao pode ser menor q a hora de inicio');
-    } else if (endTime.getTime() === date.getTime()) {
-      alert('A hora de termino nao pode ser igual a hora de inicio');
-    } else {
-      setEndTime(date);
-    }
-
-    setEndTimePickerVisible(!endTimePickerVisible);
+    props.addNewEquipment(props.navigation.getParam('idRoom'), newEquipment);
+    props.navigation.goBack();
   };
 
   const renderSetTime = () => {
     return (
       <View>
-        <TextBold style={{marginTop: 15}} fontSize={'h5'}>
+        <TextBold style={{ marginTop: 15 }} fontSize={'h5'}>
           Dias da Semana
         </TextBold>
 
@@ -127,12 +102,12 @@ const NewEquipment2 = props => {
                 mode={'time'}
                 date={startTime}
                 isVisible={startTimePickerVisible}
-                onConfirm={date => handleStartTime(date)}
+                onConfirm={date => setStartTime(date)}
                 onCancel={() => setStartTimePickerVisible(false)}
               />
 
               <TextBold
-                style={{marginTop: 10}}
+                style={{ marginTop: 10 }}
                 color={'#707070'}
                 fontSize={'h6'}>
                 Horário de término
@@ -154,7 +129,7 @@ const NewEquipment2 = props => {
                 mode={'time'}
                 date={endTime}
                 isVisible={endTimePickerVisible}
-                onConfirm={date => handleEndTime(date)}
+                onConfirm={date => setEndTime(date)}
                 onCancel={() => setEndTimePickerVisible(false)}
               />
             </View>
@@ -166,7 +141,7 @@ const NewEquipment2 = props => {
 
           <Picker
             selectedValue={frequencyOfUseOnWeekdays}
-            style={{width: 345}}
+            style={{ width: 345 }}
             onValueChange={(itemValue, itemIndex) =>
               setFrequencyOfUseOnWeekdays(itemValue)
             }>
@@ -178,7 +153,7 @@ const NewEquipment2 = props => {
           </Picker>
         </SetOperation>
 
-        <TextBold style={{marginTop: 15}} fontSize={'h5'}>
+        <TextBold style={{ marginTop: 15 }} fontSize={'h5'}>
           Final de Semana
         </TextBold>
         <SetOperation>
@@ -188,10 +163,10 @@ const NewEquipment2 = props => {
                 Tempo de funcionamento por dia
               </TextBold>
               <Picker
-                selectedValue={frequencyOfUseOnWeekend}
-                style={{width: 320}}
+                selectedValue={weekendUsageTime}
+                style={{ width: 320 }}
                 onValueChange={(itemValue, itemIndex) =>
-                  setFrequencyOfUseOnWeekend(itemValue)
+                  setWeekendUsageTime(itemValue)
                 }>
                 <Picker.Item key={'key'} value={0.25} label={'15 minutos'} />
                 <Picker.Item key={'key'} value={0.5} label={'30 minutos'} />
@@ -230,7 +205,7 @@ const NewEquipment2 = props => {
 
           <Picker
             selectedValue={frequencyOfUseOnWeekend}
-            style={{width: 320}}
+            style={{ width: 320 }}
             onValueChange={(itemValue, itemIndex) =>
               setFrequencyOfUseOnWeekend(itemValue)
             }>
@@ -255,16 +230,16 @@ const NewEquipment2 = props => {
       </Header>
 
       <ScrollView
-        contentContainerStyle={{flex: 1}}
+        contentContainerStyle={{}}
         showsVerticalScrollIndicator={false}>
         <RegisteredContainer>
           {equipment.models.length > 1 ? renderHasModels() : null}
 
           <TextBold fontSize={'h5'}> Quantidade </TextBold>
           <Input
-            value={amount.replace(/[^0-9]/g, '')}
+            value={quantity.replace(/[^0-9]/g, '')}
             maxLength={2}
-            onChangeText={amount => setAmount(amount)}
+            onChangeText={quantity => setQuantity(quantity)}
             keyboardType={'numeric'}
           />
 
@@ -274,7 +249,7 @@ const NewEquipment2 = props => {
               alignItems: 'center',
             }}>
             <CheckBox
-              contentContainerStyle={{padding: 0}}
+              contentContainerStyle={{ padding: 0 }}
               value={on24Hours}
               onValueChange={() => setOn24Hours(!on24Hours)}
             />
@@ -297,4 +272,17 @@ const NewEquipment2 = props => {
   );
 };
 
-export default NewEquipment2;
+const mapDispatchToProps = dispatch => {
+  return {
+    addNewEquipment: (id, newEquipment) =>
+      dispatch({
+        type: 'ADD_EQUIPMENT',
+        payload: {
+          id,
+          newEquipment,
+        },
+      }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(NewEquipment2);

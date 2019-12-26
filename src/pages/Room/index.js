@@ -1,30 +1,24 @@
-import React, {Component} from 'react';
-import {View} from 'react-native';
+import React, { Component } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // redux
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 // components
 import Collapse from '../../components/Collapse/index';
 import CardEquipment from '../../components/Cards/CardEquipment/index';
 import HiddenCard from '../../components/Cards/CardEquipment/HiddenCard';
-import {SwipeListView} from 'react-native-swipe-list-view';
+import { SwipeListView } from 'react-native-swipe-list-view';
 import ActionButton from 'react-native-action-button';
 
 // styles
 import {
-  EquipmentsList,
-  Container,
-  HeaderContainer,
-  HeaderInfo,
-  HeaderInfosContainer,
-  ContainerNoEquipment,
+  EquipmentsList, Container, HeaderContainer,
+  HeaderInfo, HeaderInfosContainer, ContainerNoEquipment
 } from './styles';
-
 import Colors from '../../styles/colors';
 
-import {TextBold, TextLight, Text, TextThin} from '../../styles/fonts';
+import { TextBold, TextLight, Text } from '../../styles/fonts';
 
 class Room extends Component {
   constructor(props) {
@@ -108,7 +102,7 @@ class Room extends Component {
           </HeaderInfo>
         </HeaderInfosContainer>
 
-        <TextBold style={{marginTop: 20}} color={'#fff'} fontSize={'h5'}>
+        <TextBold style={{ marginTop: 20 }} color={'#fff'} fontSize={'h5'}>
           Tarifa branca
         </TextBold>
         <HeaderInfosContainer>
@@ -135,7 +129,9 @@ class Room extends Component {
   }
 
   toggleNewEquipment() {
-    this.props.navigation.navigate('NewEquipment1');
+    this.props.navigation.navigate('NewEquipment1', {
+      idRoom: this.state.room.id,
+    });
   }
 
   renderNoEquipment() {
@@ -144,7 +140,7 @@ class Room extends Component {
         <MaterialCommunityIcons name="candle" size={100} color="#707070" />
 
         <TextBold textAlign={'center'} color={'#707070'} fontSize={'h4'}>
-          {this.state.room.name} não possui nenhum equipamento cadastrado.
+          "{this.state.room.name}" não possui nenhum equipamento cadastrado.
         </TextBold>
 
         <ActionButton
@@ -157,8 +153,6 @@ class Room extends Component {
   }
 
   renderEquipmentsList() {
-    this.props.calculateExpenses(this.state.room.id);
-
     return (
       <Container>
         <Collapse
@@ -172,9 +166,8 @@ class Room extends Component {
             keyExtractor={item => item.id}
             rightOpenValue={-100}
             disableRightSwipe={true}
-            // extraData={updateList}
-            renderHiddenItem={({item, index}) => <HiddenCard />}
-            renderItem={({item}) => <CardEquipment equipment={item} />}
+            renderHiddenItem={({ item, index }) => <HiddenCard />}
+            renderItem={({ item }) => <CardEquipment equipment={item} />}
           />
         </EquipmentsList>
 
@@ -194,12 +187,8 @@ class Room extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    calculateExpenses: id => {
-      dispatch({type: 'CALCULATE_EXPENSES', payload: {id}});
-    },
-  };
-};
+const mapStateToProps = state => ({
+  rooms: state.houseReducer.rooms,
+});
 
-export default connect(null, mapDispatchToProps)(Room);
+export default connect(mapStateToProps, null)(Room);

@@ -64,15 +64,7 @@ const INITIAL_STATE = {
           hoursOnPerDay: 2,
           numberDaysInOperation: 7,
         },
-        {
-          name: 'Televisão',
-          id: 40,
-          power: 500,
-          kwMonthly: 0,
-          dayAmount: 4,
-          hoursOnPerDay: 2,
-          numberDaysInOperation: 7,
-        },
+
         {
           name: 'Lampâda',
           id: 50,
