@@ -72,7 +72,7 @@ const NewEquipment2 = props => {
     };
 
     props.addNewEquipment(props.navigation.getParam('idRoom'), newEquipment);
-    props.navigation.goBack();
+    props.navigation.navigate('Room');
   };
 
   const renderSetTime = () => {

@@ -13,8 +13,12 @@ import ActionButton from 'react-native-action-button';
 
 // styles
 import {
-  EquipmentsList, Container, HeaderContainer,
-  HeaderInfo, HeaderInfosContainer, ContainerNoEquipment
+  EquipmentsList,
+  Container,
+  HeaderContainer,
+  HeaderInfo,
+  HeaderInfosContainer,
+  ContainerNoEquipment,
 } from './styles';
 
 import Colors from '../../styles/colors';
@@ -23,15 +27,65 @@ import { TextBold, TextLight, Text } from '../../styles/fonts';
 class Room extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      room: this.props.navigation.getParam('room'),
-      expenses: {},
+      room: this.props.rooms.find(item => item.id === this.props.navigation.getParam('roomId')),
+      kwMonthly: 0,
+      EquipmentsListUpdate: false,
     };
 
     this.collapseVisible = this.collapseVisible.bind(this);
     this.toggleNewEquipment = this.toggleNewEquipment.bind(this);
     this.renderEquipmentsList = this.renderEquipmentsList.bind(this);
     this.renderNoEquipment = this.renderNoEquipment.bind(this);
+
+    this.calculateKwMonthly = this.calculateKwMonthly.bind(this);
+    this.calculateMonthlyExpenses = this.calculateMonthlyExpenses.bind(this);
+    this.reRenderEquipmentsList = this.reRenderEquipmentsList.bind(this);
+  }
+
+  // Quando algum equipamento for deletado ou editado aé necessario recalcular o KW
+  reRenderEquipmentsList() {
+    let s = this.state;
+    s.EquipmentsListUpdate = !s.EquipmentsListUpdate;
+    this.setState(s);
+
+    this.calculateKwMonthly();
+
+  }
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    this.focusListener = navigation.addListener('didFocus', () => {
+      this.calculateKwMonthly();
+    });
+  }
+
+  componentWillUnmount() {
+    // Remove the event listener
+    this.focusListener.remove();
+  }
+
+
+
+  // Calcula o consumo total de KW mensais do coomôdo
+  calculateKwMonthly() {
+    let kwTotal = this.state.room.equipments.reduce(
+      (preVal, elem) => preVal + elem.kwMonthly,
+      0,
+    );
+
+    this.props.setRoomKwMonthly(this.state.room.id, kwTotal);
+
+    let s = this.state;
+    s.kwMonthly = kwTotal;
+    s.room = this.props.rooms.find(item => item.id === this.state.room.id);
+    this.setState(s);
+  }
+
+  // Calcula o consumo total de R$ mensais do coomôdo
+  calculateMonthlyExpenses() {
+    return;
   }
 
   collapseVisible() {
@@ -59,7 +113,7 @@ class Room extends Component {
               Consumo Total
             </Text>
             <TextLight color={'#fff'} fontSize={'h5'}>
-              {/* {this.state.room.tarifaConvencional.kwMonthly} */}
+              {this.state.room.tarifaConvencional.kwMonthly} KW
             </TextLight>
           </HeaderInfo>
 
@@ -68,7 +122,7 @@ class Room extends Component {
               Maior Consumo{' '}
             </Text>
             <TextLight color={'#fff'} fontSize={'h5'}>
-              {/* {'aaaaa'} */}
+              {'aaaaa'}
             </TextLight>
           </HeaderInfo>
         </HeaderInfosContainer>
@@ -129,6 +183,8 @@ class Room extends Component {
   }
 
   toggleNewEquipment() {
+
+
     this.props.navigation.navigate('NewEquipment1', {
       idRoom: this.state.room.id,
     });
@@ -161,12 +217,15 @@ class Room extends Component {
         />
         <EquipmentsList>
           <SwipeListView
+            extraData={this.state.EquipmentsListUpdate}
             data={this.state.room.equipments}
             showsVerticalScrollIndicator={false}
             keyExtractor={item => item.id}
             rightOpenValue={-100}
             disableRightSwipe={true}
-            renderHiddenItem={({ item, index }) => <HiddenCard idRoom={this.state.room.id} idEquipment={item.id} />}
+            renderHiddenItem={({ item, index }) => (
+              <HiddenCard reRender={this.reRenderEquipmentsList} idRoom={this.state.room.id} idEquipment={item.id} />
+            )}
             renderItem={({ item }) => <CardEquipment equipment={item} />}
           />
         </EquipmentsList>
@@ -191,4 +250,19 @@ const mapStateToProps = state => ({
   rooms: state.houseReducer.rooms,
 });
 
-export default connect(mapStateToProps, null)(Room);
+const mapDispatchToProps = dispatch => {
+  return {
+    setRoomKwMonthly: (idRoom, totalKwMonthly) =>
+      dispatch({
+        type: 'SET_ROOM_KW_MONTHLY',
+        payload: { idRoom, totalKwMonthly },
+      }),
+    setRoomMonthlyExpenses: (idRoom, totalMonthlyExpenses) =>
+      dispatch({
+        type: 'SET_ROOM_MONTHLY_EXPENSES',
+        payload: { idRoom, totalMonthlyExpenses },
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Room);

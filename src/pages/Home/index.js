@@ -46,7 +46,7 @@ const Home = props => {
   };
 
   const toggleRoomCard = room => {
-    props.navigation.navigate('Room', { room: room });
+    props.navigation.navigate('Room', { roomId: room.id });
   };
 
   return (

@@ -4,13 +4,11 @@ const INITIAL_STATE = {
   roomHigherConsumption: '',
 
   tarifaBranca: {
-    dailySpend: 0,
     kwMonthly: 0,
     equipmentHigherConsumption: '',
   },
 
   tarifaConvencional: {
-    dailySpend: 0,
     kwMonthly: 0,
     equipmentHigherConsumption: '',
   },
@@ -30,7 +28,6 @@ const INITIAL_STATE = {
       },
 
       tarifaConvencional: {
-        dailySpend: 0,
         kwMonthly: 0,
         monthlySpend: 0,
         equipmentHigherConsumption: '',

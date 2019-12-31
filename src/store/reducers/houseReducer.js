@@ -43,10 +43,10 @@ export default function houseReducer(state = INITIAL_STATE, action) {
         rooms: state.rooms.map((item, index) =>
           item.id == action.payload.id
             ? {
-              ...item,
-              name: action.payload.name,
-              typeRoom: action.payload.typeRoom,
-            }
+                ...item,
+                name: action.payload.name,
+                typeRoom: action.payload.typeRoom,
+              }
             : item,
         ),
       };
@@ -68,21 +68,36 @@ export default function houseReducer(state = INITIAL_STATE, action) {
         ...state,
         rooms: state.rooms.map(item => {
           if (item.id === action.payload.idRoom) {
-
             item.equipments = item.equipments.filter(equipment => {
               if (equipment.id !== action.payload.idEquipment) {
-                return equipment
+                return equipment;
               }
-            })
-
-            return item
+            });
+            return item;
           } else {
-            return item
+            return item;
           }
-        }
-        ),
-      }
-      break
+        }),
+      };
+      break;
+
+    case 'SET_ROOM_KW_MONTHLY':
+      return {
+        ...state,
+        rooms: state.rooms.map(item => {
+          if (item.id === action.payload.idRoom) {
+            item.tarifaConvencional.kwMonthly = action.payload.totalKwMonthly;
+            return item;
+          } else {
+            return item;
+          }
+        }),
+      };
+      break;
+
+    case 'SET_ROOM_MONTHLY_EXPENSES':
+      return {...state};
+      break;
 
     default:
       return state;

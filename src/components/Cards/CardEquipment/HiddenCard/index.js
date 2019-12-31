@@ -20,16 +20,21 @@ const HiddenCard = props => {
           text: 'Cancel',
           style: 'cancel',
         },
-        { text: 'Confirmar', onPress: () => props.deleteEquipment(props.idRoom.toString(), props.idEquipment.toString()) },
+        {
+          text: 'Confirmar', onPress: () => {
+            props.deleteEquipment(props.idRoom, props.idEquipment);
+            props.reRender();
+          }
+        },
       ],
       { cancelable: false },
     );
+
   };
 
   return (
     <Container>
       <DeleteButton underlayColor="#f79292" onPress={() => toggleDeleteBtn()}>
-
         <MaterialCommunityIcons name="delete" size={30} color="#fff" />
       </DeleteButton>
       <EditButton underlayColor="#ffdd67">

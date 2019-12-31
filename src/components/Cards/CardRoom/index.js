@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {TouchableHighlight} from 'react-native';
+import React, { useState } from 'react';
+import { TouchableHighlight } from 'react-native';
 
 // styles
-import {Container, TotalPrice, Details} from './styles';
-import {TextLight, TextBold} from '../../../styles/fonts';
+import { Container, TotalPrice, Details } from './styles';
+import { TextLight, TextBold } from '../../../styles/fonts';
 
 const CardRoom = props => {
-  const {room} = props;
+  const { room } = props;
   const [totalAmount, setTotalAmount] = useState(
     room.tarifaConvencional.kwMonthly,
   );
@@ -15,7 +15,7 @@ const CardRoom = props => {
   return (
     <TouchableHighlight
       onPress={() => props.toggleRoomCard(room)}
-      style={{marginBottom: 15}}
+      style={{ marginBottom: 15 }}
       underlayColor="#FDFDFD">
       <Container>
         <Details>
@@ -24,7 +24,7 @@ const CardRoom = props => {
             {' '}
             {room.equipments.length} equipamentos
           </TextLight>
-          <TextLight fontSize="h5"> {room.totalKw} KW </TextLight>
+          <TextLight fontSize="h5"> {room.tarifaConvencional.kwMonthly} KW </TextLight>
         </Details>
 
         <TotalPrice>
