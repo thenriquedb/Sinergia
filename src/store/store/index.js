@@ -42,7 +42,6 @@ const INITIAL_STATE = {
           id: 10,
           power: 1500,
           kwMonthly: 10,
-          dayAmount: 0.5,
           numberDaysInOperation: 4,
           hoursOnPerDay: 2,
         },

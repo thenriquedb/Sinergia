@@ -16,8 +16,8 @@ import {
   EquipmentsList, Container, HeaderContainer,
   HeaderInfo, HeaderInfosContainer, ContainerNoEquipment
 } from './styles';
-import Colors from '../../styles/colors';
 
+import Colors from '../../styles/colors';
 import { TextBold, TextLight, Text } from '../../styles/fonts';
 
 class Room extends Component {
@@ -166,7 +166,7 @@ class Room extends Component {
             keyExtractor={item => item.id}
             rightOpenValue={-100}
             disableRightSwipe={true}
-            renderHiddenItem={({ item, index }) => <HiddenCard />}
+            renderHiddenItem={({ item, index }) => <HiddenCard idRoom={this.state.room.id} idEquipment={item.id} />}
             renderItem={({ item }) => <CardEquipment equipment={item} />}
           />
         </EquipmentsList>

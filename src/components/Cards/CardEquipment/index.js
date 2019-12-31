@@ -27,7 +27,7 @@ const CardEquipment = props => {
         </Icon>
 
         <Details>
-          <TextLight fontSize="h4"> {equipment.name} </TextLight>
+          <TextLight fontSize="h4"> {equipment.name.length >= 24 ? equipment.name.substring(0, 24).concat('...') : equipment.name} </TextLight>
           <InfoContainer>
             <DetailsLabels>
               <TextLight> Potência </TextLight>

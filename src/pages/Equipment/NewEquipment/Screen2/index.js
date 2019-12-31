@@ -61,6 +61,7 @@ const NewEquipment2 = props => {
     const kwMonthly = power * quantity * (frequencyOfUseOnWeekdays + frequencyOfUseOnWeekend) * totalTimeOn.asHours()
 
     const newEquipment = {
+      id: new Date().getTime().toString(),
       name: selectedModel.name,
       power,
       quantity,

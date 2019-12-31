@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 // Style
 import Colors from '../../styles/colors';
 import { Container, Tasks, Details, TotalConsumeKW, Header } from './style';
-import { Text, TextLight, TextThin, TextBold } from '../../styles/fonts';
+import { TextLight, TextThin, TextBold } from '../../styles/fonts';
 
 // Components
 import ActionButton from 'react-native-action-button';

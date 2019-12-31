@@ -53,7 +53,7 @@ export default function houseReducer(state = INITIAL_STATE, action) {
       break;
 
     case 'ADD_EQUIPMENT':
-      const temp = {
+      return {
         ...state,
         rooms: state.rooms.filter(item =>
           item.id === action.payload.id
@@ -61,10 +61,28 @@ export default function houseReducer(state = INITIAL_STATE, action) {
             : item,
         ),
       };
-
-
-      return temp;
       break;
+
+    case 'DELETE_EQUIPMENT':
+      return {
+        ...state,
+        rooms: state.rooms.map(item => {
+          if (item.id === action.payload.idRoom) {
+
+            item.equipments = item.equipments.filter(equipment => {
+              if (equipment.id !== action.payload.idEquipment) {
+                return equipment
+              }
+            })
+
+            return item
+          } else {
+            return item
+          }
+        }
+        ),
+      }
+      break
 
     default:
       return state;
