@@ -1,15 +1,19 @@
 const INITIAL_STATE = {
   totalKw: {},
   totalAmount: {},
-  roomHigherConsumption: '',
+  flag: 'Verde',
+  valueKW: 10,
+
 
   tarifaBranca: {
     kwMonthly: 0,
+    monthlyExpenses: 0,
     equipmentHigherConsumption: '',
   },
 
   tarifaConvencional: {
     kwMonthly: 0,
+    monthlyExpenses: 0,
     equipmentHigherConsumption: '',
   },
 
@@ -22,14 +26,14 @@ const INITIAL_STATE = {
       totalAmount: 0,
 
       tarifaBranca: {
-        monthlySpend: 0,
+        monthlyExpenses: 0,
         kwMonthly: 0,
         equipmentHigherConsumption: '',
       },
 
       tarifaConvencional: {
         kwMonthly: 0,
-        monthlySpend: 0,
+        monthlyExpenses: 0,
         equipmentHigherConsumption: '',
       },
 
@@ -38,7 +42,7 @@ const INITIAL_STATE = {
           name: 'Microondas',
           id: 10,
           power: 1500,
-          kwMonthly: 10,
+          kwMonthly: 0,
           numberDaysInOperation: 4,
           hoursOnPerDay: 2,
         },

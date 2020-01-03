@@ -17,13 +17,11 @@ export default function houseReducer(state = INITIAL_STATE, action) {
             equipmentHigherConsumption: '',
 
             tarifaBranca: {
-              dailySpend: 0,
-              kwDaily: 0,
+              monthlyExpenses: 0,
             },
 
             tarifaConvencional: {
-              dailySpend: 0,
-              kwDaily: 0,
+              monthlyExpenses: 0,
             },
           },
         ],
@@ -43,10 +41,10 @@ export default function houseReducer(state = INITIAL_STATE, action) {
         rooms: state.rooms.map((item, index) =>
           item.id == action.payload.id
             ? {
-                ...item,
-                name: action.payload.name,
-                typeRoom: action.payload.typeRoom,
-              }
+              ...item,
+              name: action.payload.name,
+              typeRoom: action.payload.typeRoom,
+            }
             : item,
         ),
       };
@@ -86,7 +84,7 @@ export default function houseReducer(state = INITIAL_STATE, action) {
         ...state,
         rooms: state.rooms.map(item => {
           if (item.id === action.payload.idRoom) {
-            item.tarifaConvencional.kwMonthly = action.payload.totalKwMonthly;
+            item.totalKw = action.payload.totalKwMonthly;
             return item;
           } else {
             return item;
@@ -96,7 +94,17 @@ export default function houseReducer(state = INITIAL_STATE, action) {
       break;
 
     case 'SET_ROOM_MONTHLY_EXPENSES':
-      return {...state};
+      return {
+        ...state, rooms: state.rooms.map(item => {
+          if (item.id === action.payload.idRoom) {
+            item.tarifaConvencional.monthlyExpenses = action.payload.totalTarifaConvencional;
+            item.tarifaBranca.monthlyExpenses = action.payload.totalTarifaBranca;
+            return item;
+          } else {
+            return item;
+          }
+        }),
+      };
       break;
 
     default:

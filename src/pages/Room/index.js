@@ -31,10 +31,11 @@ class Room extends Component {
     this.state = {
       room: this.props.rooms.find(item => item.id === this.props.navigation.getParam('roomId')),
       kwMonthly: 0,
+      MonthlyExpenses: 0,
       EquipmentsListUpdate: false,
     };
 
-    this.collapseVisible = this.collapseVisible.bind(this);
+    this.headerCollapseVisible = this.headerCollapseVisible.bind(this);
     this.toggleNewEquipment = this.toggleNewEquipment.bind(this);
     this.renderEquipmentsList = this.renderEquipmentsList.bind(this);
     this.renderNoEquipment = this.renderNoEquipment.bind(this);
@@ -42,6 +43,7 @@ class Room extends Component {
     this.calculateKwMonthly = this.calculateKwMonthly.bind(this);
     this.calculateMonthlyExpenses = this.calculateMonthlyExpenses.bind(this);
     this.reRenderEquipmentsList = this.reRenderEquipmentsList.bind(this);
+
   }
 
   // Quando algum equipamento for deletado ou editado aé necessario recalcular o KW
@@ -51,13 +53,15 @@ class Room extends Component {
     this.setState(s);
 
     this.calculateKwMonthly();
-
+    this.calculateMonthlyExpenses();
   }
 
   componentDidMount() {
     const { navigation } = this.props;
     this.focusListener = navigation.addListener('didFocus', () => {
       this.calculateKwMonthly();
+      this.calculateMonthlyExpenses();
+
     });
   }
 
@@ -68,7 +72,7 @@ class Room extends Component {
 
 
 
-  // Calcula o consumo total de KW mensais do coomôdo
+  // Calcula o consumo total de KW mensais do comôdo
   calculateKwMonthly() {
     let kwTotal = this.state.room.equipments.reduce(
       (preVal, elem) => preVal + elem.kwMonthly,
@@ -77,18 +81,23 @@ class Room extends Component {
 
     this.props.setRoomKwMonthly(this.state.room.id, kwTotal);
 
-    let s = this.state;
-    s.kwMonthly = kwTotal;
-    s.room = this.props.rooms.find(item => item.id === this.state.room.id);
-    this.setState(s);
+    // let s = this.state;
+    // s.kwMonthly = kwTotal;
+    // s.room = this.props.rooms.find(item => item.id === this.state.room.id);
+    // this.setState(s);
   }
 
   // Calcula o consumo total de R$ mensais do coomôdo
+  // Calcular a tarifa convencional e a branca
   calculateMonthlyExpenses() {
-    return;
+    let totalTarifaConvencional = this.state.room.totalKw * this.props.valueKW;
+    let totalTarifaBranca = 0;
+
+    this.props.setRoomMonthlyExpenses(this.state.room.id, totalTarifaConvencional, totalTarifaBranca)
+    // return;
   }
 
-  collapseVisible() {
+  headerCollapseVisible() {
     return (
       <HeaderContainer>
         <TextBold textAlign={'center'} color={'#fff'} fontSize={'h1'}>
@@ -102,9 +111,9 @@ class Room extends Component {
             </Text>
             <TextLight color={'#fff'} fontSize={'h5'}>
               R$
-              {/* {this.state.room.tarifaConvencional.monthlySpend
+              {this.state.room.tarifaConvencional.monthlyExpenses
                 .toFixed(2)
-                .replace('.', ',')} */}
+                .replace('.', ',')}
             </TextLight>
           </HeaderInfo>
 
@@ -113,7 +122,7 @@ class Room extends Component {
               Consumo Total
             </Text>
             <TextLight color={'#fff'} fontSize={'h5'}>
-              {this.state.room.tarifaConvencional.kwMonthly} KW
+              {this.state.room.totalKw} KW
             </TextLight>
           </HeaderInfo>
 
@@ -130,66 +139,55 @@ class Room extends Component {
     );
   }
 
-  collapseHidden() {
+  headerCollapseHidden() {
     return (
       <HeaderContainer>
-        <TextBold color={'#fff'} fontSize={'h5'}>
-          Tarifa convencional
+        <TextBold color={'#fff'} fontSize={'h4'}>
+          Gastos mensais
         </TextBold>
+
         <HeaderInfosContainer>
           <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h6'}>
-              Gasto mensal
-            </Text>
-            <TextLight color={'#fff'} fontSize={'h5'}>
-              R$ 6,00
+            <TextLight textAlign='center' color={'#fff'} fontSize={'h3'}>
+              R$ {this.state.room.tarifaBranca.monthlyExpenses
+                .toFixed(2)
+                .replace('.', ',')}
             </TextLight>
+            <TextBold textAlign='center' color={'#fff'} fontSize={'h5'}> Tarifa branca</TextBold>
           </HeaderInfo>
 
           <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h6'}>
-              Consumo mensal (KW/h)
-            </Text>
-            <TextLight color={'#fff'} fontSize={'h5'}>
-              44 W
+            <TextLight textAlign='center' color={'#fff'} fontSize={'h3'}>
+              R$ {this.state.room.tarifaConvencional.monthlyExpenses
+                .toFixed(2)
+                .replace('.', ',')}
             </TextLight>
+            <TextBold textAlign='center' color={'#fff'} fontSize={'h5'}> Tarifa convencional</TextBold>
           </HeaderInfo>
         </HeaderInfosContainer>
 
-        <TextBold style={{ marginTop: 20 }} color={'#fff'} fontSize={'h5'}>
-          Tarifa branca
-        </TextBold>
-        <HeaderInfosContainer>
-          <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h6'}>
-              Gasto mensal
-            </Text>
-            <TextLight color={'#fff'} fontSize={'h5'}>
-              R$ 6,00
-            </TextLight>
-          </HeaderInfo>
+        <Text style={{ marginTop: 20, }} color={'#fff'} fontSize={'h5'}>
+          Utilizando a tarifa branca você economiza   </Text>
 
-          <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h6'}>
-              Consumo mensal (KW/h)
-            </Text>
-            <TextLight color={'#fff'} fontSize={'h5'}>
-              44 W
-            </TextLight>
-          </HeaderInfo>
-        </HeaderInfosContainer>
+        <TextBold color={'#fff'} fontSize={'h2'}>
+          R$ {
+            Math.abs(this.state.room.tarifaConvencional.monthlyExpenses - this.state.room.tarifaBranca.monthlyExpenses)
+              .toFixed(2)
+              .replace('.', ',')
+          }
+        </TextBold>
       </HeaderContainer>
     );
   }
 
+  // Adcionar novo equipamento ao cômodo
   toggleNewEquipment() {
-
-
     this.props.navigation.navigate('NewEquipment1', {
       idRoom: this.state.room.id,
     });
   }
 
+  //  Se o comôdo não possuir nenhum equipamento cadastrado
   renderNoEquipment() {
     return (
       <ContainerNoEquipment>
@@ -208,12 +206,13 @@ class Room extends Component {
     );
   }
 
+  //  Se o comôdo possuir pelo menos um equipamento cadastrado
   renderEquipmentsList() {
     return (
       <Container>
         <Collapse
-          visible={this.collapseVisible()}
-          hidden={this.collapseHidden()}
+          visible={this.headerCollapseVisible()}
+          hidden={this.headerCollapseHidden()}
         />
         <EquipmentsList>
           <SwipeListView
@@ -248,6 +247,7 @@ class Room extends Component {
 
 const mapStateToProps = state => ({
   rooms: state.houseReducer.rooms,
+  valueKW: state.houseReducer.valueKW,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -257,10 +257,10 @@ const mapDispatchToProps = dispatch => {
         type: 'SET_ROOM_KW_MONTHLY',
         payload: { idRoom, totalKwMonthly },
       }),
-    setRoomMonthlyExpenses: (idRoom, totalMonthlyExpenses) =>
+    setRoomMonthlyExpenses: (idRoom, totalTarifaConvencional, totalTarifaBranca) =>
       dispatch({
         type: 'SET_ROOM_MONTHLY_EXPENSES',
-        payload: { idRoom, totalMonthlyExpenses },
+        payload: { idRoom, totalTarifaConvencional, totalTarifaBranca },
       }),
   };
 };

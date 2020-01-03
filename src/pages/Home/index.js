@@ -19,6 +19,7 @@ const Home = props => {
   const [totalKw, setTotalKw] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [updateList, setUpdateList] = useState(false);
+  const [roomHigherConsumption, setRoomHigherConsumption] = useState(false);
 
   useEffect(() => {
     setTotalKw(
@@ -31,6 +32,8 @@ const Home = props => {
         0,
       ),
     );
+
+    getRoomHigherConsumption();
   });
 
   const reRender = () => {
@@ -49,42 +52,56 @@ const Home = props => {
     props.navigation.navigate('Room', { roomId: room.id });
   };
 
+  const getRoomHigherConsumption = room => {
+
+    let maior = 0;
+    let maiorNome = ''
+
+    props.house.rooms.forEach(item => {
+      if (item.tarifaConvencional.monthlySpend > maior) {
+        maior = item.tarifaConvencional.monthlySpend;
+        maiorNome = item.name
+      }
+    });
+    setRoomHigherConsumption(maiorNome)
+  }
+
   return (
     <Container>
       <Header>
         <TotalConsumeKW>
-          <TextBold color="#fff" fontSize="h5">
-            Consumo Total
+          <TextBold textAlign='center' color="#fff" fontSize="h5">
+            Valor Total
           </TextBold>
 
-          <TextThin color="#fff" fontSize="h1">
-            {totalKw} KW
+          <TextThin textAlign='center' color="#fff" fontSize="h1">
+            R${' '}
+            {totalAmount
+              .toFixed(2)
+              .toString()
+              .replace('.', ',')}
           </TextThin>
         </TotalConsumeKW>
 
         <Details>
           <View>
-            <TextBold color="#FFF"> Valor total </TextBold>
-            <TextLight color="#fff" fontSize="h4">
-              R${' '}
-              {totalAmount
-                .toFixed(2)
-                .toString()
-                .replace('.', ',')}
+            <TextBold textAlign='center' color="#FFF"> Consumo total </TextBold>
+            <TextLight textAlign='center' color="#fff" fontSize="h4">
+              {totalKw} KW
             </TextLight>
           </View>
 
           <View>
-            <TextBold color="#FFF"> Maior consumo </TextBold>
-            <TextLight color="#fff" fontSize="h4">
-              Sala
+            <TextBold textAlign='center' color="#FFF"> Maior consumo </TextBold>
+            <TextLight textAlign='center' color="#fff" fontSize="h4">
+              {roomHigherConsumption}
             </TextLight>
           </View>
 
           <View>
-            <TextBold color="#FFF"> Bandeira </TextBold>
-            <TextLight color="#fff" fontSize="h4">
-              Amarela
+            <TextBold textAlign='center' color="#FFF"> Bandeira </TextBold>
+            <TextLight textAlign='center' color="#fff" fontSize="h4">
+              {props.house.flag}
             </TextLight>
           </View>
         </Details>
