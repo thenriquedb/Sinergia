@@ -46,7 +46,8 @@ class Room extends Component {
     this.reRenderEquipmentsList = this.reRenderEquipmentsList.bind(this);
     this.getRoomHigherConsumption = this.setEquipmentHigherConsumption.bind(this);
 
-    this.setEquipmentHigherConsumption();
+    this.state.room.equipments.length > 0 ? this.setEquipmentHigherConsumption() : null
+
   }
 
   // Quando algum equipamento for deletado ou editado aé necessario recalcular o KW
@@ -210,9 +211,11 @@ class Room extends Component {
       <ContainerNoEquipment>
         <MaterialCommunityIcons name="candle" size={100} color="#707070" />
 
-        <TextBold textAlign={'center'} color={'#707070'} fontSize={'h4'}>
+        <TextBold textAlign={'center'} color={'#707070'} fontSize={'h4'}> Nenhum equipamento cadastrado </TextBold>
+        <TextLight color="#707070" textAlign='center' fontSize='h5'>
           "{this.state.room.name}" não possui nenhum equipamento cadastrado.
-        </TextBold>
+       </TextLight>
+
 
         <ActionButton
           size={55}

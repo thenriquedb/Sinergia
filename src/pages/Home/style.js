@@ -7,6 +7,14 @@ export const Container = styled.View`
   background-color: ${Colors.primary};
 `;
 
+export const ContainerNoRooms = styled.View`
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: ${Colors.white};
+`;
+
 export const Rooms = styled.View`
   flex: 3;
   background-color: ${Colors.white};

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 // Style
 import Colors from '../../styles/colors';
-import { Container, Rooms, Details, TotalConsumeKW, Header } from './style';
+import { Container, ContainerNoRooms, Rooms, Details, TotalConsumeKW, Header } from './style';
 import { TextLight, TextThin, TextBold } from '../../styles/fonts';
 
 // Components
@@ -34,7 +34,7 @@ const Home = props => {
       ),
     );
 
-    getRoomHigherConsumption();
+    props.house.rooms.length > 0 ? getRoomHigherConsumption() : null
   });
 
   const reRender = () => {
@@ -53,6 +53,7 @@ const Home = props => {
     props.navigation.navigate('Room', { roomId: room.id });
   };
 
+  // Seleciona o maior cômodo de maior consumo
   const getRoomHigherConsumption = room => {
     let highestExpense = props.house.rooms[0].tarifaConvencional.monthlyExpenses;
     let largestRoomSpent = props.house.rooms[0].name;
@@ -67,73 +68,94 @@ const Home = props => {
     setRoomHigherConsumption(largestRoomSpent);
   }
 
-  return (
-    <Container>
-      <Header>
-        <TotalConsumeKW>
-          <TextBold textAlign='center' color="#fff" fontSize="h5">
-            Valor Total
+  // Pelo menos um cômodo cadastrado
+  const renderHasRooms = () => {
+    return (
+      <Container>
+        <Header>
+          <TotalConsumeKW>
+            <TextBold textAlign='center' color="#fff" fontSize="h5">
+              Valor Total
           </TextBold>
 
-          <TextThin textAlign='center' color="#fff" fontSize="h1">
-            R${' '}
-            {totalAmount
-              .toFixed(2)
-              .toString()
-              .replace('.', ',')}
-          </TextThin>
-        </TotalConsumeKW>
+            <TextThin textAlign='center' color="#fff" fontSize="h1">
+              R${' '}
+              {totalAmount
+                .toFixed(2)
+                .toString()
+                .replace('.', ',')}
+            </TextThin>
+          </TotalConsumeKW>
 
-        <Details>
-          <View>
-            <TextBold textAlign='center' color="#FFF"> Consumo total </TextBold>
-            <TextLight textAlign='center' color="#fff" fontSize="h4">
-              {totalKw.toFixed(2)} KW
+          <Details>
+            <View>
+              <TextBold textAlign='center' color="#FFF"> Consumo total </TextBold>
+              <TextLight textAlign='center' color="#fff" fontSize="h4">
+                {totalKw.toFixed(2)} KW
             </TextLight>
-          </View>
+            </View>
 
-          <View>
-            <TextBold textAlign='center' color="#FFF"> Maior consumo </TextBold>
-            <TextLight textAlign='center' color="#fff" fontSize="h4">
-              {roomHigherConsumption}
-            </TextLight>
-          </View>
+            <View>
+              <TextBold textAlign='center' color="#FFF"> Maior consumo </TextBold>
+              <TextLight textAlign='center' color="#fff" fontSize="h4">
+                {roomHigherConsumption}
+              </TextLight>
+            </View>
 
-          <View>
-            <TextBold textAlign='center' color="#FFF"> Bandeira </TextBold>
-            <TextLight textAlign='center' color="#fff" fontSize="h4">
-              {props.house.flag}
-            </TextLight>
-          </View>
-        </Details>
-      </Header>
+            <View>
+              <TextBold textAlign='center' color="#FFF"> Bandeira </TextBold>
+              <TextLight textAlign='center' color="#fff" fontSize="h4">
+                {props.house.flag}
+              </TextLight>
+            </View>
+          </Details>
+        </Header>
 
-      <Rooms>
-        <SwipeListView
-          data={props.house.rooms}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={room => room.id}
-          rightOpenValue={-100}
-          disableRightSwipe={true}
-          extraData={updateList}
-          renderHiddenItem={({ item, index }) => (
-            <HiddenCard
-              refreshList={reRender}
-              room={item}
-              toggleEditRoom={toggleEditRoom}
-            />
-          )}
-          renderItem={({ item }) => (
-            <CardRoom toggleRoomCard={toggleRoomCard} room={item} />
-          )}
+        <Rooms>
+          <SwipeListView
+            data={props.house.rooms}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={room => room.id}
+            rightOpenValue={-100}
+            disableRightSwipe={true}
+            extraData={updateList}
+            renderHiddenItem={({ item, index }) => (
+              <HiddenCard
+                refreshList={reRender}
+                room={item}
+                toggleEditRoom={toggleEditRoom}
+              />
+            )}
+            renderItem={({ item }) => (
+              <CardRoom toggleRoomCard={toggleRoomCard} room={item} />
+            )}
+          />
+        </Rooms>
+        <ActionButton
+          size={55}
+          onPress={() => toggleNewRoomBtn()}
+          buttonColor={Colors.primary}
         />
-      </Rooms>
+      </Container>
+    );
+  }
+
+  const renderNoRooms = () => (
+    <ContainerNoRooms >
+      <MaterialCommunityIcons name="candle" size={100} color="#707070" />
+      <TextBold color="#707070" fontSize='h4'> Nenhum cômodo cadastrado</TextBold>
+      <TextLight color="#707070" textAlign='center' fontSize='h5'>  Vivamus interdum purus non neque commodo fringilla.   </TextLight>
       <ActionButton
         size={55}
         onPress={() => toggleNewRoomBtn()}
         buttonColor={Colors.primary}
       />
-    </Container>
+    </ContainerNoRooms>
+  )
+
+
+  return (
+    props.house.rooms.length > 0 ? renderHasRooms() : renderNoRooms()
   );
 };
 
