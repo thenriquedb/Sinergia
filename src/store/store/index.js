@@ -23,7 +23,6 @@ const INITIAL_STATE = {
       name: 'Cômodo teste',
       typeRoom: 'bedroom',
       totalKw: 0,
-      totalAmount: 0,
 
       tarifaBranca: {
         monthlyExpenses: 0,

@@ -10,7 +10,6 @@ const CardRoom = props => {
   const [totalAmount, setTotalAmount] = useState(
     room.tarifaConvencional.kwMonthly,
   );
-  const [totalKw, setTotalKw] = useState(50);
 
   return (
     <TouchableHighlight
@@ -24,14 +23,14 @@ const CardRoom = props => {
             {' '}
             {room.equipments.length} equipamentos
           </TextLight>
-          <TextLight fontSize="h5"> {room.tarifaConvencional.kwMonthly} KW </TextLight>
+          <TextLight fontSize="h5"> {room.totalKw.toFixed(2)} KW </TextLight>
         </Details>
 
         <TotalPrice>
           <TextLight fontSize="h5"> Valor total</TextLight>
           <TextBold fontSize="h3">
             R${' '}
-            {room.totalAmount
+            {room.tarifaConvencional.monthlyExpenses
               .toFixed(2)
               .toString()
               .replace('.', ',')}

@@ -33,6 +33,7 @@ class Room extends Component {
       kwMonthly: 0,
       MonthlyExpenses: 0,
       EquipmentsListUpdate: false,
+      equipmentHigherConsumption: ''
     };
 
     this.headerCollapseVisible = this.headerCollapseVisible.bind(this);
@@ -43,7 +44,9 @@ class Room extends Component {
     this.calculateKwMonthly = this.calculateKwMonthly.bind(this);
     this.calculateMonthlyExpenses = this.calculateMonthlyExpenses.bind(this);
     this.reRenderEquipmentsList = this.reRenderEquipmentsList.bind(this);
+    this.getRoomHigherConsumption = this.setEquipmentHigherConsumption.bind(this);
 
+    this.setEquipmentHigherConsumption();
   }
 
   // Quando algum equipamento for deletado ou editado aé necessario recalcular o KW
@@ -54,22 +57,22 @@ class Room extends Component {
 
     this.calculateKwMonthly();
     this.calculateMonthlyExpenses();
+    this.setEquipmentHigherConsumption();
   }
 
   componentDidMount() {
     const { navigation } = this.props;
+
     this.focusListener = navigation.addListener('didFocus', () => {
       this.calculateKwMonthly();
       this.calculateMonthlyExpenses();
-
+      this.setEquipmentHigherConsumption();
     });
   }
 
   componentWillUnmount() {
-    // Remove the event listener
     this.focusListener.remove();
   }
-
 
 
   // Calcula o consumo total de KW mensais do comôdo
@@ -80,12 +83,25 @@ class Room extends Component {
     );
 
     this.props.setRoomKwMonthly(this.state.room.id, kwTotal);
-
-    // let s = this.state;
-    // s.kwMonthly = kwTotal;
-    // s.room = this.props.rooms.find(item => item.id === this.state.room.id);
-    // this.setState(s);
   }
+
+  setEquipmentHigherConsumption() {
+    let maior = this.state.room.equipments[0].kwMonthly;
+    let maiorNome = this.state.room.equipments[0].name;
+
+
+    this.state.room.equipments.forEach(item => {
+      if (item.kwMonthly > maior) {
+        maior = item.kwMonthly;
+        maiorNome = item.name;
+      }
+    });
+
+    let s = this.state;
+    s.equipmentHigherConsumption = maiorNome;
+    this.setState(s);
+  }
+
 
   // Calcula o consumo total de R$ mensais do coomôdo
   // Calcular a tarifa convencional e a branca
@@ -119,10 +135,10 @@ class Room extends Component {
 
           <HeaderInfo>
             <Text color={'#fff'} fontSize={'h6'}>
-              Consumo Total
+              Consumo total
             </Text>
             <TextLight color={'#fff'} fontSize={'h5'}>
-              {this.state.room.totalKw} KW
+              {this.state.room.totalKw.toFixed(2)} KW
             </TextLight>
           </HeaderInfo>
 
@@ -131,7 +147,7 @@ class Room extends Component {
               Maior Consumo{' '}
             </Text>
             <TextLight color={'#fff'} fontSize={'h5'}>
-              {'aaaaa'}
+              {this.state.equipmentHigherConsumption}
             </TextLight>
           </HeaderInfo>
         </HeaderInfosContainer>
@@ -184,6 +200,7 @@ class Room extends Component {
   toggleNewEquipment() {
     this.props.navigation.navigate('NewEquipment1', {
       idRoom: this.state.room.id,
+      typeRoom: this.state.room.typeRoom
     });
   }
 

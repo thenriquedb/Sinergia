@@ -16,7 +16,9 @@ export default class NewEquipment extends Component {
     this.state = {
       equipments: [
         ...equipmentsList.rooms['default'],
+        // ...equipmentsList.rooms[this.props.navigation.getParam('typeRoom')],
         ...equipmentsList.rooms['bedroom'],
+
       ]
         .map(item => {
           item.class = styles.SelectedEquipmentCard;

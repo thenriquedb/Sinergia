@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 //Redux
 import { connect } from 'react-redux';
 
 // Style
 import Colors from '../../styles/colors';
-import { Container, Tasks, Details, TotalConsumeKW, Header } from './style';
+import { Container, Rooms, Details, TotalConsumeKW, Header } from './style';
 import { TextLight, TextThin, TextBold } from '../../styles/fonts';
 
 // Components
@@ -28,7 +29,7 @@ const Home = props => {
 
     setTotalAmount(
       props.house.rooms.reduce(
-        (prevVal, elem) => prevVal + elem.totalAmount,
+        (prevVal, elem) => prevVal + elem.tarifaConvencional.monthlyExpenses,
         0,
       ),
     );
@@ -53,17 +54,17 @@ const Home = props => {
   };
 
   const getRoomHigherConsumption = room => {
-
-    let maior = 0;
-    let maiorNome = ''
+    let highestExpense = props.house.rooms[0].tarifaConvencional.monthlyExpenses;
+    let largestRoomSpent = props.house.rooms[0].name;
 
     props.house.rooms.forEach(item => {
-      if (item.tarifaConvencional.monthlySpend > maior) {
-        maior = item.tarifaConvencional.monthlySpend;
-        maiorNome = item.name
+      if (item.tarifaConvencional.monthlyExpenses > highestExpense) {
+        highestExpense = item.tarifaConvencional.monthlyExpenses;
+        largestRoomSpent = item.name
       }
     });
-    setRoomHigherConsumption(maiorNome)
+
+    setRoomHigherConsumption(largestRoomSpent);
   }
 
   return (
@@ -87,7 +88,7 @@ const Home = props => {
           <View>
             <TextBold textAlign='center' color="#FFF"> Consumo total </TextBold>
             <TextLight textAlign='center' color="#fff" fontSize="h4">
-              {totalKw} KW
+              {totalKw.toFixed(2)} KW
             </TextLight>
           </View>
 
@@ -107,7 +108,7 @@ const Home = props => {
         </Details>
       </Header>
 
-      <Tasks>
+      <Rooms>
         <SwipeListView
           data={props.house.rooms}
           showsVerticalScrollIndicator={false}
@@ -126,7 +127,7 @@ const Home = props => {
             <CardRoom toggleRoomCard={toggleRoomCard} room={item} />
           )}
         />
-      </Tasks>
+      </Rooms>
       <ActionButton
         size={55}
         onPress={() => toggleNewRoomBtn()}

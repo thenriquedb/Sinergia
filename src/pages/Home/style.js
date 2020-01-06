@@ -7,7 +7,7 @@ export const Container = styled.View`
   background-color: ${Colors.primary};
 `;
 
-export const Tasks = styled.View`
+export const Rooms = styled.View`
   flex: 3;
   background-color: ${Colors.white};
   border-top-left-radius: 15;

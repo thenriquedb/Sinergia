@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
-import {Alert} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 // style
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Container, DeleteButton, EditButton} from './styles';
+import { Container, DeleteButton, EditButton } from './styles';
 
 const HiddenCard = props => {
-  const {room} = props;
+  const { room, rowData, rowMap } = props;
 
   const toggleDeleteBtn = () => {
     Alert.alert(
@@ -19,11 +19,17 @@ const HiddenCard = props => {
           text: 'Cancel',
           style: 'cancel',
         },
-        {text: 'Confirmar', onPress: () => props.deleteRoom(room.id)},
+        { text: 'Confirmar', onPress: () => props.deleteRoom(room.id) },
       ],
-      {cancelable: false},
+      { cancelable: false },
     );
   };
+
+  const closeRow = (rowData, rowMap) => {
+
+    // rowMap[rowData.item.key].closeRow()
+  }
+
 
   return (
     <Container>
@@ -41,7 +47,7 @@ const HiddenCard = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteRoom: (id, type) => dispatch({type: 'DELETE_ROOM', payload: {id}}),
+    deleteRoom: (id, type) => dispatch({ type: 'DELETE_ROOM', payload: { id } }),
   };
 };
 

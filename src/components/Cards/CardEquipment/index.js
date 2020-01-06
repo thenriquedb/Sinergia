@@ -27,7 +27,7 @@ const CardEquipment = props => {
         </Icon>
 
         <Details>
-          <TextLight fontSize="h4"> {equipment.name.length >= 24 ? equipment.name.substring(0, 24).concat('...') : equipment.name} </TextLight>
+          <TextLight fontSize="h4"> {equipment.name.length >= 22 ? equipment.name.substring(0, 22).concat('...') : equipment.name} </TextLight>
           <InfoContainer>
             <DetailsLabels>
               <TextLight> Potência </TextLight>
@@ -36,7 +36,7 @@ const CardEquipment = props => {
 
             <DetailsLabels>
               <TextLight> KW/h Mensal </TextLight>
-              <TextLight> {equipment.kwMonthly} KW </TextLight>
+              <TextLight> {equipment.kwMonthly.toFixed(2)} KW </TextLight>
             </DetailsLabels>
 
             <DetailsLabels>

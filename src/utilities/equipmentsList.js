@@ -277,14 +277,14 @@ export default {
       },
     ],
 
-    kitchen: [],
+    kitchen: [{}],
 
-    externalArea: [],
+    externalArea: [{}],
 
-    bathroom: [],
+    bathroom: [{}],
 
-    laundry: [],
+    laundry: [{}],
 
-    serviceArea: [],
+    serviceArea: [{}],
   },
 };

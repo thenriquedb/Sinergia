@@ -20,14 +20,24 @@ const NewRoom = props => {
 
   const toggleSaveBtn = () => {
     if (name.length >= 4) {
-      try {
-        props.addNewRoom(name, selectedRoom);
-        Alert.alert('O cômodo ' + name + ' foi cadastrado com sucesso!');
-        setName('');
-      } catch (error) {
-        Alert.alert('Não foi possivel cadastrar o cômodo ' + name + '.');
+
+      const found = props.rooms.find(item => item.name === name);
+
+      if (!found) {
+        try {
+          props.addNewRoom(name, selectedRoom);
+          Alert.alert('O cômodo ' + name + ' foi cadastrado com sucesso!');
+          setName('');
+        } catch (error) {
+          Alert.alert('Não foi possivel cadastrar o cômodo ' + name + '.');
+        }
+      } else {
+        Alert.alert('O cômodo ' + name + 'já foi cadastrado.');
       }
-    } else {
+    }
+
+
+    else {
       Alert.alert('O nome precisa possuir no mínimo 4 caracteres');
     }
   };
@@ -57,6 +67,11 @@ const NewRoom = props => {
   );
 };
 
+const mapStateToProps = state => ({
+  rooms: state.houseReducer.rooms,
+});
+
+
 const mapDispatchToProps = dispatch => {
   return {
     addNewRoom: (name, typeRoom) =>
@@ -64,4 +79,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(NewRoom);
+export default connect(mapStateToProps, mapDispatchToProps)(NewRoom);
