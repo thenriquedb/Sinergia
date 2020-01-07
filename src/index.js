@@ -5,10 +5,9 @@ import SplashScreen from './components/SplashScreen/index'
 // Redux
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
-
 import { store, persistor } from './store/index';
 
-export default function App() {
+export default App = () => {
   console.disableYellowBox = true;
 
   return (
@@ -19,3 +18,7 @@ export default function App() {
     </Provider>
   );
 }
+
+
+
+
