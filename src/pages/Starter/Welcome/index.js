@@ -1,12 +1,22 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
-import { Container } from './styles';
+import { Container, NextPageButton, ContinueConfigArea, WelcomeContent } from './styles';
+import { TextLight, Text } from '../../../styles/fonts';
 
-const Welcome = () => (
+const Welcome = props => (
   <Container>
-    <Text> Primeira pagina </Text>
+
+    <WelcomeContent>
+      <TextLight fontSize='h4'> Bem vindo(a) ao Sinergia </TextLight>
+    </WelcomeContent>
+
+    <ContinueConfigArea>
+      <NextPageButton onPress={() => props.navigation.navigate('SetDefaultKwValue')}>
+        <Text fontSize='h6' color='#fff'> Iniciar configuração </Text>
+      </NextPageButton>
+    </ContinueConfigArea>
   </Container>
 );
 

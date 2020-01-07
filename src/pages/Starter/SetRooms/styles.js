@@ -5,11 +5,20 @@ export const Container = styled.View`
   flex: 1;
 `;
 
-export const WelcomeContent = styled.View`
+export const Content = styled.View`
   flex: 1;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
+  padding: 0px 15px 0px 15px;
+  margin-top: 10px;
 `;
+
+export const InputArea = styled.View`
+  width: 100%;
+  margin:20px 0px 0px 0px ;
+  padding: 0px 15px 0px 15px;
+`;
+
 
 
 export const NextPageButton = styled.TouchableOpacity`
@@ -23,7 +32,6 @@ export const NextPageButton = styled.TouchableOpacity`
 `
 
 export const ContinueConfigArea = styled.View` 
-  /* flex: ${1 / 5}; */
   height: 100px;
   align-items: center;
   justify-content: center;

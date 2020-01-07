@@ -9,7 +9,7 @@ import Input from '../../../../components/Input/index';
 
 // styles
 import { Container, SaveBtn } from './styles';
-import { TextBold } from '../../../../styles/fonts';
+import { Text } from '../../../../styles/fonts';
 
 // utilities
 import roomsList from '../../../../utilities/roomsList';
@@ -58,9 +58,9 @@ const NewRoom = props => {
         })}
       </Picker>
       <SaveBtn onPress={() => toggleSaveBtn()}>
-        <TextBold fontSize="h5" color="#fff">
+        <Text fontSize="h5" color="#fff">
           Salvar
-        </TextBold>
+        </Text>
       </SaveBtn>
     </Container>
   );

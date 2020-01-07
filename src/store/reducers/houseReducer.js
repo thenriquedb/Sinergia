@@ -107,6 +107,17 @@ export default function houseReducer(state = INITIAL_STATE, action) {
       };
       break;
 
+    case 'SET_VALUE_KW':
+      return {
+        ...state,
+        valueKW: action.payload.valueKW
+      }
+
+    case 'SET_FIRST_USE_STATUS':
+      return {
+        ...state,
+        firstUse: !state.firstUse
+      }
     default:
       return state;
   }
