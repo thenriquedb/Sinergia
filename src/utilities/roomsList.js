@@ -1,8 +1,8 @@
 export default roomsList = [
-  {name: 'Área Externa'},
-  {name: 'Área de Serviço'},
-  {name: 'Banheiro'},
-  {name: 'Cozinha'},
-  {name: 'Quarto'},
-  {name: 'Sala'},
+  { name: 'Área Externa', value: 'externalArea' },
+  { name: 'Área de Serviço', value: 'serviceArea' },
+  { name: 'Banheiro', value: 'bathroom' },
+  { name: 'Cozinha', value: 'kitchen' },
+  { name: 'Quarto', value: 'bedroom' },
+  { name: 'Sala', value: 'bedroom' },
 ];

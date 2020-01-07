@@ -1,17 +1,20 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import Colors from './styles/colors';
+import Colors from '../styles/colors';
+
+//rotas
+// import FirstRoute from './firstRoute'
 
 // screens
-import Home from './pages/Home/index';
+import Home from '../pages/Main/Home/index';
 
-import Room from './pages/Room/index';
-import NewRoom from './pages/Room/NewRoom/index';
-import EditRoom from './pages/Room/EditRoom/index';
+import Room from '../pages/Main/Room/index';
+import NewRoom from '../pages/Main/Room/NewRoom/index';
+import EditRoom from '../pages/Main/Room/EditRoom/index';
 
-import NewEquipment1 from './pages/Equipment/NewEquipment/Screen1/index';
-import NewEquipment2 from './pages/Equipment/NewEquipment/Screen2/index';
+import NewEquipment1 from '../pages/Main/Equipment/NewEquipment/Screen1/index';
+import NewEquipment2 from '../pages/Main/Equipment/NewEquipment/Screen2/index';
 
 const mainStack = createStackNavigator({
   Home: {

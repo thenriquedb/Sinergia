@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Picker, CheckBox, TouchableOpacity, ScrollView } from 'react-native';
 
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import Input from '../../../../components/Input/index';
+import Input from '../../../../../components/Input/index';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ActionButton from 'react-native-action-button';
 import { connect } from 'react-redux';
@@ -11,8 +11,8 @@ import moment from "moment"
 // styles
 import { Container, RegisteredContainer, Header, SetOperation, SelectTime, } from './styles';
 
-import Colors from '../../../../styles/colors';
-import { TextBold, TextLight, Text } from '../../../../styles/fonts';
+import Colors from '../../../../../styles/colors';
+import { TextBold, TextLight, Text } from '../../../../../styles/fonts';
 
 const NewEquipment2 = props => {
   const equipment = props.navigation.getParam('equipment');

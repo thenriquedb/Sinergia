@@ -5,24 +5,23 @@ import { Picker, Alert } from 'react-native';
 import { connect } from 'react-redux';
 
 // components
-import Input from '../../../components/Input/index';
+import Input from '../../../../components/Input/index';
 
 // styles
 import { Container, SaveBtn } from './styles';
-import { TextBold } from '../../../styles/fonts';
+import { TextBold } from '../../../../styles/fonts';
 
 // utilities
-import roomsList from '../../../utilities/roomsList';
+import roomsList from '../../../../utilities/roomsList';
 
 const NewRoom = props => {
   const [name, setName] = useState('');
-  const [selectedRoom, setSelectedRoom] = useState('f');
+  const [selectedRoom, setSelectedRoom] = useState(roomsList[0].value);
 
   const toggleSaveBtn = () => {
+    console.log("tipo do comodo selecionado: ", selectedRoom)
     if (name.length >= 4) {
-
       const found = props.rooms.find(item => item.name === name);
-
       if (!found) {
         try {
           props.addNewRoom(name, selectedRoom);
@@ -55,7 +54,7 @@ const NewRoom = props => {
           setSelectedRoom(itemValue);
         }}>
         {roomsList.map((value, key) => {
-          return <Picker.Item key={key} value={key} label={value.name} />;
+          return <Picker.Item key={key} value={value.value} label={value.name} />;
         })}
       </Picker>
       <SaveBtn onPress={() => toggleSaveBtn()}>

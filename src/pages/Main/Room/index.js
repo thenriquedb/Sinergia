@@ -5,9 +5,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { connect } from 'react-redux';
 
 // components
-import Collapse from '../../components/Collapse/index';
-import CardEquipment from '../../components/Cards/CardEquipment/index';
-import HiddenCard from '../../components/Cards/CardEquipment/HiddenCard';
+import Collapse from '../../../components/Collapse/index';
+import CardEquipment from '../../../components/Cards/CardEquipment/index';
+import HiddenCard from '../../../components/Cards/CardEquipment/HiddenCard';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import ActionButton from 'react-native-action-button';
 
@@ -21,8 +21,8 @@ import {
   ContainerNoEquipment,
 } from './styles';
 
-import Colors from '../../styles/colors';
-import { TextBold, TextLight, Text } from '../../styles/fonts';
+import Colors from '../../../styles/colors';
+import { TextBold, TextLight, Text } from '../../../styles/fonts';
 
 class Room extends Component {
   constructor(props) {

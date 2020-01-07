@@ -2,22 +2,23 @@ import React, { Component } from 'react';
 import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid } from 'react-native';
 
 // Lista de equipamentos
-import equipmentsList from '../../../../utilities/equipmentsList';
+import equipmentsList from '../../../../../utilities/equipmentsList';
 
 // styles
-import { TextLight } from '../../../../styles/fonts';
-import Colors from '../../../../styles/colors';
+import { TextLight } from '../../../../../styles/fonts';
+import Colors from '../../../../../styles/colors';
 import { Container, EquipmentCard, ContinueButton, EquipmentContainer, Footer, styles } from './styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class NewEquipment extends Component {
   constructor(props) {
     super(props);
+    console.log('this.props.navigation.getParam(typeRoom): ', this.props.navigation.getParam('typeRoom'))
+
     this.state = {
       equipments: [
         ...equipmentsList.rooms['default'],
-        // ...equipmentsList.rooms[this.props.navigation.getParam('typeRoom')],
-        ...equipmentsList.rooms['bedroom'],
+        ...equipmentsList.rooms[this.props.navigation.getParam('typeRoom')],
 
       ]
         .map(item => {

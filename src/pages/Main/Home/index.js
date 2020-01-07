@@ -6,15 +6,15 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { connect } from 'react-redux';
 
 // Style
-import Colors from '../../styles/colors';
+import Colors from '../../../styles/colors';
 import { Container, ContainerNoRooms, Rooms, Details, TotalConsumeKW, Header } from './style';
-import { TextLight, TextThin, TextBold } from '../../styles/fonts';
+import { TextLight, TextThin, TextBold } from '../../../styles/fonts';
 
 // Components
 import ActionButton from 'react-native-action-button';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import CardRoom from '../../components/Cards/CardRoom/index';
-import HiddenCard from '../../components/Cards/CardRoom/HiddenCardRoom';
+import CardRoom from '../../../components/Cards/CardRoom/index';
+import HiddenCard from '../../../components/Cards/CardRoom/HiddenCardRoom';
 
 const Home = props => {
   const [totalKw, setTotalKw] = useState(0);

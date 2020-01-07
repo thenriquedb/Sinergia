@@ -5,14 +5,14 @@ import { Picker, Alert } from 'react-native';
 import { connect } from 'react-redux';
 
 // components
-import Input from '../../../components/Input/index';
+import Input from '../../../../components/Input/index';
 
 // styles
 import { Container, SaveBtn } from './styles';
-import { TextBold } from '../../../styles/fonts';
+import { TextBold } from '../../../../styles/fonts';
 
 // utilities
-import roomsList from '../../../utilities/roomsList';
+import roomsList from '../../../../utilities/roomsList';
 
 class EditRoom extends Component {
   constructor(props) {
