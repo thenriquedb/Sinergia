@@ -9,13 +9,12 @@ import {
   DetailsLabels,
   Icon,
   InfoContainer,
-  EquipmentsList,
 } from './styles';
 import { TextLight, TextBold } from '../../../styles/fonts';
 
 const CardEquipment = props => {
   const { equipment } = props;
-
+  console.log('equipamento card: ', equipment)
   return (
     <TouchableHighlight
       onPress={() => props.toggleRoomCard(props.idRoom)}
@@ -41,7 +40,7 @@ const CardEquipment = props => {
 
             <DetailsLabels>
               <TextLight> Gasto mensal </TextLight>
-              <TextLight> R$ {(equipment.dayAmount * 30).toFixed(2)}</TextLight>
+              <TextLight> R$ {(equipment.tarifaConvencional.monthlyExpenses).toFixed(2)}</TextLight>
             </DetailsLabels>
           </InfoContainer>
         </Details>

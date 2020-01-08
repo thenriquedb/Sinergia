@@ -143,12 +143,16 @@ class Room extends Component {
             </TextLight>
           </HeaderInfo>
 
+          {/* <TextLight fontSize="h4"> {equipment.name.length >= 22 ? equipment.name.substring(0, 22).concat('...') : equipment.name} </TextLight> */}
+
           <HeaderInfo>
             <Text color={'#fff'} fontSize={'h6'}>
               Maior Consumo{' '}
             </Text>
             <TextLight color={'#fff'} fontSize={'h5'}>
-              {this.state.equipmentHigherConsumption}
+              {this.state.equipmentHigherConsumption.length >= 20 ?
+                this.state.equipmentHigherConsumption.substring(0, 20).concat('...')
+                : this.state.equipmentHigherConsumption}
             </TextLight>
           </HeaderInfo>
         </HeaderInfosContainer>

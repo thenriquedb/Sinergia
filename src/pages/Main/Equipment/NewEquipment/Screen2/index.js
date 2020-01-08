@@ -10,15 +10,17 @@ import moment from "moment"
 
 // styles
 import { Container, RegisteredContainer, Header, SetOperation, SelectTime, } from './styles';
-
 import Colors from '../../../../../styles/colors';
 import { TextBold, TextLight, Text } from '../../../../../styles/fonts';
 
 const NewEquipment2 = props => {
   const equipment = props.navigation.getParam('equipment');
 
+  // states
   const [selectedModel, setSelectedModel] = useState(equipment.models[0]);
+  const [customName, setCustomName] = useState(equipment.models[0].name);
   const [quantity, setQuantity] = useState('1');
+  const [power, setPower] = useState(equipment.models[0].power.toString());
   const [on24Hours, setOn24Hours] = useState(false);
 
   // Hour pickers
@@ -36,6 +38,7 @@ const NewEquipment2 = props => {
   const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(1);
   const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(1);
 
+  // Renderiza caso o equipamento possuir mais de um modelo
   const renderHasModels = () => {
     return (
       <View>
@@ -55,18 +58,23 @@ const NewEquipment2 = props => {
   };
 
   const toggleSaveBtn = () => {
-    const totalTimeOn = moment.duration(moment(endTime).diff(startTime));
-
+    const totalTimeOn = on24Hours ? 24 : moment.duration(moment(endTime).diff(startTime)).asHours();
     const power = !selectedModel ? equipment.models[0].power : selectedModel.power
-    const kwMonthly = power * quantity * (frequencyOfUseOnWeekdays + frequencyOfUseOnWeekend) * totalTimeOn.asHours()
+
+    // Consumo de KW/H mensais
+    const kwMonthly = (power * quantity * totalTimeOn * 30) / 1000
+    const tarifaConvencional = kwMonthly * props.valueKW;
 
     const newEquipment = {
       id: new Date().getTime().toString(),
-      name: selectedModel.name,
+      name: customName,
       power,
       quantity,
       totalTimeOn,
       kwMonthly,
+      tarifaConvencional: {
+        monthlyExpenses: tarifaConvencional,
+      },
       frequencyOfUseOnWeekdays,
       frequencyOfUseOnWeekend,
     };
@@ -236,11 +244,25 @@ const NewEquipment2 = props => {
         <RegisteredContainer>
           {equipment.models.length > 1 ? renderHasModels() : null}
 
+          <TextBold fontSize={'h5'}> Nome </TextBold>
+          <Input
+            value={customName}
+            onChangeText={customName => setCustomName(customName)}
+          />
+
+
           <TextBold fontSize={'h5'}> Quantidade </TextBold>
           <Input
             value={quantity.replace(/[^0-9]/g, '')}
             maxLength={2}
             onChangeText={quantity => setQuantity(quantity)}
+            keyboardType={'numeric'}
+          />
+
+          <TextBold fontSize={'h5'}> Potência </TextBold>
+          <Input
+            value={power}
+            onChangeText={power => setPower(power)}
             keyboardType={'numeric'}
           />
 
@@ -273,6 +295,10 @@ const NewEquipment2 = props => {
   );
 };
 
+const mapStateToProps = state => ({
+  valueKW: state.houseReducer.valueKW,
+});
+
 const mapDispatchToProps = dispatch => {
   return {
     addNewEquipment: (id, newEquipment) =>
@@ -286,4 +312,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(NewEquipment2);
+export default connect(mapStateToProps, mapDispatchToProps)(NewEquipment2);
