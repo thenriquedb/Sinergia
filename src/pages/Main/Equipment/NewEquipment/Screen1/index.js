@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid } from 'react-native';
+import SvgUri from 'react-native-svg-uri';
 
 // Lista de equipamentos
 import equipmentsList from '../../../../../utilities/equipmentsList';
@@ -13,7 +14,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 export default class NewEquipment extends Component {
   constructor(props) {
     super(props);
-    console.log('this.props.navigation.getParam(typeRoom): ', this.props.navigation.getParam('typeRoom'))
 
     this.state = {
       equipments: [
@@ -44,16 +44,18 @@ export default class NewEquipment extends Component {
         style={{ flex: 1 / 3 }}
         onPress={() => this.toggleSelectEquipment(index)}>
         <EquipmentCard style={item.select ? item.class : ''}>
-          <MaterialCommunityIcons
-            name="radio"
-            size={60}
-            color={item.select ? Colors.primary : Colors.darkGray2}
+          <SvgUri
+            width="60"
+            height="60"
+            fillOpacity={0.1}
+            fill="#ff09ff"
+            source={item.icon}
           />
 
           <TextLight
             textAlign={'center'}
             color={item.select ? Colors.primary : Colors.darkGray2}
-            fontSize={4}>
+            fontSize={'h5'}>
             {item.name}
           </TextLight>
         </EquipmentCard>

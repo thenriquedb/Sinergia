@@ -11,14 +11,20 @@ class SetDefaultKwValue extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultKwValue: '0'
+      defaultKwValue: '1'
     }
     this.toggleNext = this.toggleNext.bind(this);
   }
 
   toggleNext() {
-    this.props.setValueKw(parseFloat(this.state.defaultKwValue));
-    this.props.navigation.navigate('SetRooms');
+
+    if (this.state.defaultKwValue.match(/^(\d+\.?\d{0,9}|\.\d{1,9})$/)) {
+      this.props.setValueKw(parseFloat(this.state.defaultKwValue));
+      this.props.navigation.navigate('SetRooms');
+    } else {
+      this.setState({ defaultKwValue: '' })
+      alert('esta errado')
+    }
   }
 
   render() {
@@ -32,14 +38,14 @@ class SetDefaultKwValue extends Component {
               keyboardType={'numeric'}
               maxLength={10}
               onChangeText={defaultKwValue => this.setState({ defaultKwValue })}
-              placeholder="Valor KW/h"
+              placeholder="Valor KWh"
             />
           </InputArea>
         </Content>
 
         <ContinueConfigArea>
           <NextPageButton onPress={() => this.toggleNext()}>
-            <Text fontSize='h6' color='#fff'> Próximo </Text>
+            <Text fontSize='h6' color='#fff'> Continuar </Text>
           </NextPageButton>
         </ContinueConfigArea>
       </Container>

@@ -6,6 +6,7 @@ import Welcome from '../pages/Starter/Welcome/index'
 import SetDefaultKwValue from '../pages/Starter/SetDefaultKwValue/index';
 import SetRooms from '../pages/Starter/SetRooms/index';
 import NewRoom from '../pages/Main/Room/NewRoom/index';
+import EditRoom from '../pages/Main/Room/EditRoom/index';
 import Final from '../pages/Starter/Final/index'
 
 export default StarterStack = createStackNavigator({
@@ -48,6 +49,19 @@ export default StarterStack = createStackNavigator({
     screen: NewRoom,
     navigationOptions: {
       title: 'Novo cômodo',
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerStyle: {
+        backgroundColor: Colors.primary,
+      },
+    },
+  },
+
+  StarterEditRoom: {
+    screen: EditRoom,
+    navigationOptions: {
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',

@@ -22,6 +22,12 @@ export const HeaderContainer = styled.View`
   padding-right: 15;
 `;
 
+export const HeaderTop = styled.View`
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+`;
+
 export const HeaderInfosContainer = styled.View`
   flex-direction: row;
   margin-top: 10px;

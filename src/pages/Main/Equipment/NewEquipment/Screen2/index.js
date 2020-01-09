@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Picker, CheckBox, TouchableOpacity, ScrollView } from 'react-native';
+import SvgUri from 'react-native-svg-uri';
 
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Input from '../../../../../components/Input/index';
@@ -68,6 +69,7 @@ const NewEquipment2 = props => {
     const newEquipment = {
       id: new Date().getTime().toString(),
       name: customName,
+      icon: equipment.icon,
       power,
       quantity,
       totalTimeOn,
@@ -169,42 +171,53 @@ const NewEquipment2 = props => {
           {!on24Hours ? (
             <View>
               <TextBold color={'#707070'} fontSize={'h6'}>
-                Tempo de funcionamento por dia
+                Horário de início
               </TextBold>
-              <Picker
-                selectedValue={weekendUsageTime}
-                style={{ width: 320 }}
-                onValueChange={(itemValue, itemIndex) =>
-                  setWeekendUsageTime(itemValue)
-                }>
-                <Picker.Item key={'key'} value={0.25} label={'15 minutos'} />
-                <Picker.Item key={'key'} value={0.5} label={'30 minutos'} />
-                <Picker.Item key={'key'} value={0.75} label={'45 minutos'} />
-                <Picker.Item key={'key'} value={1} label={'1 hora'} />
-                <Picker.Item key={'key'} value={2} label={'2 horas'} />
-                <Picker.Item key={'key'} value={3} label={'3 horas'} />
-                <Picker.Item key={'key'} value={4} label={'4 horas'} />
-                <Picker.Item key={'key'} value={5} label={'5 horas'} />
-                <Picker.Item key={'key'} value={6} label={'6 horas'} />
-                <Picker.Item key={'key'} value={7} label={'7 horas'} />
-                <Picker.Item key={'key'} value={8} label={'8 horas'} />
-                <Picker.Item key={'key'} value={9} label={'9 horas'} />
-                <Picker.Item key={'key'} value={10} label={'10 horas'} />
-                <Picker.Item key={'key'} value={11} label={'11 horas'} />
-                <Picker.Item key={'key'} value={12} label={'12 horas'} />
-                <Picker.Item key={'key'} value={13} label={'13 horas'} />
-                <Picker.Item key={'key'} value={14} label={'14 horas'} />
-                <Picker.Item key={'key'} value={15} label={'15 horas'} />
-                <Picker.Item key={'key'} value={16} label={'16 horas'} />
-                <Picker.Item key={'key'} value={17} label={'17 horas'} />
-                <Picker.Item key={'key'} value={18} label={'18 horas'} />
-                <Picker.Item key={'key'} value={19} label={'19 horas'} />
-                <Picker.Item key={'key'} value={20} label={'20 horas'} />
-                <Picker.Item key={'key'} value={21} label={'21 horas'} />
-                <Picker.Item key={'key'} value={22} label={'22 horas'} />
-                <Picker.Item key={'key'} value={23} label={'23 horas'} />
-                <Picker.Item key={'key'} value={24} label={'24 horas'} />
-              </Picker>
+              <TouchableOpacity onPress={() => setStartTimePickerVisible(true)}>
+                <SelectTime>
+                  <Text>
+                    {startTime.getHours()}:
+                    {startTime.getMinutes() < 10
+                      ? '0' + startTime.getMinutes()
+                      : startTime.getMinutes()}
+                  </Text>
+                </SelectTime>
+              </TouchableOpacity>
+              <DateTimePicker
+                is24Hour={true}
+                mode={'time'}
+                date={startTime}
+                isVisible={startTimePickerVisible}
+                onConfirm={date => setStartTime(date)}
+                onCancel={() => setStartTimePickerVisible(false)}
+              />
+
+              <TextBold
+                style={{ marginTop: 10 }}
+                color={'#707070'}
+                fontSize={'h6'}>
+                Horário de término
+              </TextBold>
+
+              <TouchableOpacity onPress={() => setEndTimePickerVisible(true)}>
+                <SelectTime>
+                  <Text>
+                    {endTime.getHours()}:{' '}
+                    {endTime.getMinutes() < 10
+                      ? '0' + endTime.getMinutes()
+                      : endTime.getMinutes()}
+                  </Text>
+                </SelectTime>
+              </TouchableOpacity>
+
+              <DateTimePicker
+                is24Hour={true}
+                mode={'time'}
+                date={endTime}
+                isVisible={endTimePickerVisible}
+                onConfirm={date => setEndTime(date)}
+                onCancel={() => setEndTimePickerVisible(false)}
+              />
             </View>
           ) : null}
 
@@ -229,6 +242,12 @@ const NewEquipment2 = props => {
   return (
     <Container>
       <Header>
+        <SvgUri
+          width="110"
+          height="110"
+          fill="#ffff"
+          source={equipment.icon}
+        />
         <TextBold color={'#fff'} fontSize={'h3'} textAlign={'center'}>
           {equipment.name}
         </TextBold>

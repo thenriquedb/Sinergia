@@ -3,8 +3,8 @@ export default {
     default: [
       {
         name: 'Lampâda',
-        description:
-          'Evite acender Lâmpadas durante o dia, utilize a iluminação natural.            ',
+        icon: require('../assets/icons/default/lamp.svg'),
+        description: 'Evite acender Lâmpadas durante o dia, utilize a iluminação natural.            ',
 
         models: [
           {
@@ -52,13 +52,13 @@ export default {
             description: 'Lorem Ipsulum Dolor',
           },
         ],
-        icon: '',
       },
     ],
 
     bedroom: [
       {
         name: 'Computador',
+        icon: require('../assets/icons/bedroom/computer.svg'),
         models: [
           {
             name: 'Computador',
@@ -67,10 +67,22 @@ export default {
               'Pesquise modelos mais econômicos e evite deixar ligado sem necessidade.            ',
           },
         ],
-        icon: '',
+      },
+      {
+        name: 'Telefone Fixo',
+        icon: require('../assets/icons/bedroom/phone.svg'),
+        models: [
+          {
+            name: 'Telefone Fixo',
+            power: 5,
+            description:
+              '',
+          },
+        ],
       },
       {
         name: 'Notebook',
+        icon: require('../assets/icons/bedroom/notebook.svg'),
         models: [
           {
             name: 'Notebook',
@@ -80,10 +92,10 @@ export default {
           },
         ],
 
-        icon: '',
       },
       {
         name: 'Ar condicionado',
+        icon: require('../assets/icons/bedroom/air-conditioner.svg'),
         models: [
           {
             name: 'Ar condicionado (7.500 BTU) 1000W',
@@ -104,10 +116,10 @@ export default {
               'Evite instalar o aparelho em locais com incidência de raios solares. Isso exige maior consumo para esfriar.',
           },
         ],
-        icon: '',
       },
       {
         name: 'Carregador de celular',
+        icon: require('../assets/icons/bedroom/phone-charger.svg'),
         models: [
           {
             name: 'Carregador de celular - 10W',
@@ -122,11 +134,10 @@ export default {
               'Retire da tomada quando o aparelho já estiver com a carga completa.',
           },
         ],
-
-        icon: '',
       },
       {
         name: 'Impressora',
+        icon: require('../assets/icons/bedroom/printer.svg'),
         models: [
           {
             name: 'Impressora',
@@ -139,6 +150,7 @@ export default {
       },
       {
         name: 'Micro system',
+        icon: require('../assets/icons/bedroom/microsystem.svg'),
         models: [
           {
             name: 'Micro system',
@@ -147,12 +159,11 @@ export default {
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
           },
         ],
-
-        icon: '',
       },
 
       {
         name: 'Televisão',
+        icon: require('../assets/icons/bedroom/tv.svg'),
         models: [
           {
             name: 'Televisão CRT (20" a 29") - 100W',
@@ -179,28 +190,28 @@ export default {
               'Desligue da tomada quando não for mais assistir, pois o stand-by consome energia.',
           },
         ],
-        icon: '',
       },
       {
         name: 'Ventilador',
+        icon: require('../assets/icons/bedroom/fan.svg'),
         models: [
           {
-            name: 'Ventilador de teto - 200W',
+            name: 'Ventilador grande',
             power: 200,
             description:
               'Mantenha hélices e grades limpas para facilitar a circulação do ar',
           },
           {
-            name: 'Ventilador grande - 150W',
+            name: 'Ventilador pequeno',
             power: 150,
             description:
               'Mantenha hélices e grades limpas para facilitar a circulação do ar',
           },
         ],
-        icon: '',
       },
       {
         name: 'Video Game',
+        icon: require('../assets/icons/bedroom/videogame.svg'),
         models: [
           {
             name: 'PlayStation 2',
@@ -246,11 +257,10 @@ export default {
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
           },
         ],
-
-        icon: '',
       },
       {
         name: 'DVD',
+        icon: require('../assets/icons/bedroom/dvd.svg'),
         models: [
           {
             name: 'DVD',
@@ -259,11 +269,10 @@ export default {
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
           },
         ],
-
-        icon: '',
       },
       {
         name: 'Home theater',
+        icon: require('../assets/icons/bedroom/speaker.svg'),
         models: [
           {
             name: 'Home theater',
@@ -273,7 +282,6 @@ export default {
             icon: '',
           },
         ],
-        icon: '',
       },
     ],
 
@@ -282,15 +290,16 @@ export default {
       models: [
         {
           name: 'Batedeira',
+          icon: require('../assets/icons/kitchen/blender.svg'),
           power: 180,
           description:
             'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
         },
       ],
-      icon: '',
     },
     {
       name: 'Cafeteira',
+      icon: require('../assets/icons/kitchen/coffemachine.svg'),
       models: [
         {
           name: 'Cafeteira',
@@ -299,10 +308,10 @@ export default {
             ' ',
         },
       ],
-      icon: '',
     },
     {
       name: 'Exaustor Fogão',
+      icon: require('../assets/icons/kitchen/exaust.svg'),
       models: [
         {
           name: 'Exaustor Fogão',
@@ -311,10 +320,10 @@ export default {
             ' ',
         },
       ],
-      icon: '',
     },
     {
       name: 'Fogão elétrico',
+      icon: require('../assets/icons/kitchen/cooker.svg'),
       models: [
         {
           name: 'Fogão elétrico',
@@ -323,10 +332,10 @@ export default {
             ' ',
         },
       ],
-      icon: '',
     },
     {
       name: 'Forno elétrico',
+      icon: require('../assets/icons/kitchen/forno.svg'),
       models: [
         {
           name: 'Forno elétrico',
@@ -335,10 +344,10 @@ export default {
             ' ',
         },
       ],
-      icon: '',
     },
     {
       name: 'Freezer',
+      icon: require('../assets/icons/kitchen/freezer.svg'),
       models: [
         {
           name: 'Freezer',
@@ -347,10 +356,10 @@ export default {
             'Instalar longe das fontes de calor e de preferência em local ventilado',
         },
       ],
-      icon: '',
     },
     {
       name: 'Frigobar',
+      icon: require('../assets/icons/kitchen/frigobar.svg'),
       models: [
         {
           name: 'Frigobar',
@@ -359,10 +368,10 @@ export default {
             '',
         },
       ],
-      icon: '',
     },
     {
       name: 'Lavadora de louça',
+      icon: require('../assets/icons/kitchen/dishwasher.svg'),
       models: [
         {
           name: 'Lavadora de louça',
@@ -371,10 +380,10 @@ export default {
             'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
         },
       ],
-      icon: '',
     },
     {
       name: 'Liquidificador',
+      icon: require('../assets/icons/kitchen/mixer.svg'),
       models: [
         {
           name: 'Liquidificador',
@@ -383,10 +392,10 @@ export default {
             'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
         },
       ],
-      icon: '',
     },
     {
       name: 'Microondas',
+      icon: require('../assets/icons/kitchen/microwave.svg'),
       models: [
         {
           name: 'Microondas',
@@ -395,10 +404,10 @@ export default {
             'Use corretamente a potência para aquecer a comida, para não usar mais que o tempo necessário.',
         },
       ],
-      icon: '',
     },
     {
       name: 'Refrigerador',
+      icon: require('../assets/icons/kitchen/geladeira.svg'),
       models: [
         {
           name: 'Refrigerador 1 porta',
@@ -425,10 +434,10 @@ export default {
             'Não deixe a porta muito tempo aberta e evite guardar panelas quentes.',
         },
       ],
-      icon: '',
     },
     {
       name: 'Sanduicheira',
+      icon: require('../assets/icons/kitchen/sandwich.svg'),
       models: [
         {
           name: 'Sanduicheira',
@@ -437,13 +446,13 @@ export default {
             '',
         },
       ],
-      icon: '',
     },
     ],
 
     externalArea: [
       {
         name: 'Boiler',
+        icon: require('../assets/icons/externalArea/boiler.svg'),
         models: [
           {
             name: 'Boiler 100L',
@@ -464,10 +473,22 @@ export default {
               '',
           },
         ],
-        icon: '',
+      },
+      {
+        name: 'Sauna',
+        icon: require('../assets/icons/externalArea/sauna.svg'),
+        models: [
+          {
+            name: 'Sauna',
+            power: 15000,
+            description:
+              '',
+          },
+        ],
       },
       {
         name: 'Bomba d\'água',
+        icon: require('../assets/icons/externalArea/plumb.svg'),
         models: [
           {
             name: 'Bomba d\'água 1/4 CV',
@@ -494,10 +515,10 @@ export default {
               '',
           },
         ],
-        icon: '',
       },
       {
         name: 'Bomba de piscina',
+        icon: require('../assets/icons/externalArea/water-pump.svg'),
         models: [
           {
             name: 'Bomba de piscina',
@@ -506,10 +527,10 @@ export default {
               '',
           },
         ],
-        icon: '',
       },
       {
         name: 'Churrasqueira elétrica',
+        icon: require('../assets/icons/externalArea/grill.svg'),
         models: [
           {
             name: 'Churrasqueira elétrica',
@@ -518,10 +539,10 @@ export default {
               '',
           },
         ],
-        icon: '',
       },
       {
         name: 'Cortador de grama',
+        icon: require('../assets/icons/externalArea/lawn-mower.svg'),
         models: [
           {
             name: 'Cortador de grama',
@@ -530,13 +551,13 @@ export default {
               '',
           },
         ],
-        icon: '',
       },
     ],
 
     bathroom: [
       {
         name: 'Chuveiro',
+        icon: require('../assets/icons/bathroom/shower.svg'),
         models: [
           {
             name: 'Chuveiro elétrico pequeno',
@@ -557,10 +578,10 @@ export default {
               'Nos meses quentes, ajuste a chave do chuveiro para a posição verão.',
           },
         ],
-        icon: '',
       },
       {
         name: 'Depilador',
+        icon: require('../assets/icons/bathroom/depilador.svg'),
         models: [
           {
             name: 'Depilador',
@@ -569,22 +590,11 @@ export default {
               '',
           },
         ],
-        icon: '',
       },
-      {
-        name: 'Sauna',
-        models: [
-          {
-            name: 'Sauna',
-            power: 15000,
-            description:
-              '',
-          },
-        ],
-        icon: '',
-      },
+
       {
         name: 'Secador de cabelo',
+        icon: require('../assets/icons/bathroom/hairdryer.svg'),
         models: [
           {
             name: 'Secador pequeno de cabelo',
@@ -599,10 +609,10 @@ export default {
               '',
           },
         ],
-        icon: '',
       },
       {
         name: 'Torneira elétrica',
+        icon: require('../assets/icons/bathroom/sink.svg'),
         models: [
           {
             name: 'Torneira elétrica',
@@ -611,10 +621,10 @@ export default {
               'Evite ligá-la no verão quando a água, em geral, é mais quente.',
           },
         ],
-        icon: '',
       },
       {
         name: 'Banheira',
+        icon: require('../assets/icons/bathroom/bathtub.svg'),
         models: [
           {
             name: 'Banheira de hidromassagem',
@@ -623,13 +633,13 @@ export default {
               '',
           },
         ],
-        icon: '',
       },
     ],
 
     serviceArea: [
       {
         name: 'Aspirador de pó',
+        icon: require('../assets/icons/serviceArea/vacuum-cleaner.svg'),
         models: [
           {
             name: 'Aspirador de pó',
@@ -638,22 +648,22 @@ export default {
               '',
           },
         ],
-        icon: '',
       },
       {
-        name: 'Enceradeira',
+        name: 'Máquina de costura',
+        icon: require('../assets/icons/serviceArea/sewing-machine.svg'),
         models: [
           {
-            name: 'Enceradeira',
-            power: 500,
+            name: 'Maquina de costura',
+            power: 100,
             description:
               '',
           },
         ],
-        icon: '',
       },
       {
         name: 'Ferro de passar',
+        icon: require('../assets/icons/serviceArea/flatiron.svg'),
         models: [
           {
             name: 'Ferro de passar',
@@ -662,10 +672,10 @@ export default {
               'Ao desligar o ferro, aproveite o seu calor para passar as roupas mais leves.',
           },
         ],
-        icon: '',
       },
       {
         name: 'Lavadora de roupa',
+        icon: require('../assets/icons/serviceArea/washing-machine.svg'),
         models: [
           {
             name: 'Lavadora de roupa',
@@ -674,10 +684,10 @@ export default {
               'Procure usar toda a capacidade em uma mesma lavagem, evitando ligá-la muitas vezes.',
           },
         ],
-        icon: '',
       },
       {
         name: 'Secadora de roupa',
+        icon: require('../assets/icons/serviceArea/secadora.svg'),
         models: [
           {
             name: 'Secadora de roupa',
@@ -686,10 +696,10 @@ export default {
               '',
           },
         ],
-        icon: '',
       },
       {
         name: 'Tanquinho',
+        icon: require('../assets/icons/serviceArea/tanquinho.svg'),
         models: [
           {
             name: 'Tanquinho',
@@ -698,22 +708,7 @@ export default {
               'Procure usar toda a capacidade em uma mesma lavagem, evitando ligá-lo muitas vezes.',
           },
         ],
-        icon: '',
       },
     ],
-
-    livingRoom: [
-      {
-        name: 'Aspirador de pó',
-        models: [
-          {
-            name: 'Aspirador de pó',
-            power: 600,
-            description:
-              '',
-          },
-        ],
-        icon: '',
-      },]
   },
 };

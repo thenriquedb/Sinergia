@@ -1,38 +1,73 @@
 import React, { Component } from 'react';
+import { SwipeListView } from 'react-native-swipe-list-view';
 
-import { View, FlatList } from 'react-native';
+import { View, TouchableHighlight } from 'react-native';
+import SimpleCardRoom from '../../../components/Cards/SimpleCardRoom';
+import HiddenSimpleCardRoom from '../../../components/Cards/SimpleCardRoom/HiddenSimpleCardRoom';
+
 
 import { connect } from 'react-redux'
 
 // styles
-import { Container, NextPageButton, ContinueConfigArea, Content, InputArea } from './styles';
+import { Container, NextPageButton, ContinueConfigArea, Content, NewRoomButton } from './styles';
 import { TextLight, Text } from '../../../styles/fonts';
+
 
 class SetRooms extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rooms: '0'
+      rooms: '0',
+      updateList: false
     }
-    this.toggleNext = this.toggleNext.bind(this);
     this.renderButton = this.renderButton.bind(this);
+    this.toggleEditRoom = this.toggleEditRoom.bind(this);
+    this.renderAddNewRoom = this.renderAddNewRoom.bind(this);
+    this.reRender = this.reRender.bind(this);
   }
 
-  componentWillMount() {
-    this.setState({ rooms: this.props.rooms })
+  // componentDidMount() {
+  //   const { navigation } = this.props;
+
+  //   this.focusListener = navigation.addListener('didFocus', () => {
+  //     this.reRender();
+  //   });
+  // }
+
+  // componentWillUnmount() {
+  //   this.focusListener.remove();
+  // }
+
+
+  reRender() {
+    let s = this.state;
+    s.updateList = !s.updateList;
+    this.setState(s);
   }
 
-  toggleNext() {
-    this.props.setValueKw(parseFloat(this.state.defaultKwValue));
-    this.props.navigation.navigate('SetRooms');
+  renderAddNewRoom() {
+    return (
+      <TouchableHighlight underlayColor={'#fcf8f7'} onPress={() => this.props.navigation.navigate('StarterNewRoom')}>
+        <NewRoomButton>
+          <Text color={'#cccccc'}> Adcionar um novo comôdo </Text>
+        </NewRoomButton>
+      </TouchableHighlight>
+    );
   }
+
+
+  toggleEditRoom(data) {
+    console.log('toggleEditRoom: ', data)
+    this.props.navigation.navigate('StarterEditRoom', { room: data });
+  };
+
 
   renderButton() {
     console.log('this.props.rooms: ', this.props.rooms);
     if (this.state.rooms.length > 0) {
       return (
         <NextPageButton onPress={() => this.props.navigation.navigate('Final')}>
-          <Text fontSize='h6' color='#fff'> Próximo </Text>
+          <Text fontSize='h6' color='#fff'> Continuar </Text>
         </NextPageButton>
       );
     } else {
@@ -49,8 +84,24 @@ class SetRooms extends Component {
       <Container>
         <TextLight textAlign='center' fontSize='h4'> Esta quase pronto! Agora é só cadastrar os cômodos  </TextLight>
 
-        <Content>
-        </Content>
+        <View style={{ flex: 1 }}>
+          <Content >
+            {/* <SwipeListView
+              data={this.props.rooms}
+              extraData={this.state.updateList}
+              keyExtractor={item => item.name}
+              showsVerticalScrollIndicator={false}
+              rightOpenValue={-100}
+              disableRightSwipe={true}
+              renderItem={({ item }) => <SimpleCardRoom room={item} />}
+              renderHiddenItem={({ item }) => <HiddenSimpleCardRoom
+                refreshList={this.reRender}
+                toggleEditRoom={this.toggleEditRoom}
+                room={item} />}
+            /> */}
+            {this.state.rooms.length > 0 ? this.renderAddNewRoom() : null}
+          </Content>
+        </View>
 
         <ContinueConfigArea>
           {this.renderButton()}
@@ -59,13 +110,10 @@ class SetRooms extends Component {
     )
   }
 }
-
 const mapStateToProps = state => ({
   rooms: state.houseReducer.rooms,
 });
 
-
-// export default connect(mapStateToProps, mapDispatchToProps)(SetRooms);
 export default connect(mapStateToProps, null)(SetRooms);
 
 

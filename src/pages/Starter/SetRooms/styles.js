@@ -6,20 +6,21 @@ export const Container = styled.View`
 `;
 
 export const Content = styled.View`
-  flex: 1;
-  align-items: center;
-  /* justify-content: center; */
   padding: 0px 15px 0px 15px;
   margin-top: 10px;
 `;
 
-export const InputArea = styled.View`
-  width: 100%;
-  margin:20px 0px 0px 0px ;
-  padding: 0px 15px 0px 15px;
+export const NewRoomButton = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border-width: 2px;
+  border-style: dashed;
+  border-color: ${Colors.lightGray1};
+  border-radius: 5;
+  padding: 1px 5px 0px 5px;
 `;
-
-
 
 export const NextPageButton = styled.TouchableOpacity`
   background-color: ${Colors.primary};

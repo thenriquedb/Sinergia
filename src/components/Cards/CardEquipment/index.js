@@ -1,28 +1,32 @@
 import React from 'react';
 import { TouchableHighlight } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SvgUri from 'react-native-svg-uri';
 
 // styles
 import {
-  Container,
-  Details,
-  DetailsLabels,
-  Icon,
-  InfoContainer,
+  Container, Details, DetailsLabels, Icon, InfoContainer,
 } from './styles';
 import { TextLight, TextBold } from '../../../styles/fonts';
 
 const CardEquipment = props => {
   const { equipment } = props;
-  console.log('equipamento card: ', equipment)
+
+  const iconPath = equipment.icon;
+  // console.log('icone path: ', require(equipment.icon));
+
   return (
     <TouchableHighlight
       onPress={() => props.toggleRoomCard(props.idRoom)}
       style={{ marginBottom: 15 }}
       underlayColor="#FDFDFD">
       <Container>
+        {/* <TextLight> {equipment.icon}</TextLight> */}
         <Icon>
-          <MaterialCommunityIcons name="radio" size={50} color="#000" />
+          <SvgUri
+            width="60"
+            height="60"
+            source={equipment.icon}
+          />
         </Icon>
 
         <Details>

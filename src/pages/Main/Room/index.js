@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { TouchableOpacity } from "react-native";
 
 // redux
 import { connect } from 'react-redux';
@@ -10,15 +11,12 @@ import CardEquipment from '../../../components/Cards/CardEquipment/index';
 import HiddenCard from '../../../components/Cards/CardEquipment/HiddenCard';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import ActionButton from 'react-native-action-button';
+import EditRoomModal from "./EditRoomModal/index"
 
 // styles
 import {
-  EquipmentsList,
-  Container,
-  HeaderContainer,
-  HeaderInfo,
-  HeaderInfosContainer,
-  ContainerNoEquipment,
+  EquipmentsList, Container, HeaderContainer, HeaderInfo,
+  HeaderInfosContainer, ContainerNoEquipment, HeaderTop
 } from './styles';
 
 import Colors from '../../../styles/colors';
@@ -32,6 +30,7 @@ class Room extends Component {
       room: this.props.rooms.find(item => item.id === this.props.navigation.getParam('roomId')),
       kwMonthly: 0,
       MonthlyExpenses: 0,
+      modalIsVisible: false,
       EquipmentsListUpdate: false,
       equipmentHigherConsumption: ''
     };
@@ -45,9 +44,9 @@ class Room extends Component {
     this.calculateMonthlyExpenses = this.calculateMonthlyExpenses.bind(this);
     this.reRenderEquipmentsList = this.reRenderEquipmentsList.bind(this);
     this.getRoomHigherConsumption = this.setEquipmentHigherConsumption.bind(this);
+    this.updateData = this.updateData.bind(this);
 
     this.state.room.equipments.length > 0 ? this.setEquipmentHigherConsumption() : null
-
   }
 
   // Quando algum equipamento for deletado ou editado aé necessario recalcular o KW
@@ -68,6 +67,7 @@ class Room extends Component {
       this.calculateKwMonthly();
       this.calculateMonthlyExpenses();
       this.setEquipmentHigherConsumption();
+
     });
   }
 
@@ -103,7 +103,6 @@ class Room extends Component {
     this.setState(s);
   }
 
-
   // Calcula o consumo total de R$ mensais do coomôdo
   // Calcular a tarifa convencional e a branca
   calculateMonthlyExpenses() {
@@ -114,12 +113,26 @@ class Room extends Component {
     // return;
   }
 
+  updateData() {    // room: ,
+    console.log('room atulizdo: ', this.props.rooms)
+
+    this.setState({
+      room: this.props.rooms.find(item => item.id === this.props.navigation.getParam('roomId'))
+    })
+  }
+
   headerCollapseVisible() {
     return (
       <HeaderContainer>
-        <TextBold textAlign={'center'} color={'#fff'} fontSize={'h1'}>
-          {this.state.room.name}
-        </TextBold>
+        <HeaderTop>
+          <TextBold textAlign={'center'} color={'#fff'} fontSize={'h1'}>
+            {this.state.room.name}
+          </TextBold>
+
+          <TouchableOpacity onPress={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}>
+            <MaterialCommunityIcons name="pencil" size={30} color="#fff" />
+          </TouchableOpacity>
+        </HeaderTop>
 
         <HeaderInfosContainer>
           <HeaderInfo>
@@ -253,6 +266,11 @@ class Room extends Component {
           />
         </EquipmentsList>
 
+        <EditRoomModal
+          isVisible={this.state.modalIsVisible}
+          room={this.state.room}
+          updateData={() => this.updateData()}
+          closeModal={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })} />
         <ActionButton
           size={55}
           onPress={() => this.toggleNewEquipment()}
@@ -274,6 +292,8 @@ const mapStateToProps = state => ({
   valueKW: state.houseReducer.valueKW,
 });
 
+
+
 const mapDispatchToProps = dispatch => {
   return {
     setRoomKwMonthly: (idRoom, totalKwMonthly) =>
@@ -286,6 +306,9 @@ const mapDispatchToProps = dispatch => {
         type: 'SET_ROOM_MONTHLY_EXPENSES',
         payload: { idRoom, totalTarifaConvencional, totalTarifaBranca },
       }),
+    editRoom: (id, name, typeRoom) => {
+      dispatch({ type: 'EDIT_ROOM', payload: { id, name, typeRoom } });
+    },
   };
 };
 

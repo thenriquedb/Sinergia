@@ -9,6 +9,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   /* flex: 1; */
+  align-items: center;
   margin-bottom: 15;
   padding-left: 15;
   padding-right: 15;

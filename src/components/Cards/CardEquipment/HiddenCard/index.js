@@ -35,11 +35,9 @@ const HiddenCard = props => {
   return (
     <Container>
       <DeleteButton underlayColor="#f79292" onPress={() => toggleDeleteBtn()}>
-        <MaterialCommunityIcons name="delete" size={30} color="#fff" />
+        <MaterialCommunityIcons name="delete" size={40} color="#fff" />
       </DeleteButton>
-      <EditButton underlayColor="#ffdd67">
-        <MaterialCommunityIcons name="pencil" size={30} color="#fff" />
-      </EditButton>
+
     </Container>
   );
 };

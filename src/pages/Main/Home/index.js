@@ -119,7 +119,7 @@ const Home = props => {
             rightOpenValue={-100}
             disableRightSwipe={true}
             extraData={updateList}
-            renderHiddenItem={({ item, index }) => (
+            renderHiddenItem={({ item }) => (
               <HiddenCard
                 refreshList={reRender}
                 room={item}

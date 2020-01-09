@@ -31,6 +31,8 @@ export const Icon = styled.View`
   color: red;
   justify-content: center;
   align-items: center;
+  margin-right: 5px;
+margin-left: 5px;
 `;
 
 export const InfoContainer = styled.View`

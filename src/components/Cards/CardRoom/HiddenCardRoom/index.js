@@ -23,24 +23,16 @@ const HiddenCard = props => {
       ],
       { cancelable: false },
     );
+
+    props.refreshList();
   };
-
-  const closeRow = (rowData, rowMap) => {
-
-    // rowMap[rowData.item.key].closeRow()
-  }
-
 
   return (
     <Container>
       <DeleteButton underlayColor="#f79292" onPress={() => toggleDeleteBtn()}>
         <MaterialCommunityIcons name="delete" size={30} color="#fff" />
       </DeleteButton>
-      <EditButton
-        underlayColor="#ffdd67"
-        onPress={() => props.toggleEditRoom(room)}>
-        <MaterialCommunityIcons name="pencil" size={30} color="#fff" />
-      </EditButton>
+
     </Container>
   );
 };
