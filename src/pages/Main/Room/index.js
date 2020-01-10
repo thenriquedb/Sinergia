@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Image } from "react-native";
 
 // redux
 import { connect } from 'react-redux';
@@ -15,7 +15,7 @@ import EditRoomModal from "./EditRoomModal/index"
 
 // styles
 import {
-  EquipmentsList, Container, HeaderContainer, HeaderInfo,
+  EquipmentsList, Container, HeaderContainer, Icon, IconContainer, HeaderInfo,
   HeaderInfosContainer, ContainerNoEquipment, HeaderTop
 } from './styles';
 
@@ -122,13 +122,17 @@ class Room extends Component {
   headerCollapseVisible() {
     return (
       <HeaderContainer>
+
         <HeaderTop>
-          <TextBold textAlign={'center'} color={'#fff'} fontSize={'h1'}>
-            {this.state.room.name}
-          </TextBold>
+          <TouchableOpacity onPress={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}>
+            <Icon resizeMode={"contain"} source={this.state.room.icon.light} />
+          </TouchableOpacity>
 
           <TouchableOpacity onPress={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}>
-            <MaterialCommunityIcons name="pencil" size={25} color="#fff" />
+            <TextBold textAlign={'center'} color={'#fff'} fontSize={'h1'}>
+              {this.state.room.name}
+            </TextBold>
+
           </TouchableOpacity>
         </HeaderTop>
 

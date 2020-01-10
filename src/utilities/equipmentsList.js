@@ -3,7 +3,10 @@ export default {
     default: [
       {
         name: 'Lâmpada',
-        icon: require('../assets/icons/default/lamp.svg'),
+        icon: {
+          dark: require('../assets/icons/default/dark/lamp.png'),
+          light: require('../assets/icons/default/light/lamp.png')
+        },
         description: 'Evite acender Lâmpadas durante o dia, utilize a iluminação natural.            ',
 
         models: [
@@ -58,7 +61,10 @@ export default {
     bedroom: [
       {
         name: 'Computador',
-        icon: require('../assets/icons/bedroom/computer.svg'),
+        icon: {
+          dark: require('../assets/icons/bedroom/dark/computer.png'),
+          light: require('../assets/icons/bedroom/light/computer.png')
+        },
         models: [
           {
             name: 'Computador',
@@ -70,8 +76,10 @@ export default {
       },
       {
         name: 'Telefone Fixo',
-        icon: require('../assets/icons/bedroom/phone.svg'),
-        models: [
+        icon: {
+          dark: require('../assets/icons/bedroom/dark/phone.png'),
+          light: require('../assets/icons/bedroom/light/phone.png')
+        }, models: [
           {
             name: 'Telefone Fixo',
             power: 5,
@@ -82,7 +90,10 @@ export default {
       },
       {
         name: 'Notebook',
-        icon: require('../assets/icons/bedroom/notebook.svg'),
+        icon: {
+          dark: require('../assets/icons/bedroom/dark/notebook.png'),
+          light: require('../assets/icons/bedroom/light/notebook.png')
+        },
         models: [
           {
             name: 'Notebook',
@@ -95,7 +106,10 @@ export default {
       },
       {
         name: 'Ar condicionado',
-        icon: require('../assets/icons/bedroom/air-conditioner.svg'),
+        icon: {
+          dark: require('../assets/icons/bedroom/dark/air-conditioner.png'),
+          light: require('../assets/icons/bedroom/light/air-conditioner.png')
+        },
         models: [
           {
             name: 'Ar condicionado (7.500 BTU) 1000W',
@@ -119,7 +133,10 @@ export default {
       },
       {
         name: 'Carregador de celular',
-        icon: require('../assets/icons/bedroom/phone-charger.svg'),
+        icon: {
+          dark: require('../assets/icons/bedroom/dark/phone-charger.png'),
+          light: require('../assets/icons/bedroom/light/phone-charger.png')
+        },
         models: [
           {
             name: 'Carregador de celular - 10W',
@@ -137,7 +154,10 @@ export default {
       },
       {
         name: 'Impressora',
-        icon: require('../assets/icons/bedroom/printer.svg'),
+        icon: {
+          dark: require('../assets/icons/bedroom/dark/printer.png'),
+          light: require('../assets/icons/bedroom/light/printer.png')
+        },
         models: [
           {
             name: 'Impressora',
@@ -149,7 +169,10 @@ export default {
       },
       {
         name: 'Micro system',
-        icon: require('../assets/icons/bedroom/microsystem.svg'),
+        icon: {
+          dark: require('../assets/icons/bedroom/dark/microsystem.png'),
+          light: require('../assets/icons/bedroom/light/microsystem.png')
+        },
         models: [
           {
             name: 'Micro system',
@@ -162,7 +185,10 @@ export default {
 
       {
         name: 'Televisão',
-        icon: require('../assets/icons/bedroom/tv.svg'),
+        icon: {
+          dark: require('../assets/icons/bedroom/dark/tv.png'),
+          light: require('../assets/icons/bedroom/light/tv.png')
+        },
         models: [
           {
             name: 'Televisão CRT (20" a 29") - 100W',
@@ -192,7 +218,10 @@ export default {
       },
       {
         name: 'Ventilador',
-        icon: require('../assets/icons/bedroom/fan.svg'),
+        icon: {
+          dark: require('../assets/icons/bedroom/dark/fan.png'),
+          light: require('../assets/icons/bedroom/light/fan.png')
+        },
         models: [
           {
             name: 'Ventilador pequeno',
@@ -210,7 +239,10 @@ export default {
       },
       {
         name: 'Video Game',
-        icon: require('../assets/icons/bedroom/videogame.svg'),
+        icon: {
+          dark: require('../assets/icons/bedroom/dark/videogame.png'),
+          light: require('../assets/icons/bedroom/light/videogame.png')
+        },
         models: [
           {
             name: 'PlayStation 2',
@@ -259,7 +291,10 @@ export default {
       },
       {
         name: 'DVD',
-        icon: require('../assets/icons/bedroom/dvd.svg'),
+        icon: {
+          dark: require('../assets/icons/bedroom/dark/dvd.png'),
+          light: require('../assets/icons/bedroom/light/dvd.png')
+        },
         models: [
           {
             name: 'DVD',
@@ -271,7 +306,10 @@ export default {
       },
       {
         name: 'Home theater',
-        icon: require('../assets/icons/bedroom/speaker.svg'),
+        icon: {
+          dark: require('../assets/icons/bedroom/dark/speaker.png'),
+          light: require('../assets/icons/bedroom/light/speaker.png')
+        },
         models: [
           {
             name: 'Home theater',
@@ -286,7 +324,10 @@ export default {
 
     kitchen: [{
       name: 'Batedeira',
-      icon: require('../assets/icons/kitchen/mixer.svg'),
+      icon: {
+        dark: require('../assets/icons/kitchen/dark/mixer.png'),
+        light: require('../assets/icons/kitchen/light/mixer.png')
+      },
       models: [
         {
           name: 'Batedeira - 180W',
@@ -336,7 +377,10 @@ export default {
     },
     {
       name: 'Cafeteira',
-      icon: require('../assets/icons/kitchen/coffemachine.svg'),
+      icon: {
+        dark: require('../assets/icons/kitchen/dark/coffemachine.png'),
+        light: require('../assets/icons/kitchen/light/coffemachine.png')
+      },
       models: [
         {
           name: 'Cafeteira - 1000W',
@@ -348,7 +392,10 @@ export default {
     },
     {
       name: 'Exaustor Fogão',
-      icon: require('../assets/icons/kitchen/exaust.svg'),
+      icon: {
+        dark: require('../assets/icons/kitchen/dark/exaust.png'),
+        light: require('../assets/icons/kitchen/light/exaust.png')
+      },
       models: [
         {
           name: 'Exaustor Fogão - 170W',
@@ -360,7 +407,10 @@ export default {
     },
     {
       name: 'Fogão elétrico',
-      icon: require('../assets/icons/kitchen/cooker.svg'),
+      icon: {
+        dark: require('../assets/icons/kitchen/dark/cooker.png'),
+        light: require('../assets/icons/kitchen/light/cooker.png')
+      },
       models: [
         {
           name: 'Fogão elétrico - 1500W',
@@ -372,7 +422,10 @@ export default {
     },
     {
       name: 'Forno elétrico',
-      icon: require('../assets/icons/kitchen/forno.svg'),
+      icon: {
+        dark: require('../assets/icons/kitchen/dark/forno.png'),
+        light: require('../assets/icons/kitchen/light/forno.png')
+      },
       models: [
         {
           name: 'Forno elétrico',
@@ -384,7 +437,10 @@ export default {
     },
     {
       name: 'Freezer',
-      icon: require('../assets/icons/kitchen/freezer.svg'),
+      icon: {
+        dark: require('../assets/icons/kitchen/dark/freezer.png'),
+        light: require('../assets/icons/kitchen/light/freezer.png')
+      },
       models: [
         {
           name: 'Freezer',
@@ -396,7 +452,10 @@ export default {
     },
     {
       name: 'Frigobar',
-      icon: require('../assets/icons/kitchen/frigobar.svg'),
+      icon: {
+        dark: require('../assets/icons/kitchen/dark/frigobar.png'),
+        light: require('../assets/icons/kitchen/light/frigobar.png')
+      },
       models: [
         {
           name: 'Frigobar',
@@ -408,7 +467,10 @@ export default {
     },
     {
       name: 'Lavadora de louça',
-      icon: require('../assets/icons/kitchen/dishwasher.svg'),
+      icon: {
+        dark: require('../assets/icons/kitchen/dark/dishwasher.png'),
+        light: require('../assets/icons/kitchen/light/dishwasher.png')
+      },
       models: [
         {
           name: 'Lavadora de louça',
@@ -420,7 +482,10 @@ export default {
     },
     {
       name: 'Liquidificador',
-      icon: require('../assets/icons/kitchen/mixer.svg'),
+      icon: {
+        dark: require('../assets/icons/kitchen/dark/mixer.png'),
+        light: require('../assets/icons/kitchen/light/mixer.png')
+      },
       models: [
         {
           name: 'Liquidificador - 450W',
@@ -474,7 +539,10 @@ export default {
     },
     {
       name: 'Microondas',
-      icon: require('../assets/icons/kitchen/microwave.svg'),
+      icon: {
+        dark: require('../assets/icons/kitchen/dark/microwave.png'),
+        light: require('../assets/icons/kitchen/light/microwave.png')
+      },
       models: [
         {
           name: 'Microondas - 700W',
@@ -498,7 +566,10 @@ export default {
     },
     {
       name: 'Refrigerador',
-      icon: require('../assets/icons/kitchen/geladeira.svg'),
+      icon: {
+        dark: require('../assets/icons/kitchen/dark/geladeira.png'),
+        light: require('../assets/icons/kitchen/light/geladeira.png')
+      },
       models: [
         {
           name: 'Refrigerador 1 porta',
@@ -528,7 +599,10 @@ export default {
     },
     {
       name: 'Sanduicheira',
-      icon: require('../assets/icons/kitchen/sandwich.svg'),
+      icon: {
+        dark: require('../assets/icons/kitchen/dark/sandwich.png'),
+        light: require('../assets/icons/kitchen/light/sandwich.png')
+      },
       models: [
         {
           name: 'Sanduicheira - 640W',
@@ -555,7 +629,10 @@ export default {
     externalArea: [
       {
         name: 'Boiler',
-        icon: require('../assets/icons/externalArea/boiler.svg'),
+        icon: {
+          dark: require('../assets/icons/externalArea/dark/boiler.png'),
+          light: require('../assets/icons/externalArea/light/boiler.png')
+        },
         models: [
           {
             name: 'Boiler 100L',
@@ -579,7 +656,10 @@ export default {
       },
       {
         name: 'Sauna',
-        icon: require('../assets/icons/externalArea/sauna.svg'),
+        icon: {
+          dark: require('../assets/icons/externalArea/dark/sauna.png'),
+          light: require('../assets/icons/externalArea/light/sauna.png')
+        },
         models: [
           {
             name: 'Sauna',
@@ -591,7 +671,10 @@ export default {
       },
       {
         name: 'Bomba d\'água',
-        icon: require('../assets/icons/externalArea/plumb.svg'),
+        icon: {
+          dark: require('../assets/icons/externalArea/dark/plumb.png'),
+          light: require('../assets/icons/externalArea/light/plumb.png')
+        },
         models: [
           {
             name: 'Bomba d\'água 1/4 CV',
@@ -621,7 +704,10 @@ export default {
       },
       {
         name: 'Bomba de piscina',
-        icon: require('../assets/icons/externalArea/water-pump.svg'),
+        icon: {
+          dark: require('../assets/icons/externalArea/dark/water-pump.png'),
+          light: require('../assets/icons/externalArea/light/water-pump.png')
+        },
         models: [
           {
             name: 'Bomba de piscina',
@@ -633,7 +719,10 @@ export default {
       },
       {
         name: 'Churrasqueira elétrica',
-        icon: require('../assets/icons/externalArea/grill.svg'),
+        icon: {
+          dark: require('../assets/icons/externalArea/dark/grill.png'),
+          light: require('../assets/icons/externalArea/light/grill.png')
+        },
         models: [
           {
             name: 'Churrasqueira elétrica',
@@ -645,7 +734,10 @@ export default {
       },
       {
         name: 'Cortador de grama',
-        icon: require('../assets/icons/externalArea/lawn-mower.svg'),
+        icon: {
+          dark: require('../assets/icons/externalArea/dark/lawn-mower.png'),
+          light: require('../assets/icons/externalArea/light/lawn-mower.png')
+        },
         models: [
           {
             name: 'Cortador de grama',
@@ -660,7 +752,10 @@ export default {
     bathroom: [
       {
         name: 'Chuveiro',
-        icon: require('../assets/icons/bathroom/shower.svg'),
+        icon: {
+          dark: require('../assets/icons/bathroom/dark/shower.png'),
+          light: require('../assets/icons/bathroom/light/shower.png')
+        },
         models: [
           {
             name: 'Chuveiro - 6400W',
@@ -684,7 +779,10 @@ export default {
       },
       {
         name: 'Depilador',
-        icon: require('../assets/icons/bathroom/depilador.svg'),
+        icon: {
+          dark: require('../assets/icons/bathroom/dark/depilador.png'),
+          light: require('../assets/icons/bathroom/light/depilador.png')
+        },
         models: [
           {
             name: 'Depilador - 4W',
@@ -709,7 +807,10 @@ export default {
 
       {
         name: 'Secador de cabelo',
-        icon: require('../assets/icons/bathroom/hairdryer.svg'),
+        icon: {
+          dark: require('../assets/icons/bathroom/dark/hairdryer.png'),
+          light: require('../assets/icons/bathroom/light/hairdryer.png')
+        },
         models: [
           {
             name: 'Secador - 1250W',
@@ -739,7 +840,10 @@ export default {
       },
       {
         name: 'Torneira elétrica',
-        icon: require('../assets/icons/bathroom/sink.svg'),
+        icon: {
+          dark: require('../assets/icons/bathroom/dark/sink.png'),
+          light: require('../assets/icons/bathroom/light/sink.png')
+        },
         models: [
           {
             name: 'Torneira elétrica - 4800W',
@@ -757,7 +861,10 @@ export default {
       },
       {
         name: 'Banheira',
-        icon: require('../assets/icons/bathroom/bathtub.svg'),
+        icon: {
+          dark: require('../assets/icons/bathroom/dark/bathtub.png'),
+          light: require('../assets/icons/bathroom/light/bathtub.png')
+        },
         models: [
           {
             name: 'Banheira de hidromassagem',
@@ -772,7 +879,10 @@ export default {
     serviceArea: [
       {
         name: 'Aspirador de pó',
-        icon: require('../assets/icons/serviceArea/vacuum-cleaner.svg'),
+        icon: {
+          dark: require('../assets/icons/serviceArea/dark/vacuum-cleaner.png'),
+          light: require('../assets/icons/serviceArea/light/vacuum-cleaner.png')
+        },
         models: [
           {
             name: 'Aspirador de pó',
@@ -784,7 +894,10 @@ export default {
       },
       {
         name: 'Máquina de costura',
-        icon: require('../assets/icons/serviceArea/sewing-machine.svg'),
+        icon: {
+          dark: require('../assets/icons/serviceArea/dark/sewing-machine.png'),
+          light: require('../assets/icons/serviceArea/light/sewing-machine.png')
+        },
         models: [
           {
             name: 'Maquina de costura',
@@ -796,7 +909,10 @@ export default {
       },
       {
         name: 'Ferro de passar',
-        icon: require('../assets/icons/serviceArea/flatiron.svg'),
+        icon: {
+          dark: require('../assets/icons/serviceArea/dark/flatiron.png'),
+          light: require('../assets/icons/serviceArea/light/flatiron.png')
+        },
         models: [
           {
             name: 'Ferro de passar',
@@ -808,7 +924,10 @@ export default {
       },
       {
         name: 'Lavadora de roupa',
-        icon: require('../assets/icons/serviceArea/washing-machine.svg'),
+        icon: {
+          dark: require('../assets/icons/serviceArea/dark/washing-machine.png'),
+          light: require('../assets/icons/serviceArea/light/washing-machine.png')
+        },
         models: [
           {
             name: 'Lavadora de roupa',
@@ -820,7 +939,10 @@ export default {
       },
       {
         name: 'Secadora de roupa',
-        icon: require('../assets/icons/serviceArea/secadora.svg'),
+        icon: {
+          dark: require('../assets/icons/serviceArea/dark/secadora.png'),
+          light: require('../assets/icons/serviceArea/light/secadora.png')
+        },
         models: [
           {
             name: 'Secadora de roupa',
@@ -832,7 +954,10 @@ export default {
       },
       {
         name: 'Tanquinho',
-        icon: require('../assets/icons/serviceArea/tanquinho.svg'),
+        icon: {
+          dark: require('../assets/icons/serviceArea/dark/tanquinho.png'),
+          light: require('../assets/icons/serviceArea/light/tanquinho.png')
+        },
         models: [
           {
             name: 'Tanquinho',

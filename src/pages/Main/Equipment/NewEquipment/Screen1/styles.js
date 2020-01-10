@@ -15,16 +15,16 @@ export const RoomContainer = styled.View`
 `;
 
 export const RoomCard = styled.View`
-  flex: 1;
+  /* flex: 1; */
   height: 115;
   width: 115;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 6px;
+  /* padding: 2px; */
   background-color: ${Colors.white};
   border: 1px;
-  border-color: ${Colors.lightGray1};
+  border-color: ${Colors.darkGray1};
   border-radius: 5px;
   margin-bottom: 5px;
 `;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid } from 'react-native';
+import { FlatList, Image, TouchableOpacity, TouchableHighlight, ToastAndroid } from 'react-native';
 import SvgUri from 'react-native-svg-uri';
 
 // Lista de equipamentos
@@ -8,8 +8,7 @@ import equipmentsList from '../../../../../utilities/equipmentsList';
 // styles
 import { TextLight } from '../../../../../styles/fonts';
 import Colors from '../../../../../styles/colors';
-import { Container, EquipmentCard, ContinueButton, EquipmentContainer, Footer, styles } from './styles';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Container, RoomCard, ContinueButton, RoomContainer, Footer, styles } from './styles';
 
 export default class NewEquipment extends Component {
   constructor(props) {
@@ -25,7 +24,7 @@ export default class NewEquipment extends Component {
     ].sort((a, b) => {
       return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
     })
-    
+
     console.log('allEquipments: ', allEquipments)
     this.state = {
       equipments: this.props.navigation.getParam('typeRoom') === 'other' ?
@@ -46,33 +45,28 @@ export default class NewEquipment extends Component {
       selectedEquipment: -1,
     };
 
-    this.equipmentCard = this.equipmentCard.bind(this);
+    this.RoomCard = this.RoomCard.bind(this);
     this.toggleSelectEquipment = this.toggleSelectEquipment.bind(this);
     this.toggleContinueButton = this.toggleContinueButton.bind(this);
   }
 
-  equipmentCard(item, index) {
+  RoomCard(item, index) {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
         style={{ flex: 1 / 3 }}
         onPress={() => this.toggleSelectEquipment(index)}>
-        <EquipmentCard style={item.select ? item.class : ''}>
-          <SvgUri
-            width="60"
-            height="60"
-            fillOpacity={0.1}
-            fill="#ff09ff"
-            source={item.icon}
-          />
+        <RoomCard style={item.select ? item.class : ''}>
 
+
+          <Image style={{ height: 60, width: 65, resizeMode: 'contain' }} source={item.icon.dark} />
           <TextLight
             textAlign={'center'}
             color={item.select ? Colors.primary : Colors.darkGray2}
             fontSize={'h5'}>
             {item.name}
           </TextLight>
-        </EquipmentCard>
+        </RoomCard>
       </TouchableOpacity>
     );
   }
@@ -123,7 +117,7 @@ export default class NewEquipment extends Component {
   render() {
     return (
       <Container>
-        <EquipmentContainer>
+        <RoomContainer>
           <FlatList
             data={this.state.equipments}
             extraData={this.state.selectedEquipment}
@@ -131,10 +125,10 @@ export default class NewEquipment extends Component {
             numColumns={3}
             showsVerticalScrollIndicator={false}
             renderItem={({ item, index }) => {
-              return this.equipmentCard(item, index);
+              return this.RoomCard(item, index);
             }}
           />
-        </EquipmentContainer>
+        </RoomContainer>
 
         <Footer>
           <TouchableHighlight onPress={() => this.toggleContinueButton()}>

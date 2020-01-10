@@ -11,6 +11,7 @@ export default function houseReducer(state = INITIAL_STATE, action) {
             id: new Date().getTime().toString(),
             name: action.payload.name,
             typeRoom: action.payload.typeRoom,
+            icon: action.payload.icon,
             totalKw: 0,
             totalAmount: 0,
             equipments: [],

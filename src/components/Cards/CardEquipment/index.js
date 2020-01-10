@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableHighlight } from 'react-native';
+import { TouchableHighlight, Image } from 'react-native';
 import SvgUri from 'react-native-svg-uri';
 
 // styles
@@ -19,11 +19,9 @@ const CardEquipment = props => {
       underlayColor="#FDFDFD">
       <Container>
         <Icon>
-          <SvgUri
-            width="60"
-            height="60"
-            source={equipment.icon}
-          />
+          <Image style={{ width: 60, height: 60, resizeMode: 'contain' }} source={equipment.icon.dark} />
+          {/* <SvgUri
+         gg */}
         </Icon>
 
         <Details>

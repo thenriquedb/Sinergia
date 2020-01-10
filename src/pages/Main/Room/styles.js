@@ -7,6 +7,16 @@ export const Container = styled.View`
   background-color: ${Colors.primary};
 `;
 
+export const Icon = styled.Image`
+width: 140px;
+height:140px;
+/* margin: 0px; */
+`;
+
+export const IconContainer = styled.View`
+
+`;
+
 export const ContainerNoEquipment = styled.View`
   flex: 1;
   flex-direction: column;
@@ -18,14 +28,12 @@ export const ContainerNoEquipment = styled.View`
 
 export const HeaderContainer = styled.View`
   /* margin-top: -10; */
-  padding-left: 15;
-  padding-right: 15;
+
 `;
 
 export const HeaderTop = styled.View`
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+justify-content: center;
+align-items: center;
 `;
 
 export const HeaderInfosContainer = styled.View`
@@ -36,6 +44,8 @@ export const HeaderInfosContainer = styled.View`
 
 export const HeaderInfo = styled.View`
   flex-direction: column;
+    padding-left: 15;
+  padding-right: 15;
 `;
 
 export const EquipmentsList = styled.View`
@@ -50,3 +60,4 @@ export const EquipmentsList = styled.View`
   justify-content: center;
   align-content: center;
 `;
+

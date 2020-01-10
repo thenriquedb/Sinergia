@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { View, Picker, CheckBox, TouchableOpacity, ScrollView } from 'react-native';
-import SvgUri from 'react-native-svg-uri';
+import { View, Picker, CheckBox, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Input from '../../../../../components/Input/index';
@@ -249,12 +248,8 @@ const NewEquipment2 = props => {
   return (
     <Container>
       <Header>
-        <SvgUri
-          width="110"
-          height="110"
-          fill="#ffff"
-          source={equipment.icon}
-        />
+        <Image style={{ height: 100, width: 100 }} source={equipment.icon.light} />
+
         <TextBold color={'#fff'} fontSize={'h3'} textAlign={'center'}>
           {equipment.name}
         </TextBold>

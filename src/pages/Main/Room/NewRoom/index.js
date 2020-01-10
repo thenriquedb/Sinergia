@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, Alert, View, KeyboardAvoidingView } from 'react-native';
-import SvgUri from 'react-native-svg-uri';
+import { FlatList, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, Alert, View, KeyboardAvoidingView } from 'react-native';
 
 // redux
 import { connect } from 'react-redux';
@@ -28,6 +27,7 @@ class NewRoom extends Component {
       }),
       selectedRoomIndex: -1,
       selectedRoom: '',
+      icon: [],
       customName: ''
     };
 
@@ -43,11 +43,7 @@ class NewRoom extends Component {
         style={{ flex: 1 / 3 }}
         onPress={() => this.toggleSelectEquipment(index)}>
         <EquipmentCard style={item.select ? item.class : ''}>
-          <SvgUri
-            width="75"
-            height="75"
-            source={item.icon}
-          />
+          <Image style={{ width: 75, height: 70, resizeMode: 'contain' }} source={item.icon.dark} />
 
           <TextLight
             textAlign={'center'}
@@ -70,6 +66,7 @@ class NewRoom extends Component {
 
       s.selectedRoom = s.rooms[s.selectedRoomIndex].value;
       s.customName = s.rooms[s.selectedRoomIndex].name;
+      s.icon = s.rooms[s.selectedRoomIndex].icon;
     }
 
     // Se o equipamento ja estiver selecionado ele sera desmarcado
@@ -89,6 +86,7 @@ class NewRoom extends Component {
 
       s.selectedRoom = s.rooms[s.selectedRoomIndex].value;
       s.customName = s.rooms[s.selectedRoomIndex].name;
+      s.icon = s.rooms[s.selectedRoomIndex].icon;
     }
 
     this.setState(s);
@@ -101,7 +99,7 @@ class NewRoom extends Component {
 
         if (!found) {
           try {
-            this.props.addNewRoom(this.state.customName, this.state.selectedRoom);
+            this.props.addNewRoom(this.state.customName, this.state.selectedRoom, this.state.icon);
             Alert.alert('O cômodo ' + this.state.customName + ' foi cadastrado com sucesso!');
             setName('');
           } catch (error) {
@@ -147,7 +145,6 @@ class NewRoom extends Component {
               }}
             />
 
-
           </EquipmentContainer>
         </View>
 
@@ -179,8 +176,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    addNewRoom: (name, typeRoom) =>
-      dispatch({ type: 'ADD_ROOM', payload: { name, typeRoom } }),
+    addNewRoom: (name, typeRoom, icon) =>
+      dispatch({ type: 'ADD_ROOM', payload: { name, typeRoom, icon } }),
   };
 };
 
