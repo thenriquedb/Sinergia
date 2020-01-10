@@ -2,7 +2,7 @@ export default {
   rooms: {
     default: [
       {
-        name: 'Lampâda',
+        name: 'Lâmpada',
         icon: require('../assets/icons/default/lamp.svg'),
         description: 'Evite acender Lâmpadas durante o dia, utilize a iluminação natural.            ',
 
@@ -146,7 +146,6 @@ export default {
               'Evite deixar acessórios do computador ligados sem necessidade.',
           },
         ],
-        icon: '',
       },
       {
         name: 'Micro system',
@@ -196,14 +195,14 @@ export default {
         icon: require('../assets/icons/bedroom/fan.svg'),
         models: [
           {
-            name: 'Ventilador grande',
-            power: 200,
+            name: 'Ventilador pequeno',
+            power: 50,
             description:
               'Mantenha hélices e grades limpas para facilitar a circulação do ar',
           },
           {
-            name: 'Ventilador pequeno',
-            power: 150,
+            name: 'Ventilador grande',
+            power: 130,
             description:
               'Mantenha hélices e grades limpas para facilitar a circulação do ar',
           },
@@ -287,11 +286,49 @@ export default {
 
     kitchen: [{
       name: 'Batedeira',
+      icon: require('../assets/icons/kitchen/mixer.svg'),
       models: [
         {
-          name: 'Batedeira',
-          icon: require('../assets/icons/kitchen/blender.svg'),
+          name: 'Batedeira - 180W',
           power: 180,
+          description:
+            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+        },
+
+        {
+          name: 'Batedeira - 275W',
+          power: 275,
+          description:
+            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+        },
+
+        {
+          name: 'Batedeira - 350W',
+          power: 350,
+          description:
+            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+        },
+        {
+          name: 'Batedeira - 400W',
+          power: 400,
+          description:
+            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+        },
+        {
+          name: 'Batedeira - 500W',
+          power: 500,
+          description:
+            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+        },
+        {
+          name: 'Batedeira - 600W',
+          power: 600,
+          description:
+            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+        },
+        {
+          name: 'Batedeira - 750W',
+          power: 750,
           description:
             'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
         },
@@ -302,7 +339,7 @@ export default {
       icon: require('../assets/icons/kitchen/coffemachine.svg'),
       models: [
         {
-          name: 'Cafeteira',
+          name: 'Cafeteira - 1000W',
           power: 1000,
           description:
             ' ',
@@ -314,7 +351,7 @@ export default {
       icon: require('../assets/icons/kitchen/exaust.svg'),
       models: [
         {
-          name: 'Exaustor Fogão',
+          name: 'Exaustor Fogão - 170W',
           power: 170,
           description:
             ' ',
@@ -326,7 +363,7 @@ export default {
       icon: require('../assets/icons/kitchen/cooker.svg'),
       models: [
         {
-          name: 'Fogão elétrico',
+          name: 'Fogão elétrico - 1500W',
           power: 1500,
           description:
             ' ',
@@ -386,8 +423,50 @@ export default {
       icon: require('../assets/icons/kitchen/mixer.svg'),
       models: [
         {
-          name: 'Liquidificador',
-          power: 300,
+          name: 'Liquidificador - 450W',
+          power: 450,
+          description:
+            'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
+        },
+        {
+          name: 'Liquidificador - 500W',
+          power: 500,
+          description:
+            'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
+        },
+        {
+          name: 'Liquidificador - 550W',
+          power: 550,
+          description:
+            'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
+        },
+        {
+          name: 'Liquidificador - 650W',
+          power: 650,
+          description:
+            'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
+        },
+        {
+          name: 'Liquidificador - 700W',
+          power: 700,
+          description:
+            'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
+        },
+        {
+          name: 'Liquidificador - 900W',
+          power: 900,
+          description:
+            'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
+        },
+        {
+          name: 'Liquidificador - 100W',
+          power: 1000,
+          description:
+            'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
+        },
+        {
+          name: 'Liquidificador - 1200W',
+          power: 1200,
           description:
             'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
         },
@@ -398,8 +477,20 @@ export default {
       icon: require('../assets/icons/kitchen/microwave.svg'),
       models: [
         {
-          name: 'Microondas',
-          power: 1500,
+          name: 'Microondas - 700W',
+          power: 700,
+          description:
+            'Use corretamente a potência para aquecer a comida, para não usar mais que o tempo necessário.',
+        },
+        {
+          name: 'Microondas - 1200W',
+          power: 1200,
+          description:
+            'Use corretamente a potência para aquecer a comida, para não usar mais que o tempo necessário.',
+        },
+        {
+          name: 'Microondas - 1400W',
+          power: 1400,
           description:
             'Use corretamente a potência para aquecer a comida, para não usar mais que o tempo necessário.',
         },
@@ -440,8 +531,20 @@ export default {
       icon: require('../assets/icons/kitchen/sandwich.svg'),
       models: [
         {
-          name: 'Sanduicheira',
+          name: 'Sanduicheira - 640W',
+          power: 640,
+          description:
+            '',
+        },
+        {
+          name: 'Sanduicheira - 750W',
           power: 750,
+          description:
+            '',
+        },
+        {
+          name: 'Sanduicheira - 850W',
+          power: 850,
           description:
             '',
         },
@@ -456,19 +559,19 @@ export default {
         models: [
           {
             name: 'Boiler 100L',
-            power: 2030,
+            power: 2000,
             description:
               '',
           },
           {
             name: 'Boiler 200 a 500L',
-            power: 3000,
+            power: 4000,
             description:
               '',
           },
           {
             name: 'Boiler 200 a 500L com coletor solor',
-            power: 2030,
+            power: 2000,
             description:
               '',
           },
@@ -492,25 +595,25 @@ export default {
         models: [
           {
             name: 'Bomba d\'água 1/4 CV',
-            power: 335,
+            power: 185,
             description:
               '',
           },
           {
             name: 'Bomba d\'água 1/2 CV',
-            power: 615,
+            power: 370,
             description:
               '',
           },
           {
             name: 'Bomba d\'água 3/4 CV',
-            power: 850,
+            power: 555,
             description:
               '',
           },
           {
             name: 'Bomba d\'água 1 CV',
-            power: 1055,
+            power: 740,
             description:
               '',
           },
@@ -560,20 +663,20 @@ export default {
         icon: require('../assets/icons/bathroom/shower.svg'),
         models: [
           {
-            name: 'Chuveiro elétrico pequeno',
-            power: 3500,
+            name: 'Chuveiro - 6400W',
+            power: 6400,
             description:
               'Nos meses quentes, ajuste a chave do chuveiro para a posição verão.',
           },
           {
-            name: 'Chuveiro elétrico médio',
-            power: 4500,
+            name: 'Chuveiro - 7500W',
+            power: 7500,
             description:
               'Nos meses quentes, ajuste a chave do chuveiro para a posição verão.',
           },
           {
-            name: 'Chuveiro elétrico grande',
-            power: 5500,
+            name: 'Chuveiro - 7800W',
+            power: 7800,
             description:
               'Nos meses quentes, ajuste a chave do chuveiro para a posição verão.',
           },
@@ -584,8 +687,20 @@ export default {
         icon: require('../assets/icons/bathroom/depilador.svg'),
         models: [
           {
-            name: 'Depilador',
-            power: 150,
+            name: 'Depilador - 4W',
+            power: 4,
+            description:
+              '',
+          },
+          {
+            name: 'Depilador - 5W',
+            power: 5,
+            description:
+              '',
+          },
+          {
+            name: 'Depilador - 7,5W',
+            power: 7.5,
             description:
               '',
           },
@@ -597,14 +712,26 @@ export default {
         icon: require('../assets/icons/bathroom/hairdryer.svg'),
         models: [
           {
-            name: 'Secador pequeno de cabelo',
-            power: 800,
+            name: 'Secador - 1250W',
+            power: 1250,
             description:
               '',
           },
           {
-            name: 'Secador grande de cabelo',
-            power: 1800,
+            name: 'Secador - 1900W',
+            power: 1900,
+            description:
+              '',
+          },
+          {
+            name: 'Secador - 2000W',
+            power: 2000,
+            description:
+              '',
+          },
+          {
+            name: 'Secador - 2100W',
+            power: 2100,
             description:
               '',
           },
@@ -615,8 +742,14 @@ export default {
         icon: require('../assets/icons/bathroom/sink.svg'),
         models: [
           {
-            name: 'Torneira elétrica',
-            power: 4400,
+            name: 'Torneira elétrica - 4800W',
+            power: 4800,
+            description:
+              'Evite ligá-la no verão quando a água, em geral, é mais quente.',
+          },
+          {
+            name: 'Torneira elétrica - 5500W',
+            power: 5500,
             description:
               'Evite ligá-la no verão quando a água, em geral, é mais quente.',
           },
@@ -710,5 +843,6 @@ export default {
         ],
       },
     ],
+
   },
 };

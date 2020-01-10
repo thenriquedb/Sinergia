@@ -22,6 +22,7 @@ export const EquipmentContainer = styled.View`
 
 export const EquipmentCard = styled.View`
   flex: 1;
+  padding: 6px;
   height: 115;
   width: 115;
   align-items: center;

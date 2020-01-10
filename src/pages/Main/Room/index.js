@@ -114,8 +114,6 @@ class Room extends Component {
   }
 
   updateData() {    // room: ,
-    console.log('room atulizdo: ', this.props.rooms)
-
     this.setState({
       room: this.props.rooms.find(item => item.id === this.props.navigation.getParam('roomId'))
     })
@@ -130,7 +128,7 @@ class Room extends Component {
           </TextBold>
 
           <TouchableOpacity onPress={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}>
-            <MaterialCommunityIcons name="pencil" size={30} color="#fff" />
+            <MaterialCommunityIcons name="pencil" size={25} color="#fff" />
           </TouchableOpacity>
         </HeaderTop>
 

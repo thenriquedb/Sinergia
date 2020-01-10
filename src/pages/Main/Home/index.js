@@ -45,9 +45,6 @@ const Home = props => {
     props.navigation.navigate('NewRoom');
   };
 
-  const toggleEditRoom = data => {
-    props.navigation.navigate('EditRoom', { room: data });
-  };
 
   const toggleRoomCard = room => {
     props.navigation.navigate('Room', { roomId: room.id });
@@ -123,7 +120,6 @@ const Home = props => {
               <HiddenCard
                 refreshList={reRender}
                 room={item}
-                toggleEditRoom={toggleEditRoom}
               />
             )}
             renderItem={({ item }) => (

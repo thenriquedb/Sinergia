@@ -15,20 +15,34 @@ export default class NewEquipment extends Component {
   constructor(props) {
     super(props);
 
+    const allEquipments = [
+      ...equipmentsList.rooms['default'],
+      ...equipmentsList.rooms['bedroom'],
+      ...equipmentsList.rooms['bathroom'],
+      ...equipmentsList.rooms['externalArea'],
+      ...equipmentsList.rooms['serviceArea'],
+      ...equipmentsList.rooms['kitchen'],
+    ].sort((a, b) => {
+      return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+    })
+    
+    console.log('allEquipments: ', allEquipments)
     this.state = {
-      equipments: [
-        ...equipmentsList.rooms['default'],
-        ...equipmentsList.rooms[this.props.navigation.getParam('typeRoom')],
-
-      ]
-        .map(item => {
-          item.class = styles.SelectedEquipmentCard;
-          item.select = false;
-          return item;
-        })
-        .sort((a, b) => {
-          return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-        }),
+      equipments: this.props.navigation.getParam('typeRoom') === 'other' ?
+        [...allEquipments]
+        :
+        [
+          ...equipmentsList.rooms['default'],
+          ...equipmentsList.rooms[this.props.navigation.getParam('typeRoom')],
+        ]
+          .map(item => {
+            item.class = styles.SelectedEquipmentCard;
+            item.select = false;
+            return item;
+          })
+          .sort((a, b) => {
+            return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+          }),
       selectedEquipment: -1,
     };
 

@@ -7,7 +7,6 @@ import Colors from '../styles/colors';
 import Home from '../pages/Main/Home/index';
 import Room from '../pages/Main/Room/index';
 import NewRoom from '../pages/Main/Room/NewRoom/index';
-import EditRoom from '../pages/Main/Room/EditRoom/index';
 import NewEquipment1 from '../pages/Main/Equipment/NewEquipment/Screen1/index';
 import NewEquipment2 from '../pages/Main/Equipment/NewEquipment/Screen2/index';
 
@@ -48,19 +47,7 @@ export default MainStack = createStackNavigator({
     },
   },
 
-  EditRoom: {
-    screen: EditRoom,
-    navigationOptions: {
-      title: 'Editar cômodo',
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-      headerStyle: {
-        backgroundColor: Colors.primary,
-      },
-    },
-  },
+
 
   NewEquipment1: {
     screen: NewEquipment1,

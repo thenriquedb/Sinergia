@@ -9,18 +9,19 @@ export const Container = styled.View`
   background-color: ${Colors.white};
 `;
 
-export const EquipmentContainer = styled.View`
+export const RoomContainer = styled.View`
   padding: 5px 0px 0px 10px;
   flex: 1;
 `;
 
-export const EquipmentCard = styled.View`
+export const RoomCard = styled.View`
   flex: 1;
   height: 115;
   width: 115;
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding: 6px;
   background-color: ${Colors.white};
   border: 1px;
   border-color: ${Colors.lightGray1};

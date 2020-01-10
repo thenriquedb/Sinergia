@@ -49,7 +49,7 @@ const NewEquipment2 = props => {
         <Picker
           selectedValue={selectedModel}
           style={{ width: 350 }}
-          onValueChange={itemValue => setSelectedModel(itemValue)}>
+          onValueChange={itemValue => selectEquipmentModel(itemValue)}>
           {equipment.models.map((value, key) => {
             return <Picker.Item key={key} value={value} label={value.name} />;
           })}
@@ -57,6 +57,13 @@ const NewEquipment2 = props => {
       </View>
     );
   };
+
+  const selectEquipmentModel = (itemValue) => {
+    setSelectedModel(itemValue);
+    console.log('itemValue: ', itemValue)
+    setCustomName(itemValue.name);
+    setPower(itemValue.power.toString())
+  }
 
   const toggleSaveBtn = () => {
     const totalTimeOn = on24Hours ? 24 : moment.duration(moment(endTime).diff(startTime)).asHours();
@@ -278,7 +285,7 @@ const NewEquipment2 = props => {
             keyboardType={'numeric'}
           />
 
-          <TextBold fontSize={'h5'}> Potência </TextBold>
+          <TextBold fontSize={'h5'}> Potência (W) </TextBold>
           <Input
             value={power}
             onChangeText={power => setPower(power)}

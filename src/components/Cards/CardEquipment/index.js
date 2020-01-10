@@ -11,8 +11,6 @@ import { TextLight, TextBold } from '../../../styles/fonts';
 const CardEquipment = props => {
   const { equipment } = props;
 
-  const iconPath = equipment.icon;
-  // console.log('icone path: ', require(equipment.icon));
 
   return (
     <TouchableHighlight
@@ -20,7 +18,6 @@ const CardEquipment = props => {
       style={{ marginBottom: 15 }}
       underlayColor="#FDFDFD">
       <Container>
-        {/* <TextLight> {equipment.icon}</TextLight> */}
         <Icon>
           <SvgUri
             width="60"
