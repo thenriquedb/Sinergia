@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { FlatList, Image, TouchableOpacity, TouchableHighlight, ToastAndroid } from 'react-native';
-import SvgUri from 'react-native-svg-uri';
 
 // Lista de equipamentos
 import equipmentsList from '../../../../../utilities/equipmentsList';

@@ -1,6 +1,5 @@
 import React from 'react';
 import { TouchableHighlight, Image } from 'react-native';
-import SvgUri from 'react-native-svg-uri';
 
 // styles
 import {
@@ -20,8 +19,7 @@ const CardEquipment = props => {
       <Container>
         <Icon>
           <Image style={{ width: 60, height: 60, resizeMode: 'contain' }} source={equipment.icon.dark} />
-          {/* <SvgUri
-         gg */}
+
         </Icon>
 
         <Details>
