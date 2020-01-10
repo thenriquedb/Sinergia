@@ -14,7 +14,7 @@ export const NewRoomButton = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  height: 80px;
   border-width: 2px;
   border-style: dashed;
   border-color: ${Colors.lightGray1};

@@ -262,7 +262,10 @@ class Room extends Component {
             rightOpenValue={-100}
             disableRightSwipe={true}
             renderHiddenItem={({ item, index }) => (
-              <HiddenCard reRender={this.reRenderEquipmentsList} idRoom={this.state.room.id} idEquipment={item.id} />
+              <HiddenCard
+                reRender={this.reRenderEquipmentsList}
+                room idRoom={this.state.room.id}
+                idEquipment={item.id} />
             )}
             renderItem={({ item }) => <CardEquipment equipment={item} />}
           />

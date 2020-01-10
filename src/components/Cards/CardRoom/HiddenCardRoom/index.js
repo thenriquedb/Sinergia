@@ -8,6 +8,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { Container, DeleteButton, EditButton } from './styles';
 
 const HiddenCard = props => {
+  const { room } = props;
+
   const toggleDeleteBtn = () => {
     Alert.alert(
       'Você deseja excluir o cômodo ' + room.name + '?',

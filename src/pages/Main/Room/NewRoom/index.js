@@ -98,15 +98,10 @@ class NewRoom extends Component {
         const found = this.props.rooms.find(item => item.name === this.state.customName);
 
         if (!found) {
-          try {
-            this.props.addNewRoom(this.state.customName, this.state.selectedRoom, this.state.icon);
-            Alert.alert('O cômodo ' + this.state.customName + ' foi cadastrado com sucesso!');
-            setName('');
-          } catch (error) {
-            Alert.alert('Não foi possivel cadastrar o cômodo ' + this.state.customName + '.');
-          }
+          this.props.addNewRoom(this.state.customName, this.state.selectedRoom, this.state.icon);
+          Alert.alert('O cômodo ' + this.state.customName + ' foi cadastrado com sucesso!');
         } else {
-          Alert.alert('Não foi possível cadastrar o cômodo ' + this.state.customName + ' pois o mesmo já foi cadastrado.');
+          Alert.alert('O cômodo ' + this.state.customName + ' já esta cadastrado.');
         }
       }
     } else {

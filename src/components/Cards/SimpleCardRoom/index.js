@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableHighlight } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Image } from 'react-native';
 
 // styles
 import { Container, Icon, Details } from './styles';
@@ -14,12 +13,10 @@ const SimpleCardRoom = props => {
     room.tarifaConvencional.kwMonthly,
   );
 
-
-
   return (
     <Container>
       <Icon>
-        <MaterialCommunityIcons name="radio" size={35} color="#000" />
+        <Image style={{ width: 70, height: 70 }} resizeMode={"contain"} source={room.icon.dark} />
       </Icon>
       <Details>
         <TextLight fontSize="h4"> {room.name} </TextLight>

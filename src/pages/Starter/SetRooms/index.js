@@ -49,7 +49,7 @@ class SetRooms extends Component {
     return (
       <TouchableHighlight underlayColor={'#fcf8f7'} onPress={() => this.props.navigation.navigate('StarterNewRoom')}>
         <NewRoomButton>
-          <Text color={'#cccccc'}> Adcionar um novo comôdo </Text>
+          <Text fontSize={'h5'} color={'#cccccc'}> Adcionar um novo comôdo </Text>
         </NewRoomButton>
       </TouchableHighlight>
     );
@@ -57,13 +57,11 @@ class SetRooms extends Component {
 
 
   toggleEditRoom(data) {
-    console.log('toggleEditRoom: ', data)
     this.props.navigation.navigate('StarterEditRoom', { room: data });
   };
 
 
   renderButton() {
-    console.log('this.props.rooms: ', this.props.rooms);
     if (this.state.rooms.length > 0) {
       return (
         <NextPageButton onPress={() => this.props.navigation.navigate('Final')}>
@@ -86,7 +84,7 @@ class SetRooms extends Component {
 
         <View style={{ flex: 1 }}>
           <Content >
-            {/* <SwipeListView
+            <SwipeListView
               data={this.props.rooms}
               extraData={this.state.updateList}
               keyExtractor={item => item.name}
@@ -98,7 +96,7 @@ class SetRooms extends Component {
                 refreshList={this.reRender}
                 toggleEditRoom={this.toggleEditRoom}
                 room={item} />}
-            /> */}
+            />
             {this.state.rooms.length > 0 ? this.renderAddNewRoom() : null}
           </Content>
         </View>

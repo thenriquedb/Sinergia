@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import colors from '../../../styles/colors';
+import Colors from '../../../styles/colors';
 
 export const Container = styled.View`
   flex-direction: row;
@@ -7,10 +7,10 @@ export const Container = styled.View`
   height: 100px;
   border-radius: 5;
   border-left-width: 4;
-  border-left-color: ${colors.high};
+  border-left-color: ${Colors.high};
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  background-color: ${colors.white};
+  background-color: ${Colors.white};
   padding-top: 10;
   padding-bottom: 10;
   padding-right: 15;
@@ -19,7 +19,7 @@ export const Container = styled.View`
 `;
 
 export const Status = styled.View`
-  background-color: ${colors.high};
+  background-color: ${Colors.high};
   border-top-left-radius: 10;
   border-bottom-left-radius: 10;
   margin-right: 5;

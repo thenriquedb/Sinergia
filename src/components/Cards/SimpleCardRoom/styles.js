@@ -3,7 +3,8 @@ import colors from '../../../styles/colors';
 
 export const Container = styled.View`
   flex-direction: row;
-  height: 70px;
+
+  height: 100px;
   border-radius: 5;
   border-left-width: 4;
   border-left-color: ${colors.primary};
@@ -18,6 +19,7 @@ export const Container = styled.View`
 
 export const Details = styled.View`
   flex: 1;
+  justify-content: center;
   margin-left: 5px;
   flex-direction: column;
   /* align-items: center; */
