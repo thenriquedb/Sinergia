@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TouchableHighlight } from 'react-native';
 
 // styles
@@ -7,9 +7,6 @@ import { TextLight, TextBold } from '../../../styles/fonts';
 
 const CardRoom = props => {
   const { room } = props;
-  const [totalAmount, setTotalAmount] = useState(
-    room.tarifaConvencional.kwMonthly,
-  );
 
   return (
     <TouchableHighlight

@@ -13,7 +13,7 @@ const Welcome = props => (
     </WelcomeContent>
 
     <ContinueConfigArea>
-      <NextPageButton onPress={() => props.navigation.navigate('SetDefaultKwValue')}>
+      <NextPageButton onPress={() => props.navigation.navigate('SelectState')}>
         <Text fontSize='h6' color='#fff'> Iniciar configuração </Text>
       </NextPageButton>
     </ContinueConfigArea>

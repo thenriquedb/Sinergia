@@ -3,7 +3,6 @@ import colors from '../../../styles/colors';
 
 export const Container = styled.View`
   flex-direction: row;
-
   height: 100px;
   border-radius: 5;
   border-left-width: 4;
@@ -22,13 +21,16 @@ export const Details = styled.View`
   justify-content: center;
   margin-left: 5px;
   flex-direction: column;
-  /* align-items: center; */
 `;
 
 export const Icon = styled.View`
+  width: 70;
+  height: 70;
+`;
+
+export const IconContainer = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* align-items: center; */
 `;
 

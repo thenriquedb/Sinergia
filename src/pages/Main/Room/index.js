@@ -107,7 +107,7 @@ class Room extends Component {
   // Calcular a tarifa convencional e a branca
   calculateMonthlyExpenses() {
     let totalTarifaConvencional = this.state.room.totalKw * this.props.valueKW;
-    let totalTarifaBranca = 0;
+    let totalTarifaBranca = this.state.room.equipments[0].tarifaBranca.monthlyExpenses;
 
     this.props.setRoomMonthlyExpenses(this.state.room.id, totalTarifaConvencional, totalTarifaBranca)
     // return;

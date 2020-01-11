@@ -2,14 +2,11 @@ import React from 'react';
 import { TouchableHighlight, Image } from 'react-native';
 
 // styles
-import {
-  Container, Details, DetailsLabels, Icon, InfoContainer,
-} from './styles';
-import { TextLight, TextBold } from '../../../styles/fonts';
+import { Container, Details, DetailsLabels, Icon, IconContainer, InfoContainer } from './styles';
+import { TextLight } from '../../../styles/fonts';
 
 const CardEquipment = props => {
   const { equipment } = props;
-
 
   return (
     <TouchableHighlight
@@ -17,10 +14,9 @@ const CardEquipment = props => {
       style={{ marginBottom: 15 }}
       underlayColor="#FDFDFD">
       <Container>
-        <Icon>
-          <Image style={{ width: 60, height: 60, resizeMode: 'contain' }} source={equipment.icon.dark} />
-
-        </Icon>
+        <IconContainer>
+          <Icon resizeMode={"contain"} source={equipment.icon.dark} />
+        </IconContainer>
 
         <Details>
           <TextLight fontSize="h4"> {equipment.name.length >= 22 ? equipment.name.substring(0, 22).concat('...') : equipment.name} </TextLight>

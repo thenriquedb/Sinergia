@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Collapse = props => {

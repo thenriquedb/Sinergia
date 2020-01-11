@@ -10,3 +10,13 @@ export default StyleSheet.create({
     borderColor: Colors.lightGray1,
   },
 });
+
+import styled from 'styled-components/native';
+
+export const MyInput = styled.TextInput`
+  border-width: 1.5;
+  font-size: 18px;
+  padding: 6px;
+  border-radius: 5;
+  border-color: ${Colors.lightGray1};
+`;

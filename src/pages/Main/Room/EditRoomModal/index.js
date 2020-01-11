@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
+import { View, Button, Picker, Alert, TouchableOpacity } from 'react-native';
 import Modal from "react-native-modal";
 import Input from "../../../../components/Input/index";
+
+//redux
 import { connect } from 'react-redux'
 
-import { View, Button, Picker, Alert, TouchableOpacity } from 'react-native';
+
+//styles
 import { TextBold, Text, TextLight } from '../../../../styles/fonts'
 import Colors from '../../../../styles/colors'
 import { Container, ButtonsContainer } from './styles';
 
+//util
 import roomList from "../../../../utilities/roomsList"
 
 const EditRoomModal = props => {

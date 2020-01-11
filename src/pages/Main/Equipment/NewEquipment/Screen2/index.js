@@ -82,7 +82,7 @@ const NewEquipment2 = props => {
     const totalTimeOn = on24Hours ? 24 : moment.duration(moment(endTimeWeekdays).diff(startTimeWeekdays)).asHours();
     const power = !selectedModel ? equipment.models[0].power : selectedModel.power
 
-    console.log("startTimeWeekdays", startTimeWeekdays);
+    console.log("startTimeWeekdays", moment(startTimeWeekdays).format("HH"));
     console.log("endTimeWeekdays", endTimeWeekdays);
     console.log("startTimeWeekend", startTimeWeekend);
     console.log("endTimeWeekend", endTimeWeekend);
@@ -91,7 +91,12 @@ const NewEquipment2 = props => {
 
     // Consumo de KW/H mensais
     const kwMonthly = (power * quantity * totalTimeOn * 30) / 1000
+
+    // calculo da tarifa convencional
     const tarifaConvencional = kwMonthly * props.valueKW;
+
+    // calculo da tarifa convencional
+    const tarifaBranca = 100;
 
     const newEquipment = {
       id: new Date().getTime().toString(),
@@ -103,6 +108,9 @@ const NewEquipment2 = props => {
       kwMonthly,
       tarifaConvencional: {
         monthlyExpenses: tarifaConvencional,
+      },
+      tarifaBranca: {
+        monthlyExpenses: tarifaBranca,
       },
       frequencyOfUseOnWeekdays,
       frequencyOfUseOnWeekend,
@@ -266,19 +274,19 @@ const NewEquipment2 = props => {
 
   return (
     <Container>
-      <Header>
-        <Image style={{ height: 100, width: 100 }} resizeMode={"contain"} source={equipment.icon.light} />
-
-        <TextBold color={'#fff'} fontSize={'h3'} textAlign={'center'}>
-          {equipment.name}
-        </TextBold>
-
-        <TextLight textAlign={'center'} fontSize={'h5'} color={'#fff'}>
-          {equipment.models[0].description}
-        </TextLight>
-      </Header>
-
       <ScrollView showsVerticalScrollIndicator={false}>
+        <Header>
+          <Image style={{ height: 100, width: 100 }} resizeMode={"contain"} source={equipment.icon.light} />
+
+          <TextBold color={'#fff'} fontSize={'h3'} textAlign={'center'}>
+            {equipment.name}
+          </TextBold>
+
+          <TextLight textAlign={'center'} fontSize={'h5'} color={'#fff'}>
+            {equipment.models[0].description}
+          </TextLight>
+        </Header>
+
         <RegisteredContainer>
           {equipment.models.length > 1 ? renderHasModels() : null}
 
@@ -303,13 +311,8 @@ const NewEquipment2 = props => {
             keyboardType={'numeric'}
           />
 
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <CheckBox
-              contentContainerStyle={{ padding: 0 }}
               value={on24Hours}
               onValueChange={() => setOn24Hours(!on24Hours)}
             />
@@ -318,16 +321,16 @@ const NewEquipment2 = props => {
 
           {renderSetTime()}
         </RegisteredContainer>
-      </ScrollView>
 
-      <ActionButton
-        size={55}
-        renderIcon={() => (
-          <MaterialCommunityIcons name="content-save" size={30} color="#fff" />
-        )}
-        onPress={() => toggleSaveBtn()}
-        buttonColor={Colors.primary}
-      />
+        <ActionButton
+          size={55}
+          renderIcon={() => (
+            <MaterialCommunityIcons name="content-save" size={30} color="#fff" />
+          )}
+          onPress={() => toggleSaveBtn()}
+          buttonColor={Colors.primary}
+        />
+      </ScrollView>
     </Container>
   );
 };

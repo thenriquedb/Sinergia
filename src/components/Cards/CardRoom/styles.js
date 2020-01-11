@@ -29,7 +29,6 @@ export const Status = styled.View`
 
 export const Details = styled.View`
   flex: 1;
-  /* background-color: red; */
 `;
 
 export const TotalPrice = styled.View`

@@ -4,9 +4,11 @@ import Colors from '../styles/colors';
 
 import Welcome from '../pages/Starter/Welcome/index'
 import SetDefaultKwValue from '../pages/Starter/SetDefaultKwValue/index';
+import SetDefaultKwValueTarifaBranca from '../pages/Starter/SetDefaultKwValueTarifaBranca';
 import SetRooms from '../pages/Starter/SetRooms/index';
 import NewRoom from '../pages/Main/Room/NewRoom/index';
-// import EditRoom from '../pages/Main/Room/EditRoom/index';
+import SelectState from "../pages/Starter/SelectState/index"
+import SelectTarifa from "../pages/Starter/SelectTarifa/index";
 import Final from '../pages/Starter/Final/index'
 
 export default StarterStack = createStackNavigator({
@@ -14,6 +16,34 @@ export default StarterStack = createStackNavigator({
     screen: Welcome,
     navigationOptions: {
       header: null
+    },
+  },
+
+  SelectState: {
+    screen: SelectState,
+    navigationOptions: {
+      headerTintColor: '#9999',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerStyle: {
+        shadowColor: 'transparent',
+        elevation: 0,
+      },
+    },
+  },
+
+  SelectTarifa: {
+    screen: SelectTarifa,
+    navigationOptions: {
+      headerTintColor: '#9999',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerStyle: {
+        shadowColor: 'transparent',
+        elevation: 0,
+      },
     },
   },
 
@@ -30,6 +60,21 @@ export default StarterStack = createStackNavigator({
       },
     },
   },
+
+  SetDefaultKwValueTarifaBranca: {
+    screen: SetDefaultKwValueTarifaBranca,
+    navigationOptions: {
+      headerTintColor: '#9999',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerStyle: {
+        shadowColor: 'transparent',
+        elevation: 0,
+      },
+    },
+  },
+
 
   SetRooms: {
     screen: SetRooms,

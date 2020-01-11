@@ -27,12 +27,17 @@ export const DetailsLabels = styled.View`
   justify-content: space-between;
 `;
 
-export const Icon = styled.View`
+export const IconContainer = styled.View`
   color: red;
   justify-content: center;
   align-items: center;
   margin-right: 5px;
 margin-left: 5px;
+`;
+
+export const Icon = styled.Image`
+  width: 60;
+  height: 60;
 `;
 
 export const InfoContainer = styled.View`

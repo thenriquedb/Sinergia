@@ -7,38 +7,59 @@ import { TouchableOpacity } from "react-native";
 // styles
 import { Container, NextPageButton, ContinueConfigArea, Content, InputArea } from './styles';
 import { TextLight, Text } from '../../../styles/fonts';
+import Colors from '../../../styles/colors';
 
-class SetDefaultKwValue extends Component {
+class SetDefaultKwValueTarifaBranca extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultKwValue: '1'
+      foraDePontaValue: '1',
+      intermediarioAPontaValue: '2',
+      pontaValue: '3',
     }
     this.toggleNext = this.toggleNext.bind(this);
   }
 
   toggleNext() {
-    if (this.state.defaultKwValue.match(/^(\d+\.?\d{0,9}|\.\d{1,9})$/)) {
-      this.props.setValueKw(parseFloat(this.state.defaultKwValue));
-      this.props.navigation.navigate('SetRooms');
-    } else {
-      this.setState({ defaultKwValue: '' })
-      alert('esta errado')
-    }
+    this.props.navigation.navigate('SetRooms');
+
   }
 
   render() {
     return (
       <Container>
         <Content>
-          <TextLight textAlign='center' fontSize='h4'> Primeiramente vamos definir o valor faturado do KWh  </TextLight>
+          <TextLight textAlign='center' fontSize='h4'> Valor faturado do KWh </TextLight>
+
           <InputArea>
+            <Text style={{ marginTop: 20 }} fontSize='h5'> Fora de ponta  </Text>
             <Input
-              value={this.state.defaultKwValue}
+              value={this.state.foraDePontaValue}
               keyboardType={'numeric'}
               maxLength={10}
+              borderColor={Colors.low}
               onChangeText={defaultKwValue => this.setState({ defaultKwValue })}
-              placeholder="Valor KWh"
+              placeholder="Fora de ponta"
+            />
+
+            <Text style={{ marginTop: 20 }} fontSize='h5'> Intermediário a ponta </Text>
+            <Input
+              value={this.state.intermediarioAPontaValue}
+              keyboardType={'numeric'}
+              maxLength={10}
+              borderColor={Colors.medium}
+              onChangeText={defaultKwValue => this.setState({ defaultKwValue })}
+              placeholder="Intermediário a ponta "
+            />
+
+            <Text style={{ marginTop: 20 }} fontSize='h5'> Ponta </Text>
+            <Input
+              value={this.state.pontaValue}
+              keyboardType={'numeric'}
+              maxLength={10}
+              borderColor={Colors.high}
+              onChangeText={defaultKwValue => this.setState({ defaultKwValue })}
+              placeholder="Ponta"
             />
             <TouchableOpacity onPress={() => alert('')}>
               <TextLight color={'#707070'} fontSize={'h6'} textAlign="center">  Onde encontrar? </TextLight>
@@ -66,5 +87,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SetDefaultKwValue);
+export default connect(mapStateToProps, mapDispatchToProps)(SetDefaultKwValueTarifaBranca);
 
