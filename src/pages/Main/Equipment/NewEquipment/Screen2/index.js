@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Picker, CheckBox, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Picker, CheckBox, TouchableOpacity, ScrollView } from 'react-native';
 
 // components
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import moment from "moment"
 
 // styles
-import { Container, RegisteredContainer, Header, SetOperation, SelectTime, } from './styles';
+import { Container, RegisteredContainer, Header, SetOperation, Icon, SelectTime, } from './styles';
 import Colors from '../../../../../styles/colors';
 import { TextBold, TextLight, Text } from '../../../../../styles/fonts';
 
@@ -117,7 +117,7 @@ const NewEquipment2 = props => {
     };
 
     props.addNewEquipment(props.navigation.getParam('idRoom'), newEquipment);
-    // props.navigation.navigate('Room');
+    props.navigation.navigate('Room');
   };
 
   const renderSetTime = () => {
@@ -276,7 +276,7 @@ const NewEquipment2 = props => {
     <Container>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header>
-          <Image style={{ height: 100, width: 100 }} resizeMode={"contain"} source={equipment.icon.light} />
+          <Icon resizeMode={"contain"} source={equipment.icon.light} />
 
           <TextBold color={'#fff'} fontSize={'h3'} textAlign={'center'}>
             {equipment.name}
@@ -321,16 +321,16 @@ const NewEquipment2 = props => {
 
           {renderSetTime()}
         </RegisteredContainer>
-
-        <ActionButton
-          size={55}
-          renderIcon={() => (
-            <MaterialCommunityIcons name="content-save" size={30} color="#fff" />
-          )}
-          onPress={() => toggleSaveBtn()}
-          buttonColor={Colors.primary}
-        />
       </ScrollView>
+
+      <ActionButton
+        size={55}
+        renderIcon={() => (
+          <MaterialCommunityIcons name="content-save" size={30} color="#fff" />
+        )}
+        onPress={() => toggleSaveBtn()}
+        buttonColor={Colors.primary}
+      />
     </Container>
   );
 };

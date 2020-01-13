@@ -17,14 +17,14 @@ export const SaveBtn = styled.TouchableOpacity`
 
 
 export const EquipmentContainer = styled.View`
-  padding: 20px 10px 10px 10px;
+padding: 10px;
 `;
 
 export const EquipmentCard = styled.View`
   flex: 1;
   padding: 6px;
-  height: 115;
-  width: 115;
+  height: 110;
+  width: 110;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -32,7 +32,7 @@ export const EquipmentCard = styled.View`
   border: 1px;
   border-color: ${Colors.lightGray1};
   border-radius: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 `;
 
 export const ContinueButton = styled.View`
@@ -51,8 +51,13 @@ export const FooterTextContainer = styled.View`
   padding: 5px 0px 5px 5px;
 `;
 
+export const Icon = styled.Image`
+width: 65px;
+height: 65px;
+`;
+
 export const styles = StyleSheet.create({
-  SelectedTarifaCard: {
+  SelectedRoomCard: {
     flex: 1,
     color: Colors.primary,
     borderWidth: 5,

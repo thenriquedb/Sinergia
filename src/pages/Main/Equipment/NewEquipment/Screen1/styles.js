@@ -10,23 +10,22 @@ export const Container = styled.View`
 `;
 
 export const RoomContainer = styled.View`
-  padding: 5px 0px 0px 10px;
-  flex: 1;
+padding: 10px;
+flex: 1;
 `;
 
 export const RoomCard = styled.View`
-  /* flex: 1; */
-  height: 115;
-  width: 115;
+  padding: 6px;
+  height: 110;
+  width: 110;
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* padding: 2px; */
   background-color: ${Colors.white};
   border: 1px;
-  border-color: ${Colors.darkGray1};
+  border-color: ${Colors.lightGray1};
   border-radius: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 `;
 
 export const ContinueButton = styled.View`
@@ -43,6 +42,11 @@ export const Footer = styled.View`
 
 export const FooterTextContainer = styled.View`
   padding: 5px 0px 5px 5px;
+`;
+
+export const Icon = styled.Image`
+width: 65px;
+height: 65px;
 `;
 
 export const styles = StyleSheet.create({

@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Input from '../../../../components/Input/index';
 
 // styles
-import { Container, EquipmentCard, SaveBtn, ContinueButton, EquipmentContainer, Footer, styles } from './styles';
+import { Container, EquipmentCard, Icon, ContinueButton, EquipmentContainer, Footer, styles } from './styles';
 import { Text, TextLight, TextBold } from '../../../../styles/fonts';
 import Colors from '../../../../styles/colors';
 
@@ -21,7 +21,7 @@ class NewRoom extends Component {
 
     this.state = {
       rooms: roomsList.map(item => {
-        item.class = styles.SelectedEquipmentCard;
+        item.class = styles.SelectedRoomCard;
         item.select = false;
         return item;
       }),
@@ -43,7 +43,7 @@ class NewRoom extends Component {
         style={{ flex: 1 / 3 }}
         onPress={() => this.toggleSelectEquipment(index)}>
         <EquipmentCard style={item.select ? item.class : ''}>
-          <Image style={{ width: 75, height: 70, resizeMode: 'contain' }} source={item.icon.dark} />
+          <Icon resizeMode={"contain"} source={item.icon.dark} />
 
           <TextLight
             textAlign={'center'}
@@ -120,7 +120,6 @@ class NewRoom extends Component {
       <Container>
 
         <View style={{ flex: 1 }}>
-
           <EquipmentContainer>
             <Input
               value={this.state.customName}
@@ -139,7 +138,6 @@ class NewRoom extends Component {
                 return this.equipmentCard(item, index);
               }}
             />
-
           </EquipmentContainer>
         </View>
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 const FONT_SIZES = {
-  'h1': 42,
+  'h1': 54,
   'h2': 34,
   'h3': 28,
   'h4': 22,

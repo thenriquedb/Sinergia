@@ -9,6 +9,7 @@ import roomList from '../../../utilities/roomsList';
 
 const SimpleCardRoom = props => {
   const { room } = props;
+  console.log("room: ", room);
 
   return (
     <Container>
@@ -16,8 +17,8 @@ const SimpleCardRoom = props => {
         <Icon resizeMode={"contain"} source={room.icon.dark} />
       </IconContainer>
       <Details>
-        <TextLight fontSize="h4"> {room.name} </TextLight>
-        <TextLight fontSize="h5"> {roomList.find(item => item.value === room.typeRoom).name} </TextLight>
+        <TextLight fontSize="h3"> {room.name} </TextLight>
+        <TextLight fontSize="h4"> {roomList.find(item => item.value === room.typeRoom).name} </TextLight>
       </Details>
     </Container>
   );

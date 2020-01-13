@@ -9,7 +9,7 @@ const Welcome = props => (
   <Container>
 
     <WelcomeContent>
-      <TextLight fontSize='h4'> Bem vindo(a) ao Sinergia </TextLight>
+      <TextLight fontSize='h4'> Bem vindo(a) ao SSinergia </TextLight>
     </WelcomeContent>
 
     <ContinueConfigArea>

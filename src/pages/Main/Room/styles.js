@@ -8,9 +8,8 @@ export const Container = styled.View`
 `;
 
 export const Icon = styled.Image`
-width: 140px;
-height:140px;
-/* margin: 0px; */
+  width: 140px;
+  height:140px;
 `;
 
 export const IconContainer = styled.View`
@@ -27,13 +26,12 @@ export const ContainerNoEquipment = styled.View`
 `;
 
 export const HeaderContainer = styled.View`
-  /* margin-top: -10; */
-
+  padding: 0px 10px 0px 10px;
 `;
 
 export const HeaderTop = styled.View`
-justify-content: center;
-align-items: center;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const HeaderInfosContainer = styled.View`
@@ -44,8 +42,7 @@ export const HeaderInfosContainer = styled.View`
 
 export const HeaderInfo = styled.View`
   flex-direction: column;
-    padding-left: 15;
-  padding-right: 15;
+
 `;
 
 export const EquipmentsList = styled.View`

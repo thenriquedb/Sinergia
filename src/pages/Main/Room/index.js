@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TouchableOpacity, Image } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 // redux
 import { connect } from 'react-redux';
@@ -122,11 +122,8 @@ class Room extends Component {
   headerCollapseVisible() {
     return (
       <HeaderContainer>
-
         <HeaderTop>
-          <TouchableOpacity onPress={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}>
-            <Icon resizeMode={"contain"} source={this.state.room.icon.light} />
-          </TouchableOpacity>
+          <Icon resizeMode={"contain"} source={this.state.room.icon.light} />
 
           <TouchableOpacity onPress={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}>
             <TextBold textAlign={'center'} color={'#fff'} fontSize={'h1'}>
@@ -138,10 +135,10 @@ class Room extends Component {
 
         <HeaderInfosContainer>
           <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h6'}>
+            <Text color={'#fff'} fontSize={'h5'}>
               Gasto Mensal
             </Text>
-            <TextLight color={'#fff'} fontSize={'h5'}>
+            <TextLight color={'#fff'} fontSize={'h4'}>
               R$
               {this.state.room.tarifaConvencional.monthlyExpenses
                 .toFixed(2)
@@ -150,21 +147,19 @@ class Room extends Component {
           </HeaderInfo>
 
           <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h6'}>
+            <Text color={'#fff'} fontSize={'h5'}>
               Consumo total
             </Text>
-            <TextLight color={'#fff'} fontSize={'h5'}>
+            <TextLight color={'#fff'} fontSize={'h4'}>
               {this.state.room.totalKw.toFixed(2)} KW
             </TextLight>
           </HeaderInfo>
 
-          {/* <TextLight fontSize="h4"> {equipment.name.length >= 22 ? equipment.name.substring(0, 22).concat('...') : equipment.name} </TextLight> */}
-
           <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h6'}>
+            <Text color={'#fff'} fontSize={'h5'}>
               Maior Consumo{' '}
             </Text>
-            <TextLight color={'#fff'} fontSize={'h5'}>
+            <TextLight color={'#fff'} fontSize={'h4'}>
               {this.state.equipmentHigherConsumption.length >= 20 ?
                 this.state.equipmentHigherConsumption.substring(0, 20).concat('...')
                 : this.state.equipmentHigherConsumption}
@@ -264,7 +259,8 @@ class Room extends Component {
             renderHiddenItem={({ item, index }) => (
               <HiddenCard
                 reRender={this.reRenderEquipmentsList}
-                room idRoom={this.state.room.id}
+                roomName={this.state.room.name}
+                idRoom={this.state.room.id}
                 idEquipment={item.id} />
             )}
             renderItem={({ item }) => <CardEquipment equipment={item} />}

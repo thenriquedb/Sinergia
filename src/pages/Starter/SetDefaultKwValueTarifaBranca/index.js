@@ -22,7 +22,6 @@ class SetDefaultKwValueTarifaBranca extends Component {
 
   toggleNext() {
     this.props.navigation.navigate('SetRooms');
-
   }
 
   render() {

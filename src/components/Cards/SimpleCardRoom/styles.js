@@ -23,7 +23,7 @@ export const Details = styled.View`
   flex-direction: column;
 `;
 
-export const Icon = styled.View`
+export const Icon = styled.Image`
   width: 70;
   height: 70;
 `;

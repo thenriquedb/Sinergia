@@ -7,7 +7,7 @@ import equipmentsList from '../../../../../utilities/equipmentsList';
 // styles
 import { TextLight } from '../../../../../styles/fonts';
 import Colors from '../../../../../styles/colors';
-import { Container, RoomCard, ContinueButton, RoomContainer, Footer, styles } from './styles';
+import { Container, RoomCard,Icon, ContinueButton, RoomContainer, Footer, styles } from './styles';
 
 export default class NewEquipment extends Component {
   constructor(props) {
@@ -57,7 +57,7 @@ export default class NewEquipment extends Component {
         <RoomCard style={item.select ? item.class : ''}>
 
 
-          <Image style={{ height: 60, width: 65, resizeMode: 'contain' }} source={item.icon.dark} />
+          <Icon resizeMode={"contain"}  source={item.icon.dark} />
           <TextLight
             textAlign={'center'}
             color={item.select ? Colors.primary : Colors.darkGray2}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Button, Picker, Alert, TouchableOpacity } from 'react-native';
+import { Picker, Alert, TouchableOpacity } from 'react-native';
 import Modal from "react-native-modal";
 import Input from "../../../../components/Input/index";
 
@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 
 
 //styles
-import { TextBold, Text, TextLight } from '../../../../styles/fonts'
+import { TextBold } from '../../../../styles/fonts'
 import Colors from '../../../../styles/colors'
 import { Container, ButtonsContainer } from './styles';
 

@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'calcConsumoEnergia' do
-  # Pods for calcConsumoEnergia
+target 'Sinergia' do
+  # Pods for Sinergia
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -34,11 +34,7 @@ target 'calcConsumoEnergia' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
-
-  target 'calcConsumoEnergiaTests' do
+  target 'SinergiaTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -46,10 +42,10 @@ target 'calcConsumoEnergia' do
   use_native_modules!
 end
 
-target 'calcConsumoEnergia-tvOS' do
-  # Pods for calcConsumoEnergia-tvOS
+target 'Sinergia-tvOS' do
+  # Pods for Sinergia-tvOS
 
-  target 'calcConsumoEnergia-tvOSTests' do
+  target 'Sinergia-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

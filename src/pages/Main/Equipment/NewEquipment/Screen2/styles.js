@@ -8,7 +8,6 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-  /* flex: 1; */
   align-items: center;
   margin-bottom: 15;
   padding-left: 15;
@@ -30,6 +29,11 @@ export const SetOperation = styled.View`
   border-width: 1px;
   padding: 10px;
   elevation: 3;
+`;
+
+export const Icon = styled.Image`
+width: 100px;
+height: 100px;
 `;
 
 export const SelectTime = styled.View`

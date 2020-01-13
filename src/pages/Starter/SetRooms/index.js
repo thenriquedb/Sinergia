@@ -78,6 +78,7 @@ class SetRooms extends Component {
   }
 
   render() {
+
     return (
       <Container>
         <TextLight textAlign='center' fontSize='h4'> Esta quase pronto! Agora é só cadastrar os cômodos  </TextLight>
