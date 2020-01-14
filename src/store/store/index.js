@@ -4,6 +4,8 @@ const INITIAL_STATE = {
   valueKW: 1,
   firstUse: true,
   totalKw: 0,
+  dealership: {},
+  uf: '',
 
   tarifaBranca: {
     monthlyExpenses: 0,

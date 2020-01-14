@@ -2,6 +2,24 @@ import INITIAL_STATE from '../store/index';
 
 export default function houseReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case 'SET_VALUE_KW':
+      return {
+        ...state,
+        valueKW: action.payload.valueKW
+      }
+
+    case 'SET_UF':
+      return {
+        ...state,
+        uf: action.payload.uf
+      }
+
+    case 'SET_DEALERSHIP':
+      return {
+        ...state,
+        dealership: action.payload.dealership
+      }
+
     case 'ADD_ROOM':
       return {
         ...state,
@@ -108,17 +126,13 @@ export default function houseReducer(state = INITIAL_STATE, action) {
       };
       break;
 
-    case 'SET_VALUE_KW':
-      return {
-        ...state,
-        valueKW: action.payload.valueKW
-      }
 
     case 'SET_FIRST_USE_STATUS':
       return {
         ...state,
         firstUse: !state.firstUse
       }
+
     default:
       return state;
   }

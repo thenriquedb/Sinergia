@@ -9,7 +9,6 @@ import roomList from '../../../utilities/roomsList';
 
 const SimpleCardRoom = props => {
   const { room } = props;
-  console.log("room: ", room);
 
   return (
     <Container>

@@ -27,11 +27,18 @@ class SetDefaultKwValue extends Component {
     }
   }
 
+  componentDidMount() {
+    let s = this.state;
+    s.defaultKwValue = this.props.valueKW;
+    this.setState(s);
+  }
+
   render() {
     return (
       <Container>
         <Content>
           <TextLight textAlign='center' fontSize='h4'> Primeiramente vamos definir o valor faturado do KWh  </TextLight>
+          <TextLight> valorKw: {this.props.valueKW} </TextLight>
           <InputArea>
             <Input
               value={this.state.defaultKwValue}
@@ -57,7 +64,8 @@ class SetDefaultKwValue extends Component {
 }
 
 const mapStateToProps = state => ({
-  valueKW: state.houseReducer.valueKW,
+  dealership: state.houseReducer,
+  valueKW: state.houseReducer.dealership.valorTarifaConvencional,
 });
 
 const mapDispatchToProps = dispatch => {

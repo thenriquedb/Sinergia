@@ -24,6 +24,14 @@ class SetDefaultKwValueTarifaBranca extends Component {
     this.props.navigation.navigate('SetRooms');
   }
 
+  componentWillMount() {
+    let s = this.state;
+    s.pontaValue = this.props.valorForaPonta;
+    s.intermediarioAPontaValue = this.props.valorIntermediaria;
+    s.foraDePontaValue = this.props.valorForaPonta;
+    this.setState(s);
+  }
+
   render() {
     return (
       <Container>
@@ -37,7 +45,7 @@ class SetDefaultKwValueTarifaBranca extends Component {
               keyboardType={'numeric'}
               maxLength={10}
               borderColor={Colors.low}
-              onChangeText={defaultKwValue => this.setState({ defaultKwValue })}
+              onChangeText={foraDePontaValue => this.setState({ foraDePontaValue })}
               placeholder="Fora de ponta"
             />
 
@@ -47,7 +55,7 @@ class SetDefaultKwValueTarifaBranca extends Component {
               keyboardType={'numeric'}
               maxLength={10}
               borderColor={Colors.medium}
-              onChangeText={defaultKwValue => this.setState({ defaultKwValue })}
+              onChangeText={intermediarioAPontaValue => this.setState({ intermediarioAPontaValue })}
               placeholder="Intermediário a ponta "
             />
 
@@ -57,7 +65,7 @@ class SetDefaultKwValueTarifaBranca extends Component {
               keyboardType={'numeric'}
               maxLength={10}
               borderColor={Colors.high}
-              onChangeText={defaultKwValue => this.setState({ defaultKwValue })}
+              onChangeText={pontaValue => this.setState({ pontaValue })}
               placeholder="Ponta"
             />
             <TouchableOpacity onPress={() => alert('')}>
@@ -77,7 +85,9 @@ class SetDefaultKwValueTarifaBranca extends Component {
 }
 
 const mapStateToProps = state => ({
-  valueKW: state.houseReducer.valueKW,
+  valorPonta: state.houseReducer.dealership.valorPonta,
+  valorIntermediaria: state.houseReducer.dealership.valorIntermediaria,
+  valorForaPonta: state.houseReducer.dealership.valorForaPonta,
 });
 
 const mapDispatchToProps = dispatch => {

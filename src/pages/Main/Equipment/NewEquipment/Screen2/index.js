@@ -82,13 +82,6 @@ const NewEquipment2 = props => {
     const totalTimeOn = on24Hours ? 24 : moment.duration(moment(endTimeWeekdays).diff(startTimeWeekdays)).asHours();
     const power = !selectedModel ? equipment.models[0].power : selectedModel.power
 
-    console.log("startTimeWeekdays", moment(startTimeWeekdays).format("HH"));
-    console.log("endTimeWeekdays", endTimeWeekdays);
-    console.log("startTimeWeekend", startTimeWeekend);
-    console.log("endTimeWeekend", endTimeWeekend);
-    console.log("frequencyOfUseOnWeekend", frequencyOfUseOnWeekend);
-    console.log("frequencyOfUseOnWeekdays", frequencyOfUseOnWeekdays);
-
     // Consumo de KW/H mensais
     const kwMonthly = (power * quantity * totalTimeOn * 30) / 1000
 

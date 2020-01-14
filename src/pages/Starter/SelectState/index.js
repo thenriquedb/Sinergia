@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
-import { Picker, View } from 'react-native';
+import { Picker, View, ToastAndroid } from 'react-native';
+
+//redux
+import { connect } from 'react-redux'
 
 // styles
 import { Container, ContinueConfigArea, Content, NextPageButton } from './styles';
@@ -9,15 +12,33 @@ import Colors from "../../../styles/colors";
 
 //util
 import states from "../../../utilities/estados"
+import tarifaBranca from "../../../utilities/tarifaBranca.json"
 
 const SelectState = (props) => {
-  const [state, setState] = useState('')
-  const [dealership, setDealership] = useState('')
+  const [state, setState] = useState('NONE')
+  const [dealerships, setDealerships] = useState(tarifaBranca);
+  const [selectedDealership, setSelectedDealership] = useState('');
+
 
   const toggleNext = () => {
-    props.navigation.navigate('SelectTarifa');
-  }
 
+
+    if (state != 'NONE') {
+
+      setSelectedDealership(selectedDealership ? selectedDealership : dealerships[0]);
+      props.setUf(state);
+      props.setDealership(selectedDealership ? selectedDealership : dealerships[0]);
+      props.navigation.navigate('SelectTarifa');
+    } else {
+      ToastAndroid.showWithGravityAndOffset(
+        'É necessário selecionar um estado para continuar',
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+        25,
+        50,
+      );
+    }
+  }
 
 
 
@@ -30,6 +51,8 @@ const SelectState = (props) => {
           selectedValue={state}
           onValueChange={(itemValue, itemIndex) => {
             setState(itemValue);
+            setDealerships(tarifaBranca.filter(item => item.UF === itemValue));
+            setSelectedDealership('');
           }}>
           {states.map((value, key) => {
             return <Picker.Item value={value.sigla} label={value.name} />;
@@ -37,18 +60,19 @@ const SelectState = (props) => {
         </Picker>
 
 
-        {state !== 'NONE' ? <View>
-          <Text style={{ marginTop: 20 }} fontSize='h5'> Concessionária  </Text>
-          <Picker
-            selectedValue={state}
-            onValueChange={(itemValue, itemIndex) => {
-              setState(itemValue);
-            }}>
-            {states.map((value, key) => {
-              return <Picker.Item value={value.sigla} label={value.name} />;
-            })}
-          </Picker>
-        </View> : null}
+        {state !== 'NONE' ?
+          <View>
+            <Text style={{ marginTop: 20 }} fontSize='h5'> Concessionária  </Text>
+            <Picker
+              selectedValue={selectedDealership}
+              onValueChange={(itemValue, itemIndex) => {
+                setSelectedDealership(itemValue);
+              }}>
+              {dealerships.map((value, key) => {
+                return <Picker.Item value={value} label={value.Distribuidora} />;
+              })}
+            </Picker>
+          </View> : null}
 
       </Content>
 
@@ -57,14 +81,21 @@ const SelectState = (props) => {
           style={{
             backgroundColor: state === 'NONE' ? Colors.lightGray1 : Colors.primary,
           }}
-          disabled={state === 'NONE' ? true : false}
           onPress={() => toggleNext()}>
           <Text
             fontSize='h6' color={'#fff'}> Continuar </Text>
         </NextPageButton>
       </ContinueConfigArea>
-    </Container>
+    </Container >
   )
 };
 
-export default SelectState;
+const mapDispatchToProps = dispatch => {
+  return {
+    setUf: (uf) => dispatch({ type: 'SET_UF', payload: { uf } }),
+    setDealership: (dealership) => dispatch({ type: 'SET_DEALERSHIP', payload: { dealership } })
+  };
+};
+
+
+export default connect(null, mapDispatchToProps)(SelectState);
