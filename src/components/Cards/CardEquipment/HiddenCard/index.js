@@ -9,9 +9,7 @@ import { Container, DeleteButton, EditButton } from './styles';
 
 const HiddenCard = props => {
   const [modalIsVisible, setmodalIsVisible] = useState(false);
-
-  const deleteMessage = "Você deseja excluir o cômodo " + props.roomName + "? " +
-    "Esta ação não poderá ser desfeita futuramente."
+  const deleteMessage = `Você deseja excluir o cômodo ${props.roomName}? Esta ação não poderá ser desfeita futuramente.`
 
   return (
     <Container>

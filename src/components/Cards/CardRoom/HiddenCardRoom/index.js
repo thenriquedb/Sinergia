@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert } from 'react-native';
+import Alert from "../../../../components/Alert/index";
 
 import { connect } from 'react-redux';
 
@@ -9,27 +9,23 @@ import { Container, DeleteButton, EditButton } from './styles';
 
 const HiddenCard = props => {
   const { room } = props;
+  const message = `Você deseja excluir o cômodo ${room.name}? Esta ação não poderá ser desfeita futuramente.`;
+  const [isVisible, setisVisible] = useState(false);
 
-  const toggleDeleteBtn = () => {
-    Alert.alert(
-      'Você deseja excluir o cômodo ' + room.name + '?',
-      ' Esta ação não poderá ser desfeita futuramente.',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        { text: 'Confirmar', onPress: () => props.deleteRoom(room.id) },
-      ],
-      { cancelable: false },
-    );
-
-    props.refreshList();
-  };
 
   return (
     <Container>
-      <DeleteButton underlayColor="#f79292" onPress={() => toggleDeleteBtn()}>
+      <Alert
+        title={"Confirmar "}
+        message={message}
+        confirm={() => {
+          props.deleteRoom(room.id);
+          props.refreshList();
+          setisVisible(!isVisible);
+        }}
+        isVisible={isVisible} />
+
+      <DeleteButton underlayColor="#f79292" onPress={() => setisVisible(!isVisible)}>
         <MaterialCommunityIcons name="delete" size={40} color="#fff" />
       </DeleteButton>
 

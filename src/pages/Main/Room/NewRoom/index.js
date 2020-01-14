@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { FlatList, Image, TouchableOpacity, TouchableHighlight, ToastAndroid, Alert, View, KeyboardAvoidingView } from 'react-native';
+import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, View, KeyboardAvoidingView } from 'react-native';
+import Alert from "../../../../components/Alert/index";
 
 // redux
 import { connect } from 'react-redux';
@@ -9,7 +10,7 @@ import Input from '../../../../components/Input/index';
 
 // styles
 import { Container, EquipmentCard, Icon, ContinueButton, EquipmentContainer, Footer, styles } from './styles';
-import { Text, TextLight, TextBold } from '../../../../styles/fonts';
+import { TextLight } from '../../../../styles/fonts';
 import Colors from '../../../../styles/colors';
 
 // utilities
@@ -27,6 +28,9 @@ class NewRoom extends Component {
       }),
       selectedRoomIndex: -1,
       selectedRoom: '',
+      selectedRoom: '',
+      alertMessage: '',
+      modalIsVisible: false,
       icon: [],
       customName: ''
     };
@@ -99,9 +103,15 @@ class NewRoom extends Component {
 
         if (!found) {
           this.props.addNewRoom(this.state.customName, this.state.selectedRoom, this.state.icon);
-          Alert.alert('O cômodo ' + this.state.customName + ' foi cadastrado com sucesso!');
+          this.setState({
+            modalIsVisible: !this.state.modalIsVisible,
+            alertMessage: `O cômodo ${this.state.customName} foi cadastrado com sucesso!`
+          });
         } else {
-          Alert.alert('O cômodo ' + this.state.customName + ' já esta cadastrado.');
+          this.setState({
+            modalIsVisible: !this.state.modalIsVisible,
+            alertMessage: `O cômodo ${this.state.customName} já esta cadastrado.`
+          });
         }
       }
     } else {
@@ -118,6 +128,12 @@ class NewRoom extends Component {
   render() {
     return (
       <Container>
+
+        <Alert
+          title={"Confirmar"}
+          message={this.state.alertMessage}
+          confirm={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}
+          isVisible={this.state.modalIsVisible} />
 
         <View style={{ flex: 1 }}>
           <EquipmentContainer>
