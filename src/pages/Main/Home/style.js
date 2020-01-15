@@ -7,6 +7,10 @@ export const Container = styled.View`
   background-color: ${Colors.primary};
 `;
 
+export const Scroll = styled.ScrollView`
+`;
+
+
 export const ContainerNoRooms = styled.View`
   flex: 1;
   flex-direction: column;

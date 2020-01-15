@@ -7,6 +7,10 @@ export const Container = styled.View`
   background-color: ${Colors.primary};
 `;
 
+export const Scroll = styled.ScrollView`
+`;
+
+
 export const Icon = styled.Image`
   width: 140px;
   height:140px;

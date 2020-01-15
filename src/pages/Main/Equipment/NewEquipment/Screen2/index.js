@@ -11,7 +11,8 @@ import ActionButton from 'react-native-action-button';
 import { connect } from 'react-redux';
 
 //util
-import moment from "moment"
+import moment from "moment";
+import calcTarifaBranca from "../../../../../util/calcTarifaBranca";
 
 // styles
 import { Container, RegisteredContainer, Header, SetOperation, Icon, SelectTime, } from './styles';
@@ -88,8 +89,8 @@ const NewEquipment2 = props => {
     // calculo da tarifa convencional
     const tarifaConvencional = kwMonthly * props.valueKW;
 
-    // calculo da tarifa convencional
-    const tarifaBranca = 100;
+    // calculo da tarifa branca
+    const tarifaBranca = calcTarifaBranca(kwMonthly);
 
     const newEquipment = {
       id: new Date().getTime().toString(),
@@ -330,6 +331,7 @@ const NewEquipment2 = props => {
 
 const mapStateToProps = state => ({
   valueKW: state.houseReducer.valueKW,
+  dealership: state.houseReducer.dealership
 });
 
 const mapDispatchToProps = dispatch => {

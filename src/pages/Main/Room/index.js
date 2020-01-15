@@ -15,7 +15,7 @@ import EditRoomModal from "./EditRoomModal/index"
 
 // styles
 import {
-  EquipmentsList, Container, HeaderContainer, Icon, IconContainer, HeaderInfo,
+  EquipmentsList, Container, HeaderContainer, Icon, IconContainer, Scroll, HeaderInfo,
   HeaderInfosContainer, ContainerNoEquipment, HeaderTop
 } from './styles';
 
@@ -244,40 +244,44 @@ class Room extends Component {
   renderEquipmentsList() {
     return (
       <Container>
-        <Collapse
-          visible={this.headerCollapseVisible()}
-          hidden={this.headerCollapseHidden()}
-        />
-        <EquipmentsList>
-          <SwipeListView
-            extraData={this.state.EquipmentsListUpdate}
-            data={this.state.room.equipments}
-            showsVerticalScrollIndicator={false}
-            keyExtractor={item => item.id}
-            rightOpenValue={-100}
-            disableRightSwipe={true}
-            renderHiddenItem={({ item, index }) => (
-              <HiddenCard
-                reRender={this.reRenderEquipmentsList}
-                roomName={this.state.room.name}
-                idRoom={this.state.room.id}
-                idEquipment={item.id} />
-            )}
-            renderItem={({ item }) => <CardEquipment equipment={item} />}
+        <Scroll>
+          <Collapse
+            visible={this.headerCollapseVisible()}
+            hidden={this.headerCollapseHidden()}
           />
-        </EquipmentsList>
+          <EquipmentsList>
+            <SwipeListView
+              extraData={this.state.EquipmentsListUpdate}
+              data={this.state.room.equipments}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={item => item.id}
+              rightOpenValue={-100}
+              disableRightSwipe={true}
+              renderHiddenItem={({ item, index }) => (
+                <HiddenCard
+                  reRender={this.reRenderEquipmentsList}
+                  roomName={this.state.room.name}
+                  idRoom={this.state.room.id}
+                  idEquipment={item.id} />
+              )}
+              renderItem={({ item }) => <CardEquipment equipment={item} />}
+            />
+          </EquipmentsList>
 
-        <EditRoomModal
-          isVisible={this.state.modalIsVisible}
-          room={this.state.room}
-          updateData={() => this.updateData()}
-          closeModal={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })} />
+          <EditRoomModal
+            isVisible={this.state.modalIsVisible}
+            room={this.state.room}
+            updateData={() => this.updateData()}
+            closeModal={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })} />
+        </Scroll>
+
         <ActionButton
           size={55}
           onPress={() => this.toggleNewEquipment()}
           buttonColor={Colors.primary}
         />
       </Container>
+
     );
   }
 

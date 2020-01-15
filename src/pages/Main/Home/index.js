@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 // Style
 import Colors from '../../../styles/colors';
-import { Container, ContainerNoRooms, Rooms, Details, TotalConsumeKW, Header } from './style';
+import { Container, ContainerNoRooms, Rooms, Details, Scroll, TotalConsumeKW, Header } from './style';
 import { TextLight, TextThin, TextBold } from '../../../styles/fonts';
 
 // Components
@@ -69,65 +69,67 @@ const Home = props => {
   const renderHasRooms = () => {
     return (
       <Container>
-        <Header>
-          <TotalConsumeKW>
-            <TextBold textAlign='center' color="#fff" fontSize="h5">
-              Valor Total
+        <Scroll>
+          <Header>
+            <TotalConsumeKW>
+              <TextBold textAlign='center' color="#fff" fontSize="h5">
+                Valor Total
           </TextBold>
 
-            <TextThin textAlign='center' color="#fff" fontSize="h1">
-              R${' '}
-              {totalAmount
-                .toFixed(2)
-                .toString()
-                .replace('.', ',')}
-            </TextThin>
-          </TotalConsumeKW>
+              <TextThin textAlign='center' color="#fff" fontSize="h1">
+                R${' '}
+                {totalAmount
+                  .toFixed(2)
+                  .toString()
+                  .replace('.', ',')}
+              </TextThin>
+            </TotalConsumeKW>
 
-          <Details>
-            <View>
-              <TextBold textAlign='center' color="#FFF"> Consumo total </TextBold>
-              <TextLight textAlign='center' color="#fff" fontSize="h4">
-                {totalKw.toFixed(2)} KW
+            <Details>
+              <View>
+                <TextBold textAlign='center' color="#FFF"> Consumo total </TextBold>
+                <TextLight textAlign='center' color="#fff" fontSize="h4">
+                  {totalKw.toFixed(2)} KW
             </TextLight>
-            </View>
+              </View>
 
-            <View>
-              <TextBold textAlign='center' color="#FFF"> Maior consumo </TextBold>
-              <TextLight textAlign='center' color="#fff" fontSize="h4">
-                {roomHigherConsumption}
-              </TextLight>
-            </View>
+              <View>
+                <TextBold textAlign='center' color="#FFF"> Maior consumo </TextBold>
+                <TextLight textAlign='center' color="#fff" fontSize="h4">
+                  {roomHigherConsumption}
+                </TextLight>
+              </View>
 
-            <View>
-              <TextBold textAlign='center' color="#FFF"> Bandeira </TextBold>
-              <TextLight textAlign='center' color="#fff" fontSize="h4">
-                {props.house.flag}
-              </TextLight>
-            </View>
-          </Details>
-        </Header>
+              <View>
+                <TextBold textAlign='center' color="#FFF"> Bandeira </TextBold>
+                <TextLight textAlign='center' color="#fff" fontSize="h4">
+                  {props.house.flag}
+                </TextLight>
+              </View>
+            </Details>
+          </Header>
 
-        <Rooms>
-          <SwipeListView
-            data={props.house.rooms}
-            showsVerticalScrollIndicator={false}
-            keyExtractor={room => room.id}
-            rightOpenValue={-100}
-            disableRightSwipe={true}
-            extraData={updateList}
-            renderHiddenItem={({ item }) => (
-              <HiddenCard
-                refreshList={reRender}
-                room={item}
-              />
-            )}
-            renderItem={({ item }) => (
-              <CardRoom toggleRoomCard={toggleRoomCard} room={item} />
-            )}
-          />
-        </Rooms>
+          <Rooms>
+            <SwipeListView
+              data={props.house.rooms}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={room => room.id}
+              rightOpenValue={-100}
+              disableRightSwipe={true}
+              extraData={updateList}
+              renderHiddenItem={({ item }) => (
+                <HiddenCard
+                  refreshList={reRender}
+                  room={item}
+                />
+              )}
+              renderItem={({ item }) => (
+                <CardRoom toggleRoomCard={toggleRoomCard} room={item} />
+              )}
+            />
+          </Rooms>
 
+        </Scroll>
 
 
         <ActionButton
