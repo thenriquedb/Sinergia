@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   firstUse: true,
   totalKw: 0,
   dealership: {},
+  tarifa: 'branca',
   uf: '',
 
   tarifaBranca: {

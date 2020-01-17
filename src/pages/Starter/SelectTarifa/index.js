@@ -6,12 +6,14 @@ import { TouchableOpacity, ToastAndroid } from 'react-native';
 import { Container, TarifaCard, Icon, ContinueConfigArea, Content, NextPageButton, styles } from './styles';
 import { Text, TextLight } from "../../../styles/fonts";
 import Colors from "../../../styles/colors";
+import { connect } from 'react-redux'
 
 const SelectTarifa = (props) => {
   const [tarifa, setTarifa] = useState('')
 
   const toggleNext = () => {
     if (tarifa) {
+      props.setTarifa(tarifa);
       tarifa === 'convencional' ? props.navigation.navigate('SetDefaultKwValue') : props.navigation.navigate('SetDefaultKwValueTarifaBranca');
     } else {
       ToastAndroid.showWithGravityAndOffset(
@@ -74,4 +76,12 @@ const SelectTarifa = (props) => {
   )
 };
 
-export default SelectTarifa;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setTarifa: (tarifa) => dispatch({ type: 'SET_TARIFA', payload: { tarifa } }),
+  };
+};
+
+
+export default connect(null, mapDispatchToProps)(SelectTarifa);

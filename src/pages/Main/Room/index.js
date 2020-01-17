@@ -140,9 +140,16 @@ class Room extends Component {
             </Text>
             <TextLight color={'#fff'} fontSize={'h4'}>
               R$
-              {this.state.room.tarifaConvencional.monthlyExpenses
-                .toFixed(2)
-                .replace('.', ',')}
+              {
+                this.props.tarifaUsed === 'convencional' ?
+                  this.state.room.tarifaConvencional.monthlyExpenses
+                    .toFixed(2)
+                    .replace('.', ',')
+                  :
+                  this.state.room.tarifaBranca.monthlyExpenses
+                    .toFixed(2)
+                    .replace('.', ',')
+              }
             </TextLight>
           </HeaderInfo>
 
@@ -295,6 +302,7 @@ class Room extends Component {
 const mapStateToProps = state => ({
   rooms: state.houseReducer.rooms,
   valueKW: state.houseReducer.valueKW,
+  tarifaUsed: state.houseReducer.tarifa
 });
 
 

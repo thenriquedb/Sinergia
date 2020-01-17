@@ -5,6 +5,8 @@ import { TouchableHighlight, Image } from 'react-native';
 import { Container, Details, DetailsLabels, Icon, IconContainer, InfoContainer } from './styles';
 import { TextLight } from '../../../styles/fonts';
 
+import { connect } from 'react-redux'
+
 const CardEquipment = props => {
   const { equipment } = props;
 
@@ -33,7 +35,14 @@ const CardEquipment = props => {
 
             <DetailsLabels>
               <TextLight> Gasto mensal </TextLight>
-              <TextLight> R$ {(equipment.tarifaConvencional.monthlyExpenses).toFixed(2)}</TextLight>
+              <TextLight> R$
+              {
+                  props.tarifaUsed === 'convencional' ?
+                    (equipment.tarifaConvencional.monthlyExpenses).toFixed(2).replace('.', ',')
+                    :
+                    (equipment.tarifaBranca.monthlyExpenses).toFixed(2).replace('.', ',')
+                }
+              </TextLight>
             </DetailsLabels>
           </InfoContainer>
         </Details>
@@ -42,4 +51,9 @@ const CardEquipment = props => {
   );
 };
 
-export default CardEquipment;
+
+const mapStateToProps = state => ({
+  tarifaUsed: state.houseReducer.tarifa
+});
+
+export default connect(mapStateToProps, null)(CardEquipment);

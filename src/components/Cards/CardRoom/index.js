@@ -5,6 +5,8 @@ import { TouchableHighlight } from 'react-native';
 import { Container, TotalPrice, Details } from './styles';
 import { TextLight, TextBold } from '../../../styles/fonts';
 
+import { connect } from 'react-redux'
+
 const CardRoom = props => {
   const { room } = props;
 
@@ -27,10 +29,18 @@ const CardRoom = props => {
           <TextLight fontSize="h5"> Valor total</TextLight>
           <TextBold fontSize="h3">
             R${' '}
-            {room.tarifaConvencional.monthlyExpenses
-              .toFixed(2)
-              .toString()
-              .replace('.', ',')}
+            {
+              props.tarifaUsed === 'convencional' ?
+                room.tarifaConvencional.monthlyExpenses
+                  .toFixed(2)
+                  .toString()
+                  .replace('.', ',')
+                :
+                room.tarifaBranca.monthlyExpenses
+                  .toFixed(2)
+                  .toString()
+                  .replace('.', ',')
+            }
           </TextBold>
         </TotalPrice>
       </Container>
@@ -38,4 +48,9 @@ const CardRoom = props => {
   );
 };
 
-export default CardRoom;
+const mapStateToProps = state => ({
+  tarifaUsed: state.houseReducer.tarifa
+});
+
+
+export default connect(mapStateToProps, null)(CardRoom);

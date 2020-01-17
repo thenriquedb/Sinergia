@@ -8,6 +8,12 @@ export default function houseReducer(state = INITIAL_STATE, action) {
         valueKW: action.payload.valueKW
       }
 
+    case 'SET_TARIFA':
+      return {
+        ...state,
+        tarifa: action.payload.tarifa
+      }
+
     case 'SET_UF':
       return {
         ...state,

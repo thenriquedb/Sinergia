@@ -27,13 +27,21 @@ const Home = props => {
       props.house.rooms.reduce((prevVal, elem) => prevVal + elem.totalKw, 0),
     );
 
-    setTotalAmount(
-      props.house.rooms.reduce(
-        (prevVal, elem) => prevVal + elem.tarifaConvencional.monthlyExpenses,
-        0,
-      ),
-    );
-
+    if (props.tarifaUsed === 'convencional') {
+      setTotalAmount(
+        props.house.rooms.reduce(
+          (prevVal, elem) => prevVal + elem.tarifaConvencional.monthlyExpenses,
+          0,
+        ),
+      );
+    } else {
+      setTotalAmount(
+        props.house.rooms.reduce(
+          (prevVal, elem) => prevVal + elem.tarifaBranca.monthlyExpenses,
+          0,
+        ),
+      );
+    }
     props.house.rooms.length > 0 ? getRoomHigherConsumption() : null
   });
 
@@ -128,9 +136,7 @@ const Home = props => {
               )}
             />
           </Rooms>
-
         </Scroll>
-
 
         <ActionButton
           size={55}
@@ -162,6 +168,7 @@ const Home = props => {
 
 const mapStateToProps = state => ({
   house: state.houseReducer,
+  tarifaUsed: state.houseReducer.tarifa
 });
 
 export default connect(mapStateToProps, null)(Home);
