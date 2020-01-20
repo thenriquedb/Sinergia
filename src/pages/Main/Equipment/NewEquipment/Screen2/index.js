@@ -90,7 +90,7 @@ const NewEquipment2 = props => {
     const tarifaConvencional = kwMonthly * props.valueKW;
 
     // calculo da tarifa branca
-    const tarifaBranca = calcTarifaBranca(kwMonthly);
+    const tarifaBranca = calcTarifaBranca(kwMonthly, props.dealership, startTimeWeekdays, endTimeWeekdays, on24Hours);
 
     const newEquipment = {
       id: new Date().getTime().toString(),

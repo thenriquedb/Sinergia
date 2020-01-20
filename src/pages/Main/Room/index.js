@@ -250,13 +250,14 @@ class Room extends Component {
   //  Se o comôdo possuir pelo menos um equipamento cadastrado
   renderEquipmentsList() {
     return (
-      <Container>
-        <Scroll>
+      <Scroll>
+
+        <Container>
           <Collapse
             visible={this.headerCollapseVisible()}
             hidden={this.headerCollapseHidden()}
           />
-          <EquipmentsList>
+          <EquipmentsList >
             <SwipeListView
               extraData={this.state.EquipmentsListUpdate}
               data={this.state.room.equipments}
@@ -280,14 +281,14 @@ class Room extends Component {
             room={this.state.room}
             updateData={() => this.updateData()}
             closeModal={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })} />
-        </Scroll>
+        </Container>
 
         <ActionButton
           size={55}
           onPress={() => this.toggleNewEquipment()}
           buttonColor={Colors.primary}
         />
-      </Container>
+      </Scroll>
 
     );
   }
