@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TouchableOpacity } from "react-native";
+import Header from "./Header/index";
 
 // redux
 import { connect } from 'react-redux';
 
 // components
-import Collapse from '../../../components/Collapse/index';
-import CardEquipment from '../../../components/Cards/CardEquipment/index';
+import CardEquipment from '../../../components/Cards/CardEquipment';
 import HiddenCard from '../../../components/Cards/CardEquipment/HiddenCard';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import ActionButton from 'react-native-action-button';
-import EditRoomModal from "./EditRoomModal/index"
 
 // styles
 import {
-  EquipmentsList, Container, HeaderContainer, Icon, IconContainer, Scroll, HeaderInfo,
-  HeaderInfosContainer, ContainerNoEquipment, HeaderTop
+  EquipmentsList, Container, Icon, Scroll,
+  ContainerNoEquipment
 } from './styles';
 
 import Colors from '../../../styles/colors';
@@ -28,25 +26,15 @@ class Room extends Component {
 
     this.state = {
       room: this.props.rooms.find(item => item.id === this.props.navigation.getParam('roomId')),
-      kwMonthly: 0,
-      MonthlyExpenses: 0,
-      modalIsVisible: false,
       EquipmentsListUpdate: false,
       equipmentHigherConsumption: ''
     };
 
-    this.headerCollapseVisible = this.headerCollapseVisible.bind(this);
     this.toggleNewEquipment = this.toggleNewEquipment.bind(this);
     this.renderEquipmentsList = this.renderEquipmentsList.bind(this);
     this.renderNoEquipment = this.renderNoEquipment.bind(this);
 
-    this.calculateKwMonthly = this.calculateKwMonthly.bind(this);
-    this.calculateMonthlyExpenses = this.calculateMonthlyExpenses.bind(this);
     this.reRenderEquipmentsList = this.reRenderEquipmentsList.bind(this);
-    this.getRoomHigherConsumption = this.setEquipmentHigherConsumption.bind(this);
-    this.updateData = this.updateData.bind(this);
-
-    this.state.room.equipments.length > 0 ? this.setEquipmentHigherConsumption() : null
   }
 
   // Quando algum equipamento for deletado ou editado aé necessario recalcular o KW
@@ -54,169 +42,8 @@ class Room extends Component {
     let s = this.state;
     s.EquipmentsListUpdate = !s.EquipmentsListUpdate;
     this.setState(s);
-
-    this.calculateKwMonthly();
-    this.calculateMonthlyExpenses();
-    this.setEquipmentHigherConsumption();
   }
 
-  componentDidMount() {
-    const { navigation } = this.props;
-
-    this.focusListener = navigation.addListener('didFocus', () => {
-      this.calculateKwMonthly();
-      this.calculateMonthlyExpenses();
-      this.setEquipmentHigherConsumption();
-
-    });
-  }
-
-  componentWillUnmount() {
-    this.focusListener.remove();
-  }
-
-
-  // Calcula o consumo total de KW mensais do comôdo
-  calculateKwMonthly() {
-    let kwTotal = this.state.room.equipments.reduce(
-      (preVal, elem) => preVal + elem.kwMonthly,
-      0,
-    );
-
-    this.props.setRoomKwMonthly(this.state.room.id, kwTotal);
-  }
-
-  setEquipmentHigherConsumption() {
-    let maior = this.state.room.equipments[0].kwMonthly;
-    let maiorNome = this.state.room.equipments[0].name;
-
-
-    this.state.room.equipments.forEach(item => {
-      if (item.kwMonthly > maior) {
-        maior = item.kwMonthly;
-        maiorNome = item.name;
-      }
-    });
-
-    let s = this.state;
-    s.equipmentHigherConsumption = maiorNome;
-    this.setState(s);
-  }
-
-  // Calcula o consumo total de R$ mensais do coomôdo
-  // Calcular a tarifa convencional e a branca
-  calculateMonthlyExpenses() {
-    let totalTarifaConvencional = this.state.room.totalKw * this.props.valueKW;
-    let totalTarifaBranca = this.state.room.equipments[0].tarifaBranca.monthlyExpenses;
-
-    this.props.setRoomMonthlyExpenses(this.state.room.id, totalTarifaConvencional, totalTarifaBranca)
-    // return;
-  }
-
-  updateData() {    // room: ,
-    this.setState({
-      room: this.props.rooms.find(item => item.id === this.props.navigation.getParam('roomId'))
-    })
-  }
-
-  headerCollapseVisible() {
-    return (
-      <HeaderContainer>
-        <HeaderTop>
-          <Icon resizeMode={"contain"} source={this.state.room.icon.light} />
-
-          <TouchableOpacity onPress={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}>
-            <TextBold textAlign={'center'} color={'#fff'} fontSize={'h1'}>
-              {this.state.room.name}
-            </TextBold>
-
-          </TouchableOpacity>
-        </HeaderTop>
-
-        <HeaderInfosContainer>
-          <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h5'}>
-              Gasto Mensal
-            </Text>
-            <TextLight color={'#fff'} fontSize={'h4'}>
-              R$
-              {
-                this.props.tarifaUsed === 'convencional' ?
-                  this.state.room.tarifaConvencional.monthlyExpenses
-                    .toFixed(2)
-                    .replace('.', ',')
-                  :
-                  this.state.room.tarifaBranca.monthlyExpenses
-                    .toFixed(2)
-                    .replace('.', ',')
-              }
-            </TextLight>
-          </HeaderInfo>
-
-          <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h5'}>
-              Consumo total
-            </Text>
-            <TextLight color={'#fff'} fontSize={'h4'}>
-              {this.state.room.totalKw.toFixed(2)} KW
-            </TextLight>
-          </HeaderInfo>
-
-          <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h5'}>
-              Maior Consumo{' '}
-            </Text>
-            <TextLight color={'#fff'} fontSize={'h4'}>
-              {this.state.equipmentHigherConsumption.length >= 20 ?
-                this.state.equipmentHigherConsumption.substring(0, 20).concat('...')
-                : this.state.equipmentHigherConsumption}
-            </TextLight>
-          </HeaderInfo>
-        </HeaderInfosContainer>
-      </HeaderContainer>
-    );
-  }
-
-  headerCollapseHidden() {
-    return (
-      <HeaderContainer>
-        <TextBold color={'#fff'} fontSize={'h4'}>
-          Gastos mensais
-        </TextBold>
-
-        <HeaderInfosContainer>
-          <HeaderInfo>
-            <TextLight textAlign='center' color={'#fff'} fontSize={'h3'}>
-              R$ {this.state.room.tarifaBranca.monthlyExpenses
-                .toFixed(2)
-                .replace('.', ',')}
-            </TextLight>
-            <TextBold textAlign='center' color={'#fff'} fontSize={'h5'}> Tarifa branca</TextBold>
-          </HeaderInfo>
-
-          <HeaderInfo>
-            <TextLight textAlign='center' color={'#fff'} fontSize={'h3'}>
-              R$ {this.state.room.tarifaConvencional.monthlyExpenses
-                .toFixed(2)
-                .replace('.', ',')}
-            </TextLight>
-            <TextBold textAlign='center' color={'#fff'} fontSize={'h5'}> Tarifa convencional</TextBold>
-          </HeaderInfo>
-        </HeaderInfosContainer>
-
-        <Text style={{ marginTop: 20, }} color={'#fff'} fontSize={'h5'}>
-          Utilizando a tarifa branca você economiza   </Text>
-
-        <TextBold color={'#fff'} fontSize={'h2'}>
-          R$ {
-            Math.abs(this.state.room.tarifaConvencional.monthlyExpenses - this.state.room.tarifaBranca.monthlyExpenses)
-              .toFixed(2)
-              .replace('.', ',')
-          }
-        </TextBold>
-      </HeaderContainer>
-    );
-  }
 
   // Adcionar novo equipamento ao cômodo
   toggleNewEquipment() {
@@ -237,7 +64,6 @@ class Room extends Component {
           "{this.state.room.name}" não possui nenhum equipamento cadastrado.
        </TextLight>
 
-
         <ActionButton
           size={55}
           onPress={() => this.toggleNewEquipment()}
@@ -250,46 +76,37 @@ class Room extends Component {
   //  Se o comôdo possuir pelo menos um equipamento cadastrado
   renderEquipmentsList() {
     return (
-      <Scroll>
+      <Container>
+        <Header
+          room={this.state.room}
+          editRoom={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}
+        />
 
-        <Container>
-          <Collapse
-            visible={this.headerCollapseVisible()}
-            hidden={this.headerCollapseHidden()}
+        <EquipmentsList >
+          <SwipeListView
+            extraData={this.state.EquipmentsListUpdate}
+            data={this.state.room.equipments}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={item => item.id}
+            rightOpenValue={-100}
+            disableRightSwipe={true}
+            renderHiddenItem={({ item, index }) => (
+              <HiddenCard
+                reRender={this.reRenderEquipmentsList}
+                roomName={this.state.room.name}
+                idRoom={this.state.room.id}
+                idEquipment={item.id} />
+            )}
+            renderItem={({ item }) => <CardEquipment equipment={item} />}
           />
-          <EquipmentsList >
-            <SwipeListView
-              extraData={this.state.EquipmentsListUpdate}
-              data={this.state.room.equipments}
-              showsVerticalScrollIndicator={false}
-              keyExtractor={item => item.id}
-              rightOpenValue={-100}
-              disableRightSwipe={true}
-              renderHiddenItem={({ item, index }) => (
-                <HiddenCard
-                  reRender={this.reRenderEquipmentsList}
-                  roomName={this.state.room.name}
-                  idRoom={this.state.room.id}
-                  idEquipment={item.id} />
-              )}
-              renderItem={({ item }) => <CardEquipment equipment={item} />}
-            />
-          </EquipmentsList>
-
-          <EditRoomModal
-            isVisible={this.state.modalIsVisible}
-            room={this.state.room}
-            updateData={() => this.updateData()}
-            closeModal={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })} />
-        </Container>
+        </EquipmentsList>
 
         <ActionButton
           size={55}
           onPress={() => this.toggleNewEquipment()}
           buttonColor={Colors.primary}
         />
-      </Scroll>
-
+      </Container>
     );
   }
 
@@ -302,8 +119,6 @@ class Room extends Component {
 
 const mapStateToProps = state => ({
   rooms: state.houseReducer.rooms,
-  valueKW: state.houseReducer.valueKW,
-  tarifaUsed: state.houseReducer.tarifa
 });
 
 
@@ -320,9 +135,6 @@ const mapDispatchToProps = dispatch => {
         type: 'SET_ROOM_MONTHLY_EXPENSES',
         payload: { idRoom, totalTarifaConvencional, totalTarifaBranca },
       }),
-    editRoom: (id, name, typeRoom) => {
-      dispatch({ type: 'EDIT_ROOM', payload: { id, name, typeRoom } });
-    },
   };
 };
 
