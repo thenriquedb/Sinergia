@@ -149,8 +149,6 @@ const Header = (props) => {
               .replace('.', ',')
           }
         </TextBold>
-
-
       </HeaderContainer>
     );
   }

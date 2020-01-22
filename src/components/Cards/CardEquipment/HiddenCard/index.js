@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import { Alert } from 'react-native';
-import Alert from "../../../Alert/index";
+import Alert from "../../../Alert";
 import { connect } from 'react-redux';
 
 // style

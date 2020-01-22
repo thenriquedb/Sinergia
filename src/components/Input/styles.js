@@ -20,3 +20,10 @@ export const MyInput = styled.TextInput`
   border-radius: 5;
   border-color: ${Colors.lightGray1};
 `;
+
+export const Label = styled.Text`
+color: #000;
+font-weight: bold;
+font-size: 16px
+`;
+

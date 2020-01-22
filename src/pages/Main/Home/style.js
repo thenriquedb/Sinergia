@@ -10,6 +10,10 @@ export const Container = styled.View`
 export const Scroll = styled.ScrollView`
 `;
 
+export const SettingsButton = styled.TouchableOpacity`
+padding: 30px 15px;
+`;
+
 
 export const ContainerNoRooms = styled.View`
   flex: 1;

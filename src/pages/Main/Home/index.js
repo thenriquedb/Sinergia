@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 // Style
 import Colors from '../../../styles/colors';
-import { Container, ContainerNoRooms, Rooms, Details, Scroll, TotalConsumeKW, Header } from './style';
+import { Container, ContainerNoRooms, Rooms, Details, SettingsButton, TotalConsumeKW, Header } from './style';
 import { TextLight, TextThin, TextBold } from '../../../styles/fonts';
 
 // Components
@@ -15,6 +15,10 @@ import ActionButton from 'react-native-action-button';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import CardRoom from '../../../components/Cards/CardRoom/index';
 import HiddenCard from '../../../components/Cards/CardRoom/HiddenCardRoom';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import capitalizeFirstLetter from "../../../util/capitalizeFirstLetter";
+
 
 const Home = props => {
   const [totalKw, setTotalKw] = useState(0);
@@ -80,7 +84,7 @@ const Home = props => {
         {/* <Scroll> */}
         <Header>
           <TotalConsumeKW>
-            <TextBold textAlign='center' color="#fff" fontSize="h5">
+            <TextBold textAlign='center' color="#fff" fontSize="h4">
               Valor Total
           </TextBold>
 
@@ -96,22 +100,22 @@ const Home = props => {
           <Details>
             <View>
               <TextBold textAlign='center' color="#FFF"> Consumo total </TextBold>
-              <TextLight textAlign='center' color="#fff" fontSize="h4">
+              <TextLight textAlign='center' color="#fff" fontSize="h5">
                 {totalKw.toFixed(2)} KW
             </TextLight>
             </View>
 
             <View>
               <TextBold textAlign='center' color="#FFF"> Maior consumo </TextBold>
-              <TextLight textAlign='center' color="#fff" fontSize="h4">
+              <TextLight textAlign='center' color="#fff" fontSize="h5">
                 {roomHigherConsumption}
               </TextLight>
             </View>
 
             <View>
-              <TextBold textAlign='center' color="#FFF"> Bandeira </TextBold>
-              <TextLight textAlign='center' color="#fff" fontSize="h4">
-                {props.house.flag}
+              <TextBold textAlign='center' color="#FFF"> Tarifa utilizada </TextBold>
+              <TextLight textAlign='center' color="#fff" fontSize="h5">
+                {capitalizeFirstLetter(props.tarifaUsed)}
               </TextLight>
             </View>
           </Details>
@@ -165,6 +169,18 @@ const Home = props => {
     props.house.rooms.length > 0 ? renderHasRooms() : renderNoRooms()
   );
 };
+
+
+Home.navigationOptions = ({ navigation }) => {
+  return {
+    headerRight: () => {
+      return (
+        <SettingsButton onPress={() => navigation.navigate('Settings')}>
+          <MaterialCommunityIcons name="settings" size={25} color="#fff" />
+        </SettingsButton>)
+    }
+  }
+}
 
 const mapStateToProps = state => ({
   house: state.houseReducer,

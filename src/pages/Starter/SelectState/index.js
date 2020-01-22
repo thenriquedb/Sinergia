@@ -21,8 +21,6 @@ const SelectState = (props) => {
 
 
   const toggleNext = () => {
-
-
     if (state != 'NONE') {
 
       setSelectedDealership(selectedDealership ? selectedDealership : dealerships[0]);

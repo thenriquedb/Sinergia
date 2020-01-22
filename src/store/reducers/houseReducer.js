@@ -7,6 +7,17 @@ export default function houseReducer(state = INITIAL_STATE, action) {
         ...state,
         valueKW: action.payload.valueKW
       }
+    // valorPonta, valorIntermediaria, valorForaPonta
+    case 'SET_VALUE_KW_TARIFA_BRANCA':
+      return {
+        ...state,
+        dealership: {
+          ...state.dealership,
+          valorPonta: action.payload.valorPonta,
+          valorIntermediaria: action.payload.valorIntermediaria,
+          valorForaPonta: action.payload.valorForaPonta,
+        }
+      }
 
     case 'SET_TARIFA':
       return {
@@ -23,7 +34,8 @@ export default function houseReducer(state = INITIAL_STATE, action) {
     case 'SET_DEALERSHIP':
       return {
         ...state,
-        dealership: action.payload.dealership
+        dealership: action.payload.dealership,
+        dealershipBackup: action.payload.dealership
       }
 
     case 'ADD_ROOM':

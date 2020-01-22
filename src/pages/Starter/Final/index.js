@@ -16,7 +16,6 @@ const Final = props => {
 
   return (
     <Container>
-
       <WelcomeContent>
         <TextLight fontSize='h4'> Muito bom </TextLight>
       </WelcomeContent>
