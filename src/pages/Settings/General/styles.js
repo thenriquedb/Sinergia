@@ -11,7 +11,7 @@ export const SettingsItem = styled.View`
   align-items: center;
   padding: 8px 12px;
   margin:  10px 0;
-  `;
+`;
 
 export const Icon = styled.Image`
   height: 42px;
@@ -22,6 +22,7 @@ export const LabelContainer = styled.View`
   flex: 1;
   justify-content: center;
   margin-left: 10px;
+  
 `;
 
 

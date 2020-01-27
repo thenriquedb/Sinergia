@@ -333,45 +333,45 @@ export default {
           name: 'Batedeira - 180W',
           power: 180,
           description:
-            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+            '',
         },
 
         {
           name: 'Batedeira - 275W',
           power: 275,
           description:
-            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+            '',
         },
 
         {
           name: 'Batedeira - 350W',
           power: 350,
           description:
-            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+            '',
         },
         {
           name: 'Batedeira - 400W',
           power: 400,
           description:
-            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+            '',
         },
         {
           name: 'Batedeira - 500W',
           power: 500,
           description:
-            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+            '',
         },
         {
           name: 'Batedeira - 600W',
           power: 600,
           description:
-            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+            '',
         },
         {
           name: 'Batedeira - 750W',
           power: 750,
           description:
-            'Muito utilizado em nossas cozinhas, o liquidificador é um aparelho que consome pouca energia elétrica. ',
+            '',
         },
       ],
     },
@@ -483,8 +483,8 @@ export default {
     {
       name: 'Liquidificador',
       icon: {
-        dark: require('../assets/icons/kitchen/dark/mixer.png'),
-        light: require('../assets/icons/kitchen/light/mixer.png')
+        dark: require('../assets/icons/kitchen/dark/blender.png'),
+        light: require('../assets/icons/kitchen/light/blender.png')
       },
       models: [
         {

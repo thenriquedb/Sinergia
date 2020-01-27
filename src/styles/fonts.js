@@ -35,6 +35,7 @@ const TextLight = styled.Text`
 const TextBold = styled.Text`
   font-size: ${props => (props.fontSize ? FONT_SIZES[props.fontSize] : FONT_SIZES['default'])};
   font-family: 'Roboto-Bold';
+  font-weight: bold;
   text-align: ${props => (props.textAlign ? props.textAlign : 'left')};
   color: ${props => (props.color ? props.color : '#000')};
 `;

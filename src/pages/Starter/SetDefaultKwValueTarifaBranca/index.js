@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { TouchableOpacity } from "react-native";
 
 // styles
-import { Container, NextPageButton, ContinueConfigArea, Content, InputArea } from './styles';
+import { Container, NextPageButton, ContinueConfigArea, Content, InputContainer } from './styles';
 import { TextLight, Text } from '../../../styles/fonts';
 import Colors from '../../../styles/colors';
 
@@ -13,22 +13,23 @@ class SetDefaultKwValueTarifaBranca extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      foraDePontaValue: '1',
-      intermediarioAPontaValue: '2',
-      pontaValue: '3',
+      valorForaPonta: '1',
+      valorIntermediaria: '2',
+      valorPonta: '3',
     }
     this.toggleNext = this.toggleNext.bind(this);
   }
 
   toggleNext() {
+    this.props.setValueKwTarifaBranca(this.state.valorPonta, this.state.valorIntermediaria, this.state.valorForaPonta);
     this.props.navigation.navigate('SetRooms');
   }
 
   componentWillMount() {
     let s = this.state;
-    s.pontaValue = this.props.valorForaPonta;
-    s.intermediarioAPontaValue = this.props.valorIntermediaria;
-    s.foraDePontaValue = this.props.valorForaPonta;
+    s.valorPonta = this.props.valorForaPonta;
+    s.valorIntermediaria = this.props.valorIntermediaria;
+    s.valorForaPonta = this.props.valorForaPonta;
     this.setState(s);
   }
 
@@ -36,42 +37,46 @@ class SetDefaultKwValueTarifaBranca extends Component {
     return (
       <Container>
         <Content>
-          <TextLight textAlign='center' fontSize='h4'> Valor faturado do KWh </TextLight>
+          <TextLight style={{ marginBottom: 20 }} textAlign='center' fontSize='h4'> Valor faturado do KWh </TextLight>
 
-          <InputArea>
-            <Text style={{ marginTop: 20 }} fontSize='h5'> Fora de ponta  </Text>
+          <InputContainer>
             <Input
-              value={this.state.foraDePontaValue}
+              value={this.state.valorForaPonta}
               keyboardType={'numeric'}
+              label="Fora de ponta"
               maxLength={10}
               borderColor={Colors.low}
-              onChangeText={foraDePontaValue => this.setState({ foraDePontaValue })}
+              onChangeText={valorForaPonta => this.setState({ valorForaPonta })}
               placeholder="Fora de ponta"
             />
+          </InputContainer>
 
-            <Text style={{ marginTop: 20 }} fontSize='h5'> Intermediário a ponta </Text>
+          <InputContainer>
             <Input
-              value={this.state.intermediarioAPontaValue}
+              value={this.state.valorIntermediaria}
               keyboardType={'numeric'}
+              label="Intermediário a ponta"
               maxLength={10}
               borderColor={Colors.medium}
-              onChangeText={intermediarioAPontaValue => this.setState({ intermediarioAPontaValue })}
+              onChangeText={valorIntermediaria => this.setState({ valorIntermediaria })}
               placeholder="Intermediário a ponta "
             />
+          </InputContainer>
 
-            <Text style={{ marginTop: 20 }} fontSize='h5'> Ponta </Text>
+          <InputContainer>
             <Input
-              value={this.state.pontaValue}
+              value={this.state.valorPonta}
               keyboardType={'numeric'}
+              label="Ponta"
               maxLength={10}
               borderColor={Colors.high}
-              onChangeText={pontaValue => this.setState({ pontaValue })}
+              onChangeText={valorPonta => this.setState({ valorPonta })}
               placeholder="Ponta"
             />
-            <TouchableOpacity onPress={() => alert('')}>
-              <TextLight color={'#707070'} fontSize={'h6'} textAlign="center">  Onde encontrar? </TextLight>
-            </TouchableOpacity>
-          </InputArea>
+          </InputContainer>
+          <TouchableOpacity onPress={() => alert('')}>
+            <TextLight color={'#707070'} fontSize={'h6'} textAlign="center">  Onde encontrar? </TextLight>
+          </TouchableOpacity>
         </Content>
 
         <ContinueConfigArea>
@@ -93,6 +98,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     setValueKw: (valueKW) => dispatch({ type: 'SET_VALUE_KW', payload: { valueKW } }),
+    setValueKwTarifaBranca: (valorPonta, valorIntermediaria, valorForaPonta) =>
+      dispatch({ type: 'SET_VALUE_KW_TARIFA_BRANCA', payload: { valorPonta, valorIntermediaria, valorForaPonta } }),
   };
 };
 

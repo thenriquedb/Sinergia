@@ -45,7 +45,7 @@ const SelectDefaultValues = (props) => {
   }, [valorPonta, valorIntermediaria, valorForaPonta]);
 
   const renderInputs = () => {
-    if (props.tarifaUsed === 'convencionall') {
+    if (props.tarifaUsed === 'convencional') {
       return (
         <>
           <Input

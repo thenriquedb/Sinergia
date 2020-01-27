@@ -121,8 +121,6 @@ const mapStateToProps = state => ({
   rooms: state.houseReducer.rooms,
 });
 
-
-
 const mapDispatchToProps = dispatch => {
   return {
     setRoomKwMonthly: (idRoom, totalKwMonthly) =>

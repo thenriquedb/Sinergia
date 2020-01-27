@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
-import { View, Picker, CheckBox, TouchableOpacity, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+import { View, Picker, CheckBox, ScrollView } from 'react-native';
 
 // components
-import DateTimePicker from 'react-native-modal-datetime-picker';
-import Input from '../../../../../components/Input/index';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ActionButton from 'react-native-action-button';
+import SetTime from "./SetTime";
+import Input from "../../../../../components/Input";
 
-// redux
-import { connect } from 'react-redux';
 
 //util
 import moment from "moment";
 import calcTarifaBranca from "../../../../../util/calcTarifaBranca";
 
 // styles
-import { Container, RegisteredContainer, Header, SetOperation, Icon, SelectTime, } from './styles';
+import { Container, RegisteredContainer, Header, Icon, CheckBoxArea, InputArea } from './styles';
 import Colors from '../../../../../styles/colors';
 import { TextBold, TextLight, Text } from '../../../../../styles/fonts';
 
@@ -38,8 +37,7 @@ const NewEquipment2 = props => {
   });
 
   const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(1);
-  const [startTimePickerVisibleWeekdays, setStartTimeWeekdaysPickerVisible] = useState(false);
-  const [endTimePickerVisibleWeekdays, setEndTimeWeekdaysPickerVisible] = useState(false);
+
 
   // Picker de horas - finais de semana
   const [startTimeWeekend, setStartTimeWeekend] = useState(new Date());
@@ -50,17 +48,13 @@ const NewEquipment2 = props => {
   });
 
   const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(1);
-  const [startTimePickerVisibleWeekend, setStartTimeWeekendPickerVisible] = useState(false);
-  const [endTimePickerVisibleWeekend, setEndTimeWeekendPickerVisible] = useState(false);
 
 
   // Renderiza caso o equipamento possuir mais de um modelo
   const renderHasModels = () => {
     return (
-      <View>
-        <TextBold color={''} fontSize={'h6'}>
-          Modelo
-        </TextBold>
+      <>
+        <TextBold color={''} fontSize={'h6'}> Modelo </TextBold>
         <Picker
           selectedValue={selectedModel}
           style={{ width: 350 }}
@@ -69,7 +63,7 @@ const NewEquipment2 = props => {
             return <Picker.Item key={key} value={value} label={value.name} />;
           })}
         </Picker>
-      </View>
+      </>
     );
   };
 
@@ -114,158 +108,6 @@ const NewEquipment2 = props => {
     props.navigation.navigate('Room');
   };
 
-  const renderSetTime = () => {
-    return (
-      <View>
-        <TextBold style={{ marginTop: 15 }} fontSize={'h5'}>
-          Dias da Semana
-        </TextBold>
-
-        <SetOperation>
-          {!on24Hours ? (
-            <View>
-              <TextBold color={'#707070'} fontSize={'h6'}>
-                Horário de início
-              </TextBold>
-              <TouchableOpacity onPress={() => setStartTimeWeekdaysPickerVisible(true)}>
-                <SelectTime>
-                  <Text>
-                    {startTimeWeekdays.getHours()}:
-                    {startTimeWeekdays.getMinutes() < 10
-                      ? '0' + startTimeWeekdays.getMinutes()
-                      : startTimeWeekdays.getMinutes()}
-                  </Text>
-                </SelectTime>
-              </TouchableOpacity>
-              <DateTimePicker
-                is24Hour={true}
-                mode={'time'}
-                date={startTimeWeekdays}
-                isVisible={startTimePickerVisibleWeekdays}
-                onConfirm={date => setStartTimeWeekdays(date)}
-                onCancel={() => setStartTimeWeekdaysPickerVisible(false)}
-              />
-
-              <TextBold
-                style={{ marginTop: 10 }}
-                color={'#707070'}
-                fontSize={'h6'}>
-                Horário de término
-              </TextBold>
-
-              <TouchableOpacity onPress={() => setEndTimeWeekdaysPickerVisible(true)}>
-                <SelectTime>
-                  <Text>
-                    {endTimeWeekdays.getHours()}:{' '}
-                    {endTimeWeekdays.getMinutes() < 10
-                      ? '0' + endTimeWeekdays.getMinutes()
-                      : endTimeWeekdays.getMinutes()}
-                  </Text>
-                </SelectTime>
-              </TouchableOpacity>
-
-              <DateTimePicker
-                is24Hour={true}
-                mode={'time'}
-                date={endTimeWeekdays}
-                isVisible={endTimePickerVisibleWeekdays}
-                onConfirm={date => setEndTimeWeekdays(date)}
-                onCancel={() => setEndTimeWeekdaysPickerVisible(false)}
-              />
-            </View>
-          ) : null}
-
-          <TextBold color={'#707070'} fontSize={'h6'}>
-            Frequência de utilização
-          </TextBold>
-
-          <Picker
-            selectedValue={frequencyOfUseOnWeekdays}
-            style={{ width: 345 }}
-            onValueChange={(itemValue, itemIndex) =>
-              setFrequencyOfUseOnWeekdays(itemValue)
-            }>
-            <Picker.Item key={'key'} value={'1'} label={'1'} />
-            <Picker.Item key={'key'} value={'2'} label={'2'} />
-            <Picker.Item key={'key'} value={'3'} label={'3'} />
-            <Picker.Item key={'key'} value={'4'} label={'4'} />
-            <Picker.Item key={'key'} value={'5'} label={'5'} />
-          </Picker>
-        </SetOperation>
-
-        <TextBold style={{ marginTop: 15 }} fontSize={'h5'}>
-          Final de Semana
-        </TextBold>
-
-        <SetOperation>
-          {!on24Hours ? (
-            <View>
-              <TextBold color={'#707070'} fontSize={'h6'}>
-                Horário de início
-              </TextBold>
-              <TouchableOpacity onPress={() => setStartTimeWeekendPickerVisible(true)}>
-                <SelectTime>
-                  <Text>
-                    {startTimeWeekend.getHours()}:
-                    {startTimeWeekend.getMinutes() < 10
-                      ? '0' + startTimeWeekend.getMinutes()
-                      : startTimeWeekend.getMinutes()}
-                  </Text>
-                </SelectTime>
-              </TouchableOpacity>
-              <DateTimePicker
-                is24Hour={true}
-                mode={'time'}
-                date={startTimeWeekend}
-                isVisible={startTimePickerVisibleWeekend}
-                onConfirm={date => setStartTimeWeekend(date)}
-                onCancel={() => setStartTimeWeekendPickerVisible(false)}
-              />
-
-              <TextBold style={{ marginTop: 10 }} color={'#707070'} fontSize={'h6'}>
-                Horário de término
-              </TextBold>
-
-              <TouchableOpacity onPress={() => setEndTimeWeekendPickerVisible(true)}>
-                <SelectTime>
-                  <Text>
-                    {endTimeWeekend.getHours()}:{' '}
-                    {endTimeWeekend.getMinutes() < 10
-                      ? '0' + endTimeWeekend.getMinutes()
-                      : endTimeWeekend.getMinutes()}
-                  </Text>
-                </SelectTime>
-              </TouchableOpacity>
-
-              <DateTimePicker
-                is24Hour={true}
-                mode={'time'}
-                date={endTimeWeekend}
-                isVisible={endTimePickerVisibleWeekend}
-                onConfirm={date => setEndTimeWeekend(date)}
-                onCancel={() => setEndTimeWeekendPickerVisible(false)}
-              />
-            </View>
-          ) : null}
-
-          <TextBold color={'#707070'} fontSize={'h6'}>
-            Frequência de utilização
-          </TextBold>
-
-          <Picker
-            selectedValue={frequencyOfUseOnWeekend}
-            style={{ width: 320 }}
-            onValueChange={(itemValue, itemIndex) =>
-              setFrequencyOfUseOnWeekend(itemValue)
-            }>
-            <Picker.Item key={'key'} value={'1'} label={'1'} />
-            <Picker.Item key={'key'} value={'2'} label={'2'} />
-          </Picker>
-        </SetOperation>
-      </View>
-    );
-  };
-
   return (
     <Container>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -284,36 +126,56 @@ const NewEquipment2 = props => {
         <RegisteredContainer>
           {equipment.models.length > 1 ? renderHasModels() : null}
 
-          <TextBold fontSize={'h5'}> Nome </TextBold>
-          <Input
-            value={customName}
-            onChangeText={customName => setCustomName(customName)}
-          />
+          <InputArea>
+            <Input
+              label="Nome"
+              value={customName}
+              onChangeText={customName => setCustomName(customName)}
+            />
+          </InputArea>
 
-          <TextBold fontSize={'h5'}> Quantidade </TextBold>
-          <Input
-            value={quantity.replace(/[^0-9]/g, '')}
-            maxLength={2}
-            onChangeText={quantity => setQuantity(quantity)}
-            keyboardType={'numeric'}
-          />
+          <InputArea>
+            <Input
+              label={"Quantidade"}
+              value={quantity.replace(/[^0-9]/g, '')}
+              maxLength={2}
+              onChangeText={quantity => setQuantity(quantity)}
+              keyboardType={'numeric'}
+            />
+          </InputArea>
 
-          <TextBold fontSize={'h5'}> Potência (W) </TextBold>
-          <Input
-            value={power}
-            onChangeText={power => setPower(power)}
-            keyboardType={'numeric'}
-          />
+          <InputArea>
+            <Input
+              label={"Potência (W)"}
+              value={power}
+              onChangeText={power => setPower(power)}
+              keyboardType={'numeric'}
+            />
+          </InputArea>
 
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <CheckBoxArea>
             <CheckBox
               value={on24Hours}
               onValueChange={() => setOn24Hours(!on24Hours)}
             />
             <Text> Equipamento fica ligado 24 horas </Text>
-          </View>
+          </CheckBoxArea>
 
-          {renderSetTime()}
+          <SetTime
+            startTimeWeekdays={startTimeWeekdays}
+            setStartTimeWeekdays={setStartTimeWeekdays}
+            endTimeWeekdays={endTimeWeekdays}
+            setEndTimeWeekdays={setEndTimeWeekdays}
+            startTimeWeekend={startTimeWeekend}
+            setStartTimeWeekend={setStartTimeWeekend}
+            endTimeWeekend={endTimeWeekend}
+            setEndTimeWeekend={setEndTimeWeekend}
+            on24Hours={on24Hours}
+            frequencyOfUseOnWeekdays={frequencyOfUseOnWeekdays}
+            setFrequencyOfUseOnWeekdays={setFrequencyOfUseOnWeekdays}
+            frequencyOfUseOnWeekend={frequencyOfUseOnWeekend}
+            setFrequencyOfUseOnWeekend={setFrequencyOfUseOnWeekend}
+          />
         </RegisteredContainer>
       </ScrollView>
 

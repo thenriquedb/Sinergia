@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { TouchableHighlight, ScrollView } from "react-native";
 
-import { Container, SettingsItem, Icon, Title, Description, LabelContainer, IconContainer } from './styles';
+import {
+  Container,
+  SettingsItem,
+  Icon,
+  Title,
+  Description,
+  LabelContainer,
+  IconContainer
+} from './styles';
 import { connect } from 'react-redux'
 
 
@@ -24,8 +32,8 @@ const Settings = (props) => {
             </IconContainer>
 
             <LabelContainer>
-              <Title> Tarifa usada</Title>
-              <Description color="#999"> Tarifa {props.tarifaUsed}  </Description>
+              <Title>Tarifa usada</Title>
+              <Description color="#999">Tarifa {props.tarifaUsed}  </Description>
             </LabelContainer>
 
             <SetTarifa
@@ -43,7 +51,7 @@ const Settings = (props) => {
 
             <LabelContainer>
               <Title>Valor faturado do KWh </Title>
-              <Description color="#999">Mauris consequat ac mi in porta. Duis hendrerit nibh vel sem pellentesque mollis.  </Description>
+              <Description color="#999">Defina o valor faturado do KWh  </Description>
             </LabelContainer>
           </SettingsItem>
         </TouchableHighlight>
@@ -55,8 +63,8 @@ const Settings = (props) => {
             </IconContainer>
 
             <LabelContainer>
-              <Title> Estado e Concessionaria</Title>
-              <Description color="#999"> {ufs.find(item => item.sigla === props.usedUf).name} | {props.dealershipUsed.Distribuidora}  </Description>
+              <Title>Estado e Concessionaria</Title>
+              <Description color="#999">{ufs.find(item => item.sigla === props.usedUf).name} | {props.dealershipUsed.Distribuidora}  </Description>
             </LabelContainer>
           </SettingsItem>
         </TouchableHighlight>
@@ -69,7 +77,7 @@ const Settings = (props) => {
 
             <LabelContainer>
               <Title>Sobre</Title>
-              <Description color="#999">Mauris consequat ac mi in porta. Duis hendrerit nibh vel sem pellentesque mollis.  </Description>
+              <Description color="#999">Desenvolvido em parceria com o IFMG Campus Formiga  </Description>
             </LabelContainer>
           </SettingsItem>
         </TouchableHighlight>

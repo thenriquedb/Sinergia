@@ -23,6 +23,7 @@ const HiddenCard = props => {
           props.refreshList();
           setisVisible(!isVisible);
         }}
+        cancel={() => setisVisible(!isVisible)}
         isVisible={isVisible} />
 
       <DeleteButton underlayColor="#f79292" onPress={() => setisVisible(!isVisible)}>

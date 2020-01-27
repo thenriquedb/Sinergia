@@ -1,163 +1,120 @@
-import moment from "moment"
 
-function calculateDifferenceBetweenTwoTimes(initialHour, finalHour) {
-  return Math.abs(moment.duration(moment(initialHour).diff(finalHour)).asHours());
-}
-
-function isBetween(timeOrign, moment1, moment2) {
-  return moment(timeOrign).isBetween(moment1, moment2);
-}
-
-function duration(initialHour, finalHour) {
-  return Math.abs(moment.duration(moment(initialHour).diff(finalHour)).asHours());
-}
-
+import {
+  calculateDifferenceBetweenTwoTimes,
+  duration,
+  isBetween,
+  intervalsToArray
+} from "./time";
 
 export default function calcTarifaBranca(kwMonthly, dealership, startTimeWeekdays, endTimeWeekdays, on24Hours) {
+  const {
+    horarioPonta, horarioItermediario1, horarioIntermediario2,
+    valorPonta, valorForaPonta, valorIntermediaria } = dealership;
+
   let totalAPagar = 0;
-  const { horarioPonta,
-    horarioItermediario1,
-    horarioIntermediario2,
-    valorPonta,
-    valorForaPonta,
-    valorIntermediaria,
-  } = dealership;
+  let totalTimeOn = 0;
 
   const format = "HH:mm";
 
   // Armazena os intervalos
-  const intervalosHorarioPonta = horarioPonta.split("-").map(item => moment(item.trim(), format));
-  const intervalosHorarioIntermediario1 = horarioItermediario1.split("-").map(item => moment(item.trim(), format));
-  const intervalosHorarioIntermediario2 = horarioIntermediario2 ? horarioIntermediario2.split("-").map(item => moment(item.trim(), format)) : '';
+  const intervalosHorarioPonta = intervalsToArray(horarioPonta, format);
+  const intervalosHorarioIntermediario1 = intervalsToArray(horarioItermediario1, format);
+  const intervalosHorarioIntermediario2 = horarioIntermediario2 ? intervalsToArray(horarioIntermediario2, format) : '';
 
-  // Duração de cada intervalo em horas
-  const duracaoIntervaloPonta = calculateDifferenceBetweenTwoTimes(intervalosHorarioPonta[0], intervalosHorarioPonta[1]);
-  const duracaoIntervaloIntermediario1 = calculateDifferenceBetweenTwoTimes(intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
-  const duracaoIntervaloIntermediario2 = calculateDifferenceBetweenTwoTimes(intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1]);
-
-  // Em quais intervalos o equipamento fica ligado
-  const ligadoHorarioIntermediario1 = isBetween(startTimeWeekdays, intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
-  const ligadoHorarioPonta = isBetween(startTimeWeekdays, intervalosHorarioPonta[0], intervalosHorarioPonta[1])
-  const ligadoHorarioIntermediario2 = isBetween(startTimeWeekdays, intervalosHorarioPonta[0], intervalosHorarioIntermediario2[1]);
-
-  const ligadoHorarioConvencional = !ligadoHorarioPonta && !horarioItermediario1 && !horarioIntermediario2;
-
-  console.log("startTimeWeekdays: ", startTimeWeekdays);
-  console.log("endTimeWeekdays: ", endTimeWeekdays);
-
-  console.log("kwMonthly: ", kwMonthly)
-  console.log("consesionaria: ", dealership);
-
-  console.log("horarioItermediario1: ", horarioItermediario1)
-  console.log("horarioPonta: ", horarioPonta)
-  console.log("horarioIntermediario2: ", horarioIntermediario2)
 
   console.log("intervalosHorarioItermediario1: ", intervalosHorarioIntermediario1)
   console.log("intervalosHorarioPonta: ", intervalosHorarioPonta);
   console.log("intervalosHorarioItermediario2: ", intervalosHorarioIntermediario2)
 
-  console.log("duracaoIntervaloIntermediario1: ", duracaoIntervaloIntermediario1);
-  console.log("duracaoIntervaloPonta: ", duracaoIntervaloPonta);
-  console.log("duracaoIntervaloIntermediario2: ", duracaoIntervaloIntermediario2);
+  const ligadoHorarioIntermediario1 = isBetween(startTimeWeekdays, intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
+  const ligadoHorarioPonta = isBetween(startTimeWeekdays, intervalosHorarioPonta[0], intervalosHorarioPonta[1])
+  const ligadoHorarioIntermediario2 = isBetween(startTimeWeekdays, intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1]);
 
-  console.log("ligadoHorarioIntermediario1", ligadoHorarioIntermediario1);
-  console.log("ligadoHorarioPonta", ligadoHorarioPonta);
-  console.log("ligadoHorarioIntermediario2", ligadoHorarioIntermediario2);
+  const desligadoHorarioIntermediario1 = isBetween(endTimeWeekdays, intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
+  const desligadoHorarioPonta = isBetween(endTimeWeekdays, intervalosHorarioPonta[0], intervalosHorarioPonta[1])
+  const desligadoHorarioIntermediario2 = isBetween(endTimeWeekdays, intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1]);
 
-  let totalTimeOn = on24Hours ? 24 : duration(startTimeWeekdays, endTimeWeekdays);
-  console.log("totalTimeOn", totalTimeOn);
+  console.log("startTimeWeekdays: ", startTimeWeekdays);
+  console.log("endTimeWeekdays: ", endTimeWeekdays);
 
-  // Ligado apenas no horario de ponta
-  if (ligadoHorarioPonta && !ligadoHorarioIntermediario1 && !ligadoHorarioIntermediario2) {
-    console.log("Ligado apenas no horario de ponta")
-    return totalTimeOn * dealership.valorPonta * kwMonthly;
+  if (ligadoHorarioIntermediario1) {
+    console.log("Ligado intermediario");
+
+    if (desligadoHorarioIntermediario1) {
+      console.log("desligado intermediario 1");
+
+      totalTimeOn = on24Hours ? 24 : duration(startTimeWeekdays, endTimeWeekdays);
+      totalAPagar = totalTimeOn * valorIntermediaria;
+    }
+
+    if (desligadoHorarioPonta) {
+      console.log("desligado horario de ponta");
+
+      let tempoLigadoIntermediario = duration(startTimeWeekdays, intervalosHorarioIntermediario1[1]);
+      let tempoLigadoPonta = duration(intervalosHorarioPonta[0], endTimeWeekdays);
+
+      totalAPagar = (tempoLigadoIntermediario * valorIntermediaria) + (tempoLigadoPonta * valorPonta);
+    }
+
+    if (desligadoHorarioIntermediario2) {
+      console.log("desligado intermediario 2");
+
+      let tempoLigadoIntermediario = duration(startTimeWeekdays, intervalosHorarioIntermediario1[1]);
+      let tempoLigadoPonta = duration(intervalosHorarioPonta[0], intervalosHorarioPonta[1]);
+      let tempoLigadoIntermediario2 = duration(intervalosHorarioIntermediario2[0], endTimeWeekdays);
+
+      totalAPagar = ((tempoLigadoIntermediario + tempoLigadoIntermediario2) * valorIntermediaria) +
+        (tempoLigadoPonta * valorForaPonta);
+    }
+
+    if (!desligadoHorarioIntermediario1 && !desligadoHorarioPonta && !desligadoHorarioIntermediario2) {
+      console.log("desligado fora de ponta");
+
+
+      let tempoLigadoForaDePonta = duration(startTimeWeekdays, intervalosHorarioIntermediario1[0]);
+
+      let tempoLigadoIntermediario = duration(startTimeWeekdays, intervalosHorarioIntermediario1[1]);
+      let tempoLigadoPonta = duration(intervalosHorarioPonta[0], intervalosHorarioPonta[1]);
+      let tempoLigadoIntermediario2 = duration(intervalosHorarioIntermediario2[0], endTimeWeekdays);
+
+      totalAPagar = (tempoLigadoForaDePonta * valorForaPonta) +
+        ((tempoLigadoIntermediario + tempoLigadoIntermediario2) * valorIntermediaria) +
+        (tempoLigadoPonta * valorForaPonta);
+    }
   }
 
-  // Ligado apenas em intermediario 1 ou  intermediario 2
-  else if ((ligadoHorarioIntermediario1 && !ligadoHorarioPonta && !ligadoHorarioIntermediario2)
-    || (!ligadoHorarioIntermediario1 && !ligadoHorarioPonta && ligadoHorarioIntermediario2)) {
-    console.log("Ligado apenas em intermediario 1")
-    return totalTimeOn * valorIntermediaria * kwMonthly;
+  if (ligadoHorarioPonta) { }
+
+  if (ligadoHorarioIntermediario2) { }
+
+  if (!ligadoHorarioIntermediario1 && !ligadoHorarioPonta && !ligadoHorarioIntermediario2) {
+    // apenas fora de ponta
+    if (!desligadoHorarioIntermediario1 && desligadoHorarioPonta && !desligadoHorarioIntermediario2) {
+      totalTimeOn = on24Hours ? 24 : duration(startTimeWeekdays, endTimeWeekdays);
+      totalAPagar = totalTimeOn * valorForaPonta;
+    }
   }
 
-  // Ligado apenas fora de ponta
-  else if (!ligadoHorarioIntermediario1 && !ligadoHorarioPonta && !ligadoHorarioIntermediario2) {
-    console.log("Fora da tarifa branca")
-    return totalTimeOn * valorForaPonta * kwMonthly;
-  }
 
-  // Ligado em intermediario 1 e ponta
-  if (ligadoHorarioIntermediario1 && ligadoHorarioPonta && !ligadoHorarioIntermediario2) {
-    console.log("Ligado intermediario 1 e fora de ponta")
-    let tempoIntermediario = duration(startTimeWeekdays, intervalosHorarioIntermediario1[1]);
-    let totalIntermediario = tempoIntermediario * valorIntermediaria;
-    totalTimeOn -= totalIntermediario;
 
-    return totalIntermediario + (totalTimeOn * valorPonta) * kwMonthly;
-  }
 
-  // Ligado em intermediario 1, ponta e intermediario 2
-  if (ligadoHorarioIntermediario1 && ligadoHorarioPonta && ligadoHorarioIntermediario2) {
-    console.log("Ligado em intermediario 1, ponta e intermediario 2")
+  // console.log("kwMonthly: ", kwMonthly)
+  // console.log("consesionaria: ", dealership);
 
-    let tempoIntermediario = duration(startTimeWeekdays, intervalosHorarioIntermediario1[1]) + duracaoIntervaloIntermediario2;
-    let totalIntermediario = tempoIntermediario * valorIntermediaria;
+  // console.log("horarioItermediario1: ", horarioItermediario1)
+  // console.log("horarioPonta: ", horarioPonta)
+  // console.log("horarioIntermediario2: ", horarioIntermediario2)
 
-    totalTimeOn -= totalIntermediario;
-    let totalPonta = totalTimeOn * valorPonta;
 
-    return totalIntermediario + totalPonta * kwMonthly;
-  }
+  // console.log("duracaoIntervaloIntermediario1: ", duracaoIntervaloIntermediario1);
+  // console.log("duracaoIntervaloPonta: ", duracaoIntervaloPonta);
+  // console.log("duracaoIntervaloIntermediario2: ", duracaoIntervaloIntermediario2);
 
-  // Ligado fora de ponta e intermediario 1
-  if (ligadoHorarioConvencional && !ligadoHorarioIntermediario1 && !ligadoHorarioPonta && !ligadoHorarioIntermediario2) {
-    console.log("Ligado fora de ponta e intermediario 1")
+  // console.log("ligadoHorarioIntermediario1", ligadoHorarioIntermediario1);
+  // console.log("ligadoHorarioPonta", ligadoHorarioPonta);
+  // console.log("ligadoHorarioIntermediario2", ligadoHorarioIntermediario2);
 
-    let tempoForaPonta = duration(startTimeWeekdays, intervalosHorarioIntermediario1[0]);
-    let totalForaDePonta = tempoForaPonta * valorForaPonta;
-
-    return totalForaDePonta + ((totalTimeOn - tempoForaPonta) * valorIntermediaria) * kwMonthly;
-  }
-
-  // Ligado fora de ponta, intermediario 1 e ponta
-  if (ligadoHorarioConvencional && ligadoHorarioIntermediario1 && ligadoHorarioPonta && !ligadoHorarioIntermediario2) {
-    console.log("Ligado fora de ponta, intermediario 1 e ponta");
-    let tempoForaPonta = duration(startTimeWeekdays, intervalosHorarioIntermediario1[1]);
-    let totalForaDePonta = tempoForaPonta * valorForaPonta;
-
-    let totalIntermediario = duracaoIntervaloIntermediario1 * valorIntermediaria;
-    totalTimeOn -= duracaoIntervaloIntermediario1 + tempoForaPonta;
-    totalPonta = totalTimeOn * valorPonta;
-
-    return totalForaDePonta + totalIntermediario + totalPonta * kwMonthly;
-  }
-
-  //ligado em horario de ponta e intermediario 2
-  if (!ligadoHorarioConvencional && !ligadoHorarioIntermediario1 && ligadoHorarioPonta && ligadoHorarioIntermediario2) {
-    console.log("ligado em horario de ponta e intermediario 2 ");
-    let tempoHorarioPonta = duration(startTimeWeekdays, intervalosHorarioPonta[1]);
-    let totalHorarioPonta = tempoHorarioPonta * valorPonta;
-
-    return totalHorarioPonta + ((totalTimeOn - totalHorarioPonta) * valorIntermediaria);
-  }
-
-  // Ligado em todas as 4 faixas
-  if (ligadoHorarioConvencional && ligadoHorarioIntermediario1 && ligadoHorarioPonta && ligadoHorarioIntermediario2) {
-    console.log("Ligado em todas as 4 faixas")
-
-    let tempoForaPonta = duration(startTimeWeekdays, duracaoIntervaloIntermediario1 + duracaoIntervaloIntermediario2
-      + duracaoIntervaloPonta);
-
-    let totalForaDePonta = tempoForaPonta * valorForaPonta;
-
-    totalTimeOn -= tempoForaPonta;
-
-    let totalIntermediario = (duracaoIntervaloIntermediario1 + duracaoIntervaloIntermediario2) * valorIntermediaria;
-    totalTimeOn -= duracaoIntervaloIntermediario1 + duracaoIntervaloIntermediario2;
-
-    let totalPonta = totalTimeOn * valorPonta;
-    return totalForaDePonta + totalIntermediario + totalPonta * kwMonthly;
-  }
+  // console.log("totalTimeOn", totalTimeOn);
 
   return totalAPagar;
 }
