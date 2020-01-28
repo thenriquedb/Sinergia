@@ -21,7 +21,6 @@ const SelectDefaultValues = (props) => {
 
 
   const restoreDefaultValues = () => {
-    console.log("dealershipBackup: ", dealershipBackup);
     setValorTarifaConvencional(dealershipBackup.valorTarifaConvencional);
     setValorIntermediaria(dealershipBackup.valorIntermediaria);
     setValorPonta(dealershipBackup.valorPonta);
@@ -113,7 +112,6 @@ const SelectDefaultValues = (props) => {
     </Container>
   );
 };
-
 
 
 SelectDefaultValues.navigationOptions = ({ navigation }) => {

@@ -1,4 +1,3 @@
-import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import Colors from '../styles/colors';

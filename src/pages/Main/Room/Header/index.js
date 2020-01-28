@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
 
 // styles
 import { HeaderContainer, Icon, HeaderInfo, HeaderInfosContainer, HeaderTop } from './styles';
@@ -7,7 +6,6 @@ import { TextBold, TextLight, Text } from '../../../../styles/fonts';
 
 import { connect } from 'react-redux';
 
-import EditRoomModal from "../EditRoomModal"
 import Collapse from '../../../../components/Collapse/';
 
 const Header = (props) => {
@@ -16,7 +14,6 @@ const Header = (props) => {
   const [kwMonthly, setKwMonthly] = useState(0);
   const [totalTarifaConvencional, setTotalTarifaConvencional] = useState(0);
   const [totalTarifaBranca, setTotalTarifaBranca] = useState(0);
-  const [editModalIsVisible, setEditModalIsVisible] = useState(false);
 
   useEffect(() => {
     setKwMonthly(room.equipments.reduce(
@@ -35,17 +32,17 @@ const Header = (props) => {
 
 
   const getEquipmentHigherConsumption = () => {
-    let maior = room.equipments[0].kwMonthly;
-    let maiorNome = room.equipments[0].name;
+    let highestConsume = room.equipments[0].kwMonthly;
+    let highestConsumeName = room.equipments[0].name;
 
     room.equipments.forEach(item => {
-      if (item.kwMonthly > maior) {
-        maior = item.kwMonthly;
-        maiorNome = item.name;
+      if (item.kwMonthly > highestConsume) {
+        highestConsume = item.kwMonthly;
+        highestConsumeName = item.name;
       }
     });
 
-    setEquipmentHigherConsumption(maiorNome);
+    setEquipmentHigherConsumption(highestConsumeName);
   }
 
   // Calcula o consumo total de R$ mensais do coomôdo
@@ -61,12 +58,10 @@ const Header = (props) => {
         <HeaderTop>
           <Icon resizeMode={"contain"} source={room.icon.light} />
 
-          <TouchableOpacity onPress={() => setEditModalIsVisible(!editModalIsVisible)}>
-            <TextBold textAlign={'center'} color={'#fff'} fontSize={'h1'}>
-              {room.name}
-            </TextBold>
+          <TextBold textAlign={'center'} color={'#fff'} fontSize={'h1'}>
+            {room.name}
+          </TextBold>
 
-          </TouchableOpacity>
         </HeaderTop>
 
         <HeaderInfosContainer>
@@ -153,19 +148,12 @@ const Header = (props) => {
     );
   }
 
-
   return (
     <>
       <Collapse
         visible={headerCollapseVisible()}
         hidden={headerCollapseHidden()}
       />
-
-      <EditRoomModal
-        isVisible={editModalIsVisible}
-        room={room}
-        updateData={() => { }}
-        closeModal={() => setEditModalIsVisible(!editModalIsVisible)} />
     </>
   );
 };
@@ -188,12 +176,7 @@ const mapDispatchToProps = dispatch => {
         type: 'SET_ROOM_MONTHLY_EXPENSES',
         payload: { idRoom, totalTarifaConvencional, totalTarifaBranca },
       }),
-    editRoom: (id, name, typeRoom) => {
-      dispatch({ type: 'EDIT_ROOM', payload: { id, name, typeRoom } });
-    },
   };
 };
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

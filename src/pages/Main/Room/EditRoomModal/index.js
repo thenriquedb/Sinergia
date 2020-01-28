@@ -42,8 +42,7 @@ const EditRoomModal = props => {
 
   return (
     <Modal isVisible={props.isVisible}
-      onBackButtonPress={props.closeModal}
-    >
+      onBackButtonPress={props.closeModal}>
       <Container>
         <TextBold style={{ marginBottom: 10 }} fontSize={'h4'}> Editar cômodo</TextBold>
 

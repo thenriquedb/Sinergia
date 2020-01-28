@@ -31,7 +31,6 @@ const SetTime = (props) => {
   const [startTimePickerVisibleWeekend, setStartTimeWeekendPickerVisible] = useState(false);
   const [endTimePickerVisibleWeekend, setEndTimeWeekendPickerVisible] = useState(false);
 
-
   return (
     <Container>
       <TextBold style={{ marginTop: 15 }} fontSize={'h5'}>
@@ -39,7 +38,7 @@ const SetTime = (props) => {
         </TextBold>
 
       <SetOperation>
-        {!on24Hours ? (
+        {!on24Hours &&
           <>
             <TextBold color={'#707070'} fontSize={'h6'}> Horário de início </TextBold>
             <TouchableOpacity onPress={() => setStartTimeWeekdaysPickerVisible(!startTimePickerVisibleWeekdays)}>
@@ -85,7 +84,7 @@ const SetTime = (props) => {
               onCancel={() => setEndTimeWeekdaysPickerVisible(!endTimePickerVisibleWeekdays)}
             />
           </>
-        ) : null}
+        }
 
         <TextBold color={'#707070'} fontSize={'h6'}>
           Frequência de utilização

@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
-import { TouchableOpacity } from "react-native"
+import React from 'react';
 import Modal from "react-native-modal";
 
-import { Container, ButtonsContainer } from './styles';
-import { TextBold, Text } from "../../styles/fonts"
-import Colors from "../../styles/colors"
+import { Container } from './styles';
+import { TextBold } from "../../styles/fonts"
 
 const SettingsModal = props => {
-
   return (
     <Modal
       onBackButtonPress={props.cancel}
       isVisible={props.isVisible}>
       <Container>
-        {props.title ? <TextBold style={{ marginBottom: 10 }} fontSize={'h3'}> {props.title ? props.title : ''} </TextBold> : null}
+        {props.title && <TextBold style={{ marginBottom: 10 }} fontSize={'h3'}> {props.title ? props.title : ''} </TextBold>}
         {props.content}
 
       </Container>

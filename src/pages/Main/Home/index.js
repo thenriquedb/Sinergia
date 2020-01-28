@@ -46,7 +46,7 @@ const Home = props => {
         ),
       );
     }
-    props.house.rooms.length > 0 ? getRoomHigherConsumption() : null
+    props.house.rooms.length > 0 && getRoomHigherConsumption();
   });
 
   const reRender = () => {

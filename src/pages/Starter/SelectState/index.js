@@ -58,7 +58,7 @@ const SelectState = (props) => {
         </Picker>
 
 
-        {state !== 'NONE' ?
+        {state !== 'NONE' &&
           <View>
             <Text style={{ marginTop: 20 }} fontSize='h5'> Concessionária  </Text>
             <Picker
@@ -70,7 +70,7 @@ const SelectState = (props) => {
                 return <Picker.Item value={value} label={value.Distribuidora} />;
               })}
             </Picker>
-          </View> : null}
+          </View>}
 
       </Content>
 
@@ -84,7 +84,7 @@ const SelectState = (props) => {
             fontSize='h6' color={'#fff'}> Continuar </Text>
         </NextPageButton>
       </ContinueConfigArea>
-    </Container >
+    </Container>
   )
 };
 

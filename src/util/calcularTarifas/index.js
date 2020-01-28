@@ -1,8 +1,8 @@
+import { duration } from "../time";
 
 import calcTarifaConvencional from "./calcTarifaConvencional";
 import calcTarifaBranca from "./calcTarifaBranca";
 import calcularKWMonthly from "./calcularKWMonthly";
-
 export default function calcularTarifas(
   quantity, power, frequencyOfUseOnWeekdays,
   frequencyOfUseOnWeekend, dealership, startTimeWeekdays,

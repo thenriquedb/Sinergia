@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Header from "./Header/index";
 
@@ -18,48 +18,46 @@ import { EquipmentsList, Container, ContainerNoEquipment } from './styles';
 import Colors from '../../../styles/colors';
 import { TextBold, TextLight } from '../../../styles/fonts';
 
-class Room extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      room: this.props.rooms.find(item => item.id === this.props.navigation.getParam('roomId')),
-      EquipmentsListUpdate: false,
-      equipmentHigherConsumption: ''
-    };
 
-    this.toggleNewEquipment = this.toggleNewEquipment.bind(this);
-    this.renderEquipmentsList = this.renderEquipmentsList.bind(this);
-    this.renderNoEquipment = this.renderNoEquipment.bind(this);
+const Room = (props) => {
+  const { navigation } = props;
+  const [room, setRoom] = useState(null);
 
-    this.reRenderEquipmentsList = this.reRenderEquipmentsList.bind(this);
-  }
+  useEffect(() => {
+    const roomId = navigation.getParam('roomId');
+    const { rooms } = props;
 
-  componentDidMount() {
-    this.props.navigation.setParams({ room: this.state.room });
-    console.log("componentDidMount")
-    // alert('ok')
-  }
+    console.log("useeffect");
+    console.log("rooms: ", rooms)
+    console.log("roomId: ", roomId)
+    setRoom(rooms.find(item => item.id === roomId));
+  }, []);
+
+  useEffect(() => {
+    console.log("set room")
+    navigation.setParams({ room })
+  }, [room]);
 
 
   // Quando algum equipamento for deletado ou editado aé necessario recalcular o KW
-  reRenderEquipmentsList() {
-    let s = this.state;
-    s.EquipmentsListUpdate = !s.EquipmentsListUpdate;
-    this.setState(s);
-  }
+  // reRenderEquipmentsList() {
+  //   let s = this.state;
+  //   s.EquipmentsListUpdate = !s.EquipmentsListUpdate;
+  //   this.setState(s);
+  // }
 
 
   // Adcionar novo equipamento ao cômodo
-  toggleNewEquipment() {
+  const toggleNewEquipment = () => {
     this.props.navigation.navigate('NewEquipment1', {
-      idRoom: this.state.room.id,
-      typeRoom: this.state.room.typeRoom
+      idRoom: room.id,
+      typeRoom: room.typeRoom
     });
   }
 
   //  Se o comôdo não possuir nenhum equipamento cadastrado
-  renderNoEquipment() {
+  const renderNoEquipment = () => {
     return (
       <ContainerNoEquipment>
         <MaterialCommunityIcons name="candle" size={100} color="#707070" />
@@ -71,7 +69,7 @@ class Room extends Component {
 
         <ActionButton
           size={55}
-          onPress={() => this.toggleNewEquipment()}
+          onPress={() => toggleNewEquipment()}
           buttonColor={Colors.primary}
         />
       </ContainerNoEquipment>
@@ -79,26 +77,25 @@ class Room extends Component {
   }
 
   //  Se o comôdo possuir pelo menos um equipamento cadastrado
-  renderEquipmentsList() {
+  const renderEquipmentsList = () => {
     return (
       <Container>
         <Header
-          room={this.state.room}
+          room={room}
         />
 
         <EquipmentsList >
           <SwipeListView
-            extraData={this.state.EquipmentsListUpdate}
-            data={this.state.room.equipments}
+            data={room.equipments}
             showsVerticalScrollIndicator={false}
             keyExtractor={item => item.id}
             rightOpenValue={-100}
             disableRightSwipe={true}
             renderHiddenItem={({ item, index }) => (
               <HiddenCard
-                reRender={this.reRenderEquipmentsList}
-                roomName={this.state.room.name}
-                idRoom={this.state.room.id}
+                reRender={() => { }}
+                roomName={room.name}
+                idRoom={room.id}
                 idEquipment={item.id} />
             )}
             renderItem={({ item }) => <CardEquipment equipment={item} />}
@@ -109,19 +106,24 @@ class Room extends Component {
 
         <ActionButton
           size={55}
-          onPress={() => this.toggleNewEquipment()}
+          onPress={() => toggleNewEquipment()}
           buttonColor={Colors.primary}
         />
       </Container>
     );
   }
 
-  render() {
-    return this.state.room.equipments.length
-      ? this.renderEquipmentsList()
-      : this.renderNoEquipment();
+  if (room) {
+    console.log("room if", room)
+    return (
+      <>
+        {room.equipments.length > 0 ? renderEquipmentsList() : renderNoEquipment()}
+      </>
+    );
+  } else {
+    return null
   }
-}
+};
 
 const mapStateToProps = state => ({
   rooms: state.houseReducer.rooms,
@@ -129,11 +131,10 @@ const mapStateToProps = state => ({
 
 Room.navigationOptions = ({ navigation }) => {
   const room = navigation.getParam('room');
-  console.log("navigation:", navigation)
   console.log("room navigationOptions: ", room);
 
   return {
-    headerRight: <EditButton room={room} />
+    headerRight: room && <EditButton room={room} />
   }
 }
 

@@ -26,19 +26,6 @@ class SetRooms extends Component {
     this.reRender = this.reRender.bind(this);
   }
 
-  // componentDidMount() {
-  //   const { navigation } = this.props;
-
-  //   this.focusListener = navigation.addListener('didFocus', () => {
-  //     this.reRender();
-  //   });
-  // }
-
-  // componentWillUnmount() {
-  //   this.focusListener.remove();
-  // }
-
-
   reRender() {
     let s = this.state;
     s.updateList = !s.updateList;
@@ -98,7 +85,7 @@ class SetRooms extends Component {
                 toggleEditRoom={this.toggleEditRoom}
                 room={item} />}
             />
-            {this.state.rooms.length > 0 ? this.renderAddNewRoom() : null}
+            {this.state.rooms.length > 0 && this.renderAddNewRoom()}
           </Content>
         </View>
 

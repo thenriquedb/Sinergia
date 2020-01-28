@@ -41,7 +41,7 @@ const SelectState = (props) => {
       </Picker>
 
 
-      {uf !== 'NONE' ?
+      {uf !== 'NONE' &&
         <View>
           <Label style={{ marginTop: 20 }} fontSize='h5'> Concessionária  </Label>
           <Picker
@@ -51,11 +51,10 @@ const SelectState = (props) => {
               return <Picker.Item key={value.Distribuidora} value={value} label={value.Distribuidora} />;
             })}
           </Picker>
-        </View> : null}
+        </View>}
     </Container>
   )
 };
-
 
 const mapStateToProps = state => ({
   usedUF: state.houseReducer.uf,
