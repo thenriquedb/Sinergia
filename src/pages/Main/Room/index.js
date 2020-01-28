@@ -12,10 +12,7 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import ActionButton from 'react-native-action-button';
 
 // styles
-import {
-  EquipmentsList, Container, Icon, Scroll,
-  ContainerNoEquipment
-} from './styles';
+import { EquipmentsList, Container, ContainerNoEquipment } from './styles';
 
 import Colors from '../../../styles/colors';
 import { TextBold, TextLight, Text } from '../../../styles/fonts';

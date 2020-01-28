@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { View, Picker, CheckBox, ScrollView } from 'react-native';
+import { Picker, CheckBox, ScrollView } from 'react-native';
 
 // components
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -8,10 +8,8 @@ import ActionButton from 'react-native-action-button';
 import SetTime from "./SetTime";
 import Input from "../../../../../components/Input";
 
-
 //util
-import moment from "moment";
-import calcTarifaBranca from "../../../../../util/calcTarifaBranca";
+import calcularTarifas from "../../../../../util/calcularTarifas";
 
 // styles
 import { Container, RegisteredContainer, Header, Icon, CheckBoxArea, InputArea } from './styles';
@@ -50,41 +48,13 @@ const NewEquipment2 = props => {
   const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(1);
 
 
-  // Renderiza caso o equipamento possuir mais de um modelo
-  const renderHasModels = () => {
-    return (
-      <>
-        <TextBold color={''} fontSize={'h6'}> Modelo </TextBold>
-        <Picker
-          selectedValue={selectedModel}
-          style={{ width: 350 }}
-          onValueChange={itemValue => selectEquipmentModel(itemValue)}>
-          {equipment.models.map((value, key) => {
-            return <Picker.Item key={key} value={value} label={value.name} />;
-          })}
-        </Picker>
-      </>
-    );
-  };
-
-  const selectEquipmentModel = (itemValue) => {
-    setSelectedModel(itemValue);
-    setCustomName(itemValue.name);
-    setPower(itemValue.power.toString())
-  }
-
   const toggleSaveBtn = () => {
-    const totalTimeOn = on24Hours ? 24 : moment.duration(moment(endTimeWeekdays).diff(startTimeWeekdays)).asHours();
     const power = !selectedModel ? equipment.models[0].power : selectedModel.power
 
-    // Consumo de KW/H mensais
-    const kwMonthly = (power * quantity * totalTimeOn * 30) / 1000
-
-    // calculo da tarifa convencional
-    const tarifaConvencional = kwMonthly * props.valueKW;
-
-    // calculo da tarifa branca
-    const tarifaBranca = calcTarifaBranca(kwMonthly, props.dealership, startTimeWeekdays, endTimeWeekdays, on24Hours);
+    const { kwMonthly, totalTimeOn, tarifaConvencional, tarifaBranca } = calcularTarifas(
+      quantity, power, frequencyOfUseOnWeekdays,
+      frequencyOfUseOnWeekend, props.dealership, startTimeWeekdays,
+      endTimeWeekdays, startTimeWeekend, endTimeWeekend, on24Hours);
 
     const newEquipment = {
       id: new Date().getTime().toString(),
@@ -108,6 +78,12 @@ const NewEquipment2 = props => {
     props.navigation.navigate('Room');
   };
 
+  const selectEquipmentModel = (itemValue) => {
+    setSelectedModel(itemValue);
+    setCustomName(itemValue.name);
+    setPower(itemValue.power.toString())
+  }
+
   return (
     <Container>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -124,7 +100,18 @@ const NewEquipment2 = props => {
         </Header>
 
         <RegisteredContainer>
-          {equipment.models.length > 1 ? renderHasModels() : null}
+          {equipment.models.length > 1 && <>
+            <TextBold fontSize={'h6'}> Modelo </TextBold>
+            <Picker
+              selectedValue={selectedModel}
+              style={{ width: 280 }}
+              onValueChange={itemValue => selectEquipmentModel(itemValue)}>
+              {equipment.models.map((value, key) => {
+                return <Picker.Item key={key} value={value} label={value.name} />;
+              })}
+            </Picker>
+          </>
+          }
 
           <InputArea>
             <Input
@@ -192,7 +179,7 @@ const NewEquipment2 = props => {
 };
 
 const mapStateToProps = state => ({
-  valueKW: state.houseReducer.valueKW,
+  valorTarifaConvencional: state.houseReducer.dealership.valorTarifaConvencional,
   dealership: state.houseReducer.dealership
 });
 

@@ -51,7 +51,7 @@ const Header = (props) => {
   // Calcula o consumo total de R$ mensais do coomôdo
   // Calcular a tarifa convencional e a branca
   const calculateMonthlyExpenses = () => {
-    setTotalTarifaConvencional(kwMonthly * props.valueKW);
+    setTotalTarifaConvencional(kwMonthly * props.valorTarifaConvencional);
     setTotalTarifaBranca(room.equipments[0].tarifaBranca.monthlyExpenses);
   }
 
@@ -172,7 +172,7 @@ const Header = (props) => {
 
 const mapStateToProps = state => ({
 
-  valueKW: state.houseReducer.valueKW,
+  valorTarifaConvencional: state.houseReducer.dealership.valorTarifaConvencional,
   tarifaUsed: state.houseReducer.tarifa
 });
 

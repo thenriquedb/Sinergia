@@ -16,6 +16,7 @@ export function intervalsToArray(string, format) {
   return string.split("-").map(item => moment(item.trim(), format));
 }
 
+
 export function formatHour(time) {
   return `${time.getHours()}:${time.getMinutes() < 10 ?
     `0${time.getMinutes()}` : time.getMinutes()}`;
