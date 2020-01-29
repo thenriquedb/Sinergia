@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 
 // style
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Container, DeleteButton, EditButton } from './styles';
+import { Container, DeleteButton } from './styles';
+
 
 const HiddenCard = props => {
   const { room } = props;

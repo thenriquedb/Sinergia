@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, View, KeyboardAvoidingView } from 'react-native';
+import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, View, Animated } from 'react-native';
 import Alert from "../../../../components/Alert/index";
 
 // redux
@@ -9,7 +9,16 @@ import { connect } from 'react-redux';
 import Input from '../../../../components/Input/index';
 
 // styles
-import { Container, EquipmentCard, Icon, ContinueButton, EquipmentContainer, Footer, styles } from './styles';
+import {
+  Container,
+  CardLabel,
+  EquipmentCard,
+  Icon,
+  ContinueButton,
+  EquipmentContainer,
+  Footer,
+  styles
+} from './styles';
 import { TextLight } from '../../../../styles/fonts';
 import Colors from '../../../../styles/colors';
 
@@ -32,12 +41,20 @@ class NewRoom extends Component {
       alertMessage: '',
       modalIsVisible: false,
       icon: [],
-      customName: ''
+      customName: '',
+      offset: new Animated.Value(0)
     };
 
     this.equipmentCard = this.equipmentCard.bind(this);
     this.toggleSelectEquipment = this.toggleSelectEquipment.bind(this);
     this.toggleContinueButton = this.toggleContinueButton.bind(this);
+  }
+
+  componentDidMount() {
+    Animated.spring(this.state.offset, {
+      toValue: 1,
+      useNativeDriver: true
+    }).start();
   }
 
   equipmentCard(item, index) {
@@ -46,15 +63,25 @@ class NewRoom extends Component {
         activeOpacity={0.8}
         style={{ flex: 1 / 3 }}
         onPress={() => this.toggleSelectEquipment(index)}>
-        <EquipmentCard style={item.select ? item.class : ''}>
-          <Icon resizeMode={"contain"} source={item.icon.dark} />
 
-          <TextLight
-            textAlign={'center'}
-            color={item.select ? Colors.primary : Colors.darkGray2}
-            fontSize={'h5'}>
+        <EquipmentCard
+          style={[item.select && item.class, {
+            transform: [
+              {
+                scale: this.state.offset.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, 1]
+                })
+              }]
+          }]}>
+          <Icon
+            resizeMode={"contain"}
+            source={item.icon.dark} />
+
+          <CardLabel
+            color={item.select ? Colors.primary : Colors.darkGray2}>
             {item.name}
-          </TextLight>
+          </CardLabel>
         </EquipmentCard>
       </TouchableOpacity>
     );

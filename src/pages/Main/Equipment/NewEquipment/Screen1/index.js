@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, Image, TouchableOpacity, TouchableHighlight, ToastAndroid } from 'react-native';
+import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, Animated } from 'react-native';
 
 // Lista de equipamentos
 import equipmentsList from '../../../../../utilities/equipmentsList';
@@ -7,7 +7,7 @@ import equipmentsList from '../../../../../utilities/equipmentsList';
 // styles
 import { TextLight } from '../../../../../styles/fonts';
 import Colors from '../../../../../styles/colors';
-import { Container, RoomCard,Icon, ContinueButton, RoomContainer, Footer, styles } from './styles';
+import { Container, RoomCard, Icon, ContinueButton, RoomContainer, Footer, RoomCardLabel, styles } from './styles';
 
 export default class NewEquipment extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export default class NewEquipment extends Component {
       ...equipmentsList.rooms['kitchen'],
     ].sort((a, b) => {
       return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-    })
+    });
 
     this.state = {
       equipments: this.props.navigation.getParam('typeRoom') === 'other' ?
@@ -41,6 +41,7 @@ export default class NewEquipment extends Component {
             return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
           }),
       selectedEquipment: -1,
+      offset: new Animated.Value(0)
     };
 
     this.RoomCard = this.RoomCard.bind(this);
@@ -48,22 +49,35 @@ export default class NewEquipment extends Component {
     this.toggleContinueButton = this.toggleContinueButton.bind(this);
   }
 
+  componentDidMount() {
+    Animated.spring(this.state.offset, {
+      toValue: 1,
+      useNativeDriver: true
+    }).start();
+  }
   RoomCard(item, index) {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
         style={{ flex: 1 / 3 }}
         onPress={() => this.toggleSelectEquipment(index)}>
-        <RoomCard style={item.select ? item.class : ''}>
+        <RoomCard
+          style={[item.select && item.class, {
+            transform: [
+              {
+                scale: this.state.offset.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, 1]
+                })
+              }]
+          }]}>
 
-
-          <Icon resizeMode={"contain"}  source={item.icon.dark} />
-          <TextLight
+          <Icon resizeMode={"contain"} source={item.icon.dark} />
+          <RoomCardLabel
             textAlign={'center'}
-            color={item.select ? Colors.primary : Colors.darkGray2}
-            fontSize={'h5'}>
+            color={item.select ? Colors.primary : Colors.darkGray2}>
             {item.name}
-          </TextLight>
+          </RoomCardLabel>
         </RoomCard>
       </TouchableOpacity>
     );

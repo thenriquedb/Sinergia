@@ -7,6 +7,8 @@ import { TextLight, TextBold } from '../../../styles/fonts';
 
 import { connect } from 'react-redux'
 
+import { moneyMask, kwMask } from "../../../util/masks";
+
 const CardRoom = props => {
   const { room } = props;
 
@@ -22,24 +24,15 @@ const CardRoom = props => {
             {' '}
             {room.equipments.length} equipamentos
           </TextLight>
-          <TextLight fontSize="h5"> {room.totalKw.toFixed(2)} KW </TextLight>
+          <TextLight fontSize="h5"> {kwMask(room.totalKw)} </TextLight>
         </Details>
 
         <TotalPrice>
           <TextLight fontSize="h5"> Valor total</TextLight>
           <TextBold fontSize="h3">
-            R${' '}
-            {
-              props.tarifaUsed === 'convencional' ?
-                room.tarifaConvencional.monthlyExpenses
-                  .toFixed(2)
-                  .toString()
-                  .replace('.', ',')
-                :
-                room.tarifaBranca.monthlyExpenses
-                  .toFixed(2)
-                  .toString()
-                  .replace('.', ',')
+            {props.tarifaUsed === "convencional" ?
+              moneyMask(room.tarifaConvencional.monthlyExpenses) :
+              moneyMask(room.tarifaBranca.monthlyExpenses)
             }
           </TextBold>
         </TotalPrice>

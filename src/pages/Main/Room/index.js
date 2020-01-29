@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import Header from "./Header/index";
+import { Animated } from "react-native";
 
 // redux
 import { connect } from 'react-redux';
 
 // components
+import Header from "./Header/index";
 import CardEquipment from '../../../components/Cards/CardEquipment';
 import HiddenCard from '../../../components/Cards/CardEquipment/HiddenCard';
 import { SwipeListView } from 'react-native-swipe-list-view';
@@ -14,9 +15,14 @@ import EditButton from "./EditButton";
 import Lottie from "lottie-react-native";
 import emptyAnimation from "../../../assets/empty.json"
 
-
 // styles
-import { EquipmentsList, Container, ContainerNoEquipment } from './styles';
+import {
+  EquipmentsList,
+  Container,
+  EquipmentsListContainer,
+  ContainerNoEquipment,
+  Scroll
+} from './styles';
 
 import Colors from '../../../styles/colors';
 import { TextBold, TextLight } from '../../../styles/fonts';
@@ -28,7 +34,8 @@ class Room extends Component {
     this.state = {
       room: this.props.rooms.find(item => item.id === this.props.navigation.getParam('roomId')),
       EquipmentsListUpdate: false,
-      equipmentHigherConsumption: ''
+      equipmentHigherConsumption: '',
+      offsetList: new Animated.Value(40)
     };
 
     this.toggleNewEquipment = this.toggleNewEquipment.bind(this);
@@ -41,7 +48,14 @@ class Room extends Component {
   componentDidMount() {
     this.props.navigation.setParams({ room: this.state.room });
     console.log("componentDidMount")
-    // alert('ok')
+
+    Animated.spring(this.state.offsetList,
+      {
+        toValue: 0,
+        velocity: 10,
+        bounciness: 20,
+        useNativeDriver: true
+      }).start();
   }
 
 
@@ -92,30 +106,34 @@ class Room extends Component {
   renderEquipmentsList() {
     return (
       <Container>
-        <Header
-          room={this.state.room}
-        />
+        <Scroll>
+          <Header room={this.state.room} />
 
-        <EquipmentsList >
-          <SwipeListView
-            extraData={this.state.EquipmentsListUpdate}
-            data={this.state.room.equipments}
-            showsVerticalScrollIndicator={false}
-            keyExtractor={item => item.id}
-            rightOpenValue={-100}
-            disableRightSwipe={true}
-            renderHiddenItem={({ item, index }) => (
-              <HiddenCard
-                reRender={this.reRenderEquipmentsList}
-                roomName={this.state.room.name}
-                idRoom={this.state.room.id}
-                idEquipment={item.id} />
-            )}
-            renderItem={({ item }) => <CardEquipment equipment={item} />}
-          />
-        </EquipmentsList>
-
-
+          <EquipmentsList>
+            <EquipmentsListContainer style={{
+              transform: [
+                { translateY: this.state.offsetList }
+              ]
+            }}>
+              <SwipeListView
+                extraData={this.state.EquipmentsListUpdate}
+                data={this.state.room.equipments}
+                showsVerticalScrollIndicator={false}
+                keyExtractor={item => item.id}
+                rightOpenValue={-100}
+                disableRightSwipe={true}
+                renderHiddenItem={({ item, index }) => (
+                  <HiddenCard
+                    reRender={this.reRenderEquipmentsList}
+                    roomName={this.state.room.name}
+                    idRoom={this.state.room.id}
+                    idEquipment={item.id} />
+                )}
+                renderItem={({ item }) => <CardEquipment equipment={item} />}
+              />
+            </EquipmentsListContainer>
+          </EquipmentsList>
+        </Scroll>
 
         <ActionButton
           size={55}
@@ -139,7 +157,6 @@ const mapStateToProps = state => ({
 
 Room.navigationOptions = ({ navigation }) => {
   const room = navigation.getParam('room');
-  console.log("navigation:", navigation)
   console.log("room navigationOptions: ", room);
 
   return {

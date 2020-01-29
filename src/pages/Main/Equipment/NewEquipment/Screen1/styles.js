@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Animated } from 'react-native';
 
 import styled from 'styled-components/native';
 import Colors from '../../../../../styles/colors';
@@ -14,7 +14,7 @@ padding: 10px;
 flex: 1;
 `;
 
-export const RoomCard = styled.View`
+export const RoomCard = styled(Animated.View)`
   padding: 6px;
   height: 110;
   width: 110;
@@ -44,9 +44,15 @@ export const FooterTextContainer = styled.View`
   padding: 5px 0px 5px 5px;
 `;
 
-export const Icon = styled.Image`
-width: 65px;
-height: 65px;
+export const Icon = styled(Animated.Image)`
+  width: 65px;
+  height: 65px;
+`;
+
+export const RoomCardLabel = styled(Animated.Text)`
+  text-align: center;
+  font-size: 16px;
+  color: ${props => props.color}
 `;
 
 export const styles = StyleSheet.create({

@@ -1,17 +1,23 @@
+import { Animated } from "react-native";
+
 import styled from 'styled-components/native';
 import Colors from '../../../styles/colors';
 
 export const Container = styled.View`
   flex: 1;
-  flex-direction: column;
   background-color: ${Colors.primary};
 `;
 
-export const Scroll = styled.ScrollView`
-`;
+export const Scroll = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    flexDirection: 'column',
+    // backgroundColor: Colors.high,
+  }
+})``;
 
 export const SettingsButton = styled.TouchableOpacity`
-padding: 30px 15px;
+  padding: 30px 15px;
 `;
 
 
@@ -23,17 +29,17 @@ export const ContainerNoRooms = styled.View`
   background-color: ${Colors.white};
 `;
 
+export const RoomListContainer = styled(Animated.View)``;
+
 export const Rooms = styled.View`
-  flex: 3;
-  background-color: ${Colors.white};
+min-height: 440px;
+   background-color: ${Colors.white};
   border-top-left-radius: 15;
   border-top-right-radius: 15;
   margin-top: 30;
   padding-top: 15;
   padding-left: 10;
   padding-right: 10;
-  justify-content: center;
-  align-content: center;
 `;
 
 export const Header = styled.View`

@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import Colors from '../../../../styles/colors';
 
 
 export const HeaderContainer = styled.View`

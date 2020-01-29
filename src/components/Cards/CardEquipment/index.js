@@ -1,11 +1,13 @@
 import React from 'react';
-import { TouchableHighlight, Image } from 'react-native';
+import { TouchableHighlight } from 'react-native';
 
 // styles
 import { Container, Details, DetailsLabels, Icon, IconContainer, InfoContainer } from './styles';
 import { TextLight } from '../../../styles/fonts';
 
 import { connect } from 'react-redux'
+
+import { moneyMask, kwMask } from "../../../util/masks";
 
 const CardEquipment = props => {
   const { equipment } = props;
@@ -30,18 +32,14 @@ const CardEquipment = props => {
 
             <DetailsLabels>
               <TextLight> KW/h Mensal </TextLight>
-              <TextLight> {equipment.kwMonthly.toFixed(2)} KW </TextLight>
+              <TextLight> {kwMask(equipment.kwMonthly)}  </TextLight>
             </DetailsLabels>
 
             <DetailsLabels>
               <TextLight> Gasto mensal </TextLight>
-              <TextLight> R$
-              {
-                  props.tarifaUsed === 'convencional' ?
-                    (equipment.tarifaConvencional.monthlyExpenses).toFixed(2).replace('.', ',')
-                    :
-                    (equipment.tarifaBranca.monthlyExpenses).toFixed(2).replace('.', ',')
-                }
+              <TextLight> {props.tarifaUsed === 'convencional' ?
+                moneyMask(equipment.tarifaConvencional.monthlyExpenses) :
+                moneyMask(equipment.tarifaBranca.monthlyExpenses)}
               </TextLight>
             </DetailsLabels>
           </InfoContainer>

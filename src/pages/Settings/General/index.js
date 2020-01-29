@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { TouchableHighlight, ScrollView } from "react-native";
+import React, { useState, useEffect } from 'react';
+import { TouchableHighlight, ScrollView, Animated } from "react-native";
 
 import {
   Container,
@@ -15,16 +15,33 @@ import { connect } from 'react-redux'
 
 import SetTarifa from "../SetTarifa"
 import ufs from "../../../utilities/estados";
+import Alert from '../../../components/Alert';
 
 const Settings = (props) => {
   const { navigation } = props;
   const [tarifaModal, setTarifaModal] = useState(false);
 
-  console.log("props.dealership: ", props.dealershipUsed)
+  const offsetY = new Animated.Value(40);
+
+  useEffect(() => {
+    Alert('OK')
+    Animated.spring(offsetY, {
+      toValue: 0,
+      velocity: 20,
+      bounciness: 20,
+      useNativeDriver: true
+    }).start()
+  }, []);
 
   return (
     <Container>
-      <ScrollView>
+      {/* transform: [{ translateY: offsetList }] */}
+
+      <Animated.ScrollView style={{
+        transform: [{
+          translateY: offsetY
+        }]
+      }}>
         <TouchableHighlight underlayColor="#F6F6F6" onPress={() => setTarifaModal(!tarifaModal)}>
           <SettingsItem>
             <IconContainer>
@@ -81,7 +98,7 @@ const Settings = (props) => {
             </LabelContainer>
           </SettingsItem>
         </TouchableHighlight>
-      </ScrollView>
+      </Animated.ScrollView>
     </Container>
   )
 };

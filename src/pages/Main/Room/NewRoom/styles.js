@@ -1,10 +1,11 @@
 import styled from 'styled-components/native';
 import Colors from '../../../../styles/colors';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Animated } from 'react-native';
 
 export const Container = styled.View`
     flex: 1;
 `;
+
 
 export const SaveBtn = styled.TouchableOpacity`
   background-color: ${Colors.primary};
@@ -18,9 +19,10 @@ export const SaveBtn = styled.TouchableOpacity`
 
 export const EquipmentContainer = styled.View`
 padding: 10px;
+
 `;
 
-export const EquipmentCard = styled.View`
+export const EquipmentCard = styled(Animated.View)`
   flex: 1;
   padding: 6px;
   height: 110;
@@ -34,6 +36,12 @@ export const EquipmentCard = styled.View`
   border-radius: 5px;
   margin-bottom: 10px;
 `;
+
+export const CardLabel = styled.Text`
+  text-align: center;
+  font-size: 16px;
+  color: ${props => props.color}
+`
 
 export const ContinueButton = styled.View`
   height: 40;
@@ -52,8 +60,8 @@ export const FooterTextContainer = styled.View`
 `;
 
 export const Icon = styled.Image`
-width: 65px;
-height: 65px;
+  width: 65px;
+  height: 65px;
 `;
 
 export const styles = StyleSheet.create({

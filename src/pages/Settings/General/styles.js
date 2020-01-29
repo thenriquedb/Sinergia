@@ -1,3 +1,5 @@
+import { Animated } from "react-native";
+
 import styled from 'styled-components/native';
 import Colors from "../../../styles/colors";
 
