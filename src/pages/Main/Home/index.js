@@ -17,6 +17,9 @@ import CardRoom from '../../../components/Cards/CardRoom/index';
 import HiddenCard from '../../../components/Cards/CardRoom/HiddenCardRoom';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import Lottie from "lottie-react-native";
+import emptyAnimation from "../../../assets/empty.json";
+
 import capitalizeFirstLetter from "../../../util/capitalizeFirstLetter";
 
 
@@ -153,9 +156,16 @@ const Home = props => {
 
   const renderNoRooms = () => (
     <ContainerNoRooms >
-      <MaterialCommunityIcons name="candle" size={100} color="#707070" />
-      <TextBold color="#707070" fontSize='h4'> Nenhum cômodo cadastrado</TextBold>
-      <TextLight color="#707070" textAlign='center' fontSize='h5'>  Vivamus interdum purus non neque commodo fringilla.   </TextLight>
+      <Lottie
+        source={emptyAnimation}
+        autoPlay
+        loop
+        speed={2}
+        resizeMode={"cover"}
+        autoSize
+        style={{ height: 200, width: 200 }}
+      />
+      <TextBold textAlign="center" color="#999" fontSize='h4'> Ainda não foi cadastrado nenhum cômodo </TextBold>
       <ActionButton
         size={55}
         onPress={() => toggleNewRoomBtn()}

@@ -14,6 +14,7 @@ export default App = () => {
     <Provider store={store}>
       <PersistGate loading={<SplashScreen />} persistor={persistor}>
         <Routes />
+        {/* <SplashScreen /> */}
       </PersistGate>
     </Provider>
   );

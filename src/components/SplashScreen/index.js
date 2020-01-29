@@ -1,14 +1,21 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import animation from "../../assets/splash-animation.json";
 
+import Lottie from "lottie-react-native";
 import { Container, Title, Subtitle } from './styles';
 
 const SplashScreen = () => {
   return (
     <Container>
-      <Title> Nome do aplicativo</Title>
-      <Subtitle> Slogan  </Subtitle>
+      <Lottie
+        source={animation}
+        autoPlay
+        loop
+        speed={2}
+        resizeMode={"contain"}
+        autoSize
+      />
     </Container>)
 
 };

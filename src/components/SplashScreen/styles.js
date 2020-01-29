@@ -3,14 +3,17 @@ import Colors from '../../styles/colors'
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${Colors.primary};
+  background-color: ${Colors.white};
   justify-content: center;
   align-items: center;
 `;
 
+
+
+
 export const Title = styled.Text`
   font-size: 30;
-  color: #fff;
+  color: ${Colors.primary};
   text-transform:uppercase;
   font-weight: bold;
 `;
