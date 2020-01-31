@@ -38,6 +38,7 @@ export default function houseReducer(state = INITIAL_STATE, action) {
         dealershipBackup: action.payload.dealership
       }
 
+
     case 'ADD_ROOM':
       return {
         ...state,
@@ -97,6 +98,21 @@ export default function houseReducer(state = INITIAL_STATE, action) {
         ),
       };
       break;
+
+    // case 'ADD_EQUIPMENT':
+    //   return {
+    //     ...state,
+    //     rooms: state.rooms.filter(item =>
+    //       item.id === action.payload.id
+    //         ? {
+    //           ...item,
+    //           name: 'novo nome',
+    //           equipments: [...item.equipments, action.payload.newEquipment]
+    //         }
+    //         : item,
+    //     ),
+    //   };
+    //   break;
 
     case 'DELETE_EQUIPMENT':
       return {

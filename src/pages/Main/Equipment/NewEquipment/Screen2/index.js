@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Picker, CheckBox, ScrollView } from 'react-native';
+import { Picker, ScrollView } from 'react-native';
+import CheckBox from "@react-native-community/checkbox";
 
 // components
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -142,6 +143,7 @@ const NewEquipment2 = props => {
 
           <CheckBoxArea>
             <CheckBox
+              tintColors={{ true: Colors.primary, false: '#999' }}
               value={on24Hours}
               onValueChange={() => setOn24Hours(!on24Hours)}
             />

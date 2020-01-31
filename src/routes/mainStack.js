@@ -19,6 +19,9 @@ import SettingsSelectDefaultValues from '../pages/Settings/SelectDefaultValues';
 export default MainStack = createStackNavigator({
   Home: {
     screen: Home,
+    navigationOptions: {
+      headerShown: false
+    }
   },
 
   Room: {

@@ -7,59 +7,29 @@ import { TextBold, TextLight, Text } from '../../../../styles/fonts';
 import { connect } from 'react-redux';
 
 import Collapse from '../../../../components/Collapse/';
+import { moneyMask, kwMask } from "../../../../util/masks";
 
 const Header = (props) => {
-  const { room } = props;
-  const [equipmentHigherConsumption, setEquipmentHigherConsumption] = useState('');
-  const [kwMonthly, setKwMonthly] = useState(0);
-  const [totalTarifaConvencional, setTotalTarifaConvencional] = useState(0);
-  const [totalTarifaBranca, setTotalTarifaBranca] = useState(0);
-
-  useEffect(() => {
-    setKwMonthly(room.equipments.reduce(
-      (preVal, elem) => preVal + elem.kwMonthly,
-      0,
-    ));
-    calculateMonthlyExpenses();
-    getEquipmentHigherConsumption();
-  });
+  const {
+    roomName,
+    tarifaUsed,
+    equipmentHigherConsumption,
+    totalTarifaConvencional,
+    totalTarifaBranca,
+    kwMonthly,
+    roomIcon
+  } = props;
 
 
-  useEffect(() => {
-    props.setRoomKwMonthly(room.id, kwMonthly);
-    props.setRoomMonthlyExpenses(room.id, totalTarifaConvencional, totalTarifaBranca)
-  }, [kwMonthly, totalTarifaBranca, totalTarifaConvencional])
-
-
-  const getEquipmentHigherConsumption = () => {
-    let highestConsume = room.equipments[0].kwMonthly;
-    let highestConsumeName = room.equipments[0].name;
-
-    room.equipments.forEach(item => {
-      if (item.kwMonthly > highestConsume) {
-        highestConsume = item.kwMonthly;
-        highestConsumeName = item.name;
-      }
-    });
-
-    setEquipmentHigherConsumption(highestConsumeName);
-  }
-
-  // Calcula o consumo total de R$ mensais do coomôdo
-  // Calcular a tarifa convencional e a branca
-  const calculateMonthlyExpenses = () => {
-    setTotalTarifaConvencional(kwMonthly * props.valorTarifaConvencional);
-    setTotalTarifaBranca(room.equipments[0].tarifaBranca.monthlyExpenses);
-  }
 
   const headerCollapseVisible = () => {
     return (
       <HeaderContainer>
         <HeaderTop>
-          <Icon resizeMode={"contain"} source={room.icon.light} />
+          <Icon resizeMode={"contain"} source={roomIcon} />
 
           <TextBold textAlign={'center'} color={'#fff'} fontSize={'h1'}>
-            {room.name}
+            {roomName}
           </TextBold>
 
         </HeaderTop>
@@ -70,33 +40,17 @@ const Header = (props) => {
               Gasto Mensal
             </Text>
             <TextLight color={'#fff'} fontSize={'h4'}>
-              R$
-              {
-                props.tarifaUsed === 'convencional' ?
-                  totalTarifaConvencional
-                    .toFixed(2)
-                    .replace('.', ',')
-                  :
-                  totalTarifaBranca
-                    .toFixed(2)
-                    .replace('.', ',')
-              }
+              {tarifaUsed === 'convencional' ? moneyMask(totalTarifaConvencional) : moneyMask(totalTarifaBranca)}
             </TextLight>
           </HeaderInfo>
 
           <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h5'}>
-              Consumo total
-            </Text>
-            <TextLight color={'#fff'} fontSize={'h4'}>
-              {kwMonthly.toFixed(2)} KW
-            </TextLight>
+            <Text color={'#fff'} fontSize={'h5'}> Consumo total </Text>
+            <TextLight color={'#fff'} fontSize={'h4'}> {kwMask(kwMonthly)} </TextLight>
           </HeaderInfo>
 
           <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h5'}>
-              Maior Consumo{' '}
-            </Text>
+            <Text color={'#fff'} fontSize={'h5'}> Maior Consumo </Text>
             <TextLight color={'#fff'} fontSize={'h4'}>
               {equipmentHigherConsumption.length >= 20 ?
                 equipmentHigherConsumption.substring(0, 20).concat('...')
@@ -139,7 +93,7 @@ const Header = (props) => {
 
         <TextBold color={'#fff'} fontSize={'h2'}>
           R$ {
-            Math.abs(totalTarifaConvencional - totalTarifaBranca)
+            (totalTarifaConvencional - totalTarifaBranca)
               .toFixed(2)
               .replace('.', ',')
           }
@@ -158,10 +112,13 @@ const Header = (props) => {
   );
 };
 
-const mapStateToProps = state => ({
 
+
+
+
+const mapStateToProps = (state, ownProps) => ({
   valorTarifaConvencional: state.houseReducer.dealership.valorTarifaConvencional,
-  tarifaUsed: state.houseReducer.tarifa
+  tarifaUsed: state.houseReducer.tarifa,
 });
 
 const mapDispatchToProps = dispatch => {

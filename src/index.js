@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
 import { store, persistor } from './store/index';
 
+
 export default App = () => {
   console.disableYellowBox = true;
 

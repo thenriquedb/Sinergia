@@ -1,168 +1,106 @@
-import React, { Component } from 'react';
-import { Animated } from "react-native";
+import React, { useEffect, useState, } from 'react';
+import { connect } from 'react-redux'
 
-// redux
-import { connect } from 'react-redux';
+import { createSelector } from "reselect";
 
-// components
-import Header from "./Header/index";
-import CardEquipment from '../../../components/Cards/CardEquipment';
-import HiddenCard from '../../../components/Cards/CardEquipment/HiddenCard';
-import { SwipeListView } from 'react-native-swipe-list-view';
-import ActionButton from 'react-native-action-button';
 import EditButton from "./EditButton";
-
-import Lottie from "lottie-react-native";
-import emptyAnimation from "../../../assets/empty.json"
-
-// styles
-import {
-  EquipmentsList,
-  Container,
-  EquipmentsListContainer,
-  ContainerNoEquipment,
-  Scroll
-} from './styles';
+import Header from "./Header";
+import RoomListEmpty from "./RoomListEmpty";
+import EquipmentsList from "./EquipmentsList";
+import ActionButton from 'react-native-action-button';
 
 import Colors from '../../../styles/colors';
-import { TextBold, TextLight } from '../../../styles/fonts';
+import { Container, Scroll } from './styles';
 
-class Room extends Component {
-  constructor(props) {
-    super(props);
+function Room(props) {
+  const { navigation, room, allRooms, setRoomKwMonthly, setRoomMonthlyExpenses } = props;
 
-    this.state = {
-      room: this.props.rooms.find(item => item.id === this.props.navigation.getParam('roomId')),
-      EquipmentsListUpdate: false,
-      equipmentHigherConsumption: '',
-      offsetList: new Animated.Value(40)
-    };
-
-    this.toggleNewEquipment = this.toggleNewEquipment.bind(this);
-    this.renderEquipmentsList = this.renderEquipmentsList.bind(this);
-    this.renderNoEquipment = this.renderNoEquipment.bind(this);
-
-    this.reRenderEquipmentsList = this.reRenderEquipmentsList.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.navigation.setParams({ room: this.state.room });
-    console.log("componentDidMount")
-
-    Animated.spring(this.state.offsetList,
-      {
-        toValue: 0,
-        velocity: 10,
-        bounciness: 20,
-        useNativeDriver: true
-      }).start();
-  }
+  const [equipmentHigherConsumption, setEquipmentHigherConsumption] = useState('');
+  const [totalTarifaConvencional, setTotalTarifaConvencional] = useState(0);
+  const [totalTarifaBranca, setTotalTarifaBranca] = useState(0);
+  const [kwMonthly, setKwMonthly] = useState(0);
 
 
-  // Quando algum equipamento for deletado ou editado aé necessario recalcular o KW
-  reRenderEquipmentsList() {
-    let s = this.state;
-    s.EquipmentsListUpdate = !s.EquipmentsListUpdate;
-    this.setState(s);
-  }
+  const getEquipmentHigherConsumption = () => {
+    let highestConsume = room.equipments[0].kwMonthly;
+    let highestConsumeName = room.equipments[0].name;
 
-
-  // Adcionar novo equipamento ao cômodo
-  toggleNewEquipment() {
-    this.props.navigation.navigate('NewEquipment1', {
-      idRoom: this.state.room.id,
-      typeRoom: this.state.room.typeRoom
+    room.equipments.forEach(item => {
+      if (item.kwMonthly > highestConsume) {
+        highestConsume = item.kwMonthly;
+        highestConsumeName = item.name;
+      }
     });
+
+    setEquipmentHigherConsumption(highestConsumeName);
   }
 
-  //  Se o comôdo não possuir nenhum equipamento cadastrado
-  renderNoEquipment() {
-    return (
-      <ContainerNoEquipment>
-        <Lottie
-          source={emptyAnimation}
-          autoPlay
-          loop
-          speed={2}
-          resizeMode={"cover"}
-          autoSize
-          style={{ height: 200, width: 200 }}
-        />
-        <TextBold textAlign={'center'} color={'#999'} fontSize={'h4'}> Nenhum equipamento cadastrado </TextBold>
-        <TextLight color="#999" textAlign='center' fontSize='h5'>
-          "{this.state.room.name}" não possui nenhum equipamento cadastrado.
-       </TextLight>
 
-        <ActionButton
-          size={55}
-          onPress={() => this.toggleNewEquipment()}
-          buttonColor={Colors.primary}
-        />
-      </ContainerNoEquipment>
-    );
-  }
 
-  //  Se o comôdo possuir pelo menos um equipamento cadastrado
-  renderEquipmentsList() {
-    return (
-      <Container>
-        <Scroll>
-          <Header room={this.state.room} />
+  useEffect(() => {
+    setKwMonthly(room.equipments.reduce((preVal, elem) =>
+      preVal + elem.kwMonthly, 0));
 
-          <EquipmentsList>
-            <EquipmentsListContainer style={{
-              transform: [
-                { translateY: this.state.offsetList }
-              ]
-            }}>
-              <SwipeListView
-                extraData={this.state.EquipmentsListUpdate}
-                data={this.state.room.equipments}
-                showsVerticalScrollIndicator={false}
-                keyExtractor={item => item.id}
-                rightOpenValue={-100}
-                disableRightSwipe={true}
-                renderHiddenItem={({ item, index }) => (
-                  <HiddenCard
-                    reRender={this.reRenderEquipmentsList}
-                    roomName={this.state.room.name}
-                    idRoom={this.state.room.id}
-                    idEquipment={item.id} />
-                )}
-                renderItem={({ item }) => <CardEquipment equipment={item} />}
-              />
-            </EquipmentsListContainer>
-          </EquipmentsList>
-        </Scroll>
+    setTotalTarifaBranca(room.equipments.reduce((preVal, elem) =>
+      preVal + elem.tarifaBranca.monthlyExpenses, 0));
 
-        <ActionButton
-          size={55}
-          onPress={() => this.toggleNewEquipment()}
-          buttonColor={Colors.primary}
-        />
-      </Container>
-    );
-  }
+    setTotalTarifaConvencional(room.equipments.reduce((preVal, elem) =>
+      preVal + elem.tarifaConvencional.monthlyExpenses, 0));
 
-  render() {
-    return this.state.room.equipments.length
-      ? this.renderEquipmentsList()
-      : this.renderNoEquipment();
-  }
+    getEquipmentHigherConsumption();
+  }, [allRooms])
+
+  return (
+    <Container>
+      {!room.equipments.length ?
+        <RoomListEmpty
+          roomName="roomName" />
+        :
+        (
+          <>
+            <Header
+              equipmentHigherConsumption={equipmentHigherConsumption}
+              totalTarifaConvencional={totalTarifaConvencional}
+              totalTarifaBranca={totalTarifaBranca}
+              kwMonthly={kwMonthly}
+              roomName={room.name}
+              roomIcon={room.icon.light}
+              reload={allRooms}
+            />
+            <EquipmentsList
+              room={room}
+              relaod={allRooms}
+            />
+          </>
+        )
+      }
+      <ActionButton
+        size={55}
+        onPress={() => {
+          navigation.navigate('NewEquipment1', {
+            idRoom: room.id,
+            typeRoom: room.typeRoom
+          });
+        }}
+        buttonColor={Colors.primary}
+      />
+    </Container>
+  );
 }
-
-const mapStateToProps = state => ({
-  rooms: state.houseReducer.rooms,
-});
 
 Room.navigationOptions = ({ navigation }) => {
   const room = navigation.getParam('room');
-  console.log("room navigationOptions: ", room);
 
   return {
     headerRight: <EditButton room={room} />
   }
 }
+
+
+const mapStateToProps = (state, ownProps) => ({
+  room: state.houseReducer.rooms.find(item => item.id === ownProps.navigation.getParam('roomId')),
+  allRooms: state.houseReducer.rooms
+});
 
 const mapDispatchToProps = dispatch => {
   return {

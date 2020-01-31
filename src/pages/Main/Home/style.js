@@ -3,10 +3,31 @@ import { Animated } from "react-native";
 import styled from 'styled-components/native';
 import Colors from '../../../styles/colors';
 
+
 export const Container = styled.View`
   flex: 1;
   background-color: ${Colors.primary};
 `;
+
+export const Header = styled(Animated.View)`
+  /* flex: 1; */
+  margin-top: 30;
+  padding-left: 15;
+  padding-right: 15;
+`;
+
+export const TotalConsumeKW = styled.View`
+  align-items: center;
+  margin-bottom: 15;
+`;
+
+export const Details = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+
 
 export const Scroll = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
@@ -40,22 +61,4 @@ min-height: 440px;
   padding-top: 15;
   padding-left: 10;
   padding-right: 10;
-`;
-
-export const Header = styled.View`
-  flex: 1;
-  margin-top: 30;
-  padding-left: 15;
-  padding-right: 15;
-`;
-
-export const TotalConsumeKW = styled.View`
-  align-items: center;
-  margin-bottom: 15;
-`;
-
-export const Details = styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: space-between;
 `;

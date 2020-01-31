@@ -17,8 +17,7 @@ const HiddenCard = props => {
         title={"Deletar"}
         message={deleteMessage}
         confirm={() => {
-          props.deleteEquipment(props.idRoom, props.idEquipment);
-          props.reRender();
+          props.deleteEquipment(props.roomId, props.idEquipment);
           setmodalIsVisible(!modalIsVisible);
         }}
         cancel={() => setmodalIsVisible(!modalIsVisible)}

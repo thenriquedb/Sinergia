@@ -7,7 +7,6 @@ import EditRoomModal from '../EditRoomModal';
 
 const EditButton = ({ room }) => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
-  console.log("room edit button: ", room)
 
   if (room) {
     return (

@@ -40,7 +40,7 @@ const Home = props => {
   const [roomHigherConsumption, setRoomHigherConsumption] = useState(false);
 
   const offsetList = new Animated.Value(40);
-
+  const scrollOffset = new Animated.Value(0);
 
   useEffect(() => {
     calcTotalKw();
@@ -55,8 +55,14 @@ const Home = props => {
       }).start();
 
     props.house.rooms.length > 0 && getRoomHigherConsumption();
-
   });
+
+
+  const scrollAnimatedEvent = () => {
+    Animated.event([{
+      nat
+    }]);
+  }
 
   const calcTotalKw = () => {
     const total = props.house.rooms.reduce((prevVal, elem) => prevVal + elem.totalKw, 0)
@@ -113,8 +119,29 @@ const Home = props => {
   const renderHasRooms = () => {
     return (
       <Container>
-        <Scroll>
-          <Header>
+        <Scroll
+          scrollEventThrottle={16}
+          onScroll={Animated.event([{
+            nativeEvent: {
+              contentOffset: { y: scrollOffset }
+            }
+          }])}
+
+        >
+          <Header style={[
+            {
+              height: scrollOffset.interpolate({
+                inputRange: [0, 150],
+                outputRange: [150, 70],
+                extrapolate: 'clamp'
+              })
+            }, {
+              opacity: scrollOffset.interpolate({
+                inputRange: [0, 150],
+                outputRange: [1, 0],
+              })
+            }
+          ]}>
             <TotalConsumeKW>
               <TextBold textAlign='center' color="#fff" fontSize="h4">
                 Valor Total

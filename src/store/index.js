@@ -1,6 +1,6 @@
-import {createStore} from 'redux';
+import { createStore } from 'redux';
 import AsyncStoreage from '@react-native-community/async-storage';
-import {persistStore, persistReducer} from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 
 import reducers from './reducers/index';
 
@@ -16,4 +16,4 @@ const persistConfig = persistReducer(
 const store = createStore(persistConfig);
 const persistor = persistStore(store);
 
-export {store, persistor};
+export { store, persistor };
