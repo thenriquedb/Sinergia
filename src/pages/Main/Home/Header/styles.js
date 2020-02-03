@@ -1,10 +1,12 @@
+import { Animated } from "react-native";
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled(Animated.View)`
   margin-top: 20;
   padding-left: 15;
   padding-right: 15;
 `;
+
 
 export const SettingsButton = styled.TouchableOpacity`
   padding: 0px 15px;
@@ -15,10 +17,9 @@ export const SettingsButton = styled.TouchableOpacity`
 
 export const TotalConsumeKW = styled.View`
   align-items: center;
-  margin-bottom: 15;
 `;
 
-export const Details = styled.View`
+export const Details = styled(Animated.View)`
   flex-direction: row;
   justify-content: space-between;
 `;

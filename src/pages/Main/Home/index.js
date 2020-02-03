@@ -14,6 +14,7 @@ import { Container, Rooms, RoomList } from './style';
 const Home = props => {
   const { rooms, navigation, tarifaUsed } = props;
   const [updateList, setUpdateList] = useState(false);
+  const scrollOffset = new Animated.Value(0);
 
   const reRender = () => {
     setUpdateList(!updateList);
@@ -26,6 +27,7 @@ const Home = props => {
           <Header
             navigation={navigation}
             rooms={rooms}
+            scrollOffset={scrollOffset}
             tarifaUsed={tarifaUsed}
           />
 
@@ -41,12 +43,22 @@ const Home = props => {
                   toggleRoomCard={() => navigation.navigate('Room', { roomId: item.id })}
                   room={item} />
               )}
+              scrollEventThrottle={16}
+              onScroll={Animated.event([{
+                nativeEvent: {
+                  contentOffset: { y: scrollOffset },
+                  useNativeDriver: true
+                }
+              }])}
             />
           </Rooms>
         </Container> :
         <RoomListEmpty />
       }
-
+      {/* onScroll={Animated.event(
+        [{ nativeEvent: { contentOffset: { y: this.state.animatedValue } } }],
+        { useNativeDriver: true } // <-- Add this
+      )} */}
       <ActionButton
         size={55}
         onPress={() => navigation.navigate('NewRoom')}

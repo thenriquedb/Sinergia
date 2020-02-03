@@ -110,7 +110,7 @@ class NewRoom extends Component {
     }
 
     // Se ja tiver um equipamento selecionado
-    else if (this.state.selectedRoomIndex || this.state.selectedRoomIndex === '0') {
+    else if (this.state.selectedRoomIndex || this.state.selectedRoomIndex == '0') {
       s.rooms[s.selectedRoomIndex].select = !s.rooms[s.selectedRoomIndex].select;
       s.selectedRoomIndex = index;
       s.rooms[s.selectedRoomIndex].select = !s.rooms[s.selectedRoomIndex].select;

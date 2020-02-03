@@ -7,11 +7,44 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { moneyMask, kwMask } from "../../../../util/masks";
 import capitalizeFirstLetter from "../../../../util/capitalizeFirstLetter";
 
-export default function Header({ rooms, tarifaUsed, navigation }) {
+export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) {
 
   const [totalKw, setTotalKw] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [roomHigherConsumption, setRoomHigherConsumption] = useState('');
+
+  const detailsAnimationConfig = [
+    {
+      height: scrollOffset.interpolate({
+        inputRange: [50, 250],
+        outputRange: [40, 0],
+        extrapolate: 'clamp'
+      })
+    },
+    {
+      marginTop: scrollOffset.interpolate({
+        inputRange: [50, 250],
+        outputRange: [10, -10],
+        extrapolate: 'clamp'
+      })
+    },
+    {
+      transform: [{
+        translateY: scrollOffset.interpolate({
+          inputRange: [50, 250],
+          outputRange: [0, 10],
+        }),
+        translateX: scrollOffset
+      }]
+    },
+    {
+      opacity: scrollOffset.interpolate({
+        inputRange: [0, 250],
+        outputRange: [1, 0],
+        extrapolate: 'clamp'
+      })
+    }
+  ];
 
   useEffect(() => {
     setTotalKw(rooms.reduce((prevVal, elem) =>
@@ -61,7 +94,7 @@ export default function Header({ rooms, tarifaUsed, navigation }) {
         <TextThin textAlign='center' color="#fff" fontSize="h1"> {moneyMask(totalAmount)} </TextThin>
       </TotalConsumeKW>
 
-      <Details>
+      <Details style={[...detailsAnimationConfig]} >
         <Detail>
           <TextBold textAlign='center' color="#FFF"> Consumo total </TextBold>
           <TextLight textAlign='center' color="#fff" fontSize="h5"> {kwMask(totalKw)} </TextLight>
