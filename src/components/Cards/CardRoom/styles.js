@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Colors from '../../../styles/colors';
+import { Animated } from 'react-native';
 
 export const Container = styled.View`
   flex-direction: row;
