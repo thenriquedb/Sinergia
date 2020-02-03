@@ -1,7 +1,7 @@
 import React, { useEffect, useState, } from 'react';
-import { connect } from 'react-redux'
+import { Animated } from "react-native";
 
-import { createSelector } from "reselect";
+import { connect } from 'react-redux'
 
 import EditButton from "./EditButton";
 import Header from "./Header";
@@ -10,32 +10,17 @@ import EquipmentsList from "./EquipmentsList";
 import ActionButton from 'react-native-action-button';
 
 import Colors from '../../../styles/colors';
-import { Container, Scroll } from './styles';
+import { Container, Equipments, EquipmentsListContainer } from './styles';
 
 function Room(props) {
-  const { navigation, room, allRooms, setRoomKwMonthly, setRoomMonthlyExpenses } = props;
+  const { navigation, room, allRooms } = props;
 
   const [equipmentHigherConsumption, setEquipmentHigherConsumption] = useState('');
   const [totalTarifaConvencional, setTotalTarifaConvencional] = useState(0);
   const [totalTarifaBranca, setTotalTarifaBranca] = useState(0);
   const [kwMonthly, setKwMonthly] = useState(0);
 
-
-  const getEquipmentHigherConsumption = () => {
-    let highestConsume = room.equipments[0].kwMonthly;
-    let highestConsumeName = room.equipments[0].name;
-
-    room.equipments.forEach(item => {
-      if (item.kwMonthly > highestConsume) {
-        highestConsume = item.kwMonthly;
-        highestConsumeName = item.name;
-      }
-    });
-
-    setEquipmentHigherConsumption(highestConsumeName);
-  }
-
-
+  const scrollOffset = new Animated.Value(0);
 
   useEffect(() => {
     setKwMonthly(room.equipments.reduce((preVal, elem) =>
@@ -48,7 +33,34 @@ function Room(props) {
       preVal + elem.tarifaConvencional.monthlyExpenses, 0));
 
     getEquipmentHigherConsumption();
-  }, [allRooms])
+  }, [allRooms]);
+
+  useEffect(() => {
+    props.setRoomKwMonthly(room.id, kwMonthly);
+    props.setRoomMonthlyExpenses(room.id, totalTarifaConvencional, totalTarifaBranca);
+
+  }, [totalTarifaBranca, totalTarifaBranca, kwMonthly]);
+
+
+  function getEquipmentHigherConsumption() {
+    let highestConsume = 0;
+    let highestConsumeName = '';
+
+    room.equipments.forEach(item => {
+      if (item.kwMonthly > highestConsume) {
+        highestConsume = item.kwMonthly;
+        highestConsumeName = item.name;
+      }
+    });
+
+    setEquipmentHigherConsumption(highestConsumeName);
+  }
+
+  function handleScroll(event) {
+    scrollOffset.setOffset()
+    this.setState({ scrollPosition: event.nativeEvent.contentOffset.y });
+
+  }
 
   return (
     <Container>
@@ -57,7 +69,7 @@ function Room(props) {
           roomName="roomName" />
         :
         (
-          <>
+          <Equipments>
             <Header
               equipmentHigherConsumption={equipmentHigherConsumption}
               totalTarifaConvencional={totalTarifaConvencional}
@@ -67,11 +79,14 @@ function Room(props) {
               roomIcon={room.icon.light}
               reload={allRooms}
             />
-            <EquipmentsList
-              room={room}
-              relaod={allRooms}
-            />
-          </>
+            <EquipmentsListContainer>
+              <EquipmentsList
+                room={room}
+                relaod={allRooms}
+              />
+            </EquipmentsListContainer>
+          </Equipments>
+
         )
       }
       <ActionButton

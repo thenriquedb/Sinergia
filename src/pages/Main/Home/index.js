@@ -57,13 +57,6 @@ const Home = props => {
     props.house.rooms.length > 0 && getRoomHigherConsumption();
   });
 
-
-  const scrollAnimatedEvent = () => {
-    Animated.event([{
-      nat
-    }]);
-  }
-
   const calcTotalKw = () => {
     const total = props.house.rooms.reduce((prevVal, elem) => prevVal + elem.totalKw, 0)
     setTotalKw(total);

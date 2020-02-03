@@ -47,7 +47,7 @@ class NewRoom extends Component {
 
     this.equipmentCard = this.equipmentCard.bind(this);
     this.toggleSelectEquipment = this.toggleSelectEquipment.bind(this);
-    this.toggleContinueButton = this.toggleContinueButton.bind(this);
+    this.toggleSaveButton = this.toggleSaveButton.bind(this);
   }
 
   componentDidMount() {
@@ -110,7 +110,7 @@ class NewRoom extends Component {
     }
 
     // Se ja tiver um equipamento selecionado
-    else if (this.state.selectedRoomIndex) {
+    else if (this.state.selectedRoomIndex || this.state.selectedRoomIndex === '0') {
       s.rooms[s.selectedRoomIndex].select = !s.rooms[s.selectedRoomIndex].select;
       s.selectedRoomIndex = index;
       s.rooms[s.selectedRoomIndex].select = !s.rooms[s.selectedRoomIndex].select;
@@ -123,7 +123,7 @@ class NewRoom extends Component {
     this.setState(s);
   }
 
-  toggleContinueButton() {
+  toggleSaveButton() {
     if (this.state.selectedRoomIndex != -1) {
       if (this.state.customName.length >= 4) {
         const found = this.props.rooms.find(item => item.name === this.state.customName);
@@ -155,7 +155,6 @@ class NewRoom extends Component {
   render() {
     return (
       <Container>
-
         <Alert
           title={"Confirmar"}
           message={this.state.alertMessage}
@@ -185,7 +184,7 @@ class NewRoom extends Component {
         </View>
 
         <Footer>
-          <TouchableHighlight onPress={() => this.toggleContinueButton()}>
+          <TouchableHighlight onPress={() => this.toggleSaveButton()}>
             <ContinueButton
               style={
                 this.state.selectedRoomIndex != -1 ? '' : styles.ConitnueButton
@@ -198,8 +197,6 @@ class NewRoom extends Component {
             </ContinueButton>
           </TouchableHighlight>
         </Footer>
-        {/* </KeyboardAvoidingView> */}
-
       </Container>
     );
   }

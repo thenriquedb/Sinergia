@@ -11,7 +11,7 @@ import { moneyMask, kwMask } from "../../../util/masks";
 
 const CardRoom = props => {
   const { room } = props;
-
+  console.log("CardRoom: ", room)
   return (
     <TouchableHighlight
       onPress={() => props.toggleRoomCard(room)}
