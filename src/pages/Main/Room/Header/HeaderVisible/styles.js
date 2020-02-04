@@ -1,9 +1,9 @@
-import { Animated } from "react-native";
 import styled from 'styled-components/native';
+import { Animated } from "react-native";
 
-export const HeaderContainer = styled(Animated.View)`
+export const Container = styled.View`
   padding: 10px 15px;
-  margin-top: 10px;
+  margin-top: 15px;
 `;
 
 export const HeaderTop = styled(Animated.View)`

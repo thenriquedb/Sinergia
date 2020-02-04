@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Animated } from 'react-native';
 
 import ActionButton from 'react-native-action-button';
@@ -14,7 +14,18 @@ import { Container, Rooms, RoomList } from './style';
 const Home = props => {
   const { rooms, navigation, tarifaUsed } = props;
   const [updateList, setUpdateList] = useState(false);
+
   const scrollOffset = new Animated.Value(0);
+  const offsetBounce = new Animated.Value(40);
+
+  useEffect(() => {
+    Animated.spring(offsetBounce, {
+      toValue: 0,
+      velocity: 20,
+      bounciness: 20,
+      useNativeDriver: true
+    }).start()
+  }, []);
 
   const reRender = () => {
     setUpdateList(!updateList);
@@ -50,15 +61,17 @@ const Home = props => {
                   useNativeDriver: true
                 }
               }])}
+              style={{
+                transform: [{
+                  translateY: offsetBounce
+                }]
+              }}
             />
           </Rooms>
         </Container> :
         <RoomListEmpty />
       }
-      {/* onScroll={Animated.event(
-        [{ nativeEvent: { contentOffset: { y: this.state.animatedValue } } }],
-        { useNativeDriver: true } // <-- Add this
-      )} */}
+
       <ActionButton
         size={55}
         onPress={() => navigation.navigate('NewRoom')}

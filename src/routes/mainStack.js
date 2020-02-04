@@ -3,11 +3,11 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Colors from '../styles/colors';
 
 // screens
-import Home from '../pages/Main/Home/index';
-import Room from '../pages/Main/Room/index';
-import NewRoom from '../pages/Main/Room/NewRoom/index';
-import NewEquipment1 from '../pages/Main/Equipment/NewEquipment/Screen1/index';
-import NewEquipment2 from '../pages/Main/Equipment/NewEquipment/Screen2/index';
+import Home from '../pages/Main/Home';
+import Room from '../pages/Main/Room';
+import NewRoom from '../pages/Main/NewRoom';
+import NewEquipment1 from '../pages/Main/Equipment/NewEquipment/Screen1';
+import NewEquipment2 from '../pages/Main/Equipment/NewEquipment/Screen2';
 
 // Settings
 import Settings from '../pages/Settings/General/index';
@@ -26,6 +26,9 @@ export default MainStack = createStackNavigator({
 
   Room: {
     screen: Room,
+    navigationOptions: {
+      headerShown: false
+    }
   },
 
   NewRoom: {

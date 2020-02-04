@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
-import { Container, SettingsButton, TotalConsumeKW, Details, Detail } from './styles';
-import { TextBold, TextLight, TextThin } from "../../../../styles/fonts";
+import {
+  Container,
+  TotalConsumeLabel,
+  TotalConsumeValue,
+  SettingsButtonContainer,
+  SettingsButton,
+  TotalConsumeKW,
+  Details,
+  Detail,
+  DetailLabel,
+  DetailValue
+} from './styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { moneyMask, kwMask } from "../../../../util/masks";
@@ -16,14 +26,14 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
   const detailsAnimationConfig = [
     {
       height: scrollOffset.interpolate({
-        inputRange: [50, 250],
+        inputRange: [50, 150],
         outputRange: [40, 0],
         extrapolate: 'clamp'
       })
     },
     {
       marginTop: scrollOffset.interpolate({
-        inputRange: [50, 250],
+        inputRange: [50, 150],
         outputRange: [10, -10],
         extrapolate: 'clamp'
       })
@@ -31,7 +41,7 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
     {
       transform: [{
         translateY: scrollOffset.interpolate({
-          inputRange: [50, 250],
+          inputRange: [50, 150],
           outputRange: [0, 10],
         }),
         translateX: scrollOffset
@@ -39,10 +49,22 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
     },
     {
       opacity: scrollOffset.interpolate({
-        inputRange: [0, 250],
+        inputRange: [0, 120],
         outputRange: [1, 0],
         extrapolate: 'clamp'
       })
+    }
+  ];
+
+  const settingsButtonAnimationConfigs = [
+    {
+      transform: [{
+        scale: scrollOffset.interpolate({
+          inputRange: [50, 150],
+          outputRange: [1, 0.8],
+          extrapolate: "clamp"
+        })
+      }]
     }
   ];
 
@@ -83,35 +105,54 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
 
   return (
     <Container>
-      <SettingsButton onPress={() => navigation.navigate('Settings')}>
-        <MaterialCommunityIcons name="settings" size={25} color="#fff" />
-      </SettingsButton>
-      <TotalConsumeKW>
-        <TextBold textAlign='center' color="#fff" fontSize="h4">
-          Valor Total
-        </TextBold>
+      <SettingsButtonContainer style={[...settingsButtonAnimationConfigs]}>
+        <SettingsButton onPress={() => navigation.navigate('Settings')}>
+          <MaterialCommunityIcons name="settings" size={25} color="#fff" />
+        </SettingsButton>
+      </SettingsButtonContainer>
 
-        <TextThin textAlign='center' color="#fff" fontSize="h1"> {moneyMask(totalAmount)} </TextThin>
+      <TotalConsumeKW>
+        <TotalConsumeLabel
+          style={[
+            {
+              fontSize: scrollOffset.interpolate({
+                inputRange: [0, 400],
+                outputRange: [22, 18],
+                extrapolate: 'clamp'
+              })
+            },
+          ]}>
+          Valor Total
+        </TotalConsumeLabel>
+
+        <TotalConsumeValue
+          style={[
+            {
+              fontSize: scrollOffset.interpolate({
+                inputRange: [0, 400],
+                outputRange: [50, 40],
+                extrapolate: 'clamp'
+              })
+            },
+          ]}>
+          {moneyMask(totalAmount)}
+        </TotalConsumeValue>
       </TotalConsumeKW>
 
       <Details style={[...detailsAnimationConfig]} >
         <Detail>
-          <TextBold textAlign='center' color="#FFF"> Consumo total </TextBold>
-          <TextLight textAlign='center' color="#fff" fontSize="h5"> {kwMask(totalKw)} </TextLight>
+          <DetailLabel> Consumo total </DetailLabel>
+          <DetailValue> {kwMask(totalKw)} </DetailValue>
         </Detail>
 
         <Detail>
-          <TextBold textAlign='center' color="#FFF"> Maior consumo </TextBold>
-          <TextLight textAlign='center' color="#fff" fontSize="h5">
-            {roomHigherConsumption}
-          </TextLight>
+          <DetailLabel> Maior consumo </DetailLabel>
+          <DetailValue> {roomHigherConsumption} </DetailValue>
         </Detail>
 
         <Detail>
-          <TextBold textAlign='center' color="#FFF"> Tarifa utilizada </TextBold>
-          <TextLight textAlign='center' color="#fff" fontSize="h5">
-            {capitalizeFirstLetter(tarifaUsed)}
-          </TextLight>
+          <DetailLabel> Tarifa utilizada </DetailLabel>
+          <DetailValue> {capitalizeFirstLetter(tarifaUsed)} </DetailValue>
         </Detail>
       </Details>
     </Container>

@@ -1,3 +1,4 @@
+import { Animated } from "react-native";
 import styled from 'styled-components/native';
 import Colors from '../../../styles/colors';
 
@@ -6,11 +7,11 @@ export const Container = styled.View`
   background-color: ${Colors.primary};
 `;
 
-export const IconContainer = styled.View``;
-
 export const Equipments = styled.View`
   flex: 1;
 `;
+
+export const EquipmentsList = styled(Animated.FlatList)``;
 
 export const EquipmentsListContainer = styled.View`
   flex: 1;

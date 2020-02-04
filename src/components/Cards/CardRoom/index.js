@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TouchableHighlight, Animated } from 'react-native';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import Alert from "../../Alert";
 
@@ -8,7 +9,7 @@ import Alert from "../../Alert";
 import { Container, TotalPrice, Details } from './styles';
 import { TextLight, TextBold } from '../../../styles/fonts';
 
-import HiddenCardRoom from "./HiddenCardRoom";
+import HiddenCard from "../HiddenCard";;
 
 import { moneyMask, kwMask } from "../../../util/masks";
 
@@ -25,7 +26,7 @@ const CardRoom = props => {
 
   return (
     <Swipeable
-      renderRightActions={HiddenCardRoom}
+      renderRightActions={HiddenCard}
       onSwipeableRightOpen={() => setisVisible(!isVisible)}
     >
 

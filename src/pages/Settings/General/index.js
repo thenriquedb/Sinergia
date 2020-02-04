@@ -12,7 +12,6 @@ import {
 } from './styles';
 import { connect } from 'react-redux'
 
-
 import SetTarifa from "../SetTarifa"
 import ufs from "../../../utilities/estados";
 import Alert from '../../../components/Alert';
@@ -24,7 +23,6 @@ const Settings = (props) => {
   const offsetY = new Animated.Value(40);
 
   useEffect(() => {
-    Alert('OK')
     Animated.spring(offsetY, {
       toValue: 0,
       velocity: 20,
@@ -35,13 +33,12 @@ const Settings = (props) => {
 
   return (
     <Container>
-      {/* transform: [{ translateY: offsetList }] */}
-
-      <Animated.ScrollView style={{
-        transform: [{
-          translateY: offsetY
-        }]
-      }}>
+      <Animated.ScrollView
+        style={{
+          transform: [{
+            translateY: offsetY
+          }]
+        }}>
         <TouchableHighlight underlayColor="#F6F6F6" onPress={() => setTarifaModal(!tarifaModal)}>
           <SettingsItem>
             <IconContainer>

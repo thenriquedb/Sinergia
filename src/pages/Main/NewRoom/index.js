@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, View, Animated } from 'react-native';
-import Alert from "../../../../components/Alert/index";
+import Alert from "../../../components/Alert";
 
 // redux
 import { connect } from 'react-redux';
 
 // components
-import Input from '../../../../components/Input/index';
+import Input from '../../../components/Input/index';
 
 // styles
 import {
@@ -19,11 +19,11 @@ import {
   Footer,
   styles
 } from './styles';
-import { TextLight } from '../../../../styles/fonts';
-import Colors from '../../../../styles/colors';
+import { TextLight } from '../../../styles/fonts';
+import Colors from '../../../styles/colors';
 
 // utilities
-import roomsList from '../../../../utilities/roomsList';
+import roomsList from '../../../utilities/roomsList';
 
 class NewRoom extends Component {
   constructor(props) {

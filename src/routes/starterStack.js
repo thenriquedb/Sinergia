@@ -2,14 +2,14 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Colors from '../styles/colors';
 
-import Welcome from '../pages/Starter/Welcome/index'
-import SetDefaultKwValue from '../pages/Starter/SetDefaultKwValue/index';
+import Welcome from '../pages/Starter/Welcome'
+import SetDefaultKwValue from '../pages/Starter/SetDefaultKwValue';
 import SetDefaultKwValueTarifaBranca from '../pages/Starter/SetDefaultKwValueTarifaBranca';
-import SetRooms from '../pages/Starter/SetRooms/index';
-import NewRoom from '../pages/Main/Room/NewRoom/index';
-import SelectState from "../pages/Starter/SelectState/index"
-import SelectTarifa from "../pages/Starter/SelectTarifa/index";
-import Final from '../pages/Starter/Final/index'
+import SetRooms from '../pages/Starter/SetRooms';
+import NewRoom from '../pages/Main/NewRoom';
+import SelectState from "../pages/Starter/SelectState"
+import SelectTarifa from "../pages/Starter/SelectTarifa";
+import Final from '../pages/Starter/Final';
 
 export default StarterStack = createStackNavigator({
   Welcome: {

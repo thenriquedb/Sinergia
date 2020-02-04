@@ -1,139 +1,61 @@
-import React, { useEffect, useState } from 'react';
-
-// styles
-import { HeaderContainer, Icon, HeaderInfo, HeaderInfosContainer, HeaderTop } from './styles';
-import { TextBold, TextLight, Text } from '../../../../styles/fonts';
-
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
+import NavigationHeader from "../NavigationHeader";
+
 import Collapse from '../../../../components/Collapse/';
-import { moneyMask, kwMask } from "../../../../util/masks";
+import HeaderHidden from "./HeaderHidden";
+import HeaderVisible from "./HeaderVisible";
 
 const Header = (props) => {
   const {
-    roomName,
+    room,
+    navigation,
     tarifaUsed,
     equipmentHigherConsumption,
     totalTarifaConvencional,
     totalTarifaBranca,
     kwMonthly,
-    roomIcon
+    scrollOffset
   } = props;
-
-
-
-  const headerCollapseVisible = () => {
-    return (
-      <HeaderContainer>
-        <HeaderTop>
-          <Icon resizeMode={"contain"} source={roomIcon} />
-
-          <TextBold textAlign={'center'} color={'#fff'} fontSize={'h1'}>
-            {roomName}
-          </TextBold>
-
-        </HeaderTop>
-
-        <HeaderInfosContainer>
-          <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h5'}>
-              Gasto Mensal
-            </Text>
-            <TextLight color={'#fff'} fontSize={'h4'}>
-              {tarifaUsed === 'convencional' ? moneyMask(totalTarifaConvencional) : moneyMask(totalTarifaBranca)}
-            </TextLight>
-          </HeaderInfo>
-
-          <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h5'}> Consumo total </Text>
-            <TextLight color={'#fff'} fontSize={'h4'}> {kwMask(kwMonthly)} </TextLight>
-          </HeaderInfo>
-
-          <HeaderInfo>
-            <Text color={'#fff'} fontSize={'h5'}> Maior Consumo </Text>
-            <TextLight color={'#fff'} fontSize={'h4'}>
-              {equipmentHigherConsumption.length >= 20 ?
-                equipmentHigherConsumption.substring(0, 20).concat('...')
-                : equipmentHigherConsumption}
-            </TextLight>
-          </HeaderInfo>
-        </HeaderInfosContainer>
-      </HeaderContainer>
-    );
-  }
-
-  const headerCollapseHidden = () => {
-    return (
-      <HeaderContainer>
-        <TextBold color={'#fff'} fontSize={'h4'}>
-          Gastos mensais
-        </TextBold>
-
-        <HeaderInfosContainer>
-          <HeaderInfo>
-            <TextLight textAlign='center' color={'#fff'} fontSize={'h3'}>
-              R$ {totalTarifaBranca
-                .toFixed(2)
-                .replace('.', ',')}
-            </TextLight>
-            <TextBold textAlign='center' color={'#fff'} fontSize={'h5'}> Tarifa branca</TextBold>
-          </HeaderInfo>
-
-          <HeaderInfo>
-            <TextLight textAlign='center' color={'#fff'} fontSize={'h3'}>
-              R$ {totalTarifaConvencional.toFixed(2)
-                .replace('.', ',')}
-            </TextLight>
-            <TextBold textAlign='center' color={'#fff'} fontSize={'h5'}> Tarifa convencional</TextBold>
-          </HeaderInfo>
-        </HeaderInfosContainer>
-
-        <Text style={{ marginTop: 20, }} color={'#fff'} fontSize={'h5'}>
-          Utilizando a tarifa branca você economiza   </Text>
-
-        <TextBold color={'#fff'} fontSize={'h2'}>
-          R$ {
-            (totalTarifaConvencional - totalTarifaBranca)
-              .toFixed(2)
-              .replace('.', ',')
-          }
-        </TextBold>
-      </HeaderContainer>
-    );
-  }
 
   return (
     <>
+      <NavigationHeader
+        offset={scrollOffset}
+        navigation={navigation}
+        room={room}
+        tarifaUsed={tarifaUsed}
+      />
+
       <Collapse
-        visible={headerCollapseVisible()}
-        hidden={headerCollapseHidden()}
+        offset={scrollOffset}
+        visible={
+          <HeaderVisible
+            offset={scrollOffset}
+            totalTarifaBranca={totalTarifaBranca}
+            totalTarifaConvencional={totalTarifaConvencional}
+            tarifaUsed={tarifaUsed}
+            kwMonthly={kwMonthly}
+            room={room}
+            equipmentHigherConsumption={equipmentHigherConsumption}
+          />
+        }
+        hidden={
+          <HeaderHidden
+            offset={scrollOffset}
+            totalTarifaBranca={totalTarifaBranca}
+            totalTarifaConvencional={totalTarifaConvencional}
+          />
+        }
       />
     </>
   );
 };
 
-
-
-
-
-const mapStateToProps = (state, ownProps) => ({
-  valorTarifaConvencional: state.houseReducer.dealership.valorTarifaConvencional,
+const mapStateToProps = (state) => ({
   tarifaUsed: state.houseReducer.tarifa,
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setRoomKwMonthly: (idRoom, totalKwMonthly) =>
-      dispatch({
-        type: 'SET_ROOM_KW_MONTHLY',
-        payload: { idRoom, totalKwMonthly },
-      }),
-    setRoomMonthlyExpenses: (idRoom, totalTarifaConvencional, totalTarifaBranca) =>
-      dispatch({
-        type: 'SET_ROOM_MONTHLY_EXPENSES',
-        payload: { idRoom, totalTarifaConvencional, totalTarifaBranca },
-      }),
-  };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, null)(Header);

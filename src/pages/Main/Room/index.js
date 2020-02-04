@@ -3,14 +3,14 @@ import { Animated } from "react-native";
 
 import { connect } from 'react-redux'
 
-import EditButton from "./EditButton";
+import NavigationHeader from "./NavigationHeader";
 import Header from "./Header";
 import RoomListEmpty from "./RoomListEmpty";
-import EquipmentsList from "./EquipmentsList";
 import ActionButton from 'react-native-action-button';
+import CardEquipment from "../../../components/Cards/CardEquipment/index";
 
 import Colors from '../../../styles/colors';
-import { Container, Equipments, EquipmentsListContainer } from './styles';
+import { Container, Equipments, EquipmentsListContainer, EquipmentsList } from './styles';
 
 function Room(props) {
   const { navigation, room, allRooms } = props;
@@ -21,8 +21,17 @@ function Room(props) {
   const [kwMonthly, setKwMonthly] = useState(0);
 
   const scrollOffset = new Animated.Value(0);
+  const offsetBounce = new Animated.Value(10);
+
 
   useEffect(() => {
+    Animated.spring(offsetBounce, {
+      toValue: 0,
+      velocity: 20,
+      bounciness: 20,
+      useNativeDriver: true
+    }).start();
+
     setKwMonthly(room.equipments.reduce((preVal, elem) =>
       preVal + elem.kwMonthly, 0));
 
@@ -56,12 +65,6 @@ function Room(props) {
     setEquipmentHigherConsumption(highestConsumeName);
   }
 
-  function handleScroll(event) {
-    scrollOffset.setOffset()
-    this.setState({ scrollPosition: event.nativeEvent.contentOffset.y });
-
-  }
-
   return (
     <Container>
       {!room.equipments.length ?
@@ -75,14 +78,36 @@ function Room(props) {
               totalTarifaConvencional={totalTarifaConvencional}
               totalTarifaBranca={totalTarifaBranca}
               kwMonthly={kwMonthly}
-              roomName={room.name}
-              roomIcon={room.icon.light}
+              room={room}
+              navigation={navigation}
               reload={allRooms}
+              scrollOffset={scrollOffset}
             />
+
             <EquipmentsListContainer>
               <EquipmentsList
-                room={room}
-                relaod={allRooms}
+                data={room.equipments}
+                extraData={allRooms}
+                showsVerticalScrollIndicator={false}
+                keyExtractor={item => item.id}
+                renderItem={({ item }) => (
+                  <CardEquipment
+                    equipment={item}
+                    roomId={room.id}
+                  />
+                )}
+                scrollEventThrottle={16}
+                onScroll={Animated.event([{
+                  nativeEvent: {
+                    contentOffset: { y: scrollOffset },
+                    useNativeDriver: true
+                  }
+                }])}
+                style={{
+                  transform: [{
+                    translateY: offsetBounce
+                  }]
+                }}
               />
             </EquipmentsListContainer>
           </Equipments>
@@ -102,15 +127,6 @@ function Room(props) {
     </Container>
   );
 }
-
-Room.navigationOptions = ({ navigation }) => {
-  const room = navigation.getParam('room');
-
-  return {
-    headerRight: <EditButton room={room} />
-  }
-}
-
 
 const mapStateToProps = (state, ownProps) => ({
   room: state.houseReducer.rooms.find(item => item.id === ownProps.navigation.getParam('roomId')),
