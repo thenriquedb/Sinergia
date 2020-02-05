@@ -26,14 +26,14 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
   const detailsAnimationConfig = [
     {
       height: scrollOffset.interpolate({
-        inputRange: [50, 150],
+        inputRange: [50, 250],
         outputRange: [40, 0],
         extrapolate: 'clamp'
       })
     },
     {
       marginTop: scrollOffset.interpolate({
-        inputRange: [50, 150],
+        inputRange: [50, 250],
         outputRange: [10, -10],
         extrapolate: 'clamp'
       })
@@ -41,16 +41,18 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
     {
       transform: [{
         translateY: scrollOffset.interpolate({
-          inputRange: [50, 150],
+          inputRange: [50, 250],
           outputRange: [0, 10],
+          extrapolate: 'clamp'
+
         }),
         translateX: scrollOffset
       }]
     },
     {
       opacity: scrollOffset.interpolate({
-        inputRange: [0, 120],
-        outputRange: [1, 0],
+        inputRange: [0, 150, 250],
+        outputRange: [1, 0, 0],
         extrapolate: 'clamp'
       })
     }
@@ -60,7 +62,7 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
     {
       transform: [{
         scale: scrollOffset.interpolate({
-          inputRange: [50, 150],
+          inputRange: [50, 250],
           outputRange: [1, 0.8],
           extrapolate: "clamp"
         })
@@ -116,7 +118,7 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
           style={[
             {
               fontSize: scrollOffset.interpolate({
-                inputRange: [0, 400],
+                inputRange: [200, 250],
                 outputRange: [22, 18],
                 extrapolate: 'clamp'
               })
@@ -129,7 +131,7 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
           style={[
             {
               fontSize: scrollOffset.interpolate({
-                inputRange: [0, 400],
+                inputRange: [200, 250],
                 outputRange: [50, 40],
                 extrapolate: 'clamp'
               })

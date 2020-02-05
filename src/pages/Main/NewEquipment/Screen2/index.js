@@ -7,15 +7,15 @@ import CheckBox from "@react-native-community/checkbox";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ActionButton from 'react-native-action-button';
 import SetTime from "./SetTime";
-import Input from "../../../../../components/Input";
+import Input from "../../../../components/Input";
 
 //util
-import calcularTarifas from "../../../../../util/calcularTarifas";
+import calcularTarifas from "../../../../util/calcularTarifas";
 
 // styles
 import { Container, RegisteredContainer, Header, Icon, CheckBoxArea, InputArea } from './styles';
-import Colors from '../../../../../styles/colors';
-import { TextBold, TextLight, Text } from '../../../../../styles/fonts';
+import Colors from '../../../../styles/colors';
+import { TextBold, TextLight, Text } from '../../../../styles/fonts';
 
 const NewEquipment2 = props => {
   const equipment = props.navigation.getParam('equipment');

@@ -6,8 +6,8 @@ import Colors from '../styles/colors';
 import Home from '../pages/Main/Home';
 import Room from '../pages/Main/Room';
 import NewRoom from '../pages/Main/NewRoom';
-import NewEquipment1 from '../pages/Main/Equipment/NewEquipment/Screen1';
-import NewEquipment2 from '../pages/Main/Equipment/NewEquipment/Screen2';
+import NewEquipment1 from '../pages/Main/NewEquipment/Screen1';
+import NewEquipment2 from '../pages/Main/NewEquipment/Screen2';
 
 // Settings
 import Settings from '../pages/Settings/General/index';

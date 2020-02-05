@@ -9,7 +9,7 @@ export const Container = styled.View`
 export const HeaderTop = styled(Animated.View)`
   justify-content: center;
   align-items: center;
-
+  background-color: red
 `;
 
 export const Title = styled(Animated.Text)`

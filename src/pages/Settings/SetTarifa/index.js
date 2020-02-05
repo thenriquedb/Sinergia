@@ -37,7 +37,6 @@ const SetTarifa = (props) => {
 
   return (
     <SettingsModal
-
       title="Tarifa"
       cancel={props.cancel}
       isVisible={props.isVisible}

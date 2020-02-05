@@ -21,7 +21,7 @@ export const ExpensesValue = styled(Animated.Text)`
 export const ExpensesValueLabel = styled(Animated.Text)`
   color: #fff;
   font-size: 18;
-font-weight: bold;
+  font-weight: bold;
 `;
 
 export const HeaderInfo = styled.View`
@@ -31,19 +31,17 @@ export const HeaderInfo = styled.View`
 export const HeaderInfosContainer = styled(Animated.View)`
   flex-direction: column;
   margin-top: 10px;
-  justify-content: space-between;
   height: 80px;
 `;
 
 export const HeaderInfosValuesContainer = styled(Animated.View)`
   flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const DifferenceBetweenTariffsContainer = styled(Animated.View)`
   margin-top: 10px;
 `;
-
-
 
 export const DifferenceBetweenTariffs = styled(Animated.Text)`
   color: #fff;

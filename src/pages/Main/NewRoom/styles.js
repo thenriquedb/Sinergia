@@ -18,8 +18,7 @@ export const SaveBtn = styled.TouchableOpacity`
 
 
 export const EquipmentContainer = styled.View`
-padding: 10px;
-
+  padding: 10px;
 `;
 
 export const EquipmentCard = styled(Animated.View)`

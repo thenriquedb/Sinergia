@@ -1,7 +1,7 @@
 import { StyleSheet, Animated } from 'react-native';
 
 import styled from 'styled-components/native';
-import Colors from '../../../../../styles/colors';
+import Colors from '../../../../styles/colors';
 
 export const Container = styled.View`
   flex: 1;
@@ -10,8 +10,8 @@ export const Container = styled.View`
 `;
 
 export const RoomContainer = styled.View`
-padding: 10px;
-flex: 1;
+  padding: 10px;
+  flex: 1;
 `;
 
 export const RoomCard = styled(Animated.View)`

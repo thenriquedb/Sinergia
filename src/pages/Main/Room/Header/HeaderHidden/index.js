@@ -89,10 +89,9 @@ export default function HeaderHidden(props) {
 
 
       <HeaderInfosContainer>
-        <ExpensesLabel
-          style={[...expensesLabelAnimationConfig]}>
+        <ExpensesLabel style={[...expensesLabelAnimationConfig]}>
           Gastos mensais
-      </ExpensesLabel>
+        </ExpensesLabel>
 
         <HeaderInfosValuesContainer>
           <HeaderInfo>

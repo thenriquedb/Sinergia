@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 // components
 import Input from '../../../components/Input/index';
+import ConfirmModal from "./ConfirmModal";
 
 // styles
 import {
@@ -42,12 +43,16 @@ class NewRoom extends Component {
       modalIsVisible: false,
       icon: [],
       customName: '',
+      isVisibleConfirmModal: false,
       offset: new Animated.Value(0)
     };
 
     this.equipmentCard = this.equipmentCard.bind(this);
     this.toggleSelectEquipment = this.toggleSelectEquipment.bind(this);
     this.toggleSaveButton = this.toggleSaveButton.bind(this);
+    this.setCustomName = this.setCustomName.bind(this);
+    this.saveRoom = this.saveRoom.bind(this);
+
   }
 
   componentDidMount() {
@@ -123,7 +128,15 @@ class NewRoom extends Component {
     this.setState(s);
   }
 
-  toggleSaveButton() {
+  setCustomName(input) {
+
+    let s = this.state;
+    s.customName = input;
+    this.setState(s)
+  }
+
+  saveRoom() {
+
     if (this.state.selectedRoomIndex != -1) {
       if (this.state.customName.length >= 4) {
         const found = this.props.rooms.find(item => item.name === this.state.customName);
@@ -134,13 +147,20 @@ class NewRoom extends Component {
             modalIsVisible: !this.state.modalIsVisible,
             alertMessage: `O cômodo ${this.state.customName} foi cadastrado com sucesso!`
           });
+          this.setState({ isVisibleConfirmModal: !this.state.isVisibleConfirmModal });
         } else {
           this.setState({
             modalIsVisible: !this.state.modalIsVisible,
-            alertMessage: `O cômodo ${this.state.customName} já esta cadastrado.`
+            alertMessage: `O cômodo ${this.state.customName} já esta cadastrado. `
           });
         }
       }
+    }
+  }
+
+  toggleSaveButton() {
+    if (this.state.selectedRoomIndex != -1) {
+      this.setState({ isVisibleConfirmModal: !this.state.isVisibleConfirmModal });
     } else {
       ToastAndroid.showWithGravityAndOffset(
         'É necessário selecionar um cômodo para continuar',
@@ -163,12 +183,6 @@ class NewRoom extends Component {
 
         <View style={{ flex: 1 }}>
           <EquipmentContainer>
-            <Input
-              value={this.state.customName}
-              onChangeText={customName => this.setState({ customName })}
-              placeholder="Nome"
-            />
-
             <FlatList
               style={{ marginTop: 30 }}
               data={this.state.rooms}
@@ -197,6 +211,13 @@ class NewRoom extends Component {
             </ContinueButton>
           </TouchableHighlight>
         </Footer>
+
+        <ConfirmModal
+          customName={this.state.customName}
+          setCustomName={this.setCustomName}
+          confirm={this.saveRoom}
+          setIsVisible={() => this.setState({ isVisibleConfirmModal: !this.state.isVisibleConfirmModal })}
+          isVisible={this.state.isVisibleConfirmModal} />
       </Container>
     );
   }
