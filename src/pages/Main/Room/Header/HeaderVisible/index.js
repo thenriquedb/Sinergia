@@ -27,7 +27,7 @@ export default function HeaderVisible(props) {
   const headerInfosAnimationConfig = [
     {
       height: offset.interpolate({
-        inputRange: [50, 500],
+        inputRange: [100, 500],
         outputRange: [40, 0],
         extrapolate: 'clamp'
       })
@@ -35,7 +35,7 @@ export default function HeaderVisible(props) {
 
     {
       marginTop: offset.interpolate({
-        inputRange: [50, 500],
+        inputRange: [100, 500],
         outputRange: [10, -10],
         extrapolate: 'clamp'
       })
@@ -43,7 +43,7 @@ export default function HeaderVisible(props) {
     {
       transform: [{
         translateY: offset.interpolate({
-          inputRange: [50, 500],
+          inputRange: [100, 500],
           outputRange: [0, 10],
         }),
         translateX: offset
@@ -51,7 +51,7 @@ export default function HeaderVisible(props) {
     },
     {
       opacity: offset.interpolate({
-        inputRange: [50, 300, 500],
+        inputRange: [100, 300, 500],
         outputRange: [1, 0, 0],
         extrapolate: 'clamp'
       })
@@ -61,7 +61,7 @@ export default function HeaderVisible(props) {
   const headerTopAnimationConfig = [
     {
       height: offset.interpolate({
-        inputRange: [0, 900],
+        inputRange: [100, 500],
         outputRange: [200, 20],
         extrapolate: 'clamp'
       })
@@ -71,14 +71,14 @@ export default function HeaderVisible(props) {
   const titleAnimationConfig = [
     {
       padding: offset.interpolate({
-        inputRange: [0, 900],
+        inputRange: [100, 500],
         outputRange: [0, 40],
         extrapolate: 'clamp'
       })
     },
     {
       fontSize: offset.interpolate({
-        inputRange: [0, 900],
+        inputRange: [100, 500],
         outputRange: [48, 36],
         extrapolate: 'clamp'
       })
@@ -88,7 +88,7 @@ export default function HeaderVisible(props) {
   const iconAnimationConfig = [
     {
       height: offset.interpolate({
-        inputRange: [0, 300, 700],
+        inputRange: [100, 300, 700],
         outputRange: [140, 0, 0],
         extrapolate: 'clamp'
       })

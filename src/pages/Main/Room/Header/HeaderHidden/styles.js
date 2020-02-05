@@ -29,9 +29,14 @@ export const HeaderInfo = styled.View`
 `;
 
 export const HeaderInfosContainer = styled(Animated.View)`
-  flex-direction: row;
+  flex-direction: column;
   margin-top: 10px;
   justify-content: space-between;
+  height: 80px;
+`;
+
+export const HeaderInfosValuesContainer = styled(Animated.View)`
+  flex-direction: row;
 `;
 
 export const DifferenceBetweenTariffsContainer = styled(Animated.View)`

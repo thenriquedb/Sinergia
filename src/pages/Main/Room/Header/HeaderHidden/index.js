@@ -5,6 +5,7 @@ import {
   ExpensesLabel,
   ExpensesValue,
   ExpensesValueLabel,
+  HeaderInfosValuesContainer,
   HeaderInfo,
   HeaderInfosContainer,
   DifferenceBetweenTariffsContainer,
@@ -85,21 +86,26 @@ export default function HeaderHidden(props) {
 
   return (
     <Container>
-      <ExpensesLabel
-        style={[...expensesLabelAnimationConfig]}>
-        Gastos mensais
-      </ExpensesLabel>
+
 
       <HeaderInfosContainer>
-        <HeaderInfo>
-          <ExpensesValue style={[...expensesValueAnimationConfig]}>{moneyMask(totalTarifaBranca)} </ExpensesValue>
-          <ExpensesValueLabel style={[...expensesValueLabelAnimationConfig]}>Tarifa branca</ExpensesValueLabel>
-        </HeaderInfo>
+        <ExpensesLabel
+          style={[...expensesLabelAnimationConfig]}>
+          Gastos mensais
+      </ExpensesLabel>
 
-        <HeaderInfo>
-          <ExpensesValue style={[...expensesValueAnimationConfig]}>{moneyMask(totalTarifaConvencional)} </ExpensesValue>
-          <ExpensesValueLabel style={[...expensesValueLabelAnimationConfig]}>Tarifa convencional</ExpensesValueLabel>
-        </HeaderInfo>
+        <HeaderInfosValuesContainer>
+          <HeaderInfo>
+            <ExpensesValue style={[...expensesValueAnimationConfig]}>{moneyMask(totalTarifaBranca)} </ExpensesValue>
+            <ExpensesValueLabel style={[...expensesValueLabelAnimationConfig]}>Tarifa branca</ExpensesValueLabel>
+          </HeaderInfo>
+
+          <HeaderInfo>
+            <ExpensesValue style={[...expensesValueAnimationConfig]}>{moneyMask(totalTarifaConvencional)} </ExpensesValue>
+            <ExpensesValueLabel style={[...expensesValueLabelAnimationConfig]}>Tarifa convencional</ExpensesValueLabel>
+          </HeaderInfo>
+        </HeaderInfosValuesContainer>
+
       </HeaderInfosContainer>
 
       <DifferenceBetweenTariffsContainer style={[...headerInfosAnimationConfig]}>

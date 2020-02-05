@@ -9,10 +9,11 @@ export const Container = styled.View`
 export const HeaderTop = styled(Animated.View)`
   justify-content: center;
   align-items: center;
+
 `;
 
 export const Title = styled(Animated.Text)`
-  font-size: 54;
+  font-size: 48;
   color: #fff;
   font-weight: bold;
 `;
