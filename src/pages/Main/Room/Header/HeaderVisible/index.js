@@ -25,34 +25,34 @@ export default function HeaderVisible(props) {
   } = props;
 
   const headerInfosAnimationConfig = [
-    {
-      height: offset.interpolate({
-        inputRange: [50, 400],
-        outputRange: [40, 0],
-        extrapolate: 'clamp'
-      })
-    },
 
     {
-      marginTop: offset.interpolate({
-        inputRange: [50, 400],
-        outputRange: [10, -10],
+      height: offset.interpolate({
+        inputRange: [0, 320, 600],
+        outputRange: [40, 20, 0],
         extrapolate: 'clamp'
       })
     },
-    // {
-    //   transform: [{
-    //     translateY: offset.interpolate({
-    //       inputRange: [50, 400],
-    //       outputRange: [0, 10],
-    //     }),
-    //     translateX: offset
-    //   }]
-    // },
+    {
+      marginTop: offset.interpolate({
+        inputRange: [200, 500],
+        outputRange: [15, -10],
+        extrapolate: 'clamp'
+      })
+    },
+    {
+      transform: [{
+        translateY: offset.interpolate({
+          inputRange: [150, 400],
+          outputRange: [0, -10],
+        }),
+        translateX: offset
+      }]
+    },
     {
       opacity: offset.interpolate({
-        inputRange: [100, 150, 400],
-        outputRange: [1, 1, 0],
+        inputRange: [150, 250, 320, 400],
+        outputRange: [1, 0, 0, 0],
         extrapolate: 'clamp'
       })
     }
@@ -61,25 +61,19 @@ export default function HeaderVisible(props) {
   const headerTopAnimationConfig = [
     {
       height: offset.interpolate({
-        inputRange: [50, 500],
-        outputRange: [200, 50],
+        inputRange: [0, 320, 600],
+        outputRange: [200, 40, 0],
         extrapolate: 'clamp'
       })
     },
   ];
 
   const titleAnimationConfig = [
-    {
-      padding: offset.interpolate({
-        inputRange: [50, 500],
-        outputRange: [0, 40],
-        extrapolate: 'clamp'
-      })
-    },
+
     {
       fontSize: offset.interpolate({
-        inputRange: [50, 500],
-        outputRange: [48, 36],
+        inputRange: [0, 500],
+        outputRange: [48, 28],
         extrapolate: 'clamp'
       })
     },
@@ -88,15 +82,24 @@ export default function HeaderVisible(props) {
   const iconAnimationConfig = [
     {
       height: offset.interpolate({
-        inputRange: [50, 400],
-        outputRange: [150, 0],
+        inputRange: [0, 320, 600],
+        outputRange: [140, 80, 0],
         extrapolate: 'clamp'
       })
     },
     {
+      transform: [{
+        translateY: offset.interpolate({
+          inputRange: [150, 400],
+          outputRange: [0, -10],
+          extrapolate: 'clamp'
+        }),
+      }]
+    },
+    {
       opacity: offset.interpolate({
-        inputRange: [50, 400],
-        outputRange: [1, 0],
+        inputRange: [150, 250, 320, 400],
+        outputRange: [1, 0, 0, 0],
         extrapolate: 'clamp'
       })
     }

@@ -1,14 +1,21 @@
 import React from 'react';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Lottie from "lottie-react-native";
 import emptyAnimation from "../../../../assets/empty.json";
 
-import { TextLight, TextBold } from "../../../../styles/fonts";
-import { Container } from './styles';
 
-export default function RoomListEmpty({ roomName }) {
+import { Container, BackButton } from './styles';
+import { TextLight, TextBold } from "../../../../styles/fonts";
+import Colors from "../../../../styles/colors";
+
+export default function RoomListEmpty({ roomName, navigation }) {
   return (
     <Container>
+      <BackButton onPress={() => navigation.goBack()} >
+        <MaterialCommunityIcons name="arrow-left" size={28} color={Colors.primary} />
+      </BackButton>
+
       <Lottie
         source={emptyAnimation}
         autoPlay

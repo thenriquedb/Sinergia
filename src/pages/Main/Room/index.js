@@ -69,6 +69,7 @@ function Room(props) {
     <Container>
       {!room.equipments.length ?
         <RoomListEmpty
+          navigation={navigation}
           roomName="roomName" />
         :
         (

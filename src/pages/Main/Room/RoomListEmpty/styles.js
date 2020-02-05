@@ -9,3 +9,9 @@ export const Container = styled.View`
   justify-content: center;
   background-color: ${Colors.white};
 `;
+
+export const BackButton = styled.TouchableOpacity`
+    position: absolute;
+    left: 10;
+    top: 10
+  `;
