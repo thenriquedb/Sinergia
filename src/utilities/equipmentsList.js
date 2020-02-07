@@ -471,7 +471,7 @@ export default {
           name: 'Cafeteira - 1000W',
           power: 1000,
           description:
-            ' ',
+            '',
         },
         {
           name: 'Personalizado',
@@ -492,7 +492,7 @@ export default {
           name: 'Exaustor Fogão - 170W',
           power: 170,
           description:
-            ' ',
+            '',
         },
         {
           name: 'Personalizado',
@@ -513,7 +513,7 @@ export default {
           name: 'Fogão elétrico - 1500W',
           power: 1500,
           description:
-            ' ',
+            '',
         },
         {
           name: 'Personalizado',

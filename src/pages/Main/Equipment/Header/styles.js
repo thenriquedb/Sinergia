@@ -23,6 +23,7 @@ export const Description = styled(Animated.Text)`
   text-align: center;
   position: absolute;
   bottom: 15;
+  height: 70px;
 `;
 
 export const Icon = styled(Animated.Image)`

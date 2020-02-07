@@ -19,17 +19,30 @@ const EditRoomModal = props => {
 
   const toggleSaveBtn = () => {
     if (newName.length >= 4) {
-      props.editRoom(props.room.id, newName);
-      Alert.alert(
-        'Atualizado com sucesso',
-        `O cômodo ${oldName} foi atualizado para ${newName} com sucesso!`,
-        [
-          { text: 'OK' },
-        ],
-        { cancelable: true },
-      );
 
-      props.updateData();
+      if (newName.trim() === oldName.trim()) {
+        Alert.alert(
+          'Nomes iguais',
+          `O novo nome não pode ser igual ao nome antigo.`,
+          [
+            { text: 'OK' },
+          ],
+          { cancelable: true },
+        );
+
+      } else {
+        props.editRoom(props.room.id, newName);
+        Alert.alert(
+          'Atualizado com sucesso',
+          `O cômodo ${oldName} foi atualizado para ${newName} com sucesso!`,
+          [
+            { text: 'OK' },
+          ],
+          { cancelable: true },
+        );
+
+        props.updateData();
+      }
     } else {
       Alert.alert(
         'Não foi possivel atualizar',

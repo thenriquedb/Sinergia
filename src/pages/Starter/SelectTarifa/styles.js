@@ -5,7 +5,6 @@ import Colors from "../../../styles/colors";
 
 export const Container = styled.View`
   flex: 1;
-  padding: 0px 10px 0px 10px;
 `;
 
 export const Content = styled.View`
@@ -34,8 +33,8 @@ export const ContinueConfigArea = styled.View`
 
 export const TarifaCard = styled.View`
   padding: 6px;
-  height: 150;
-  width: 150;
+  height: 140;
+  width: 140;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -47,8 +46,8 @@ export const TarifaCard = styled.View`
 `;
 
 export const Icon = styled.Image`
-width: 90;
-height: 90;
+width: 70;
+height: 70;
 margin-bottom: 5;
 `;
 

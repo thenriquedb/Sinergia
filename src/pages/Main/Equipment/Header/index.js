@@ -3,7 +3,7 @@ import { Container, Description, Title, Icon } from './styles';
 
 const Header = ({ offset, on24Hours, equipmentName, equipmentIcon, equipmentDescription }) => {
 
-  const MAX_INPUT_VALUE = 300;
+  const MAX_INPUT_VALUE = 380;
 
   const containerAnimationConfig = [
     {
@@ -36,14 +36,14 @@ const Header = ({ offset, on24Hours, equipmentName, equipmentIcon, equipmentDesc
     {
       fontSize: offset.interpolate({
         inputRange: [0, MAX_INPUT_VALUE],
-        outputRange: [36, 28],
+        outputRange: [equipmentName.length >= 20 ? 28 : 36, 28],
         extrapolate: 'clamp'
       })
     },
     {
       bottom: offset.interpolate({
         inputRange: [0, MAX_INPUT_VALUE],
-        outputRange: [equipmentDescription ? 80 : 30, 20],
+        outputRange: [equipmentDescription ? 75 : 30, 20],
         extrapolate: 'clamp'
       }),
     },
@@ -66,7 +66,14 @@ const Header = ({ offset, on24Hours, equipmentName, equipmentIcon, equipmentDesc
         outputRange: [1, 0],
         extrapolate: 'clamp'
       })
-    }
+    },
+    {
+      bottom: offset.interpolate({
+        inputRange: [0, MAX_INPUT_VALUE],
+        outputRange: [equipmentDescription ? -5 : 30, 20],
+        extrapolate: 'clamp'
+      }),
+    },
   ];
 
   return (

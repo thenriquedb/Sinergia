@@ -9,13 +9,13 @@ export const Container = styled(Animated.View)`
 `;
 
 export const BackButton = styled.TouchableOpacity`
-    position: absolute;
-    left: 10;
-    top: 10
-  `;
+  position: absolute;
+  left: 10;
+  top: 10
+`;
 
 export const RegisteredContainer = styled(Animated.ScrollView)`
-  flex: 1;
+  /* flex: 1; */
   background-color: ${Colors.white};
   border-top-left-radius: 15;
   border-top-right-radius: 15;
@@ -26,7 +26,6 @@ export const CheckBoxArea = styled.View`
   flex-direction: row;
   align-items: center;
   margin-top: 10px;
-  /* margin-bottom: -10px; */
 `;
 
 export const InputArea = styled.View`
