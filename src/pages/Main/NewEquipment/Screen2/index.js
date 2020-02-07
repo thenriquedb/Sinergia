@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Picker, Animated } from 'react-native';
+import { Picker, Animated, ToastAndroid } from 'react-native';
 import { connect } from 'react-redux';
 
 import CheckBox from "@react-native-community/checkbox";
@@ -10,6 +10,7 @@ import ActionButton from 'react-native-action-button';
 import SetTime from "./SetTime";
 import Input from "../../../../components/Input";
 import Header from "./Header";
+
 //util
 import calcularTarifas from "../../../../util/calcularTarifas";
 
@@ -21,6 +22,7 @@ import {
   CheckBoxArea,
   InputArea
 } from './styles';
+
 import Colors from '../../../../styles/colors';
 import { TextBold, Text } from '../../../../styles/fonts';
 
@@ -31,7 +33,6 @@ const NewEquipment2 = props => {
   // states
   const [selectedModel, setSelectedModel] = useState(equipment.models[0]);
   const [customName, setCustomName] = useState(equipment.models[0].name);
-  // const [customPower, setCustomPower] = useState('');
   const [quantity, setQuantity] = useState('1');
   const [power, setPower] = useState(equipment.models[0].power.toString());
   const [on24Hours, setOn24Hours] = useState(false);
@@ -44,11 +45,7 @@ const NewEquipment2 = props => {
     currentDate.setMinutes(currentDate.getMinutes() + 15);
     return currentDate;
   });
-
-  const scrollOffset = new Animated.Value(0);
-
   const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(1);
-
 
   // Picker de horas - finais de semana
   const [startTimeWeekend, setStartTimeWeekend] = useState(new Date());
@@ -57,45 +54,47 @@ const NewEquipment2 = props => {
     currentDate.setMinutes(currentDate.getMinutes() + 15);
     return currentDate;
   });
-
   const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(1);
 
+  const scrollOffset = new Animated.Value(0);
 
   const toggleSaveBtn = () => {
-    // const power = !selectedModel ? equipment.models[0].power : selectedModel.power
+    if (endTimeWeekdays < startTimeWeekdays || endTimeWeekend < startTimeWeekend) {
+      ToastAndroid.showWithGravityAndOffset(
+        'O horário de desligamento do equipamento não pode ser menor do que o horário de início',
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+        25,
+        50,
+      );
+    }
+    else {
+      const { kwMonthly, totalTimeOn, tarifaConvencional, tarifaBranca } = calcularTarifas(
+        quantity, power, frequencyOfUseOnWeekdays,
+        frequencyOfUseOnWeekend, props.dealership, startTimeWeekdays,
+        endTimeWeekdays, startTimeWeekend, endTimeWeekend, on24Hours);
 
-    const { kwMonthly, totalTimeOn, tarifaConvencional, tarifaBranca } = calcularTarifas(
-      quantity, power, frequencyOfUseOnWeekdays,
-      frequencyOfUseOnWeekend, props.dealership, startTimeWeekdays,
-      endTimeWeekdays, startTimeWeekend, endTimeWeekend, on24Hours);
+      const newEquipment = {
+        id: new Date().getTime().toString(),
+        name: customName,
+        icon: equipment.icon,
+        power,
+        quantity,
+        totalTimeOn,
+        kwMonthly,
+        tarifaConvencional: {
+          monthlyExpenses: tarifaConvencional,
+        },
+        tarifaBranca: {
+          monthlyExpenses: tarifaBranca,
+        },
+        frequencyOfUseOnWeekdays,
+        frequencyOfUseOnWeekend,
+      };
 
-    const newEquipment = {
-      id: new Date().getTime().toString(),
-      name: customName,
-      icon: equipment.icon,
-      power,
-      quantity,
-      totalTimeOn,
-      kwMonthly,
-      tarifaConvencional: {
-        monthlyExpenses: tarifaConvencional,
-      },
-      tarifaBranca: {
-        monthlyExpenses: tarifaBranca,
-      },
-      frequencyOfUseOnWeekdays,
-      frequencyOfUseOnWeekend,
+      props.addNewEquipment(props.navigation.getParam('idRoom'), newEquipment);
+      props.navigation.navigate('Room');
     };
-
-    props.addNewEquipment(props.navigation.getParam('idRoom'), newEquipment);
-    props.navigation.navigate('Room');
-  };
-
-  const selectEquipmentModel = (itemValue) => {
-    setSelectedModel(itemValue);
-    setUseCustomEquipment(itemValue.name === 'Personalizado' ? true : false);
-    setCustomName(itemValue.name === 'Personalizado' ? equipment.name : itemValue.name);
-    setPower(itemValue.power.toString())
   }
 
   return (

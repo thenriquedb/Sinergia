@@ -45,7 +45,6 @@ function Room(props) {
   useEffect(() => {
     props.setRoomKwMonthly(room.id, kwMonthly);
     props.setRoomMonthlyExpenses(room.id, totalTarifaConvencional, totalTarifaBranca);
-
   }, [totalTarifaBranca, totalTarifaBranca, kwMonthly]);
 
 
@@ -68,7 +67,7 @@ function Room(props) {
       {!room.equipments.length ?
         <RoomListEmpty
           navigation={navigation}
-          roomName="roomName" />
+          roomName={room.name} />
         :
         (
           <Equipments>

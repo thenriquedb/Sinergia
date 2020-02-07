@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, View, Animated } from 'react-native';
+import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, Animated } from 'react-native';
 
 import Alert from "../../../components/Alert";
 import ConfirmModal from "./ConfirmModal";
@@ -191,7 +191,7 @@ class NewRoom extends Component {
         <Alert
           title={"Confirmar"}
           message={this.state.alertMessage}
-          confirm={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}
+          cancel={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}
           isVisible={this.state.modalIsVisible} />
 
         <EquipmentContainer>

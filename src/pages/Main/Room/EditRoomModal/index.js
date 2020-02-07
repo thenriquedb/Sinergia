@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Picker, Alert, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux'
+import { Alert, TouchableOpacity } from 'react-native';
+
 import Modal from "react-native-modal";
 import Input from "../../../../components/Input/index";
-
-//redux
-import { connect } from 'react-redux'
-
 
 //styles
 import { TextBold } from '../../../../styles/fonts'
@@ -18,25 +16,29 @@ import roomList from "../../../../utilities/roomsList"
 const EditRoomModal = props => {
   const [newName, setNewName] = useState(props.room.name);
   const [oldName, setOldName] = useState(props.room.name);
-  const [selectType, setSelectType] = useState(roomList[0].value);
 
   const toggleSaveBtn = () => {
     if (newName.length >= 4) {
-      if (newName === oldName) {
-        Alert.alert('Novo nome não pode ser igual ao original.');
-      } else {
-        try {
-          props.editRoom(props.room.id, newName, selectType);
+      props.editRoom(props.room.id, newName);
+      Alert.alert(
+        'Atualizado com sucesso',
+        `O cômodo ${oldName} foi atualizado para ${newName} com sucesso!`,
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: true },
+      );
 
-          Alert.alert('O cômodo ' + oldName + ' foi atualizado para ' + newName +
-            ' com sucesso!');
-          props.updateData();
-        } catch (error) {
-          Alert.alert('Não foi atualizar cômodo ' + oldName + '.');
-        }
-      }
+      props.updateData();
     } else {
-      Alert.alert('O novo nome precisa possuir no mínimo 4 caracteres.');
+      Alert.alert(
+        'Não foi possivel atualizar',
+        `O novo nome precisa possuir no mínimo 4 caracteres.`,
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: false },
+      );
     }
   }
 
@@ -51,16 +53,6 @@ const EditRoomModal = props => {
           onChangeText={newName => setNewName(newName)}
           placeholder="Novo nome"
         />
-
-        <Picker
-          selectedValue={selectType}
-          onValueChange={(itemValue, itemIndex) => {
-            setSelectType(itemValue);
-          }}>
-          {roomsList.map((value, key) => {
-            return <Picker.Item key={key} value={key} label={value.name} />;
-          })}
-        </Picker>
 
         <ButtonsContainer>
           <TouchableOpacity activeOpacity={0.5} onPress={() => {
@@ -83,8 +75,8 @@ const EditRoomModal = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    editRoom: (id, name, typeRoom) => {
-      dispatch({ type: 'EDIT_ROOM', payload: { id, name, typeRoom } });
+    editRoom: (id, name) => {
+      dispatch({ type: 'EDIT_ROOM', payload: { id, name } });
     },
   };
 };

@@ -18,17 +18,16 @@ const Alert = props => {
         <Text>{props.message} </Text>
 
         <ButtonsContainer>
-          {props.cancel &&
+          {props.confirm &&
             <TouchableOpacity activeOpacity={0.5} onPress={props.confirm}>
               <TextBold style={{ marginHorizontal: 15 }} color={Colors.primary} fontSize={'h5'}> CONFIRMAR </TextBold>
             </TouchableOpacity>
           }
 
-          {props.confirm &&
+          {props.cancel &&
             <TouchableOpacity activeOpacity={0.5} onPress={props.cancel}>
-              <TextBold style={{ marginHorizontal: 15 }} color={Colors.primary} fontSize={'h5'}> CANCELAR </TextBold>
+              <TextBold style={{ marrginHorizontal: 15 }} color={Colors.primary} fontSize={'h5'}>CANCELAR</TextBold>
             </TouchableOpacity>
-
           }
         </ButtonsContainer>
       </Container>

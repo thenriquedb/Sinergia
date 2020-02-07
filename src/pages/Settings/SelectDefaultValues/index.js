@@ -19,7 +19,6 @@ const SelectDefaultValues = (props) => {
   const [valorPonta, setValorPonta] = useState(dealership.valorPonta);
   const [valorForaPonta, setValorForaPonta] = useState(dealership.valorForaPonta);
 
-
   const restoreDefaultValues = () => {
     setValorTarifaConvencional(dealershipBackup.valorTarifaConvencional);
     setValorIntermediaria(dealershipBackup.valorIntermediaria);
@@ -28,6 +27,7 @@ const SelectDefaultValues = (props) => {
   }
 
   useEffect(() => {
+    console.log("dealership: ", dealership)
     navigation.setParams({ restoreDefaultValues });
   }, []);
 
@@ -132,7 +132,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    setValueKw: (valueKW) => dispatch({ type: 'SET_VALUE_KW', payload: { valueKW } }),
+    setValueKw: (valorTarifaConvencional) => dispatch({ type: 'SET_VALUE_KW', payload: { valorTarifaConvencional } }),
     setValueKwTarifaBranca: (valorPonta, valorIntermediaria, valorForaPonta) =>
       dispatch({ type: 'SET_VALUE_KW_TARIFA_BRANCA', payload: { valorPonta, valorIntermediaria, valorForaPonta } }),
   };

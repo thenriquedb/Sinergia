@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
     borderColor: Colors.primary,
   },
 
-  ConitnueButton: {
+  ContinueButton: {
     backgroundColor: Colors.lightGray1,
   },
 });
