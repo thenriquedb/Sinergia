@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, Animated } from 'react-native';
 
 // Lista de equipamentos
-import equipmentsList from '../../../../utilities/equipmentsList';
+import equipmentsList from '../../../utilities/equipmentsList';
 
 // styles
-import { TextLight } from '../../../../styles/fonts';
-import Colors from '../../../../styles/colors';
+import { TextLight } from '../../../styles/fonts';
+import Colors from '../../../styles/colors';
 import {
   Container,
   RoomCard,
@@ -121,8 +121,9 @@ export default class NewEquipment extends Component {
 
   toggleContinueButton() {
     if (this.state.selectedEquipment != -1) {
-      this.props.navigation.navigate('NewEquipment2', {
+      this.props.navigation.navigate('Equipment', {
         equipment: this.state.equipments[this.state.selectedEquipment],
+        action: 'add',
         idRoom: this.props.navigation.getParam('idRoom'),
       });
     } else {

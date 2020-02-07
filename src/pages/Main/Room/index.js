@@ -90,8 +90,9 @@ function Room(props) {
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
                   <CardEquipment
+                    navigation={navigation}
                     equipment={item}
-                    roomId={room.id}
+                    idRoom={room.id}
                   />
                 )}
                 scrollEventThrottle={16}
@@ -114,7 +115,7 @@ function Room(props) {
       <ActionButton
         size={55}
         onPress={() => {
-          navigation.navigate('NewEquipment1', {
+          navigation.navigate('NewEquipment', {
             idRoom: room.id,
             typeRoom: room.typeRoom
           });

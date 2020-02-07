@@ -24,10 +24,11 @@ const Home = props => {
       velocity: 20,
       bounciness: 20,
       useNativeDriver: true
-    }).start()
+    }).start();
   }, []);
 
   const reRender = () => {
+
     setUpdateList(!updateList);
   };
 

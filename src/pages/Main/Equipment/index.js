@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Picker, Animated, ToastAndroid } from 'react-native';
+import { Picker, Animated, Alert, ToastAndroid } from 'react-native';
 import { connect } from 'react-redux';
 
 import CheckBox from "@react-native-community/checkbox";
@@ -8,11 +8,11 @@ import CheckBox from "@react-native-community/checkbox";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ActionButton from 'react-native-action-button';
 import SetTime from "./SetTime";
-import Input from "../../../../components/Input";
+import Input from "../../../components/Input";
 import Header from "./Header";
 
 //util
-import calcularTarifas from "../../../../util/calcularTarifas";
+import calcularTarifas from "../../../util/calcularTarifas";
 
 // styles
 import {
@@ -23,42 +23,47 @@ import {
   InputArea
 } from './styles';
 
-import Colors from '../../../../styles/colors';
-import { TextBold, Text } from '../../../../styles/fonts';
+import Colors from '../../../styles/colors';
+import { TextBold, Text } from '../../../styles/fonts';
 
-const NewEquipment2 = props => {
+function Equipment(props) {
   const equipment = props.navigation.getParam('equipment');
+  console.log("equipment: ", equipment)
+  const action = props.navigation.getParam('action');
   const { navigation } = props;
 
   // states
-  const [selectedModel, setSelectedModel] = useState(equipment.models[0]);
-  const [customName, setCustomName] = useState(equipment.models[0].name);
-  const [quantity, setQuantity] = useState('1');
-  const [power, setPower] = useState(equipment.models[0].power.toString());
-  const [on24Hours, setOn24Hours] = useState(false);
-  const [useCustomEquipment, setUseCustomEquipment] = useState(false);
+  const [selectedModel, setSelectedModel] = useState(equipment.model ? equipment.model : equipment.models[0]);
+  const [customName, setCustomName] = useState(equipment.name ? equipment.name : equipment.models[0].name);
+  const [quantity, setQuantity] = useState(equipment.quantity ? equipment.quantity : '1');
+  const [power, setPower] = useState(equipment.power ? equipment.power : equipment.models[0].power.toString());
+  const [on24Hours, setOn24Hours] = useState(equipment.on24Hours ? on24Hours : false);
+  const [useCustomEquipment, setUseCustomEquipment] = useState(equipment.useCustomEquipment ? equipment.useCustomEquipment : false);
 
   // Picker de horas - dias da semana
-  const [startTimeWeekdays, setStartTimeWeekdays] = useState(new Date());
-  const [endTimeWeekdays, setEndTimeWeekdays] = useState(() => {
-    const currentDate = new Date();
-    currentDate.setMinutes(currentDate.getMinutes() + 15);
-    return currentDate;
-  });
-  const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(1);
+  const [startTimeWeekdays, setStartTimeWeekdays] = useState(equipment.startTimeWeekdays ? equipment.startTimeWeekdays : new Date());
+  const [endTimeWeekdays, setEndTimeWeekdays] = useState(equipment.endTimeWeekdays ? equipment.endTimeWeekdays :
+    () => {
+      const currentDate = new Date();
+      currentDate.setMinutes(currentDate.getMinutes() + 15);
+      return currentDate;
+    });
+  const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(equipment.frequencyOfUseOnWeekdays ? equipment.frequencyOfUseOnWeekdays : 1);
 
   // Picker de horas - finais de semana
-  const [startTimeWeekend, setStartTimeWeekend] = useState(new Date());
-  const [endTimeWeekend, setEndTimeWeekend] = useState(() => {
-    const currentDate = new Date();
-    currentDate.setMinutes(currentDate.getMinutes() + 15);
-    return currentDate;
-  });
-  const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(1);
+  const [startTimeWeekend, setStartTimeWeekend] = useState(equipment.startTimeWeekend ? equipment.startTimeWeekend : new Date());
+  const [endTimeWeekend, setEndTimeWeekend] = useState(equipment.endTimeWeekend ? equipment.endTimeWeekend :
+    () => {
+      const currentDate = new Date();
+      currentDate.setMinutes(currentDate.getMinutes() + 15);
+      return currentDate;
+    });
+  const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(equipment.frequencyOfUseOnWeekend ? equipment.frequencyOfUseOnWeekend : 1);
 
   const scrollOffset = new Animated.Value(0);
 
-  const toggleSaveBtn = () => {
+
+  function validateInputs() {
     if (endTimeWeekdays < startTimeWeekdays || endTimeWeekend < startTimeWeekend) {
       ToastAndroid.showWithGravityAndOffset(
         'O horário de desligamento do equipamento não pode ser menor do que o horário de início',
@@ -67,34 +72,87 @@ const NewEquipment2 = props => {
         25,
         50,
       );
+      return false;
     }
-    else {
+
+    if (!power) {
+      Alert.alert(
+        'Potência',
+        `O campo potência não pode ficar em branco`,
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: true },
+      );
+      return false;
+    }
+
+    if (!quantity) {
+      Alert.alert(
+        'Quantidade',
+        `O campo quantidade não pode ficar em branco`,
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: true },
+      );
+      return false;
+    }
+
+    return true;
+  }
+
+  function toggleSaveBtn() {
+    if (validateInputs()) {
       const { kwMonthly, totalTimeOn, tarifaConvencional, tarifaBranca } = calcularTarifas(
         quantity, power, frequencyOfUseOnWeekdays,
         frequencyOfUseOnWeekend, props.dealership, startTimeWeekdays,
         endTimeWeekdays, startTimeWeekend, endTimeWeekend, on24Hours);
 
+      console.log("tarifaConvencional: ", tarifaConvencional)
+
       const newEquipment = {
-        id: new Date().getTime().toString(),
+        id: equipment.id ? equipment.id : new Date().getTime().toString(),
         name: customName,
         icon: equipment.icon,
+        models: equipment.models,
+        model: selectedModel,
+        on24Hours,
+        useCustomEquipment,
         power,
         quantity,
         totalTimeOn,
         kwMonthly,
+        frequencyOfUseOnWeekdays,
+        frequencyOfUseOnWeekend,
+        startTimeWeekdays,
+        endTimeWeekdays,
+        startTimeWeekend,
+        endTimeWeekend,
         tarifaConvencional: {
           monthlyExpenses: tarifaConvencional,
         },
         tarifaBranca: {
           monthlyExpenses: tarifaBranca,
         },
-        frequencyOfUseOnWeekdays,
-        frequencyOfUseOnWeekend,
       };
 
-      props.addNewEquipment(props.navigation.getParam('idRoom'), newEquipment);
+      console.log("newEquipment: ", newEquipment)
+
+      if (action == 'edit') {
+        props.editEquipment(props.navigation.getParam('idRoom'), newEquipment.id, newEquipment);
+      } else {
+        props.addNewEquipment(props.navigation.getParam('idRoom'), newEquipment);
+      }
       props.navigation.navigate('Room');
     };
+  }
+
+  function selectEquipmentModel(itemValue) {
+    setSelectedModel(itemValue);
+    setUseCustomEquipment(itemValue.name === 'Personalizado' ? true : false);
+    setCustomName(itemValue.name === 'Personalizado' ? equipment.name : itemValue.name);
+    setPower(itemValue.power.toString())
   }
 
   return (
@@ -202,7 +260,10 @@ const NewEquipment2 = props => {
       <ActionButton
         size={55}
         renderIcon={() => (
-          <MaterialCommunityIcons name="content-save" size={30} color="#fff" />
+          <MaterialCommunityIcons
+            name={action === 'edit' ? "pencil" : "content-save"}
+            size={30}
+            color="#fff" />
         )}
         onPress={() => toggleSaveBtn()}
         buttonColor={Colors.primary}
@@ -218,15 +279,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    addNewEquipment: (id, newEquipment) =>
-      dispatch({
-        type: 'ADD_EQUIPMENT',
-        payload: {
-          id,
-          newEquipment,
-        },
-      }),
+    addNewEquipment: (id, newEquipment) => dispatch({
+      type: 'ADD_EQUIPMENT', payload: { id, newEquipment },
+    }),
+    editEquipment: (idRoom, idEquipment, newEquipment) => dispatch({
+      type: 'EDIT_EQUIPMENT', payload: { idRoom, idEquipment, newEquipment },
+    }),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewEquipment2);
+export default connect(mapStateToProps, mapDispatchToProps)(Equipment);

@@ -6,8 +6,8 @@ import Colors from '../styles/colors';
 import Home from '../pages/Main/Home';
 import Room from '../pages/Main/Room';
 import NewRoom from '../pages/Main/NewRoom';
-import NewEquipment1 from '../pages/Main/NewEquipment/Screen1';
-import NewEquipment2 from '../pages/Main/NewEquipment/Screen2';
+import NewEquipment from '../pages/Main/NewEquipment';
+import Equipment from '../pages/Main/Equipment';
 
 // Settings
 import Settings from '../pages/Settings/General/index';
@@ -38,15 +38,15 @@ export default MainStack = createStackNavigator({
     },
   },
 
-  NewEquipment1: {
-    screen: NewEquipment1,
+  NewEquipment: {
+    screen: NewEquipment,
     navigationOptions: {
       title: 'Novo equipamento',
     },
   },
 
-  NewEquipment2: {
-    screen: NewEquipment2,
+  Equipment: {
+    screen: Equipment,
     navigationOptions: {
       headerShown: false
     }

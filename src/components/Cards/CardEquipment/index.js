@@ -13,7 +13,7 @@ import Alert from "../../Alert";
 import { moneyMask, kwMask } from "../../../util/masks";
 
 const CardEquipment = props => {
-  const { equipment, roomId } = props;
+  const { equipment, idRoom, navigation } = props;
   const [modalIsVisible, setmodalIsVisible] = useState(false);
   const deleteMessage = `Você deseja excluir o equipamento ${equipment.name}? Esta ação não poderá ser desfeita futuramente.`
 
@@ -23,7 +23,11 @@ const CardEquipment = props => {
       onSwipeableRightOpen={() => setmodalIsVisible(!modalIsVisible)}
     >
       <TouchableHighlight
-        onPress={() => props.toggleRoomCard(props.idRoom)}
+        onPress={() => navigation.navigate('Equipment', {
+          equipment: equipment,
+          action: 'edit',
+          idRoom,
+        })}
         style={{ marginBottom: 15 }}
         underlayColor="#FDFDFD">
         <Container>
@@ -60,7 +64,7 @@ const CardEquipment = props => {
         title={"Deletar"}
         message={deleteMessage}
         confirm={() => {
-          props.deleteEquipment(roomId, equipment.id);
+          props.deleteEquipment(idRoom, equipment.id);
           setmodalIsVisible(!modalIsVisible);
         }}
         cancel={() => setmodalIsVisible(!modalIsVisible)}

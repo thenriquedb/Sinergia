@@ -9,9 +9,9 @@ import {
   SetOperation,
   SelectTime
 } from './styles';
-import { Text } from "../../../../../styles/fonts";
+import { Text } from "../../../../styles/fonts";
 
-import { formatHour } from "../../../../../util/time";
+import { formatHour } from "../../../../util/time";
 
 const SetTime = (props) => {
   const {

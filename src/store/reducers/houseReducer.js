@@ -81,6 +81,27 @@ export default function houseReducer(state = INITIAL_STATE, action) {
       };
       break;
 
+    case 'EDIT_EQUIPMENT':
+
+      console.log("action.payload.newEquipment;: ", action.payload.newEquipment)
+      return {
+        ...state,
+        rooms: state.rooms.map(item => {
+          if (item.id === action.payload.idRoom) {
+            item.equipments = item.equipments.map(equipment => {
+              if (equipment.id === action.payload.idEquipment) {
+                return action.payload.newEquipment;
+              } else {
+                return equipment
+              }
+            });
+            return item;
+          } else {
+            return item;
+          }
+        }),
+      };
+      break;
 
     case 'DELETE_EQUIPMENT':
       return {
