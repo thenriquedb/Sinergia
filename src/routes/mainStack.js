@@ -42,15 +42,14 @@ export default MainStack = createStackNavigator({
     screen: NewEquipment1,
     navigationOptions: {
       title: 'Novo equipamento',
-
     },
   },
 
   NewEquipment2: {
     screen: NewEquipment2,
     navigationOptions: {
-      // title: 'Novo equipamento',
-    },
+      headerShown: false
+    }
   },
 
   Settings: {

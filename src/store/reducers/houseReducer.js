@@ -42,27 +42,7 @@ export default function houseReducer(state = INITIAL_STATE, action) {
     case 'ADD_ROOM':
       return {
         ...state,
-        rooms: [
-          ...state.rooms,
-          {
-            id: new Date().getTime().toString(),
-            name: action.payload.name,
-            typeRoom: action.payload.typeRoom,
-            icon: action.payload.icon,
-            totalKw: 0,
-            totalAmount: 0,
-            equipments: [],
-            equipmentHigherConsumption: '',
-
-            tarifaBranca: {
-              monthlyExpenses: 0,
-            },
-
-            tarifaConvencional: {
-              monthlyExpenses: 0,
-            },
-          },
-        ],
+        rooms: [...state.rooms, action.payload.room],
       };
       break;
 
@@ -99,20 +79,6 @@ export default function houseReducer(state = INITIAL_STATE, action) {
       };
       break;
 
-    // case 'ADD_EQUIPMENT':
-    //   return {
-    //     ...state,
-    //     rooms: state.rooms.filter(item =>
-    //       item.id === action.payload.id
-    //         ? {
-    //           ...item,
-    //           name: 'novo nome',
-    //           equipments: [...item.equipments, action.payload.newEquipment]
-    //         }
-    //         : item,
-    //     ),
-    //   };
-    //   break;
 
     case 'DELETE_EQUIPMENT':
       return {

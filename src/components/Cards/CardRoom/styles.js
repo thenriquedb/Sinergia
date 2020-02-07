@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Colors from '../../../styles/colors';
-import { Animated } from 'react-native';
 
 export const Container = styled.View`
   flex-direction: row;
@@ -15,17 +14,8 @@ export const Container = styled.View`
   padding-top: 10;
   padding-bottom: 10;
   padding-right: 15;
-  padding-left: 5;
+  padding-left: 10;
   elevation: 2;
-`;
-
-export const Status = styled.View`
-  background-color: ${Colors.high};
-  border-top-left-radius: 10;
-  border-bottom-left-radius: 10;
-  margin-right: 5;
-  height: 100;
-  width: 3;
 `;
 
 export const Details = styled.View`

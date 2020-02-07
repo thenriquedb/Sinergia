@@ -16,8 +16,7 @@ export const RoomContainer = styled.View`
 
 export const RoomCard = styled(Animated.View)`
   padding: 6px;
-  height: 110;
-  width: 110;
+  height: 150px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -25,7 +24,22 @@ export const RoomCard = styled(Animated.View)`
   border: 1px;
   border-color: ${Colors.lightGray1};
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin: 6px 4px;
+`;
+
+export const Icon = styled(Animated.Image)`
+  width: 75px;
+  height: 75px;
+`;
+
+export const RoomCardLabel = styled(Animated.Text)`
+  text-align: center;
+  font-size: 22px;
+  color: ${props => props.color}
+`;
+
+export const Footer = styled.View`
+  background-color: red;
 `;
 
 export const ContinueButton = styled.View`
@@ -34,25 +48,6 @@ export const ContinueButton = styled.View`
   justify-content: center;
   padding: 10px;
   background-color: ${Colors.primary};
-`;
-
-export const Footer = styled.View`
-  background-color: red;
-`;
-
-export const FooterTextContainer = styled.View`
-  padding: 5px 0px 5px 5px;
-`;
-
-export const Icon = styled(Animated.Image)`
-  width: 65px;
-  height: 65px;
-`;
-
-export const RoomCardLabel = styled(Animated.Text)`
-  text-align: center;
-  font-size: 16px;
-  color: ${props => props.color}
 `;
 
 export const styles = StyleSheet.create({

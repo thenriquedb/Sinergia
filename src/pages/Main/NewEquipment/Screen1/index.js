@@ -7,7 +7,16 @@ import equipmentsList from '../../../../utilities/equipmentsList';
 // styles
 import { TextLight } from '../../../../styles/fonts';
 import Colors from '../../../../styles/colors';
-import { Container, RoomCard, Icon, ContinueButton, RoomContainer, Footer, RoomCardLabel, styles } from './styles';
+import {
+  Container,
+  RoomCard,
+  Icon,
+  ContinueButton,
+  RoomContainer,
+  Footer,
+  RoomCardLabel,
+  styles
+} from './styles';
 
 export default class NewEquipment extends Component {
   constructor(props) {
@@ -55,11 +64,12 @@ export default class NewEquipment extends Component {
       useNativeDriver: true
     }).start();
   }
+
   RoomCard(item, index) {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        style={{ flex: 1 / 3 }}
+        style={{ flex: 1 / 2 }}
         onPress={() => this.toggleSelectEquipment(index)}>
         <RoomCard
           style={[item.select && item.class, {
@@ -99,7 +109,7 @@ export default class NewEquipment extends Component {
     }
 
     // Se ja tiver um equipamento selecionado
-    else if (this.state.selectedEquipment) {
+    else if (this.state.selectedEquipment || this.state.selectedEquipment == '0') {
       s.equipments[s.selectedEquipment].select = !s.equipments[s.selectedEquipment].select;
 
       s.selectedEquipment = index;
@@ -134,7 +144,7 @@ export default class NewEquipment extends Component {
             data={this.state.equipments}
             extraData={this.state.selectedEquipment}
             keyExtractor={item => item.name}
-            numColumns={3}
+            numColumns={2}
             showsVerticalScrollIndicator={false}
             renderItem={({ item, index }) => {
               return this.RoomCard(item, index);

@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, View, Animated } from 'react-native';
-import Alert from "../../../components/Alert";
-
-// redux
 import { connect } from 'react-redux';
+import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, View, Animated } from 'react-native';
 
-// components
-import Input from '../../../components/Input/index';
+import Alert from "../../../components/Alert";
 import ConfirmModal from "./ConfirmModal";
 
 // styles
@@ -47,12 +43,11 @@ class NewRoom extends Component {
       offset: new Animated.Value(0)
     };
 
-    this.equipmentCard = this.equipmentCard.bind(this);
+    this.EquipmentCard = this.EquipmentCard.bind(this);
     this.toggleSelectEquipment = this.toggleSelectEquipment.bind(this);
     this.toggleSaveButton = this.toggleSaveButton.bind(this);
     this.setCustomName = this.setCustomName.bind(this);
     this.saveRoom = this.saveRoom.bind(this);
-
   }
 
   componentDidMount() {
@@ -62,11 +57,11 @@ class NewRoom extends Component {
     }).start();
   }
 
-  equipmentCard(item, index) {
+  EquipmentCard(item, index) {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        style={{ flex: 1 / 3 }}
+        style={{ flex: 1 / 2 }}
         onPress={() => this.toggleSelectEquipment(index)}>
 
         <EquipmentCard
@@ -136,13 +131,31 @@ class NewRoom extends Component {
   }
 
   saveRoom() {
-
     if (this.state.selectedRoomIndex != -1) {
       if (this.state.customName.length >= 4) {
         const found = this.props.rooms.find(item => item.name === this.state.customName);
 
+        let room = {
+          id: new Date().getTime().toString(),
+          name: this.state.customName,
+          typeRoom: this.state.selectedRoom,
+          icon: this.state.icon,
+          totalKw: 0,
+          totalAmount: 0,
+          equipments: [],
+          equipmentHigherConsumption: '',
+
+          tarifaBranca: {
+            monthlyExpenses: 0,
+          },
+
+          tarifaConvencional: {
+            monthlyExpenses: 0,
+          },
+        };
+
         if (!found) {
-          this.props.addNewRoom(this.state.customName, this.state.selectedRoom, this.state.icon);
+          this.props.addNewRoom(room);
           this.setState({
             modalIsVisible: !this.state.modalIsVisible,
             alertMessage: `O cômodo ${this.state.customName} foi cadastrado com sucesso!`
@@ -181,27 +194,24 @@ class NewRoom extends Component {
           confirm={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}
           isVisible={this.state.modalIsVisible} />
 
-        <View style={{ flex: 1 }}>
-          <EquipmentContainer>
-            <FlatList
-              style={{ marginTop: 30 }}
-              data={this.state.rooms}
-              extraData={this.state.selectedRoomIndex}
-              keyExtractor={item => item.name}
-              numColumns={3}
-              showsVerticalScrollIndicator={false}
-              renderItem={({ item, index }) => {
-                return this.equipmentCard(item, index);
-              }}
-            />
-          </EquipmentContainer>
-        </View>
+        <EquipmentContainer>
+          <FlatList
+            data={this.state.rooms}
+            extraData={this.state.selectedRoomIndex}
+            keyExtractor={item => item.name}
+            numColumns={2}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item, index }) => {
+              return this.EquipmentCard(item, index);
+            }}
+          />
+        </EquipmentContainer>
 
         <Footer>
           <TouchableHighlight onPress={() => this.toggleSaveButton()}>
             <ContinueButton
               style={
-                this.state.selectedRoomIndex != -1 ? '' : styles.ConitnueButton
+                this.state.selectedRoomIndex != -1 ? '' : styles.ContinueButton
               }>
               <TextLight
                 color={this.state.selectedRoomIndex === -1 ? '#000' : '#fff'}
@@ -230,8 +240,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    addNewRoom: (name, typeRoom, icon) =>
-      dispatch({ type: 'ADD_ROOM', payload: { name, typeRoom, icon } }),
+    addNewRoom: (room) =>
+      dispatch({ type: 'ADD_ROOM', payload: { room } }),
   };
 };
 

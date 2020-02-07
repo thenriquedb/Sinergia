@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Picker, Animated } from 'react-native';
 import { connect } from 'react-redux';
-import { Picker, ScrollView } from 'react-native';
+
 import CheckBox from "@react-native-community/checkbox";
 
 // components
@@ -8,24 +9,33 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import ActionButton from 'react-native-action-button';
 import SetTime from "./SetTime";
 import Input from "../../../../components/Input";
-
+import Header from "./Header";
 //util
 import calcularTarifas from "../../../../util/calcularTarifas";
 
 // styles
-import { Container, RegisteredContainer, Header, Icon, CheckBoxArea, InputArea } from './styles';
+import {
+  Container,
+  BackButton,
+  RegisteredContainer,
+  CheckBoxArea,
+  InputArea
+} from './styles';
 import Colors from '../../../../styles/colors';
-import { TextBold, TextLight, Text } from '../../../../styles/fonts';
+import { TextBold, Text } from '../../../../styles/fonts';
 
 const NewEquipment2 = props => {
   const equipment = props.navigation.getParam('equipment');
+  const { navigation } = props;
 
   // states
   const [selectedModel, setSelectedModel] = useState(equipment.models[0]);
   const [customName, setCustomName] = useState(equipment.models[0].name);
+  // const [customPower, setCustomPower] = useState('');
   const [quantity, setQuantity] = useState('1');
   const [power, setPower] = useState(equipment.models[0].power.toString());
   const [on24Hours, setOn24Hours] = useState(false);
+  const [useCustomEquipment, setUseCustomEquipment] = useState(false);
 
   // Picker de horas - dias da semana
   const [startTimeWeekdays, setStartTimeWeekdays] = useState(new Date());
@@ -34,6 +44,8 @@ const NewEquipment2 = props => {
     currentDate.setMinutes(currentDate.getMinutes() + 15);
     return currentDate;
   });
+
+  const scrollOffset = new Animated.Value(0);
 
   const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(1);
 
@@ -50,7 +62,7 @@ const NewEquipment2 = props => {
 
 
   const toggleSaveBtn = () => {
-    const power = !selectedModel ? equipment.models[0].power : selectedModel.power
+    // const power = !selectedModel ? equipment.models[0].power : selectedModel.power
 
     const { kwMonthly, totalTimeOn, tarifaConvencional, tarifaBranca } = calcularTarifas(
       quantity, power, frequencyOfUseOnWeekdays,
@@ -81,92 +93,112 @@ const NewEquipment2 = props => {
 
   const selectEquipmentModel = (itemValue) => {
     setSelectedModel(itemValue);
-    setCustomName(itemValue.name);
+    setUseCustomEquipment(itemValue.name === 'Personalizado' ? true : false);
+    setCustomName(itemValue.name === 'Personalizado' ? equipment.name : itemValue.name);
     setPower(itemValue.power.toString())
   }
 
   return (
     <Container>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Header>
-          <Icon resizeMode={"contain"} source={equipment.icon.light} />
+      <BackButton onPress={() => navigation.goBack()} >
+        <MaterialCommunityIcons name="arrow-left" size={28} color={Colors.white} />
+      </BackButton>
 
-          <TextBold color={'#fff'} fontSize={'h3'} textAlign={'center'}>
-            {equipment.name}
-          </TextBold>
+      <Header
+        equipmentName={equipment.name}
+        equipmentIcon={equipment.icon.light}
+        equipmentDescription={equipment.models[0].description}
+        on24Hours={on24Hours}
+        offset={scrollOffset}
+      />
 
-          <TextLight textAlign={'center'} fontSize={'h5'} color={'#fff'}>
-            {equipment.models[0].description}
-          </TextLight>
-        </Header>
+      <RegisteredContainer
+        showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
+        onScroll={Animated.event([
+          {
+            nativeEvent: {
+              contentOffset: { y: scrollOffset },
+            }
+          }
+        ])
+        }
+      >
 
-        <RegisteredContainer>
-          {equipment.models.length > 1 && <>
+        {equipment.models.length > 1 &&
+          <>
             <TextBold fontSize={'h6'}> Modelo </TextBold>
             <Picker
               selectedValue={selectedModel}
-              style={{ width: 280 }}
+              style={{ width: 330 }}
               onValueChange={itemValue => selectEquipmentModel(itemValue)}>
               {equipment.models.map((value, key) => {
                 return <Picker.Item key={key} value={value} label={value.name} />;
               })}
             </Picker>
           </>
-          }
+        }
 
-          <InputArea>
-            <Input
-              label="Nome"
-              value={customName}
-              onChangeText={customName => setCustomName(customName)}
-            />
-          </InputArea>
-
-          <InputArea>
-            <Input
-              label={"Quantidade"}
-              value={quantity.replace(/[^0-9]/g, '')}
-              maxLength={2}
-              onChangeText={quantity => setQuantity(quantity)}
-              keyboardType={'numeric'}
-            />
-          </InputArea>
-
-          <InputArea>
-            <Input
-              label={"Potência (W)"}
-              value={power}
-              onChangeText={power => setPower(power)}
-              keyboardType={'numeric'}
-            />
-          </InputArea>
-
-          <CheckBoxArea>
-            <CheckBox
-              tintColors={{ true: Colors.primary, false: '#999' }}
-              value={on24Hours}
-              onValueChange={() => setOn24Hours(!on24Hours)}
-            />
-            <Text> Equipamento fica ligado 24 horas </Text>
-          </CheckBoxArea>
-
-          <SetTime
-            startTimeWeekdays={startTimeWeekdays}
-            setStartTimeWeekdays={setStartTimeWeekdays}
-            endTimeWeekdays={endTimeWeekdays}
-            setEndTimeWeekdays={setEndTimeWeekdays}
-            startTimeWeekend={startTimeWeekend}
-            setStartTimeWeekend={setStartTimeWeekend}
-            endTimeWeekend={endTimeWeekend}
-            setEndTimeWeekend={setEndTimeWeekend}
-            on24Hours={on24Hours}
-            frequencyOfUseOnWeekdays={frequencyOfUseOnWeekdays}
-            setFrequencyOfUseOnWeekdays={setFrequencyOfUseOnWeekdays}
-            frequencyOfUseOnWeekend={frequencyOfUseOnWeekend}
-            setFrequencyOfUseOnWeekend={setFrequencyOfUseOnWeekend}
+        <InputArea>
+          <Input
+            label="Nome"
+            value={customName}
+            onChangeText={customName => setCustomName(customName)}
           />
-        </RegisteredContainer>
-      </ScrollView>
+        </InputArea>
+
+        <InputArea>
+          <Input
+            label={"Quantidade"}
+            value={quantity.replace(/[^0-9]/g, '')}
+            maxLength={2}
+            onChangeText={quantity => setQuantity(quantity)}
+            keyboardType={'numeric'}
+          />
+        </InputArea>
+
+        {
+          useCustomEquipment &&
+          (
+            <InputArea>
+              <Input
+                label={"Potência (W)"}
+                value={power}
+                onChangeText={power => setPower(power)}
+                keyboardType={'numeric'}
+              />
+            </InputArea>
+          )
+        }
+
+        <CheckBoxArea>
+          <CheckBox
+            tintColors={{ true: Colors.primary, false: '#999' }}
+            value={on24Hours}
+            onValueChange={() => {
+              scrollOffset.setOffset(0)
+              setOn24Hours(!on24Hours)
+            }}
+          />
+          <Text> Equipamento fica ligado 24 horas </Text>
+        </CheckBoxArea>
+
+        <SetTime
+          startTimeWeekdays={startTimeWeekdays}
+          setStartTimeWeekdays={setStartTimeWeekdays}
+          endTimeWeekdays={endTimeWeekdays}
+          setEndTimeWeekdays={setEndTimeWeekdays}
+          startTimeWeekend={startTimeWeekend}
+          setStartTimeWeekend={setStartTimeWeekend}
+          endTimeWeekend={endTimeWeekend}
+          setEndTimeWeekend={setEndTimeWeekend}
+          on24Hours={on24Hours}
+          frequencyOfUseOnWeekdays={frequencyOfUseOnWeekdays}
+          setFrequencyOfUseOnWeekdays={setFrequencyOfUseOnWeekdays}
+          frequencyOfUseOnWeekend={frequencyOfUseOnWeekend}
+          setFrequencyOfUseOnWeekend={setFrequencyOfUseOnWeekend}
+        />
+      </RegisteredContainer>
 
       <ActionButton
         size={55}

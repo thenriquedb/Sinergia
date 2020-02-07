@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableHighlight, Animated } from 'react-native';
+import { TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 
 import Swipeable from "react-native-gesture-handler/Swipeable";
@@ -18,12 +18,6 @@ const CardRoom = props => {
   const message = `Você deseja excluir o cômodo ${room.name}? Esta ação não poderá ser desfeita futuramente.`;
   const [isVisible, setisVisible] = useState(false);
 
-  const cardOffset = new Animated.Value(0);
-  const closeAnimation = () => {
-    alert('ok')
-
-  }
-
   return (
     <Swipeable
       renderRightActions={HiddenCard}
@@ -36,11 +30,9 @@ const CardRoom = props => {
         underlayColor="#FDFDFD">
         <Container>
           <Details>
-            <TextLight fontSize="h4"> {room.name} </TextLight>
-            <TextLight fontSize="h5">
-              {room.equipments.length} equipamentos
-          </TextLight>
-            <TextLight fontSize="h5"> {kwMask(room.totalKw)} </TextLight>
+            <TextLight fontSize="h4">{room.name} </TextLight>
+            <TextLight fontSize="h5">{room.equipments.length} equipamentos</TextLight>
+            <TextLight fontSize="h5">{kwMask(room.totalKw)} </TextLight>
           </Details>
 
           <TotalPrice>

@@ -37,23 +37,33 @@ export default {
           {
             name: 'Lâmpada LED - 6W',
             power: 6,
-            description: 'Lorem Ipsulum Dolor',
+            description:
+              'Evite acender Lâmpadas durante o dia, utilize a iluminação natural.',
           },
           {
             name: 'Lâmpada LED - 10W',
             power: 10,
-            description: 'Lorem Ipsulum Dolor',
+            description:
+              'Evite acender Lâmpadas durante o dia, utilize a iluminação natural.',
           },
           {
             name: 'Lâmpada LED - 12W',
             power: 12,
-            description: 'Lorem Ipsulum Dolor',
+            description:
+              'Evite acender Lâmpadas durante o dia, utilize a iluminação natural.',
           },
           {
             name: 'Lâmpada LED - 18W',
             power: 18,
-            description: 'Lorem Ipsulum Dolor',
+            description:
+              'Evite acender Lâmpadas durante o dia, utilize a iluminação natural.',
           },
+          {
+            name: 'Personalizado',
+            power: 18,
+            description:
+              'Evite acender Lâmpadas durante o dia, utilize a iluminação natural.',
+          }
         ],
       },
     ],
@@ -70,8 +80,14 @@ export default {
             name: 'Computador',
             power: 200,
             description:
-              'Pesquise modelos mais econômicos e evite deixar ligado sem necessidade.            ',
+              'Pesquise modelos mais econômicos e evite deixar ligado sem necessidade.',
           },
+          {
+            name: 'Personalizado',
+            power: 200,
+            description:
+              'Pesquise modelos mais econômicos e evite deixar ligado sem necessidade.',
+          }
         ],
       },
       {
@@ -86,6 +102,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 5,
+            description:
+              '',
+          }
         ],
       },
       {
@@ -101,8 +123,13 @@ export default {
             description:
               'Pesquise modelos mais econômicos e evite deixar ligado sem necessidade.            ',
           },
+          {
+            name: 'Personalizado',
+            power: 45,
+            description:
+              'Pesquise modelos mais econômicos e evite deixar ligado sem necessidade.',
+          }
         ],
-
       },
       {
         name: 'Ar condicionado',
@@ -129,6 +156,12 @@ export default {
             description:
               'Evite instalar o aparelho em locais com incidência de raios solares. Isso exige maior consumo para esfriar.',
           },
+          {
+            name: 'Personalizado',
+            power: 1450,
+            description:
+              'Evite instalar o aparelho em locais com incidência de raios solares. Isso exige maior consumo para esfriar.',
+          }
         ],
       },
       {
@@ -150,6 +183,12 @@ export default {
             description:
               'Retire da tomada quando o aparelho já estiver com a carga completa.',
           },
+          {
+            name: 'Personalizado',
+            power: 14,
+            description:
+              'Retire da tomada quando o aparelho já estiver com a carga completa.',
+          }
         ],
       },
       {
@@ -165,6 +204,12 @@ export default {
             description:
               'Evite deixar acessórios do computador ligados sem necessidade.',
           },
+          {
+            name: 'Personalizado',
+            power: 25,
+            description:
+              'Evite deixar acessórios do computador ligados sem necessidade.',
+          }
         ],
       },
       {
@@ -180,6 +225,12 @@ export default {
             description:
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
           },
+          {
+            name: 'Personalizado',
+            power: 25,
+            description:
+              'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
+          }
         ],
       },
 
@@ -214,6 +265,12 @@ export default {
             description:
               'Desligue da tomada quando não for mais assistir, pois o stand-by consome energia.',
           },
+          {
+            name: 'Personalizado',
+            power: 350,
+            description:
+              'Desligue da tomada quando não for mais assistir, pois o stand-by consome energia.',
+          }
         ],
       },
       {
@@ -235,6 +292,12 @@ export default {
             description:
               'Mantenha hélices e grades limpas para facilitar a circulação do ar',
           },
+          {
+            name: 'Personalizado',
+            power: 90,
+            description:
+              'Mantenha hélices e grades limpas para facilitar a circulação do ar',
+          }
         ],
       },
       {
@@ -268,7 +331,6 @@ export default {
             description:
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
           },
-
           {
             name: 'Nintendo Wii ',
             power: 40,
@@ -287,6 +349,12 @@ export default {
             description:
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
           },
+          {
+            name: 'Personalizado',
+            power: 100,
+            description:
+              'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
+          }
         ],
       },
       {
@@ -302,6 +370,12 @@ export default {
             description:
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
           },
+          {
+            name: 'Personalizado',
+            power: 10,
+            description:
+              'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
+          }
         ],
       },
       {
@@ -316,8 +390,13 @@ export default {
             power: 350,
             description:
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
-            icon: '',
           },
+          {
+            name: 'Personalizado',
+            power: 350,
+            description:
+              'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
+          }
         ],
       },
     ],
@@ -373,6 +452,12 @@ export default {
           description:
             '',
         },
+        {
+          name: 'Personalizado',
+          power: 435,
+          description:
+            '',
+        }
       ],
     },
     {
@@ -388,6 +473,12 @@ export default {
           description:
             ' ',
         },
+        {
+          name: 'Personalizado',
+          power: 1000,
+          description:
+            '',
+        }
       ],
     },
     {
@@ -403,6 +494,12 @@ export default {
           description:
             ' ',
         },
+        {
+          name: 'Personalizado',
+          power: 170,
+          description:
+            '',
+        }
       ],
     },
     {
@@ -418,6 +515,12 @@ export default {
           description:
             ' ',
         },
+        {
+          name: 'Personalizado',
+          power: 1500,
+          description:
+            '',
+        }
       ],
     },
     {
@@ -433,6 +536,12 @@ export default {
           description:
             ' ',
         },
+        {
+          name: 'Personalizado',
+          power: 1500,
+          description:
+            '',
+        }
       ],
     },
     {
@@ -448,6 +557,12 @@ export default {
           description:
             'Instalar longe das fontes de calor e de preferência em local ventilado',
         },
+        {
+          name: 'Personalizado',
+          power: 200,
+          description:
+            'Instalar longe das fontes de calor e de preferência em local ventilado',
+        }
       ],
     },
     {
@@ -463,6 +578,12 @@ export default {
           description:
             '',
         },
+        {
+          name: 'Personalizado',
+          power: 70,
+          description:
+            '',
+        }
       ],
     },
     {
@@ -478,6 +599,12 @@ export default {
           description:
             'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
         },
+        {
+          name: 'Personalizado',
+          power: 1400,
+          description:
+            '',
+        }
       ],
     },
     {
@@ -535,6 +662,12 @@ export default {
           description:
             'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
         },
+        {
+          name: 'Personalizado',
+          power: 750,
+          description:
+            '',
+        }
       ],
     },
     {
@@ -562,6 +695,12 @@ export default {
           description:
             'Use corretamente a potência para aquecer a comida, para não usar mais que o tempo necessário.',
         },
+        {
+          name: 'Personalizado',
+          power: 1100,
+          description:
+            '',
+        }
       ],
     },
     {
@@ -595,6 +734,12 @@ export default {
           description:
             'Não deixe a porta muito tempo aberta e evite guardar panelas quentes.',
         },
+        {
+          name: 'Personalizado',
+          power: 215,
+          description:
+            '',
+        }
       ],
     },
     {
@@ -622,6 +767,12 @@ export default {
           description:
             '',
         },
+        {
+          name: 'Personalizado',
+          power: 750,
+          description:
+            '',
+        }
       ],
     },
     ],
@@ -652,6 +803,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 4000,
+            description:
+              '',
+          }
         ],
       },
       {
@@ -667,6 +824,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 15000,
+            description:
+              '',
+          }
         ],
       },
       {
@@ -700,6 +863,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 460,
+            description:
+              '',
+          }
         ],
       },
       {
@@ -715,6 +884,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 500,
+            description:
+              '',
+          }
         ],
       },
       {
@@ -730,6 +905,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 3800,
+            description:
+              '',
+          }
         ],
       },
       {
@@ -745,6 +926,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 600,
+            description:
+              '',
+          }
         ],
       },
     ],
@@ -775,6 +962,12 @@ export default {
             description:
               'Nos meses quentes, ajuste a chave do chuveiro para a posição verão.',
           },
+          {
+            name: 'Personalizado',
+            power: 7200,
+            description:
+              'Nos meses quentes, ajuste a chave do chuveiro para a posição verão.',
+          }
         ],
       },
       {
@@ -802,6 +995,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 5.5,
+            description:
+              '',
+          }
         ],
       },
 
@@ -836,6 +1035,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 1800,
+            description:
+              '',
+          }
         ],
       },
       {
@@ -857,6 +1062,12 @@ export default {
             description:
               'Evite ligá-la no verão quando a água, em geral, é mais quente.',
           },
+          {
+            name: 'Personalizado',
+            power: 5150,
+            description:
+              '',
+          }
         ],
       },
       {
@@ -872,6 +1083,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 6600,
+            description:
+              '',
+          }
         ],
       },
     ],
@@ -890,6 +1107,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 600,
+            description:
+              '',
+          }
         ],
       },
       {
@@ -905,6 +1128,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 100,
+            description:
+              '',
+          }
         ],
       },
       {
@@ -920,6 +1149,12 @@ export default {
             description:
               'Ao desligar o ferro, aproveite o seu calor para passar as roupas mais leves.',
           },
+          {
+            name: 'Personalizado',
+            power: 1000,
+            description:
+              'Ao desligar o ferro, aproveite o seu calor para passar as roupas mais leves.',
+          }
         ],
       },
       {
@@ -935,6 +1170,12 @@ export default {
             description:
               'Procure usar toda a capacidade em uma mesma lavagem, evitando ligá-la muitas vezes.',
           },
+          {
+            name: 'Personalizado',
+            power: 500,
+            description:
+              'Procure usar toda a capacidade em uma mesma lavagem, evitando ligá-la muitas vezes.',
+          }
         ],
       },
       {
@@ -950,6 +1191,12 @@ export default {
             description:
               '',
           },
+          {
+            name: 'Personalizado',
+            power: 3500,
+            description:
+              '',
+          }
         ],
       },
       {
@@ -965,9 +1212,14 @@ export default {
             description:
               'Procure usar toda a capacidade em uma mesma lavagem, evitando ligá-lo muitas vezes.',
           },
+          {
+            name: 'Personalizado',
+            power: 270,
+            description:
+              'Procure usar toda a capacidade em uma mesma lavagem, evitando ligá-lo muitas vezes.',
+          }
         ],
       },
     ],
-
   },
 };

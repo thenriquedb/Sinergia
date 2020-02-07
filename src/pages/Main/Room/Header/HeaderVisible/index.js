@@ -25,7 +25,6 @@ export default function HeaderVisible(props) {
   } = props;
 
   const headerInfosAnimationConfig = [
-
     {
       height: offset.interpolate({
         inputRange: [0, 320, 600],
@@ -69,11 +68,10 @@ export default function HeaderVisible(props) {
   ];
 
   const titleAnimationConfig = [
-
     {
       fontSize: offset.interpolate({
         inputRange: [0, 500],
-        outputRange: [48, 28],
+        outputRange: [40, 28],
         extrapolate: 'clamp'
       })
     },
@@ -113,7 +111,7 @@ export default function HeaderVisible(props) {
           resizeMode={"contain"}
           source={room.icon.light} />
 
-        <Title style={[...titleAnimationConfig]}>  {room.name} </Title>
+        <Title style={[...titleAnimationConfig]}>{room.name} </Title>
       </HeaderTop>
 
       <HeaderInfosContainer style={[...headerInfosAnimationConfig]}>

@@ -1,20 +1,20 @@
+import { Animated } from "react-native";
 import styled from 'styled-components/native';
 import Colors from '../../../../styles/colors';
 
-export const Container = styled.View`
+export const Container = styled(Animated.View)`
   flex: 1;
   flex-direction: column;
   background-color: ${Colors.primary};
 `;
 
-export const Header = styled.View`
-  align-items: center;
-  margin-bottom: 15;
-  padding-left: 15;
-  padding-right: 15;
-`;
+export const BackButton = styled.TouchableOpacity`
+    position: absolute;
+    left: 10;
+    top: 10
+  `;
 
-export const RegisteredContainer = styled.View`
+export const RegisteredContainer = styled(Animated.ScrollView)`
   flex: 1;
   background-color: ${Colors.white};
   border-top-left-radius: 15;
@@ -22,15 +22,13 @@ export const RegisteredContainer = styled.View`
   padding: 15px;
 `;
 
-export const Icon = styled.Image`
-width: 100px;
-height: 100px;`;
-
 export const CheckBoxArea = styled.View`
   flex-direction: row;
   align-items: center;
   margin-top: 10px;
+  /* margin-bottom: -10px; */
 `;
+
 export const InputArea = styled.View`
   margin-top: 10px;
 `;

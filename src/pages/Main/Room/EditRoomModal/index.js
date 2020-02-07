@@ -63,10 +63,16 @@ const EditRoomModal = props => {
         </Picker>
 
         <ButtonsContainer>
-          <TouchableOpacity activeOpacity={0.5} onPress={() => toggleSaveBtn()}>
+          <TouchableOpacity activeOpacity={0.5} onPress={() => {
+            toggleSaveBtn();
+            props.closeModal();
+          }}>
             <TextBold style={{ marginHorizontal: 20 }} color={Colors.primary} fontSize={'h5'}> SALVAR </TextBold>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.5} onPress={props.closeModal}>
+          <TouchableOpacity activeOpacity={0.5} onPress={() => {
+            setNewName(oldName);
+            props.closeModal();
+          }}>
             <TextBold color={Colors.primary} fontSize={'h5'}> CANCELAR </TextBold>
           </TouchableOpacity>
         </ButtonsContainer>

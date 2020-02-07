@@ -3,7 +3,6 @@ import { Animated } from "react-native";
 
 import { connect } from 'react-redux'
 
-import NavigationHeader from "./NavigationHeader";
 import Header from "./Header";
 import RoomListEmpty from "./RoomListEmpty";
 import ActionButton from 'react-native-action-button';
@@ -22,7 +21,6 @@ function Room(props) {
 
   const scrollOffset = new Animated.Value(0);
   const offsetBounce = new Animated.Value(10);
-
 
   useEffect(() => {
     Animated.spring(offsetBounce, {
@@ -112,7 +110,6 @@ function Room(props) {
               />
             </EquipmentsListContainer>
           </Equipments>
-
         )
       }
       <ActionButton

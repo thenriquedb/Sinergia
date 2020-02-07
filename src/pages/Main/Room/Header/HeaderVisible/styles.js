@@ -12,7 +12,6 @@ export const HeaderTop = styled(Animated.View)`
 `;
 
 export const Title = styled(Animated.Text)`
-  font-size: 48;
   color: #fff;
   font-weight: bold;
 `;

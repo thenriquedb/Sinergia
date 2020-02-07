@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Picker, TouchableOpacity } from 'react-native';
 
-import { Container, SetOperation, SelectTime } from './styles';
-import { Text, TextBold } from "../../../../../styles/fonts";
+import {
+  Container,
+  SetOperationLabel,
+  HourLabel,
+  SetOperation,
+  SelectTime
+} from './styles';
+import { Text } from "../../../../../styles/fonts";
 
 import { formatHour } from "../../../../../util/time";
 
@@ -24,7 +30,6 @@ const SetTime = (props) => {
     setFrequencyOfUseOnWeekend
   } = props;
 
-
   const [startTimePickerVisibleWeekdays, setStartTimeWeekdaysPickerVisible] = useState(false);
   const [endTimePickerVisibleWeekdays, setEndTimeWeekdaysPickerVisible] = useState(false);
 
@@ -33,68 +38,61 @@ const SetTime = (props) => {
 
   return (
     <Container>
-      <TextBold style={{ marginTop: 15 }} fontSize={'h5'}>
-        Dias da Semana
-        </TextBold>
 
+      <SetOperationLabel> Dias da Semana </SetOperationLabel>
       <SetOperation>
-        {!on24Hours &&
-          <>
-            <TextBold color={'#707070'} fontSize={'h6'}> Horário de início </TextBold>
-            <TouchableOpacity onPress={() => setStartTimeWeekdaysPickerVisible(!startTimePickerVisibleWeekdays)}>
-              <SelectTime>
-                <Text> {formatHour(startTimeWeekdays)} </Text>
-              </SelectTime>
-            </TouchableOpacity>
+        <>
+          <HourLabel> Horário de início </HourLabel>
+          <TouchableOpacity
+            disabled={on24Hours ? true : false}
+            onPress={() => setStartTimeWeekdaysPickerVisible(!startTimePickerVisibleWeekdays)}
+          >
 
-            <DateTimePicker
-              is24Hour={true}
-              mode={'time'}
-              date={startTimeWeekdays}
-              isVisible={startTimePickerVisibleWeekdays}
-              onConfirm={date => {
-                setStartTimeWeekdays(date);
-                setStartTimeWeekdaysPickerVisible(!startTimePickerVisibleWeekdays);
-              }}
-              onCancel={() => setStartTimeWeekdaysPickerVisible(!startTimePickerVisibleWeekdays)}
-            />
+            <SelectTime color={on24Hours ? '#eee' : '#cccccc'}>
+              <Text color={on24Hours ? '#ccc' : '#000'}> {formatHour(startTimeWeekdays)} </Text>
+            </SelectTime>
+          </TouchableOpacity>
 
-            <TextBold
-              style={{ marginTop: 10 }}
-              color={'#707070'}
-              fontSize={'h6'}>
-              Horário de término
-              </TextBold>
+          <DateTimePicker
+            is24Hour={true}
+            mode={'time'}
+            date={startTimeWeekdays}
+            isVisible={startTimePickerVisibleWeekdays}
+            onConfirm={date => {
+              setStartTimeWeekdays(date);
+              setStartTimeWeekdaysPickerVisible(!startTimePickerVisibleWeekdays);
+            }}
+            onCancel={() => setStartTimeWeekdaysPickerVisible(!startTimePickerVisibleWeekdays)}
+          />
 
-            <TouchableOpacity onPress={() => setEndTimeWeekdaysPickerVisible(!endTimePickerVisibleWeekdays)}>
-              <SelectTime>
-                <Text> {formatHour(endTimeWeekdays)} </Text>
-              </SelectTime>
-            </TouchableOpacity>
+          <HourLabel> Horário de término </HourLabel>
+          <TouchableOpacity
+            disabled={on24Hours ? true : false}
+            onPress={() => setEndTimeWeekdaysPickerVisible(!endTimePickerVisibleWeekdays)}>
+            <SelectTime color={on24Hours ? '#eee' : '#cccccc'}>
+              <Text color={on24Hours ? '#ccc' : '#000'}> {formatHour(endTimeWeekdays)} </Text>
+            </SelectTime>
+          </TouchableOpacity>
 
-            <DateTimePicker
-              is24Hour={true}
-              mode={'time'}
-              date={endTimeWeekdays}
-              isVisible={endTimePickerVisibleWeekdays}
-              onConfirm={date => {
-                setEndTimeWeekdays(date);
-                setEndTimeWeekdaysPickerVisible(!endTimePickerVisibleWeekdays);
-              }}
-              onCancel={() => setEndTimeWeekdaysPickerVisible(!endTimePickerVisibleWeekdays)}
-            />
-          </>
-        }
+          <DateTimePicker
+            is24Hour={true}
+            mode={'time'}
+            date={endTimeWeekdays}
+            isVisible={endTimePickerVisibleWeekdays}
+            onConfirm={date => {
+              setEndTimeWeekdays(date);
+              setEndTimeWeekdaysPickerVisible(!endTimePickerVisibleWeekdays);
+            }}
+            onCancel={() => setEndTimeWeekdaysPickerVisible(!endTimePickerVisibleWeekdays)}
+          />
+        </>
 
-        <TextBold color={'#707070'} fontSize={'h6'}>
-          Frequência de utilização
-          </TextBold>
-
+        <HourLabel> Frequência de utilização </HourLabel>
         <Picker
+          enabled={on24Hours ? false : true}
           selectedValue={frequencyOfUseOnWeekdays}
-          style={{ width: 345 }}
-          onValueChange={(itemValue, itemIndex) =>
-            setFrequencyOfUseOnWeekdays(itemValue)
+          style={{ width: 320 }}
+          onValueChange={(itemValue, itemIndex) => setFrequencyOfUseOnWeekdays(itemValue)
           }>
           <Picker.Item key={'key'} value={'1'} label={'1'} />
           <Picker.Item key={'key'} value={'2'} label={'2'} />
@@ -104,59 +102,54 @@ const SetTime = (props) => {
         </Picker>
       </SetOperation>
 
-      <TextBold style={{ marginTop: 15 }} fontSize={'h5'}>
-        Final de Semana
-        </TextBold>
 
+      <SetOperationLabel> Final de Semana </SetOperationLabel>
       <SetOperation>
-        {!on24Hours ? (
-          <>
-            <TextBold color={'#707070'} fontSize={'h6'}>
-              Horário de início
-              </TextBold>
-            <TouchableOpacity onPress={() => setStartTimeWeekendPickerVisible(!startTimePickerVisibleWeekend)}>
-              <SelectTime>
-                <Text> {formatHour(startTimeWeekend)} </Text>
-              </SelectTime>
-            </TouchableOpacity>
-            <DateTimePicker
-              is24Hour={true}
-              mode={'time'}
-              date={startTimeWeekend}
-              isVisible={startTimePickerVisibleWeekend}
-              onConfirm={date => {
-                setStartTimeWeekend(date);
-                setStartTimeWeekendPickerVisible(!startTimePickerVisibleWeekend);
-              }}
-              onCancel={() => setStartTimeWeekendPickerVisible(!startTimePickerVisibleWeekend)}
-            />
+        <>
+          <HourLabel> Horário de início </HourLabel>
+          <TouchableOpacity
+            disabled={on24Hours ? true : false}
+            onPress={() => setStartTimeWeekendPickerVisible(!startTimePickerVisibleWeekend)}
+          >
+            <SelectTime color={on24Hours ? '#eee' : '#cccccc'}>
+              <Text color={on24Hours ? '#ccc' : '#000'}> {formatHour(startTimeWeekend)} </Text>
+            </SelectTime>
 
-            <TextBold style={{ marginTop: 10 }} color={'#707070'} fontSize={'h6'}>
-              Horário de término
-              </TextBold>
+          </TouchableOpacity>
+          <DateTimePicker
+            is24Hour={true}
+            mode={'time'}
+            date={startTimeWeekend}
+            isVisible={startTimePickerVisibleWeekend}
+            onConfirm={date => {
+              setStartTimeWeekend(date);
+              setStartTimeWeekendPickerVisible(!startTimePickerVisibleWeekend);
+            }}
+            onCancel={() => setStartTimeWeekendPickerVisible(!startTimePickerVisibleWeekend)}
+          />
 
-            <TouchableOpacity onPress={() => setEndTimeWeekendPickerVisible(true)}>
-              <SelectTime>
-                <Text> {formatHour(endTimeWeekend)} </Text>
-              </SelectTime>
-            </TouchableOpacity>
+          <HourLabel> Horário de término </HourLabel>
+          <TouchableOpacity
+            disabled={on24Hours ? true : false}
+            onPress={() => setEndTimeWeekendPickerVisible(true)}>
+            <SelectTime color={on24Hours ? '#eee' : '#cccccc'}>
+              <Text color={on24Hours ? '#ccc' : '#000'}> {formatHour(endTimeWeekend)} </Text>
+            </SelectTime>
+          </TouchableOpacity>
 
-            <DateTimePicker
-              is24Hour={true}
-              mode={'time'}
-              date={endTimeWeekend}
-              isVisible={endTimePickerVisibleWeekend}
-              onConfirm={date => setEndTimeWeekend(date)}
-              onCancel={() => setEndTimeWeekendPickerVisible(false)}
-            />
-          </>
-        ) : null}
+          <DateTimePicker
+            is24Hour={true}
+            mode={'time'}
+            date={endTimeWeekend}
+            isVisible={endTimePickerVisibleWeekend}
+            onConfirm={date => setEndTimeWeekend(date)}
+            onCancel={() => setEndTimeWeekendPickerVisible(false)}
+          />
+        </>
 
-        <TextBold color={'#707070'} fontSize={'h6'}>
-          Frequência de utilização
-          </TextBold>
-
+        <HourLabel> Frequência de utilização </HourLabel>
         <Picker
+          enabled={on24Hours ? false : true}
           selectedValue={frequencyOfUseOnWeekend}
           style={{ width: 320 }}
           onValueChange={(itemValue, itemIndex) =>

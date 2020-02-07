@@ -10,7 +10,7 @@ const SettingsModal = props => {
       onBackButtonPress={props.cancel}
       isVisible={props.isVisible}>
       <Container>
-        {props.title && <TextBold style={{ marginBottom: 10 }} fontSize={'h3'}> {props.title ? props.title : ''} </TextBold>}
+        {props.title && <TextBold style={{ marginBottom: 10 }} fontSize={'h4'}> {props.title ? props.title : ''} </TextBold>}
         {props.content}
 
       </Container>
