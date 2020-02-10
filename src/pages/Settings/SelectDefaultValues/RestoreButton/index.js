@@ -1,28 +1,31 @@
-import React, { useState } from 'react';
-
-import Alert from "../../../../components/Alert"
+import React from 'react';
+import { Alert } from "react-native";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 import { Button } from './styles';
 
-const RestoreButton = ({ restoreDefaultValues }) => {
-  const [modalIsVisible, setmodalIsVisible] = useState(false);
+function RestoreButton({ restoreDefaultValues }) {
+  function restoreValues() {
+    Alert.alert(
+      'Restaurar valores padrões',
+      `Você deseja restaurar os valores das tarifas para o valor padrão? Essa ação não poderá ser desfeita futuramente.`,
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        { text: 'Confirmar', onPress: () => restoreDefaultValues() },
+      ],
+      { cancelable: true },
+    );
+  }
 
   return (
     <>
-      <Button onPress={() => setmodalIsVisible(!modalIsVisible)}>
+      <Button onPress={() => restoreValues()}>
         <MaterialCommunityIcons name="restore" size={25} color="#fff" />
       </Button>
-
-      <Alert
-        title={"Restaurar valores padrões"}
-        message={'Essa ação não pode ser desfeita.'}
-        confirm={() => {
-          restoreDefaultValues();
-          setmodalIsVisible(!modalIsVisible);
-        }}
-        cancel={() => setmodalIsVisible(!modalIsVisible)}
-        isVisible={modalIsVisible} />
     </>
   );
 }

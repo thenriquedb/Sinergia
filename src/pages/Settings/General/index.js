@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableHighlight, ScrollView, Animated } from "react-native";
+import { connect } from 'react-redux'
+import { TouchableHighlight, Animated } from "react-native";
 
 import {
   Container,
@@ -10,11 +11,9 @@ import {
   LabelContainer,
   IconContainer
 } from './styles';
-import { connect } from 'react-redux'
 
 import SetTarifa from "../SetTarifa"
 import ufs from "../../../utilities/estados";
-import Alert from '../../../components/Alert';
 
 const Settings = (props) => {
   const { navigation } = props;

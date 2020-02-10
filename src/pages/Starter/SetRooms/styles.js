@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import Colors from '../../../styles/colors'
-
+import { FlatList } from "react-native";
 export const Container = styled.View`
   flex: 1;
   padding: 0px 15px 0px 15px;
@@ -9,6 +9,9 @@ export const Container = styled.View`
 export const Content = styled.View`
   margin-top: 10px;
 `;
+
+
+export const RoomsList = styled(FlatList)``;
 
 export const NewRoomButton = styled.View`
   flex-direction: row;
@@ -31,6 +34,7 @@ export const NextPageButton = styled.TouchableOpacity`
   padding: 15px;
   border-radius: 10px;
 `
+
 
 export const ContinueConfigArea = styled.View` 
   height: 100px;

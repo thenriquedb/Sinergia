@@ -11,8 +11,8 @@ export const Content = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   padding: 0px 15px 0px 15px;
-  justify-content: space-between;
 `;
 
 export const NextPageButton = styled.TouchableOpacity`
@@ -42,13 +42,13 @@ export const TarifaCard = styled.View`
   border: 1px;
   border-color: ${Colors.lightGray1};
   border-radius: 5px;
-  margin-bottom: 5px;
+  margin: 5px;
 `;
 
 export const Icon = styled.Image`
-width: 70;
-height: 70;
-margin-bottom: 5;
+  width: 70;
+  height: 70;
+  margin-bottom: 5;
 `;
 
 export const styles = StyleSheet.create({

@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
-import { TouchableHighlight } from 'react-native';
-import { connect } from 'react-redux'
+import React from 'react';
+import { TouchableHighlight, Alert } from 'react-native';
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { connect } from 'react-redux'
 
 // styles
 import { Container, Details, DetailsLabels, Icon, IconContainer, InfoContainer } from './styles';
 import { TextLight } from '../../../styles/fonts';
 
 import HiddenCard from "../HiddenCard";
-import Alert from "../../Alert";
 
 import { moneyMask, kwMask } from "../../../util/masks";
 
-const CardEquipment = props => {
+function CardEquipment(props) {
   const { equipment, idRoom, navigation } = props;
-  const [modalIsVisible, setmodalIsVisible] = useState(false);
-  const deleteMessage = `Você deseja excluir o equipamento ${equipment.name}? Esta ação não poderá ser desfeita futuramente.`
+
+  function deleteEquipment() {
+    Alert.alert(
+      'Excluir',
+      `Você deseja excluir o equipamento "${equipment.name}"? Esta ação não poderá ser desfeita futuramente.`,
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        { text: 'Confirmar', onPress: () => props.deleteEquipment(idRoom, equipment.id) },
+      ],
+      { cancelable: true },
+    );
+  }
+
 
   return (
     <Swipeable
       renderRightActions={HiddenCard}
-      onSwipeableRightOpen={() => setmodalIsVisible(!modalIsVisible)}
+      onSwipeableRightOpen={() => deleteEquipment()}
     >
       <TouchableHighlight
         onPress={() => navigation.navigate('Equipment', {
@@ -59,16 +72,6 @@ const CardEquipment = props => {
           </Details>
         </Container>
       </TouchableHighlight>
-
-      <Alert
-        title={"Deletar"}
-        message={deleteMessage}
-        confirm={() => {
-          props.deleteEquipment(idRoom, equipment.id);
-          setmodalIsVisible(!modalIsVisible);
-        }}
-        cancel={() => setmodalIsVisible(!modalIsVisible)}
-        isVisible={modalIsVisible} />
     </Swipeable>
   );
 };

@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { TouchableHighlight } from 'react-native';
+import React from 'react';
+import { TouchableHighlight, Alert } from 'react-native';
 import { connect } from 'react-redux';
 
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import Alert from "../../Alert";
 
 // styles
 import { Container, TotalPrice, Details } from './styles';
@@ -15,13 +14,30 @@ import { moneyMask, kwMask } from "../../../util/masks";
 
 const CardRoom = props => {
   const { room } = props;
-  const message = `Você deseja excluir o cômodo ${room.name}? Esta ação não poderá ser desfeita futuramente.`;
-  const [isVisible, setisVisible] = useState(false);
+
+  function deleteRoom() {
+    Alert.alert(
+      'Excluir',
+      `Você deseja excluir o cômodo ${room.name}? Esta ação não poderá ser desfeita futuramente.`, [
+      {
+        text: 'Cancelar',
+        style: 'cancel',
+      },
+      {
+        text: 'Confirmar', onPress: () => {
+          props.deleteRoom(room.id);
+          props.refreshList();
+        }
+      },
+    ],
+      { cancelable: true },
+    );
+  }
 
   return (
     <Swipeable
       renderRightActions={HiddenCard}
-      onSwipeableRightOpen={() => setisVisible(!isVisible)}
+      onSwipeableRightOpen={() => deleteRoom()}
     >
 
       <TouchableHighlight
@@ -47,18 +63,6 @@ const CardRoom = props => {
           </TotalPrice>
         </Container>
       </TouchableHighlight>
-
-      <Alert
-        title={"Confirmar "}
-        message={message}
-        confirm={() => {
-          props.deleteRoom(room.id);
-          props.refreshList();
-          setisVisible(!isVisible);
-        }}
-        cancel={() => setisVisible(!isVisible)}
-        isVisible={isVisible} />
-
     </Swipeable>
   );
 };

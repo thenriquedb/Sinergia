@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import { SwipeListView } from 'react-native-swipe-list-view';
-
 import { View, TouchableHighlight } from 'react-native';
-import SimpleCardRoom from '../../../components/Cards/SimpleCardRoom';
-import HiddenSimpleCardRoom from '../../../components/Cards/SimpleCardRoom/HiddenSimpleCardRoom';
-
-
 import { connect } from 'react-redux'
 
+import SimpleCardRoom from '../../../components/Cards/SimpleCardRoom';
+
 // styles
-import { Container, NextPageButton, ContinueConfigArea, Content, NewRoomButton } from './styles';
+import { Container, NextPageButton, ContinueConfigArea, Content, RoomsList, NewRoomButton } from './styles';
 import { TextLight, Text } from '../../../styles/fonts';
 
 
@@ -17,7 +13,6 @@ class SetRooms extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rooms: '0',
       updateList: false
     }
     this.renderButton = this.renderButton.bind(this);
@@ -49,7 +44,8 @@ class SetRooms extends Component {
 
 
   renderButton() {
-    if (this.state.rooms.length > 0) {
+    // console.log("this.state.rooms ", this.state.rooms);
+    if (this.props.rooms) {
       return (
         <NextPageButton onPress={() => this.props.navigation.navigate('Final')}>
           <Text fontSize='h6' color='#fff'> Continuar </Text>
@@ -69,23 +65,16 @@ class SetRooms extends Component {
     return (
       <Container>
         <TextLight textAlign='center' fontSize='h4'> Esta quase pronto! Agora é só cadastrar os cômodos  </TextLight>
-
         <View style={{ flex: 1 }}>
           <Content >
-            <SwipeListView
+            <RoomsList
               data={this.props.rooms}
-              extraData={this.state.updateList}
               keyExtractor={item => item.name}
               showsVerticalScrollIndicator={false}
-              rightOpenValue={-100}
               disableRightSwipe={true}
               renderItem={({ item }) => <SimpleCardRoom room={item} />}
-              renderHiddenItem={({ item }) => <HiddenSimpleCardRoom
-                refreshList={this.reRender}
-                toggleEditRoom={this.toggleEditRoom}
-                room={item} />}
             />
-            {this.state.rooms.length > 0 && this.renderAddNewRoom()}
+            {this.props.rooms && this.renderAddNewRoom()}
           </Content>
         </View>
 

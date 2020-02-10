@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, Animated } from 'react-native';
+import { FlatList, Alert, TouchableOpacity, TouchableHighlight, ToastAndroid, Animated } from 'react-native';
 
-import Alert from "../../../components/Alert";
 import ConfirmModal from "./ConfirmModal";
 
 // styles
@@ -35,8 +34,6 @@ class NewRoom extends Component {
       selectedRoomIndex: -1,
       selectedRoom: '',
       selectedRoom: '',
-      alertMessage: '',
-      modalIsVisible: false,
       icon: [],
       customName: '',
       isVisibleConfirmModal: false,
@@ -124,7 +121,6 @@ class NewRoom extends Component {
   }
 
   setCustomName(input) {
-
     let s = this.state;
     s.customName = input;
     this.setState(s)
@@ -156,16 +152,24 @@ class NewRoom extends Component {
 
         if (!found) {
           this.props.addNewRoom(room);
-          this.setState({
-            modalIsVisible: !this.state.modalIsVisible,
-            alertMessage: `O cômodo ${this.state.customName} foi cadastrado com sucesso!`
-          });
           this.setState({ isVisibleConfirmModal: !this.state.isVisibleConfirmModal });
+          Alert.alert(
+            'Cadastrado com sucesso',
+            `O cômodo ${this.state.customName} foi cadastrado com sucesso!`,
+            [
+              { text: 'Ok' },
+            ],
+            { cancelable: true },
+          );
         } else {
-          this.setState({
-            modalIsVisible: !this.state.modalIsVisible,
-            alertMessage: `O cômodo ${this.state.customName} já esta cadastrado. `
-          });
+          Alert.alert(
+            'Comôdo já cadastrado',
+            `O cômodo ${this.state.customName} já esta cadastrado. Utilize um nome diferente. `,
+            [
+              { text: 'Ok' },
+            ],
+            { cancelable: true },
+          );
         }
       }
     }
@@ -188,12 +192,6 @@ class NewRoom extends Component {
   render() {
     return (
       <Container>
-        <Alert
-          title={"Confirmar"}
-          message={this.state.alertMessage}
-          cancel={() => this.setState({ modalIsVisible: !this.state.modalIsVisible })}
-          isVisible={this.state.modalIsVisible} />
-
         <EquipmentContainer>
           <FlatList
             data={this.state.rooms}
