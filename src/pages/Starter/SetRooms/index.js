@@ -5,7 +5,14 @@ import { connect } from 'react-redux'
 import SimpleCardRoom from '../../../components/Cards/SimpleCardRoom';
 
 // styles
-import { Container, NextPageButton, ContinueConfigArea, Content, RoomsList, NewRoomButton } from './styles';
+import {
+  Container,
+  NextPageButton,
+  ContinueConfigArea,
+  Content,
+  RoomsList,
+  NewRoomButton
+} from './styles';
 import { TextLight, Text } from '../../../styles/fonts';
 
 
@@ -15,9 +22,7 @@ class SetRooms extends Component {
     this.state = {
       updateList: false
     }
-    this.renderButton = this.renderButton.bind(this);
     this.toggleEditRoom = this.toggleEditRoom.bind(this);
-    this.renderAddNewRoom = this.renderAddNewRoom.bind(this);
     this.reRender = this.reRender.bind(this);
   }
 
@@ -27,41 +32,12 @@ class SetRooms extends Component {
     this.setState(s);
   }
 
-  renderAddNewRoom() {
-    return (
-      <TouchableHighlight underlayColor={'#fcf8f7'} onPress={() => this.props.navigation.navigate('StarterNewRoom')}>
-        <NewRoomButton>
-          <Text fontSize={'h5'} color={'#cccccc'}> Adcionar um novo comôdo </Text>
-        </NewRoomButton>
-      </TouchableHighlight>
-    );
-  }
-
-
   toggleEditRoom(data) {
     this.props.navigation.navigate('StarterEditRoom', { room: data });
   };
 
-
-  renderButton() {
-    // console.log("this.state.rooms ", this.state.rooms);
-    if (this.props.rooms) {
-      return (
-        <NextPageButton onPress={() => this.props.navigation.navigate('Final')}>
-          <Text fontSize='h6' color='#fff'> Continuar </Text>
-        </NextPageButton>
-      );
-    } else {
-      return (
-        <NextPageButton onPress={() => this.props.navigation.navigate('StarterNewRoom')}>
-          <Text fontSize='h6' color='#fff'> Adcionar um novo comôdo </Text>
-        </NextPageButton>
-      );
-    }
-  }
-
   render() {
-
+    console.log("this.props: ", this.props.rooms)
     return (
       <Container>
         <TextLight textAlign='center' fontSize='h4'> Esta quase pronto! Agora é só cadastrar os cômodos  </TextLight>
@@ -74,12 +50,30 @@ class SetRooms extends Component {
               disableRightSwipe={true}
               renderItem={({ item }) => <SimpleCardRoom room={item} />}
             />
-            {this.props.rooms && this.renderAddNewRoom()}
+
+            {this.props.rooms.length ?
+              <TouchableHighlight
+                underlayColor={'#fcf8f7'}
+                onPress={() => this.props.navigation.navigate('StarterNewRoom')}>
+                <NewRoomButton>
+                  <Text fontSize={'h5'} color={'#cccccc'}> Adcionar um novo comôdo </Text>
+                </NewRoomButton>
+              </TouchableHighlight>
+              : null
+            }
           </Content>
         </View>
 
         <ContinueConfigArea>
-          {this.renderButton()}
+          {this.props.rooms.length ?
+            <NextPageButton onPress={() => this.props.navigation.navigate('Final')}>
+              <Text fontSize='h6' color='#fff'> Continuar </Text>
+            </NextPageButton>
+            :
+            <NextPageButton onPress={() => this.props.navigation.navigate('StarterNewRoom')}>
+              <Text fontSize='h6' color='#fff'> Adcionar um novo comôdo </Text>
+            </NextPageButton>
+          }
         </ContinueConfigArea>
       </Container>
     )
@@ -90,5 +84,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, null)(SetRooms);
-
-
