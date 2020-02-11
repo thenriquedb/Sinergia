@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   Container,
@@ -18,6 +18,10 @@ import { moneyMask } from "../../../../../util/masks";
 export default function HeaderHidden(props) {
   const { totalTarifaBranca, totalTarifaConvencional, offset } = props;
   const [differenceBetweentariffs, setDifferenceBetweentariffs] = useState(totalTarifaConvencional - totalTarifaBranca);
+
+  useEffect(() => {
+    setDifferenceBetweentariffs(totalTarifaConvencional - totalTarifaBranca);
+  }, [totalTarifaBranca, totalTarifaConvencional])
 
   const headerInfosAnimationConfig = [
     {
@@ -123,7 +127,7 @@ export default function HeaderHidden(props) {
           <>
             <Text style={{ marginTop: 20, }} color={'#fff'} fontSize={'h5'}>
               Utilizando a tarifa convencional você economiza
-        </Text>
+            </Text>
 
             <DifferenceBetweenTariffs>
               {moneyMask(Math.abs(differenceBetweentariffs))}

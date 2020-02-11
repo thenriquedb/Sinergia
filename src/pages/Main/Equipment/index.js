@@ -29,37 +29,36 @@ import { TextBold, Text } from '../../../styles/fonts';
 function Equipment(props) {
   const equipment = props.navigation.getParam('equipment');
   const action = props.navigation.getParam('action');
-  const { navigation } = props;
+  const { navigation, dealership } = props;
   console.log("equipment fora: ", equipment)
+
   // states
   const [selectedModel, setSelectedModel] = useState(equipment.model ? equipment.model : equipment.models[0]);
   const [customName, setCustomName] = useState(equipment.name ? equipment.name : equipment.models[0].name);
   const [quantity, setQuantity] = useState(equipment.quantity ? equipment.quantity : '1');
   const [power, setPower] = useState(equipment.power ? equipment.power : equipment.models[0].power.toString());
-  const [on24Hours, setOn24Hours] = useState(equipment.on24Hours ? on24Hours : false);
+  const [on24Hours, setOn24Hours] = useState(equipment.on24Hours ? true : false);
   const [useCustomEquipment, setUseCustomEquipment] = useState(equipment.useCustomEquipment ? equipment.useCustomEquipment : false);
-  const [equipmentOffDuringTheWeek, setEquipmentOffDuringTheWeek] = useState(equipment.useCustomEquipment ? equipment.useCustomEquipment : false);
-  const [equipmentOffDuringTheWeekdend, setEquipmentOffDuringTheWeekend] = useState(equipment.useCustomEquipment ? equipment.useCustomEquipment : false);
 
   // Picker de horas - dias da semana
   const [startTimeWeekdays, setStartTimeWeekdays] = useState(equipment.startTimeWeekdays ? equipment.startTimeWeekdays : new Date());
   const [endTimeWeekdays, setEndTimeWeekdays] = useState(equipment.endTimeWeekdays ? equipment.endTimeWeekdays :
     () => {
-      const currentDate = new Date();
-      currentDate.setMinutes(currentDate.getMinutes() + 15);
-      return currentDate;
+      const currentHour = new Date();
+      currentHour.setMinutes(currentHour.getMinutes() + 30);
+      return currentHour;
     });
-  const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(equipment.frequencyOfUseOnWeekdays ? equipment.frequencyOfUseOnWeekdays : 1);
+  const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(equipment.frequencyOfUseOnWeekdays ? equipment.frequencyOfUseOnWeekdays : 0);
 
   // Picker de horas - finais de semana
   const [startTimeWeekend, setStartTimeWeekend] = useState(equipment.startTimeWeekend ? equipment.startTimeWeekend : new Date());
   const [endTimeWeekend, setEndTimeWeekend] = useState(equipment.endTimeWeekend ? equipment.endTimeWeekend :
     () => {
-      const currentDate = new Date();
-      currentDate.setMinutes(currentDate.getMinutes() + 15);
-      return currentDate;
+      const currentHour = new Date();
+      currentHour.setMinutes(currentHour.getMinutes() + 30);
+      return currentHour;
     });
-  const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(equipment.frequencyOfUseOnWeekend ? equipment.frequencyOfUseOnWeekend : 1);
+  const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(equipment.frequencyOfUseOnWeekend ? equipment.frequencyOfUseOnWeekend : 0);
 
   const scrollOffset = new Animated.Value(0);
 
@@ -100,15 +99,27 @@ function Equipment(props) {
       return false;
     }
 
+
+    if ((!frequencyOfUseOnWeekdays && !frequencyOfUseOnWeekend) && !on24Hours) {
+      Alert.alert(
+        'Frequência de uso',
+        `Frequência de uso semanal e frequência de uso no final de semana não podem ser igual a 0 ao mesmo tempo..`,
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: true },
+      );
+      return false;
+    }
+
     return true;
   }
 
   function toggleSaveBtn() {
-    // console.log("props.dealership: ", props.dealership)
     if (validateInputs()) {
       const { kwMonthly, totalTimeOn, tarifaConvencional, tarifaBranca } = calcularTarifas(
         quantity, power, frequencyOfUseOnWeekdays,
-        frequencyOfUseOnWeekend, props.dealership, startTimeWeekdays,
+        frequencyOfUseOnWeekend, dealership, startTimeWeekdays,
         endTimeWeekdays, startTimeWeekend, endTimeWeekend, on24Hours);
 
       const newEquipment = {
@@ -164,7 +175,6 @@ function Equipment(props) {
         equipmentName={equipment.name}
         equipmentIcon={equipment.icon.light}
         equipmentDescription={equipment.models[0].description}
-        on24Hours={on24Hours}
         offset={scrollOffset}
       />
 

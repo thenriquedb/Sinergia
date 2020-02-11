@@ -77,7 +77,7 @@ export default {
         },
         models: [
           {
-            name: 'Computador',
+            name: 'Computador - 200W',
             power: 200,
             description:
               'Pesquise modelos mais econômicos e evite deixar ligado sem necessidade.',
@@ -97,7 +97,7 @@ export default {
           light: require('../assets/icons/bedroom/light/phone.png')
         }, models: [
           {
-            name: 'Telefone Fixo',
+            name: 'Telefone Fixo - 5W',
             power: 5,
             description:
               '',
@@ -118,7 +118,7 @@ export default {
         },
         models: [
           {
-            name: 'Notebook',
+            name: 'Notebook - 45W',
             power: 45,
             description:
               'Pesquise modelos mais econômicos e evite deixar ligado sem necessidade.            ',
@@ -199,7 +199,7 @@ export default {
         },
         models: [
           {
-            name: 'Impressora',
+            name: 'Impressora - 25W',
             power: 25,
             description:
               'Evite deixar acessórios do computador ligados sem necessidade.',
@@ -220,7 +220,7 @@ export default {
         },
         models: [
           {
-            name: 'Micro system',
+            name: 'Micro system - 25W',
             power: 25,
             description:
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
@@ -365,7 +365,7 @@ export default {
         },
         models: [
           {
-            name: 'DVD',
+            name: 'DVD - 10W',
             power: 10,
             description:
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
@@ -386,7 +386,7 @@ export default {
         },
         models: [
           {
-            name: 'Home theater',
+            name: 'Home theater - 350W',
             power: 350,
             description:
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
@@ -531,7 +531,7 @@ export default {
       },
       models: [
         {
-          name: 'Forno elétrico',
+          name: 'Forno elétrico - 1500W',
           power: 1500,
           description:
             ' ',
@@ -573,7 +573,7 @@ export default {
       },
       models: [
         {
-          name: 'Frigobar',
+          name: 'Frigobar - 70W',
           power: 70,
           description:
             '',
@@ -594,7 +594,7 @@ export default {
       },
       models: [
         {
-          name: 'Lavadora de louça',
+          name: 'Lavadora de louça - 1400W',
           power: 1400,
           description:
             'Economize água e energia elétrica lavando de uma só vez, a quantidade máxima de louça indicada pelo fabricante.',
@@ -819,7 +819,7 @@ export default {
         },
         models: [
           {
-            name: 'Sauna',
+            name: 'Sauna - 15000W',
             power: 15000,
             description:
               '',
@@ -879,7 +879,7 @@ export default {
         },
         models: [
           {
-            name: 'Bomba de piscina',
+            name: 'Bomba de piscina - 500W',
             power: 500,
             description:
               '',
@@ -900,7 +900,7 @@ export default {
         },
         models: [
           {
-            name: 'Churrasqueira elétrica',
+            name: 'Churrasqueira elétrica - 3800W',
             power: 3800,
             description:
               '',
@@ -921,7 +921,7 @@ export default {
         },
         models: [
           {
-            name: 'Cortador de grama',
+            name: 'Cortador de grama - 600W',
             power: 600,
             description:
               '',
@@ -1108,7 +1108,7 @@ export default {
         },
         models: [
           {
-            name: 'Aspirador de pó',
+            name: 'Aspirador de pó - 600W',
             power: 600,
             description:
               '',
@@ -1129,7 +1129,7 @@ export default {
         },
         models: [
           {
-            name: 'Maquina de costura',
+            name: 'Maquina de costura - 100W',
             power: 100,
             description:
               '',
@@ -1213,7 +1213,7 @@ export default {
         },
         models: [
           {
-            name: 'Tanquinho',
+            name: 'Tanquinho - 270W',
             power: 270,
             description:
               'Procure usar toda a capacidade em uma mesma lavagem, evitando ligá-lo muitas vezes.',

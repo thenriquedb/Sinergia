@@ -16,16 +16,6 @@ const Home = props => {
   const [updateList, setUpdateList] = useState(false);
 
   const scrollOffset = new Animated.Value(0);
-  const offsetBounce = new Animated.Value(40);
-
-  useEffect(() => {
-    Animated.spring(offsetBounce, {
-      toValue: 0,
-      velocity: 20,
-      bounciness: 20,
-      useNativeDriver: true
-    }).start();
-  }, []);
 
   const reRender = () => {
 
@@ -62,11 +52,6 @@ const Home = props => {
                   useNativeDriver: true
                 }
               }])}
-              style={{
-                transform: [{
-                  translateY: offsetBounce
-                }]
-              }}
             />
           </Rooms>
         </Container> :

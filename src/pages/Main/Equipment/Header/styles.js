@@ -14,6 +14,7 @@ export const Title = styled(Animated.Text)`
   font-weight: bold;
   position: absolute;
   bottom: 80;
+  text-align: center
 `;
 
 export const Description = styled(Animated.Text)`

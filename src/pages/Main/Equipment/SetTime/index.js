@@ -2,14 +2,8 @@ import React, { useState } from 'react';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Picker, TouchableOpacity } from 'react-native';
 
-import {
-  Container,
-  SetOperationLabel,
-  HourLabel,
-  SetOperation,
-  SelectTime
-} from './styles';
 import { Text } from "../../../../styles/fonts";
+import { Container, SetOperationLabel, HourLabel, SetOperation, SelectTime } from './styles';
 
 import { formatHour } from "../../../../util/time";
 
@@ -38,18 +32,17 @@ const SetTime = (props) => {
 
   return (
     <Container>
-
       <SetOperationLabel> Dias da Semana </SetOperationLabel>
       <SetOperation>
         <>
           <HourLabel> Horário de início </HourLabel>
           <TouchableOpacity
-            disabled={on24Hours ? true : false}
+            disabled={on24Hours || !frequencyOfUseOnWeekdays ? true : false}
             onPress={() => setStartTimeWeekdaysPickerVisible(!startTimePickerVisibleWeekdays)}
           >
 
-            <SelectTime color={on24Hours ? '#eee' : '#cccccc'}>
-              <Text color={on24Hours ? '#ccc' : '#000'}> {formatHour(startTimeWeekdays)} </Text>
+            <SelectTime color={on24Hours || !frequencyOfUseOnWeekdays ? '#eee' : '#cccccc'}>
+              <Text color={on24Hours || !frequencyOfUseOnWeekdays ? '#ccc' : '#000'}> {formatHour(startTimeWeekdays)} </Text>
             </SelectTime>
           </TouchableOpacity>
 
@@ -67,10 +60,10 @@ const SetTime = (props) => {
 
           <HourLabel> Horário de término </HourLabel>
           <TouchableOpacity
-            disabled={on24Hours ? true : false}
+            disabled={on24Hours || !frequencyOfUseOnWeekdays ? true : false}
             onPress={() => setEndTimeWeekdaysPickerVisible(!endTimePickerVisibleWeekdays)}>
-            <SelectTime color={on24Hours ? '#eee' : '#cccccc'}>
-              <Text color={on24Hours ? '#ccc' : '#000'}> {formatHour(endTimeWeekdays)} </Text>
+            <SelectTime color={on24Hours || !frequencyOfUseOnWeekdays ? '#eee' : '#cccccc'}>
+              <Text color={on24Hours || !frequencyOfUseOnWeekdays ? '#ccc' : '#000'}> {formatHour(endTimeWeekdays)} </Text>
             </SelectTime>
           </TouchableOpacity>
 
@@ -94,12 +87,12 @@ const SetTime = (props) => {
           style={{ width: 100 }}
           onValueChange={(itemValue, itemIndex) => setFrequencyOfUseOnWeekdays(itemValue)
           }>
-          <Picker.Item key={'key'} value={'0'} label={'    0'} />
-          <Picker.Item key={'key'} value={'1'} label={'    1'} />
-          <Picker.Item key={'key'} value={'2'} label={'    2'} />
-          <Picker.Item key={'key'} value={'3'} label={'    3'} />
-          <Picker.Item key={'key'} value={'4'} label={'    4'} />
-          <Picker.Item key={'key'} value={'5'} label={'    5'} />
+          <Picker.Item key={'key'} value={0} label={'    0'} />
+          <Picker.Item key={'key'} value={1} label={'    1'} />
+          <Picker.Item key={'key'} value={2} label={'    2'} />
+          <Picker.Item key={'key'} value={3} label={'    3'} />
+          <Picker.Item key={'key'} value={4} label={'    4'} />
+          <Picker.Item key={'key'} value={5} label={'    5'} />
         </Picker>
       </SetOperation>
 
@@ -109,11 +102,11 @@ const SetTime = (props) => {
         <>
           <HourLabel> Horário de início </HourLabel>
           <TouchableOpacity
-            disabled={on24Hours ? true : false}
+            disabled={on24Hours || !frequencyOfUseOnWeekend ? true : false}
             onPress={() => setStartTimeWeekendPickerVisible(!startTimePickerVisibleWeekend)}
           >
-            <SelectTime color={on24Hours ? '#eee' : '#cccccc'}>
-              <Text color={on24Hours ? '#ccc' : '#000'}> {formatHour(startTimeWeekend)} </Text>
+            <SelectTime color={on24Hours || !frequencyOfUseOnWeekend ? '#eee' : '#cccccc'}>
+              <Text color={on24Hours || !frequencyOfUseOnWeekend ? '#ccc' : '#000'}> {formatHour(startTimeWeekend)} </Text>
             </SelectTime>
 
           </TouchableOpacity>
@@ -131,10 +124,10 @@ const SetTime = (props) => {
 
           <HourLabel> Horário de término </HourLabel>
           <TouchableOpacity
-            disabled={on24Hours ? true : false}
+            disabled={on24Hours || !frequencyOfUseOnWeekend ? true : false}
             onPress={() => setEndTimeWeekendPickerVisible(true)}>
-            <SelectTime color={on24Hours ? '#eee' : '#cccccc'}>
-              <Text color={on24Hours ? '#ccc' : '#000'}> {formatHour(endTimeWeekend)} </Text>
+            <SelectTime color={on24Hours || !frequencyOfUseOnWeekend ? '#eee' : '#cccccc'}>
+              <Text color={on24Hours || !frequencyOfUseOnWeekend ? '#ccc' : '#000'}> {formatHour(endTimeWeekend)} </Text>
             </SelectTime>
           </TouchableOpacity>
 
@@ -143,8 +136,11 @@ const SetTime = (props) => {
             mode={'time'}
             date={endTimeWeekend}
             isVisible={endTimePickerVisibleWeekend}
-            onConfirm={date => setEndTimeWeekend(date)}
-            onCancel={() => setEndTimeWeekendPickerVisible(false)}
+            onConfirm={date => {
+              setEndTimeWeekend(date);
+              setEndTimeWeekendPickerVisible(!endTimePickerVisibleWeekend)
+            }}
+            onCancel={() => setEndTimeWeekendPickerVisible(!endTimePickerVisibleWeekend)}
           />
         </>
 
@@ -156,9 +152,9 @@ const SetTime = (props) => {
           onValueChange={(itemValue, itemIndex) =>
             setFrequencyOfUseOnWeekend(itemValue)
           }>
-          <Picker.Item key={'key'} value={'0'} label={'    0'} />
-          <Picker.Item key={'key'} value={'1'} label={'    1'} />
-          <Picker.Item key={'key'} value={'2'} label={'    2'} />
+          <Picker.Item key={'key'} value={0} label={'    0'} />
+          <Picker.Item key={'key'} value={1} label={'    1'} />
+          <Picker.Item key={'key'} value={2} label={'    2'} />
         </Picker>
       </SetOperation>
     </Container>

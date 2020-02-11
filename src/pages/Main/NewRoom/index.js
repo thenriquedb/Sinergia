@@ -155,9 +155,10 @@ class NewRoom extends Component {
           this.setState({ isVisibleConfirmModal: !this.state.isVisibleConfirmModal });
           Alert.alert(
             'Cadastrado com sucesso',
-            `O cômodo ${this.state.customName} foi cadastrado com sucesso!`,
+            `O cômodo ${this.state.customName} foi cadastrado com sucesso! Você deseja cadastrar um novo cômodo ou voltar para a tela anterior?`,
             [
-              { text: 'Ok' },
+              { text: 'Voltar', onPress: () => this.props.navigation.goBack() },
+              { text: 'Novo cômodo' },
             ],
             { cancelable: true },
           );
