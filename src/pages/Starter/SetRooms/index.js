@@ -53,7 +53,7 @@ class SetRooms extends Component {
 
             {this.props.rooms.length ?
               <TouchableHighlight
-                underlayColor={'#fcf8f7'}
+                underlayColor2={'#fcf8f7'}
                 onPress={() => this.props.navigation.navigate('StarterNewRoom')}>
                 <NewRoomButton>
                   <Text fontSize={'h5'} color={'#cccccc'}> Adcionar um novo comôdo </Text>

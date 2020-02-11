@@ -28,10 +28,9 @@ import { TextBold, Text } from '../../../styles/fonts';
 
 function Equipment(props) {
   const equipment = props.navigation.getParam('equipment');
-  console.log("equipment: ", equipment)
   const action = props.navigation.getParam('action');
   const { navigation } = props;
-
+  console.log("equipment fora: ", equipment)
   // states
   const [selectedModel, setSelectedModel] = useState(equipment.model ? equipment.model : equipment.models[0]);
   const [customName, setCustomName] = useState(equipment.name ? equipment.name : equipment.models[0].name);
@@ -39,6 +38,8 @@ function Equipment(props) {
   const [power, setPower] = useState(equipment.power ? equipment.power : equipment.models[0].power.toString());
   const [on24Hours, setOn24Hours] = useState(equipment.on24Hours ? on24Hours : false);
   const [useCustomEquipment, setUseCustomEquipment] = useState(equipment.useCustomEquipment ? equipment.useCustomEquipment : false);
+  const [equipmentOffDuringTheWeek, setEquipmentOffDuringTheWeek] = useState(equipment.useCustomEquipment ? equipment.useCustomEquipment : false);
+  const [equipmentOffDuringTheWeekdend, setEquipmentOffDuringTheWeekend] = useState(equipment.useCustomEquipment ? equipment.useCustomEquipment : false);
 
   // Picker de horas - dias da semana
   const [startTimeWeekdays, setStartTimeWeekdays] = useState(equipment.startTimeWeekdays ? equipment.startTimeWeekdays : new Date());
@@ -62,9 +63,9 @@ function Equipment(props) {
 
   const scrollOffset = new Animated.Value(0);
 
-
+  // Até meia noite
   function validateInputs() {
-    if (endTimeWeekdays < startTimeWeekdays || endTimeWeekend < startTimeWeekend) {
+    if (endTimeWeekdays <= startTimeWeekdays || endTimeWeekend <= startTimeWeekend) {
       ToastAndroid.showWithGravityAndOffset(
         'O horário de desligamento do equipamento não pode ser menor do que o horário de início',
         ToastAndroid.SHORT,
@@ -103,13 +104,12 @@ function Equipment(props) {
   }
 
   function toggleSaveBtn() {
+    // console.log("props.dealership: ", props.dealership)
     if (validateInputs()) {
       const { kwMonthly, totalTimeOn, tarifaConvencional, tarifaBranca } = calcularTarifas(
         quantity, power, frequencyOfUseOnWeekdays,
         frequencyOfUseOnWeekend, props.dealership, startTimeWeekdays,
         endTimeWeekdays, startTimeWeekend, endTimeWeekend, on24Hours);
-
-      console.log("tarifaConvencional: ", tarifaConvencional)
 
       const newEquipment = {
         id: equipment.id ? equipment.id : new Date().getTime().toString(),
@@ -136,7 +136,6 @@ function Equipment(props) {
           monthlyExpenses: tarifaBranca,
         },
       };
-
       console.log("newEquipment: ", newEquipment)
 
       if (action == 'edit') {
@@ -233,7 +232,6 @@ function Equipment(props) {
             tintColors={{ true: Colors.primary, false: '#999' }}
             value={on24Hours}
             onValueChange={() => {
-              scrollOffset.setOffset(0)
               setOn24Hours(!on24Hours)
             }}
           />
@@ -273,7 +271,6 @@ function Equipment(props) {
 };
 
 const mapStateToProps = state => ({
-  valorTarifaConvencional: state.houseReducer.dealership.valorTarifaConvencional,
   dealership: state.houseReducer.dealership
 });
 

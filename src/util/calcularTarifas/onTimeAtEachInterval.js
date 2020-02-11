@@ -17,34 +17,42 @@ export default function onTimeAtEachInterval(intervals, startTimeWeekdays, endTi
   const intervalosHorarioIntermediario1 = intervalsToArray(horarioItermediario1, format);
   const intervalosHorarioIntermediario2 = horarioIntermediario2 ? intervalsToArray(horarioIntermediario2, format) : '';
 
-  const ligadoHorarioIntermediario1 = isBetween(startTimeWeekdays, intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
-  const ligadoHorarioPonta = isBetween(startTimeWeekdays, intervalosHorarioPonta[0], intervalosHorarioPonta[1])
-  const ligadoHorarioIntermediario2 = isBetween(startTimeWeekdays, intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1]);
+  const ligadoHorarioIntermediario1 = isBetween(startTimeWeekdays, intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1], '[]');
+  const ligadoHorarioPonta = isBetween(startTimeWeekdays, intervalosHorarioPonta[0], intervalosHorarioPonta[1], '()')
+  const ligadoHorarioIntermediario2 = isBetween(startTimeWeekdays, intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1], '[]');
   const ligadoForaDePonta = !ligadoHorarioIntermediario1 && !ligadoHorarioPonta && !ligadoHorarioIntermediario2;
 
-  const desligadoHorarioIntermediario1 = isBetween(endTimeWeekdays, intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
-  const desligadoHorarioPonta = isBetween(endTimeWeekdays, intervalosHorarioPonta[0], intervalosHorarioPonta[1])
-  const desligadoHorarioIntermediario2 = isBetween(endTimeWeekdays, intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1]);
+  const desligadoHorarioIntermediario1 = isBetween(endTimeWeekdays, intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1], '[]');
+  const desligadoHorarioPonta = isBetween(endTimeWeekdays, intervalosHorarioPonta[0], intervalosHorarioPonta[1], '()')
+  const desligadoHorarioIntermediario2 = isBetween(endTimeWeekdays, intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1], '[]');
   const desligadoForaDePonta = !desligadoHorarioIntermediario1 && !desligadoHorarioPonta && !desligadoHorarioIntermediario2;
 
   const ligadoEmTodasAsFaixas = isBetween(intervalosHorarioPonta[0], startTimeWeekdays, endTimeWeekdays);
 
-  console.log("startTimeWeekdays", startTimeWeekdays)
-  console.log("endTimeWeekdays", endTimeWeekdays)
-  console.log("startTimeWeekend", startTimeWeekend)
-  console.log("endTimeWeekend", endTimeWeekend)
-  console.log("ligadoEmTodasAsFaixas", ligadoEmTodasAsFaixas);
+  console.log("on24Hours: ", on24Hours);
 
-  console.log("\nintervalosHorarioPonta: ", intervalosHorarioPonta)
+  console.log("\n\n\nintervalosHorarioPonta: ", intervalosHorarioPonta)
   console.log("intervalosHorarioIntermediario1: ", intervalosHorarioIntermediario1)
   console.log("intervalosHorarioIntermediario2: ", intervalosHorarioIntermediario2)
 
-  console.log("\nligadoHorarioIntermediario1: ", ligadoHorarioIntermediario1)
+  console.log("\n\nstartTimeWeekdays", startTimeWeekdays)
+  console.log("endTimeWeekdays", endTimeWeekdays)
+
+  console.log("\n\nstartTimeWeekend", startTimeWeekend)
+  console.log("endTimeWeekend", endTimeWeekend)
+
+  console.log("ligadoEmTodasAsFaixas", ligadoEmTodasAsFaixas);
+
+  console.log("\n\nintervalosHorarioPonta: ", intervalosHorarioPonta)
+  console.log("intervalosHorarioIntermediario1: ", intervalosHorarioIntermediario1)
+  console.log("intervalosHorarioIntermediario2: ", intervalosHorarioIntermediario2)
+
+  console.log("\n\nligadoHorarioIntermediario1: ", ligadoHorarioIntermediario1)
   console.log("ligadoHorarioPonta: ", ligadoHorarioPonta)
   console.log("ligadoHorarioIntermediario2: ", ligadoHorarioIntermediario2)
   console.log("ligadoForaDePonta: ", ligadoForaDePonta)
 
-  console.log("\ndesligadoHorarioIntermediario1: ", desligadoHorarioIntermediario1)
+  console.log("\n\ndesligadoHorarioIntermediario1: ", desligadoHorarioIntermediario1)
   console.log("desligadoHorarioPonta: ", desligadoHorarioPonta)
   console.log("desligadoHorarioIntermediario2: ", desligadoHorarioIntermediario2)
   console.log("desligadoForaDePonta: ", desligadoForaDePonta)
@@ -53,9 +61,7 @@ export default function onTimeAtEachInterval(intervals, startTimeWeekdays, endTi
   var tempoLigadoPontaWeekdays = 0;
   var tempoLigadoForaDePontaWeekdays = 0;
 
-  var tempoLigadoIntermediarioWeekend = 0;
-  var tempoLigadoPontaWeekend = 0;
-  var tempoLigadoForaDePontaWeekend = 0;
+  var tempoLigadoWeekend = 0;
 
   if (ligadoHorarioIntermediario1) {
     console.log("Ligado intermediario 1");
@@ -63,16 +69,12 @@ export default function onTimeAtEachInterval(intervals, startTimeWeekdays, endTi
     if (desligadoHorarioIntermediario1) {
       console.log("desligado intermediario 1");
       tempoLigadoIntermediarioWeekdays = on24Hours ? 24 : duration(startTimeWeekdays, endTimeWeekdays);
-      tempoLigadoPontaWeekend = on24Hours ? 24 : duration(startTimeWeekdays, endTimeWeekdays);
     }
 
     if (desligadoHorarioPonta) {
       console.log("desligado horario de ponta");
       tempoLigadoIntermediarioWeekdays = duration(startTimeWeekdays, intervalosHorarioIntermediario1[1]);
       tempoLigadoPontaWeekdays = duration(intervalosHorarioPonta[0], endTimeWeekdays);
-
-      tempoLigadoIntermediarioWeekend = duration(startTimeWeekend, intervalosHorarioIntermediario1[1]);
-      tempoLigadoPontaWeekend = duration(intervalosHorarioPonta[0], endTimeWeekend);
     }
 
     if (desligadoHorarioIntermediario2) {
@@ -80,44 +82,32 @@ export default function onTimeAtEachInterval(intervals, startTimeWeekdays, endTi
       tempoLigadoIntermediarioWeekdays = duration(startTimeWeekdays, intervalosHorarioIntermediario1[1]);
       tempoLigadoPontaWeekdays = duration(intervalosHorarioPonta[0], intervalosHorarioPonta[1]);
       tempoLigadoIntermediarioWeekdays += duration(intervalosHorarioIntermediario2[0], endTimeWeekdays);
-
-      tempoLigadoIntermediarioWeekend = duration(startTimeWeekend, intervalosHorarioIntermediario1[1]);
-      tempoLigadoPontaWeekend = duration(intervalosHorarioPonta[0], intervalosHorarioPonta[1]);
-      tempoLigadoIntermediarioWeekend += duration(intervalosHorarioIntermediario2[0], endTimeWeekend);
     }
 
     if (!desligadoHorarioIntermediario1 && !desligadoHorarioPonta && !desligadoHorarioIntermediario2) {
       console.log("desligado fora de ponta");
+
       // dias de semana
       tempoLigadoIntermediarioWeekdays = duration(intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
       tempoLigadoPontaWeekdays = duration(intervalosHorarioPonta[0], intervalosHorarioPonta[1]);
       tempoLigadoIntermediarioWeekdays += duration(intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1]);
       tempoLigadoForaDePontaWeekdays = duration(intervalosHorarioIntermediario2[1], endTimeWeekdays);
-
-      // finais de semana
-      tempoLigadoForaDePontaWeekend = duration(startTimeWeekend, intervalosHorarioIntermediario1[0]);
-      tempoLigadoIntermediarioWeekend = duration(intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
-      tempoLigadoIntermediarioWeekend += duration(intervalosHorarioIntermediario2[0], endTimeWeekend);
-      tempoLigadoForaDePontaWeekend = duration(intervalosHorarioIntermediario2[1], endTimeWeekend);
     }
   }
 
   if (ligadoHorarioPonta) {
     console.log("ligado horario de ponta");
+
     if (desligadoHorarioPonta) {
       console.log("desligado horario de ponta");
       tempoLigadoIntermediarioWeekdays = on24Hours ? 24 : duration(startTimeWeekdays, endTimeWeekdays);
-      tempoLigadoPontaWeekend = on24Hours ? 24 : duration(startTimeWeekend, endTimeWeekend);
     }
 
     if (desligadoHorarioIntermediario2) {
-      console.log("desligado intermediario2");
+      console.log("\ndesligado intermediario2\n");
 
       tempoLigadoPontaWeekdays = duration(startTimeWeekend, intervalosHorarioPonta[1]);
       tempoLigadoIntermediarioWeekdays = duration(intervalosHorarioIntermediario2[0], endTimeWeekend);
-
-      tempoLigadoPontaWeekend = duration(startTimeWeekend, intervalosHorarioPonta[1]);
-      tempoLigadoIntermediarioWeekend = duration(intervalosHorarioIntermediario2[0], endTimeWeekend);
     }
 
     if (!desligadoHorarioIntermediario2 && !desligadoHorarioPonta) {
@@ -125,24 +115,21 @@ export default function onTimeAtEachInterval(intervals, startTimeWeekdays, endTi
       tempoLigadoPontaWeekdays = duration(startTimeWeekend, intervalosHorarioPonta[1]);
       tempoLigadoIntermediarioWeekdays = duration(intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1]);
       tempoLigadoForaDePontaWeekdays = duration(intervalosHorarioIntermediario2[1], endTimeWeekend);
-
-      tempoLigadoPontaWeekend = duration(startTimeWeekend, intervalosHorarioPonta[1]);
-      tempoLigadoIntermediarioWeekend = duration(intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1]);
-      tempoLigadoForaDePontaWeekend = duration(intervalosHorarioIntermediario2[1], endTimeWeekend);
     }
   }
 
   if (ligadoHorarioIntermediario2) {
     console.log("ligado intermediario 2")
     if (desligadoHorarioIntermediario2) {
-      tempoLigadoIntermediario2Weekdays = on24Hours ? 24 : duration(startTimeWeekdays, endTimeWeekdays);
-      tempoLigadoIntermediario2Weeend = on24Hours ? 24 : duration(startTimeWeekend, endTimeWeekend);
-    } else {
-      tempoLigadoIntermediarioWeekdays = duration(startTimeWeekdays, intervalosHorarioIntermediario2[1]);
+      console.log("desligado intermediario 2")
+      tempoLigadoIntermediarioWeekdays = on24Hours ? 24 : duration(startTimeWeekdays, intervalosHorarioIntermediario2[1]);
+    }
+    else {
+      console.log("desligado fora de PONTA")
+      tempoLigadoIntermediarioWeekdays = on24Hours ? 24 : duration(startTimeWeekdays, intervalosHorarioIntermediario2[1]);
       tempoLigadoForaDePontaWeekdays = duration(intervalosHorarioIntermediario2[1], endTimeWeekdays);
 
-      tempoLigadoIntermediarioWeekend = duration(startTimeWeekend, intervalosHorarioIntermediario2[1]);
-      tempoLigadoForaDePontaWeekend = duration(intervalosHorarioIntermediario2[1], endTimeWeekend);
+      console.log("tempoLigadoForaDePontaWeekdays AAAAAAAAAAAA: ", tempoLigadoForaDePontaWeekdays);
     }
   }
 
@@ -151,16 +138,12 @@ export default function onTimeAtEachInterval(intervals, startTimeWeekdays, endTi
     if (desligadoForaDePonta) {
       console.log("desligado fora de ponta")
       tempoLigadoForaDePontaWeekdays = duration(startTimeWeekdays, endTimeWeekdays);
-      tempoLigadoForaDePontaWeekend = duration(startTimeWeekend, endTimeWeekend);
     }
 
     if (desligadoHorarioIntermediario1) {
       console.log("desligado intermediario 1")
       tempoLigadoForaDePontaWeekdays = duration(startTimeWeekdays, intervalosHorarioIntermediario1[0]);
       tempoLigadoIntermediarioWeekdays = duration(intervalosHorarioIntermediario1[0], endTimeWeekdays);
-
-      tempoLigadoForaDePontaWeekend = duration(startTimeWeekend, intervalosHorarioIntermediario1[0]);
-      tempoLigadoIntermediarioWeekend = duration(intervalosHorarioIntermediario1[0], endTimeWeekend);
     }
 
     if (desligadoHorarioPonta) {
@@ -169,42 +152,51 @@ export default function onTimeAtEachInterval(intervals, startTimeWeekdays, endTi
       tempoLigadoForaDePontaWeekdays = duration(startTimeWeekdays, intervalosHorarioIntermediario1[0]);
       tempoLigadoIntermediarioWeekdays = duration(intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
       tempoLigadoForaDePontaWeekdays = duration(intervalosHorarioPonta[0], endTimeWeekdays);
-
-      tempoLigadoForaDePontaWeekend = duration(startTimeWeekend, intervalosHorarioIntermediario1[0]);
-      tempoLigadoIntermediarioWeekend = duration(intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
-      tempoLigadoForaDePontaWeekend = duration(intervalosHorarioPonta[0], endTimeWeekend);
     }
 
     if (desligadoHorarioIntermediario2) {
-      console.log("desligado intermediario 2")
+      console.debug("desligado intermediario 2")
 
       tempoLigadoForaDePontaWeekdays = duration(startTimeWeekdays, intervalosHorarioIntermediario1[0]);
       tempoLigadoIntermediarioWeekdays = duration(intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
       tempoLigadoForaDePontaWeekdays = duration(intervalosHorarioPonta[0], intervalosHorarioPonta[1]);
       tempoLigadoIntermediarioWeekdays += duration(intervalosHorarioIntermediario2[0], endTimeWeekdays);
-
-      tempoLigadoForaDePontaWeekend = duration(startTimeWeekend, intervalosHorarioIntermediario1[0]);
-      tempoLigadoIntermediarioWeekend = duration(intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
-      tempoLigadoForaDePontaWeekend = duration(intervalosHorarioPonta[0], intervalosHorarioPonta[1]);
-      tempoLigadoIntermediarioWeekend += duration(intervalosHorarioIntermediario2[0], endTimeWeekend);
     }
   }
 
-  if (ligadoEmTodasAsFaixas) {
-    console.log("passa por todas as faixas")
-    tempoLigadoForaDePontaWeekdays = duration(startTimeWeekdays, intervalosHorarioIntermediario1[0]);
-    tempoLigadoIntermediarioWeekdays = duration(intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
-    tempoLigadoPontaWeekdays = duration(intervalosHorarioPonta[0], intervalosHorarioPonta[1]);
-    tempoLigadoIntermediarioWeekdays += duration(intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1]);
-    tempoLigadoForaDePontaWeekdays += duration(intervalosHorarioIntermediario2[1], endTimeWeekdays);
+  // if (ligadoEmTodasAsFaixas) {
+  //   console.log("passa por todas as faixas")
+  //   tempoLigadoForaDePontaWeekdays = duration(startTimeWeekdays, intervalosHorarioIntermediario1[0]);
+  //   tempoLigadoIntermediarioWeekdays = duration(intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
+  //   tempoLigadoPontaWeekdays = duration(intervalosHorarioPonta[0], intervalosHorarioPonta[1]);
+  //   tempoLigadoIntermediarioWeekdays += duration(intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1]);
+  //   tempoLigadoForaDePontaWeekdays += duration(intervalosHorarioIntermediario2[1], endTimeWeekdays);
 
-    tempoLigadoForaDePontaWeekend = duration(startTimeWeekend, intervalosHorarioIntermediario1[0]);
-    tempoLigadoIntermediarioWeekend = duration(intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
-    tempoLigadoPontaWeekend = duration(intervalosHorarioPonta[0], intervalosHorarioPonta[1]);
-    tempoLigadoIntermediarioWeekend += duration(intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1]);
-    tempoLigadoForaDePontaWeekend += duration(intervalosHorarioIntermediario2[1], endTimeWeekend);
-  }
+  //   console.log("\ntempoLigadoForaDePontaWeekdays: ", tempoLigadoForaDePontaWeekdays)
+  //   console.log("tempoLigadoIntermediarioWeekdays: ", tempoLigadoIntermediarioWeekdays)
+  //   console.log("tempoLigadoPontaWeekdays: ", tempoLigadoPontaWeekdays)
+  //   console.log("tempoLigadoIntermediarioWeekdays: ", tempoLigadoIntermediarioWeekdays)
+  //   console.log("tempoLigadoForaDePontaWeekdays: \n", tempoLigadoForaDePontaWeekdays)
 
+  //   tempoLigadoForaDePontaWeekend = duration(startTimeWeekend, intervalosHorarioIntermediario1[0]);
+  //   tempoLigadoIntermediarioWeekend = duration(intervalosHorarioIntermediario1[0], intervalosHorarioIntermediario1[1]);
+  //   tempoLigadoPontaWeekend = duration(intervalosHorarioPonta[0], intervalosHorarioPonta[1]);
+  //   tempoLigadoIntermediarioWeekend += duration(intervalosHorarioIntermediario2[0], intervalosHorarioIntermediario2[1]);
+  //   tempoLigadoForaDePontaWeekend += duration(intervalosHorarioIntermediario2[1], endTimeWeekend);
+
+  //   console.log("\n\ntempoLigadoForaDePontaWeekend: ", tempoLigadoForaDePontaWeekend)
+  //   console.log("tempoLigadoIntermediarioWeekend: ", tempoLigadoIntermediarioWeekend)
+  //   console.log("tempoLigadoPontaWeekend: ", tempoLigadoPontaWeekend)
+  //   console.log("tempoLigadoIntermediarioWeekend: ", tempoLigadoIntermediarioWeekend)
+  //   console.log("tempoLigadoForaDePontaWeekend: ", tempoLigadoForaDePontaWeekend)
+  // }
+
+  tempoLigadoWeekend = duration(startTimeWeekend, endTimeWeekend);
+  console.log("\n\ntempoLigadoForaDePontaWeekdays: ", tempoLigadoForaDePontaWeekdays)
+  console.log("tempoLigadoIntermediarioWeekdays: ", tempoLigadoIntermediarioWeekdays)
+  console.log("tempoLigadoPontaWeekdays: ", tempoLigadoPontaWeekdays)
+
+  console.log("\n\ tempoLigadoWeekend: ", tempoLigadoWeekend)
 
   return {
     totalTimeWeekdays: {
@@ -212,10 +204,6 @@ export default function onTimeAtEachInterval(intervals, startTimeWeekdays, endTi
       tempoLigadoIntermediarioWeekdays,
       tempoLigadoPontaWeekdays
     },
-    totalTimeWeekend: {
-      tempoLigadoForaDePontaWeekend,
-      tempoLigadoIntermediarioWeekend,
-      tempoLigadoPontaWeekend
-    }
+    tempoLigadoWeekend
   }
 }

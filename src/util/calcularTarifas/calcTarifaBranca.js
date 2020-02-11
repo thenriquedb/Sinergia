@@ -20,24 +20,22 @@ export default function calcTarifaBranca(quantity, power, frequencyOfUseOnWeekda
   const tempoLigadoPorIntervalo = onTimeAtEachInterval({ horarioPonta, horarioItermediario1, horarioIntermediario2 },
     startTimeWeekdays, endTimeWeekdays, startTimeWeekend, endTimeWeekend, on24Hours);
 
-  const { totalTimeWeekdays, totalTimeWeekend } = tempoLigadoPorIntervalo;
+  console.log("TEMPO LIGADO POR INTERVALO ", tempoLigadoPorIntervalo)
+  const { totalTimeWeekdays, tempoLigadoWeekend } = tempoLigadoPorIntervalo;
 
   // Calcula a quantidade de KWh gasto em cada intervalos durante os dias de semana
-  let kwGastoIntermediarioWeekdays = calcularKWMonthly(power, quantity, totalTimeWeekdays.tempoLigadoIntermediarioWeekdays);
-  let kwGastoPontaWeekdays = calcularKWMonthly(power, quantity, totalTimeWeekdays.tempoLigadoPontaWeekdays);
-  let kwGastoForaDePontaWeedays = calcularKWMonthly(power, quantity, totalTimeWeekdays.tempoLigadoForaDePontaWeekdays);
-
+  let kwGastoIntermediarioWeekdays = calcularKWMonthly(power, quantity, totalTimeWeekdays.tempoLigadoIntermediarioWeekdays, frequencyOfUseOnWeekdays);
+  let kwGastoPontaWeekdays = calcularKWMonthly(power, quantity, totalTimeWeekdays.tempoLigadoPontaWeekdays, frequencyOfUseOnWeekdays);
+  let kwGastoForaDePontaWeedays = calcularKWMonthly(power, quantity, totalTimeWeekdays.tempoLigadoForaDePontaWeekdays, frequencyOfUseOnWeekdays);
 
   // Calcula a quantidade de KWh gasto em cada intervalos durante o final de semana
-  let kwGastoIntermediarioWeekend = calcularKWMonthly(power, quantity, totalTimeWeekend.tempoLigadoIntermediarioWeekend);
-  let kwGastoPontaWeekend = calcularKWMonthly(power, quantity, totalTimeWeekend.tempoLigadoPontaWeekend);
-  let kwGastoForaDePontaWeekend = calcularKWMonthly(power, quantity, totalTimeWeekend.tempoLigadoForaDePontaWeekend);
+  let kwGastoWeekend = calcularKWMonthly(power, quantity, tempoLigadoWeekend, frequencyOfUseOnWeekend);
 
   totalAPagarSemana = ((kwGastoIntermediarioWeekdays * valorIntermediaria) +
     (kwGastoPontaWeekdays * valorPonta) +
     (kwGastoForaDePontaWeedays * valorForaPonta)) * frequencyOfUseOnWeekdays;
 
-  totalAPagarFinalDeSemana = ((kwGastoIntermediarioWeekend + kwGastoPontaWeekend + kwGastoForaDePontaWeekend) * valorForaPonta) * frequencyOfUseOnWeekend;
+  totalAPagarFinalDeSemana = kwGastoWeekend * valorForaPonta;
 
   return totalAPagarFinalDeSemana + totalAPagarSemana;
 }

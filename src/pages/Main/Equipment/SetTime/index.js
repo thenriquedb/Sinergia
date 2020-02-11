@@ -91,14 +91,15 @@ const SetTime = (props) => {
         <Picker
           enabled={on24Hours ? false : true}
           selectedValue={frequencyOfUseOnWeekdays}
-          style={{ width: 320 }}
+          style={{ width: 100 }}
           onValueChange={(itemValue, itemIndex) => setFrequencyOfUseOnWeekdays(itemValue)
           }>
-          <Picker.Item key={'key'} value={'1'} label={'1'} />
-          <Picker.Item key={'key'} value={'2'} label={'2'} />
-          <Picker.Item key={'key'} value={'3'} label={'3'} />
-          <Picker.Item key={'key'} value={'4'} label={'4'} />
-          <Picker.Item key={'key'} value={'5'} label={'5'} />
+          <Picker.Item key={'key'} value={'0'} label={'    0'} />
+          <Picker.Item key={'key'} value={'1'} label={'    1'} />
+          <Picker.Item key={'key'} value={'2'} label={'    2'} />
+          <Picker.Item key={'key'} value={'3'} label={'    3'} />
+          <Picker.Item key={'key'} value={'4'} label={'    4'} />
+          <Picker.Item key={'key'} value={'5'} label={'    5'} />
         </Picker>
       </SetOperation>
 
@@ -151,12 +152,13 @@ const SetTime = (props) => {
         <Picker
           enabled={on24Hours ? false : true}
           selectedValue={frequencyOfUseOnWeekend}
-          style={{ width: 320 }}
+          style={{ width: 100 }}
           onValueChange={(itemValue, itemIndex) =>
             setFrequencyOfUseOnWeekend(itemValue)
           }>
-          <Picker.Item key={'key'} value={'1'} label={'1'} />
-          <Picker.Item key={'key'} value={'2'} label={'2'} />
+          <Picker.Item key={'key'} value={'0'} label={'    0'} />
+          <Picker.Item key={'key'} value={'1'} label={'    1'} />
+          <Picker.Item key={'key'} value={'2'} label={'    2'} />
         </Picker>
       </SetOperation>
     </Container>

@@ -57,7 +57,7 @@ function CardEquipment(props) {
               </DetailsLabels>
 
               <DetailsLabels>
-                <TextLight> KW/h Mensal </TextLight>
+                <TextLight> KWh Mensal </TextLight>
                 <TextLight> {kwMask(equipment.kwMonthly)}  </TextLight>
               </DetailsLabels>
 

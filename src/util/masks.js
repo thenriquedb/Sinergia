@@ -3,5 +3,5 @@ export function moneyMask(string) {
 }
 
 export function kwMask(string) {
-  return `${string.toFixed(1)} KW`;
+  return `${string.toFixed(2)} KWh`;
 }

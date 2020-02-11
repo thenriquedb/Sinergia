@@ -18,8 +18,6 @@ export const InputArea = styled.View`
   padding: 0px 15px 0px 15px;
 `;
 
-
-
 export const NextPageButton = styled.TouchableOpacity`
   background-color: ${Colors.primary};
   align-items: center;

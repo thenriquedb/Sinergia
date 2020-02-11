@@ -552,7 +552,7 @@ export default {
       },
       models: [
         {
-          name: 'Freezer',
+          name: 'Freezer - 200W',
           power: 200,
           description:
             'Instalar longe das fontes de calor e de preferência em local ventilado',
@@ -944,6 +944,12 @@ export default {
           light: require('../assets/icons/bathroom/light/shower.png')
         },
         models: [
+          {
+            name: 'Chuveiro - 5500W',
+            power: 5500,
+            description:
+              'Nos meses quentes, ajuste a chave do chuveiro para a posição verão.',
+          },
           {
             name: 'Chuveiro - 6400W',
             power: 6400,

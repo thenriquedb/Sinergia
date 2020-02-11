@@ -133,15 +133,18 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    setRoomKwMonthly: (idRoom, totalKwMonthly) =>
-      dispatch({
-        type: 'SET_ROOM_KW_MONTHLY',
-        payload: { idRoom, totalKwMonthly },
-      }),
+    editEquipment: (idRoom, idEquipment, newEquipment) => dispatch({
+      type: 'EDIT_EQUIPMENT', payload: { idRoom, idEquipment, newEquipment },
+    }),
     setRoomMonthlyExpenses: (idRoom, totalTarifaConvencional, totalTarifaBranca) =>
       dispatch({
         type: 'SET_ROOM_MONTHLY_EXPENSES',
         payload: { idRoom, totalTarifaConvencional, totalTarifaBranca },
+      }),
+    setRoomKwMonthly: (idRoom, totalKwMonthly) =>
+      dispatch({
+        type: 'SET_ROOM_KW_MONTHLY',
+        payload: { idRoom, totalKwMonthly },
       }),
   };
 };
