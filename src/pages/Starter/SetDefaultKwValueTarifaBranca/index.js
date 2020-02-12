@@ -4,6 +4,10 @@ import Input from '../../../components/Input/index';
 import { connect } from 'react-redux'
 import { TouchableOpacity } from "react-native";
 
+
+import WhereToFindKwValues from "../../../components/WhereToFindKwValues";
+
+
 // styles
 import { Container, NextPageButton, ContinueConfigArea, Content, InputContainer } from './styles';
 import { TextLight, Text } from '../../../styles/fonts';
@@ -18,6 +22,7 @@ class SetDefaultKwValueTarifaBranca extends Component {
       valorForaPonta: '1',
       valorIntermediaria: '2',
       valorPonta: '3',
+      isVisible: false
     }
     this.toggleNext = this.toggleNext.bind(this);
   }
@@ -76,7 +81,8 @@ class SetDefaultKwValueTarifaBranca extends Component {
               placeholder="Ponta"
             />
           </InputContainer>
-          <TouchableOpacity onPress={() => alert('')}>
+
+          <TouchableOpacity onPress={() => this.setState({ isVisible: !this.state.isVisible })}>
             <TextLight color={'#707070'} fontSize={'h6'} textAlign="center">  Onde encontrar? </TextLight>
           </TouchableOpacity>
         </Content>
@@ -86,6 +92,11 @@ class SetDefaultKwValueTarifaBranca extends Component {
             <Text fontSize='h6' color='#fff'> Continuar </Text>
           </NextPageButton>
         </ContinueConfigArea>
+
+        <WhereToFindKwValues
+          isVisible={this.state.isVisible}
+          setIsVisible={() => this.setState({ isVisible: !this.state.isVisible })}
+        />
       </Container>
     )
   }

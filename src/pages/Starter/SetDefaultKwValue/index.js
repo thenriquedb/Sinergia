@@ -5,6 +5,9 @@ import { Alert } from "react-native";
 import Input from '../../../components/Input/index';
 import { TouchableOpacity } from "react-native";
 
+import WhereToFindKwValues from "../../../components/WhereToFindKwValues";
+
+
 // styles
 import { Container, NextPageButton, ContinueConfigArea, Content, InputArea } from './styles';
 import { TextLight, Text } from '../../../styles/fonts';
@@ -15,7 +18,8 @@ class SetDefaultKwValue extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultKwValue: ''
+      defaultKwValue: '',
+      isVisible: false
     }
     this.toggleNext = this.toggleNext.bind(this);
   }
@@ -56,7 +60,8 @@ class SetDefaultKwValue extends Component {
               onChangeText={defaultKwValue => this.setState({ defaultKwValue: validateDecimalValues(defaultKwValue) })}
               placeholder="Valor KWh"
             />
-            <TouchableOpacity onPress={() => alert('')}>
+
+            <TouchableOpacity onPress={() => this.setState({ isVisible: !this.state.isVisible })}>
               <TextLight color={'#707070'} fontSize={'h6'} textAlign="center">  Onde encontrar? </TextLight>
             </TouchableOpacity>
           </InputArea>
@@ -67,6 +72,11 @@ class SetDefaultKwValue extends Component {
             <Text fontSize='h6' color='#fff'> Continuar </Text>
           </NextPageButton>
         </ContinueConfigArea>
+
+        <WhereToFindKwValues
+          isVisible={this.state.isVisible}
+          setIsVisible={() => this.setState({ isVisible: !this.state.isVisible })}
+        />
       </Container>
     )
   }

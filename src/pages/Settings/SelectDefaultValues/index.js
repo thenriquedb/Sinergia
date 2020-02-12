@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, ToastAndroid } from 'react-native';
 import { connect } from 'react-redux'
 
-import Input from "../../../components/Input"
+import Input from "../../../components/Input";
+import WhereToFindKwValues from "../../../components/WhereToFindKwValues";
+
 import RestoreButton from "./RestoreButton";
 
 import { Container, InputArea } from './styles';
@@ -12,7 +14,7 @@ import Colors from "../../../styles/colors";
 
 import validateDecimalValues from "../../../util/validateDecimalValues";
 
-const SelectDefaultValues = (props) => {
+function SelectDefaultValues(props) {
   const { dealership, dealershipBackup } = props;
   const { navigation } = props;
 
@@ -21,7 +23,9 @@ const SelectDefaultValues = (props) => {
   const [valorPonta, setValorPonta] = useState(dealership.valorPonta);
   const [valorForaPonta, setValorForaPonta] = useState(dealership.valorForaPonta);
 
-  const restoreDefaultValues = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  function restoreDefaultValues() {
     setValorTarifaConvencional(dealershipBackup.valorTarifaConvencional);
     setValorIntermediaria(dealershipBackup.valorIntermediaria);
     setValorPonta(dealershipBackup.valorPonta);
@@ -36,7 +40,6 @@ const SelectDefaultValues = (props) => {
   // Alterar valores tarifa convencional no store
   useEffect(() => {
     props.setValueKw(validateDecimalValues(valorTarifaConvencional));
-
   }, [valorTarifaConvencional]);
 
 
@@ -45,7 +48,7 @@ const SelectDefaultValues = (props) => {
     props.setValueKwTarifaBranca(valorPonta, valorIntermediaria, valorForaPonta);
   }, [valorPonta, valorIntermediaria, valorForaPonta]);
 
-  const renderInputs = () => {
+  function renderInputs() {
     if (props.tarifaUsed === 'convencional') {
       return (
         <>
@@ -57,9 +60,7 @@ const SelectDefaultValues = (props) => {
             onChangeText={valorTarifaConvencional => setValorTarifaConvencional(validateDecimalValues(valorTarifaConvencional))}
             placeholder="Valor faturado do KWh"
           />
-          <TouchableOpacity onPress={() => alert('')}>
-            <TextLight color={'#707070'} fontSize={'h6'} textAlign="center">  Onde encontrar? </TextLight>
-          </TouchableOpacity>
+
         </>
       );
     } else {
@@ -100,9 +101,7 @@ const SelectDefaultValues = (props) => {
               placeholder="Ponta"
             />
           </InputArea>
-          <TouchableOpacity onPress={() => alert('')}>
-            <TextLight color={'#707070'} fontSize={'h6'} textAlign="center">  Onde encontrar? </TextLight>
-          </TouchableOpacity>
+
         </>
       );
     }
@@ -111,6 +110,13 @@ const SelectDefaultValues = (props) => {
   return (
     <Container>
       {renderInputs()}
+      <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+        <TextLight color={'#707070'} fontSize={'h6'} textAlign="center">  Onde encontrar? </TextLight>
+      </TouchableOpacity>
+      <WhereToFindKwValues
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+      />
     </Container>
   );
 };
