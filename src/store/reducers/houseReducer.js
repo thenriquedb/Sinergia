@@ -3,6 +3,8 @@ import INITIAL_STATE from '../store/index';
 export default function houseReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'SET_VALUE_KW':
+      console.log("action.payload.valorTarifaConvencional: ", action.payload.valorTarifaConvencional)
+      console.log("state: ", state)
       return {
         ...state,
         dealership: {

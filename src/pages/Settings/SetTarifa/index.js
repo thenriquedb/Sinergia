@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, Text } from 'react-native';
 
 import { connect } from 'react-redux'
-import { Container, TarifaCard, Icon, ContinueConfigArea, Content, NextPageButton, styles } from './styles';
-import { TextLight } from "../../../styles/fonts";
-import Colors from "../../../styles/colors";
 
 import SettingsModal from "../../../components/SettingsModal";
 import RadioForm from "../../../components/RadioForm";
-
-import { RadioContainer, Circle, CheckedCircle } from './styles';
 
 const SetTarifa = (props) => {
   const radio_props = [

@@ -10,8 +10,9 @@ import NewEquipment from '../pages/Main/NewEquipment';
 import Equipment from '../pages/Main/Equipment';
 
 // Settings
-import Settings from '../pages/Settings/General/index';
-import About from '../pages/Settings/About/index';
+import Settings from '../pages/Settings/General';
+import About from '../pages/Settings/About';
+import Help from '../pages/Settings/Help';
 import SettingsSetTarifa from '../pages/Settings/SetTarifa';
 import SettingsSelectState from '../pages/Settings/SelectState';
 import SettingsSelectDefaultValues from '../pages/Settings/SelectDefaultValues';
@@ -77,6 +78,13 @@ export default MainStack = createStackNavigator({
     screen: About,
     navigationOptions: {
       title: 'Sobre',
+    }
+  },
+
+  SettingsHelp: {
+    screen: Help,
+    navigationOptions: {
+      title: 'Ajuda',
     }
   },
 

@@ -9,6 +9,8 @@ import { Container, NextPageButton, ContinueConfigArea, Content, InputContainer 
 import { TextLight, Text } from '../../../styles/fonts';
 import Colors from '../../../styles/colors';
 
+import validateDecimalValues from "../../../util/validateDecimalValues";
+
 class SetDefaultKwValueTarifaBranca extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +48,7 @@ class SetDefaultKwValueTarifaBranca extends Component {
               label="Fora de ponta"
               maxLength={10}
               borderColor={Colors.low}
-              onChangeText={valorForaPonta => this.setState({ valorForaPonta })}
+              onChangeText={valorForaPonta => this.setState({ valorForaPonta: validateDecimalValues(valorForaPonta) })}
               placeholder="Fora de ponta"
             />
           </InputContainer>
@@ -58,7 +60,7 @@ class SetDefaultKwValueTarifaBranca extends Component {
               label="Intermediário a ponta"
               maxLength={10}
               borderColor={Colors.medium}
-              onChangeText={valorIntermediaria => this.setState({ valorIntermediaria })}
+              onChangeText={valorIntermediaria => this.setState({ valorIntermediaria: validateDecimalValues(valorIntermediaria) })}
               placeholder="Intermediário a ponta "
             />
           </InputContainer>
@@ -70,7 +72,7 @@ class SetDefaultKwValueTarifaBranca extends Component {
               label="Ponta"
               maxLength={10}
               borderColor={Colors.high}
-              onChangeText={valorPonta => this.setState({ valorPonta })}
+              onChangeText={valorPonta => this.setState({ valorPonta: validateDecimalValues(valorPonta) })}
               placeholder="Ponta"
             />
           </InputContainer>

@@ -11,6 +11,12 @@ export const WelcomeContent = styled.View`
   justify-content: center;
 `;
 
+export const Icon = styled.Image`
+  height: 100px;
+  width: 100px;
+  opacity: .2;
+`;
+
 
 export const NextPageButton = styled.TouchableOpacity`
   background-color: ${Colors.primary};
@@ -23,7 +29,6 @@ export const NextPageButton = styled.TouchableOpacity`
 `
 
 export const ContinueConfigArea = styled.View` 
-  /* flex: ${1 / 5}; */
   height: 100px;
   align-items: center;
   justify-content: center;

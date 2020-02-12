@@ -1,35 +1,45 @@
 import React, { Component } from 'react';
-
-import Input from '../../../components/Input/index';
 import { connect } from 'react-redux'
+
+import { Alert } from "react-native";
+import Input from '../../../components/Input/index';
 import { TouchableOpacity } from "react-native";
 
 // styles
 import { Container, NextPageButton, ContinueConfigArea, Content, InputArea } from './styles';
 import { TextLight, Text } from '../../../styles/fonts';
 
+import validateDecimalValues from "../../../util/validateDecimalValues";
+
 class SetDefaultKwValue extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultKwValue: '1'
+      defaultKwValue: ''
     }
     this.toggleNext = this.toggleNext.bind(this);
   }
 
   toggleNext() {
     if (this.state.defaultKwValue.match(/^(\d+\.?\d{0,9}|\.\d{1,9})$/)) {
-      this.props.setValueKw(parseFloat(this.state.defaultKwValue));
+      this.props.setValueKw(this.state.defaultKwValue);
       this.props.navigation.navigate('SetRooms');
     } else {
       this.setState({ defaultKwValue: '' })
-      alert('esta errado')
+      Alert.alert(
+        'Entrada incorreta',
+        'Use apenas números e ponto.',
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: true },
+      );
     }
   }
 
   componentDidMount() {
     let s = this.state;
-    s.defaultKwValue = this.props.valueKW;
+    s.defaultKwValue = this.props.valorTarifaConvencional;
     this.setState(s);
   }
 
@@ -38,13 +48,12 @@ class SetDefaultKwValue extends Component {
       <Container>
         <Content>
           <TextLight textAlign='center' fontSize='h4'> Primeiramente vamos definir o valor faturado do KWh  </TextLight>
-          <TextLight> valorKw: {this.props.valueKW} </TextLight>
           <InputArea>
             <Input
               value={this.state.defaultKwValue}
               keyboardType={'numeric'}
               maxLength={10}
-              onChangeText={defaultKwValue => this.setState({ defaultKwValue })}
+              onChangeText={defaultKwValue => this.setState({ defaultKwValue: validateDecimalValues(defaultKwValue) })}
               placeholder="Valor KWh"
             />
             <TouchableOpacity onPress={() => alert('')}>
@@ -64,13 +73,12 @@ class SetDefaultKwValue extends Component {
 }
 
 const mapStateToProps = state => ({
-  dealership: state.houseReducer,
-  valueKW: state.houseReducer.dealership.valorTarifaConvencional,
+  valorTarifaConvencional: state.houseReducer.dealership.valorTarifaConvencional,
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    setValueKw: (valueKW) => dispatch({ type: 'SET_VALUE_KW', payload: { valueKW } }),
+    setValueKw: (valorTarifaConvencional) => dispatch({ type: 'SET_VALUE_KW', payload: { valorTarifaConvencional } }),
   };
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, ToastAndroid } from 'react-native';
 import { connect } from 'react-redux'
 
 import Input from "../../../components/Input"
@@ -9,6 +9,8 @@ import RestoreButton from "./RestoreButton";
 import { Container, InputArea } from './styles';
 import { TextLight } from '../../../styles/fonts';
 import Colors from "../../../styles/colors";
+
+import validateDecimalValues from "../../../util/validateDecimalValues";
 
 const SelectDefaultValues = (props) => {
   const { dealership, dealershipBackup } = props;
@@ -27,14 +29,14 @@ const SelectDefaultValues = (props) => {
   }
 
   useEffect(() => {
-    console.log("dealership: ", dealership)
     navigation.setParams({ restoreDefaultValues });
   }, []);
 
 
   // Alterar valores tarifa convencional no store
   useEffect(() => {
-    props.setValueKw(valorTarifaConvencional);
+    props.setValueKw(validateDecimalValues(valorTarifaConvencional));
+
   }, [valorTarifaConvencional]);
 
 
@@ -50,9 +52,9 @@ const SelectDefaultValues = (props) => {
           <Input
             label="Valor faturado do KWh"
             value={valorTarifaConvencional}
-            keyboardType={'numeric'}
+            keyboardType={'decimal-pad'}
             maxLength={10}
-            onChangeText={valorTarifaConvencional => setValorTarifaConvencional(valorTarifaConvencional)}
+            onChangeText={valorTarifaConvencional => setValorTarifaConvencional(validateDecimalValues(valorTarifaConvencional))}
             placeholder="Valor faturado do KWh"
           />
           <TouchableOpacity onPress={() => alert('')}>
@@ -70,7 +72,7 @@ const SelectDefaultValues = (props) => {
               keyboardType={'numeric'}
               maxLength={10}
               borderColor={Colors.low}
-              onChangeText={valorForaPonta => setValorForaPonta(valorForaPonta)}
+              onChangeText={valorForaPonta => setValorForaPonta(validateDecimalValues(valorForaPonta))}
               placeholder="Fora de ponta"
             />
           </InputArea>
@@ -82,7 +84,7 @@ const SelectDefaultValues = (props) => {
               keyboardType={'numeric'}
               maxLength={10}
               borderColor={Colors.medium}
-              onChangeText={valorIntermediaria => setValorIntermediaria(valorIntermediaria)}
+              onChangeText={valorIntermediaria => setValorIntermediaria(validateDecimalValues(valorIntermediaria))}
               placeholder="Intermediário a ponta"
             />
           </InputArea>
@@ -94,7 +96,7 @@ const SelectDefaultValues = (props) => {
               keyboardType={'numeric'}
               borderColor={Colors.high}
               maxLength={10}
-              onChangeText={valorPonta => setValorPonta(valorPonta)}
+              onChangeText={valorPonta => setValorPonta(validateDecimalValues(valorPonta))}
               placeholder="Ponta"
             />
           </InputArea>

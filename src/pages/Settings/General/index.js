@@ -82,6 +82,19 @@ const Settings = (props) => {
           </SettingsItem>
         </TouchableHighlight>
 
+        <TouchableHighlight underlayColor="#F6F6F6" onPress={() => navigation.navigate('SettingsHelp')}>
+          <SettingsItem>
+            <IconContainer>
+              <Icon source={require('../../../assets/icons/others/help.png')} />
+            </IconContainer>
+
+            <LabelContainer>
+              <Title>Ajuda</Title>
+              <Description color="#999">Entenda a diferença entre as tarifas</Description>
+            </LabelContainer>
+          </SettingsItem>
+        </TouchableHighlight>
+
         <TouchableHighlight underlayColor="#F6F6F6" onPress={() => navigation.navigate('SettingsAbout')}>
           <SettingsItem>
             <IconContainer>

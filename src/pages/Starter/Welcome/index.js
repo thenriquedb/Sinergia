@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { View } from 'react-native';
 
-import { Container, NextPageButton, ContinueConfigArea, WelcomeContent } from './styles';
+import { Container, NextPageButton, ContinueConfigArea, WelcomeContent, Icon } from './styles';
 import { TextLight, Text } from '../../../styles/fonts';
 
 const Welcome = props => (
@@ -10,6 +9,7 @@ const Welcome = props => (
 
     <WelcomeContent>
       <TextLight fontSize='h4'> Bem vindo(a) ao Sinergia </TextLight>
+      {/* <Icon source={require("../../../assets/others/tarifa_branca.jpg")} /> */}
     </WelcomeContent>
 
     <ContinueConfigArea>
