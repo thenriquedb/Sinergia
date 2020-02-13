@@ -1,41 +1,68 @@
 import styled from 'styled-components/native';
+import { StyleSheet } from "react-native";
 
 export const Container = styled.View`
   flex: 1;
-  padding: 15px 10px;
+  padding: 5px;
+  background-color: #fff
 `;
 
-export const Text = styled.Text`
-  font-size: 20px;
-  line-height: 25px;
-  margin-top: 15px;
+export const MenuLabel = styled.Text`
+  font-size: 18px;
+  color: #000;
 `;
 
-export const Graph = styled.Image`
+export const MenuButton = styled.TouchableHighlight.attrs({ underlayColor: "#F6F6F6" })`
+  padding: 20px 10px;
+  justify-content: center;
+  margin-bottom: 5px;
+  border-bottom-width: ${StyleSheet.hairlineWidth}px;
+  border-bottom-color: rgba(0,0,0,0.3);
+`;
+
+export const ModalContainer = styled.ScrollView.attrs({ showsVerticalScrollIndicator: false })``;
+
+export const IntervalContainer = styled.View`
+  border-bottom-width: ${StyleSheet.hairlineWidth}px;
+  border-bottom-color: rgba(0,0,0,0.3);
+  margin-bottom: 8px;
+`;
+
+export const IntervalsGraph = styled.Image`
   height: 140px;
   width: 140px;
 `;
 
-export const GraphContainer = styled.View`
-justify-content: center;
-align-items: center;
+export const IntervalsGraphContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px
 `;
 
-export const Title = styled.Text`
-  font-size: 24px;
-  font-weight: bold;
+
+export const IntervalLabel = styled.Text`
+  color: #777;
+  font-size: 18px;
   line-height: 25px;
-  margin-top: 15px;
+  margin-bottom: 5px
 `;
 
-export const TarifaLabel = styled.Text`
+export const ModalTitle = styled.Text`
+  color: ${props => (props.color ? props.color : '#777')};
   font-size: 22px;
   font-weight: bold;
-  margin-top: 10px;
-  color: ${props => props.color ? props.color : '#000'}
+  margin-bottom: 10px;
 `;
 
-export const IntervaloHorario = styled.Text`
-  font-size: 20px;
+export const ModalSubtitle = styled.Text`
+  color: ${props => (props.color ? props.color : '#777')};
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px 0;
 `;
 
+export const ModalText = styled.Text`
+  color: #777;
+  font-size: 18px;
+  line-height: 25px;
+`;

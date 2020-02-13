@@ -2,12 +2,15 @@ import React from 'react';
 
 import { View, Text } from 'react-native';
 
-import { Container } from './styles';
+import { Container, Logo } from './styles';
 
 const About = () => {
   return (
     <Container>
-      <Text> About </Text>
+      <Logo
+        source={require("../../../assets/others/logo.png")}
+        resizeMode="contain"
+      />
     </Container>
   );
 };

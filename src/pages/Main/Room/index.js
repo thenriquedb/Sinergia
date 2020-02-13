@@ -112,6 +112,8 @@ function Room(props) {
           </Equipments>
         )
       }
+
+
       <ActionButton
         size={55}
         onPress={() => {

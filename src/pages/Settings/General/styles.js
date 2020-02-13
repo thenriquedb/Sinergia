@@ -24,9 +24,7 @@ export const LabelContainer = styled.View`
   flex: 1;
   justify-content: center;
   margin-left: 10px;
-  
 `;
-
 
 export const Title = styled.Text` 
   font-size: 20px;

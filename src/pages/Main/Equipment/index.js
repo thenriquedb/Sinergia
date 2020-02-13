@@ -48,7 +48,7 @@ function Equipment(props) {
       currentHour.setMinutes(currentHour.getMinutes() + 30);
       return currentHour;
     });
-  const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(equipment.frequencyOfUseOnWeekdays ? equipment.frequencyOfUseOnWeekdays : 0);
+  const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(equipment.frequencyOfUseOnWeekdays ? equipment.frequencyOfUseOnWeekdays : 1);
 
   // Picker de horas - finais de semana
   const [startTimeWeekend, setStartTimeWeekend] = useState(equipment.startTimeWeekend ? equipment.startTimeWeekend : new Date());

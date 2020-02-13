@@ -1,58 +1,135 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView } from "react-native";
 import { connect } from 'react-redux'
+
+import HelpModal from "../../../components/HelpModal";
+
+import { intervalMask } from "../../../util/masks";
+
 import {
   Container,
-  Text,
-  TarifaLabel,
-  GraphContainer,
-  IntervaloHorario,
-  Title,
-  Graph
+  MenuLabel,
+  MenuButton,
+  ModalContainer,
+  ModalTitle,
+  ModalSubtitle,
+  ModalText,
+  IntervalContainer,
+  IntervalLabel,
+  IntervalsGraphContainer,
+  IntervalsGraph,
 } from './styles';
 
 import Colors from "../../../styles/colors";
 
-const Help = ({ dealership }) => {
+function Help({ dealership }) {
+  const [isVisible1, setTsVisible1] = useState(false);
+  const [isVisible2, setTsVisible2] = useState(false);
+  const [isVisible3, setTsVisible3] = useState(false);
+  const [isVisible4, setTsVisible4] = useState(false);
+
+  function renderModalContent1() {
+    return (<MenuLabel> okkkk</MenuLabel>)
+  }
+
+  function renderModalContent2() {
+    return (
+      <ModalContainer>
+        <ModalTitle>Titulo</ModalTitle>
+        <ModalText>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </ModalText>
+      </ModalContainer>)
+  }
+
+  function renderModalContent3() {
+    return (
+      <ModalContainer>
+        <ModalTitle>Intervalos da {dealership.Distribuidora}</ModalTitle>
+
+        <IntervalsGraphContainer>
+          <IntervalsGraph
+            source={require("../../../assets/others/tarifa_branca.jpg")}
+          />
+        </IntervalsGraphContainer>
+
+        {dealership.horarioItermediario1 ? (
+          <>
+            <ModalSubtitle color={Colors.medium}>Horário intermediário 1</ModalSubtitle>
+            <IntervalContainer>
+              <IntervalLabel>{intervalMask(dealership.horarioItermediario1)}</IntervalLabel>
+            </IntervalContainer>
+          </>
+        ) : null}
+
+        <ModalSubtitle color={Colors.high}>Horário ponta</ModalSubtitle>
+        <IntervalContainer>
+          <IntervalLabel>{intervalMask(dealership.horarioPonta)}</IntervalLabel>
+        </IntervalContainer>
+
+        {dealership.horarioIntermediario2 ? (
+          <>
+            <ModalSubtitle color={Colors.medium}>Horário intermediário 2</ModalSubtitle>
+            <IntervalContainer>
+              <IntervalLabel>{intervalMask(dealership.horarioIntermediario2)}</IntervalLabel>
+            </IntervalContainer>
+          </>
+        ) : null}
+
+        <ModalSubtitle color={Colors.low}>Horário fora de ponta</ModalSubtitle>
+        <IntervalContainer>
+          <IntervalLabel>Demais horários</IntervalLabel>
+        </IntervalContainer>
+      </ModalContainer>)
+  }
+
+  function renderModalContent4() { }
 
   return (
     <Container>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Text>
-          O aplicativo Sinergia tem como objetivo fazer a simulação do consumo de energia elétrica residencial, haja
-          vista que uma nova modalidade de cobrança está sendo utilizada pelas concessionárias destinada para consumidores
-          que buscam economia em sua fatura.
-        </Text>
+        <MenuButton onPress={() => setTsVisible1(!isVisible1)}>
+          <>
+            <MenuLabel>O que é a tarifa convencional? </MenuLabel>
+            <HelpModal
+              isVisible={isVisible1}
+              setIsVisible={setTsVisible1}
+              content={renderModalContent1}
+            />
+          </>
+        </MenuButton>
 
-        <Text>
-          Nesse sentido, a tarifa branca foi criada afim de proporcionar a cobrança de energia mais barata que a convencional para consumos feitos
-          em horários especificos porém mais caros em outros horários, desestimulando o consumo de energia nos horários de pico e preservando a integridade
-          e segurança da rede elétrica.
-        </Text>
+        <MenuButton onPress={() => setTsVisible2(!isVisible2)}>
+          <>
+            <MenuLabel>O que é a tarifa branca? </MenuLabel>
+            <HelpModal
+              isVisible={isVisible2}
+              setIsVisible={setTsVisible2}
+              content={renderModalContent2}
+            />
+          </>
+        </MenuButton>
 
-        <Title>Tarifa branca da concessionária {dealership.Distribuidora} </Title>
-        <GraphContainer>
-          <Graph
-            source={require("../../../assets/others/tarifa_branca.jpg")}
-          />
-        </GraphContainer>
+        <MenuButton onPress={() => setTsVisible3(!isVisible3)}>
+          <>
+            <MenuLabel>Intervalos de sua concessionária </MenuLabel>
+            <HelpModal
+              isVisible={isVisible3}
+              setIsVisible={setTsVisible3}
+              content={renderModalContent3}
+            />
+          </>
+        </MenuButton>
 
-        <TarifaLabel color={Colors.low}> Horário fora de ponta</TarifaLabel>
-        <IntervaloHorario> Demais horários </IntervaloHorario>
-
-        <TarifaLabel color={Colors.medium}>Horário intermediário 1</TarifaLabel>
-        <IntervaloHorario> {dealership.horarioItermediario1} </IntervaloHorario>
-
-        <TarifaLabel color={Colors.high}>Horário de ponta </TarifaLabel>
-        <IntervaloHorario> {dealership.horarioPonta} </IntervaloHorario>
-
-        <TarifaLabel color={Colors.medium}> Horário intermediário 2</TarifaLabel>
-        <IntervaloHorario> {dealership.horarioIntermediario2} </IntervaloHorario>
-
-        <Text>
-          Ao final da simlação o consumidor poderá concluir qual tarifa é mais vantajosa para sua modalidade de consumo.
-      </Text>
-
+        <MenuButton onPress={() => setTsVisible4(!isVisible4)}>
+          <>
+            <MenuLabel>Quando a tarifa branca é ideal? </MenuLabel>
+            <HelpModal
+              isVisible={isVisible4}
+              setIsVisible={setTsVisible4}
+              content={renderModalContent4}
+            />
+          </>
+        </MenuButton>
       </ScrollView>
     </Container>
   );
@@ -60,4 +137,5 @@ const Help = ({ dealership }) => {
 const mapStateToProps = state => ({
   dealership: state.houseReducer.dealership,
 });
+
 export default connect(mapStateToProps, null)(Help);
