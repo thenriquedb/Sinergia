@@ -1,9 +1,6 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import Colors from '../styles/colors';
-
-
 //rotas
 import MainStack from './mainStack';
 import StarterStack from './starterStack';

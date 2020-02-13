@@ -17,7 +17,7 @@ const Help = ({ dealership }) => {
 
   return (
     <Container>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Text>
           O aplicativo Sinergia tem como objetivo fazer a simulação do consumo de energia elétrica residencial, haja
           vista que uma nova modalidade de cobrança está sendo utilizada pelas concessionárias destinada para consumidores
