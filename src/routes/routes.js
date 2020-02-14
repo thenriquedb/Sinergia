@@ -1,5 +1,4 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
 
 //rotas
 import MainStack from './mainStack';

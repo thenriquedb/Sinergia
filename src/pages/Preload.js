@@ -1,4 +1,3 @@
-import { StackActions, NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
 const Preload = ({ navigation, firstUse }) => {

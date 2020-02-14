@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Animated, BackHandler } from 'react-native';
+import React, { useState } from 'react';
+import { Animated } from 'react-native';
 
 import ActionButton from 'react-native-action-button';
 import { connect } from 'react-redux';
@@ -14,12 +14,6 @@ import { Container, Rooms, RoomList } from './style';
 const Home = props => {
   const { rooms, house, navigation, tarifaUsed } = props;
   const [updateList, setUpdateList] = useState(false);
-
-
-  // Desabilita o retorno para as telas de boas vindas
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', () => BackHandler.exitApp());
-  }, [])
 
   const scrollOffset = new Animated.Value(0);
 
