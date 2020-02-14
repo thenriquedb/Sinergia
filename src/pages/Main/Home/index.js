@@ -12,13 +12,16 @@ import Colors from '../../../styles/colors';
 import { Container, Rooms, RoomList } from './style';
 
 const Home = props => {
-  const { rooms, navigation, tarifaUsed } = props;
+  const { rooms, house, navigation, tarifaUsed } = props;
   const [updateList, setUpdateList] = useState(false);
 
   const scrollOffset = new Animated.Value(0);
 
-  const reRender = () => {
+  useEffect(() => {
+    console.log("HOME ROOMS: ", rooms)
+  }, [house])
 
+  const reRender = () => {
     setUpdateList(!updateList);
   };
 
@@ -38,7 +41,7 @@ const Home = props => {
               data={rooms}
               showsVerticalScrollIndicator={false}
               keyExtractor={room => room.id}
-              extraData={updateList}
+              extraData={props.house}
               renderItem={({ item }) => (
                 <CardRoom
                   refreshList={reRender}
@@ -69,6 +72,7 @@ const Home = props => {
 
 
 const mapStateToProps = state => ({
+  house: state.houseReducer,
   rooms: state.houseReducer.rooms,
   tarifaUsed: state.houseReducer.tarifa
 });

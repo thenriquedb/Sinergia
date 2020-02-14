@@ -3,14 +3,18 @@ import INITIAL_STATE from '../store/index';
 export default function houseReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'SET_VALUE_KW':
-      console.log("action.payload.valorTarifaConvencional: ", action.payload.valorTarifaConvencional)
-      console.log("state: ", state)
       return {
         ...state,
         dealership: {
           ...state.dealership,
           valorTarifaConvencional: action.payload.valorTarifaConvencional,
         }
+      }
+
+    case 'SET_ROOMS':
+      return {
+        ...state,
+        rooms: action.payload.rooms
       }
 
     case 'SET_VALUE_KW_TARIFA_BRANCA':
@@ -85,14 +89,16 @@ export default function houseReducer(state = INITIAL_STATE, action) {
 
     case 'EDIT_EQUIPMENT':
 
-      console.log("action.payload.newEquipment;: ", action.payload.newEquipment)
       return {
         ...state,
         rooms: state.rooms.map(item => {
           if (item.id === action.payload.idRoom) {
             item.equipments = item.equipments.map(equipment => {
               if (equipment.id === action.payload.idEquipment) {
-                return action.payload.newEquipment;
+                return {
+                  ...equipment,
+                  ...action.payload.newEquipment
+                };
               } else {
                 return equipment
               }
