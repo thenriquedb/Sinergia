@@ -4,9 +4,6 @@ import calcTarifaBranca from "./calcularTarifas/calcTarifaBranca";
 export default function reCalcularValores(rooms, dealership) {
   const { valorTarifaConvencional } = dealership;
 
-  console.log("COMODO ", rooms[0])
-  console.log("concessionaria: ", dealership)
-
   let roomsCopy = rooms.map(room => {
     room.equipments = room.equipments.map(equipment => {
       const { kwMonthly,
@@ -46,16 +43,6 @@ export default function reCalcularValores(rooms, dealership) {
     return room;
   })
 
-
-  roomsCopy.map(room => {
-
-
-
-    return room;
-  })
-
-  console.log("rooms final: ", roomsCopy[0])
-
-  return rooms;
+  return roomsCopy;
 }
 

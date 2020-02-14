@@ -101,7 +101,7 @@ function Help({ dealership }) {
         <ModalText>
           A tarifa branca é ideal apenas para aqueles consumidores que conseguem concentrar o seu consumo de energia elétrica no horário fora de ponta e nos finais de semanas, sendo que nesses períodos o preço é menor que na tarifa convencional.
           Se o consumidor não conseguir se adaptar aos horários de menor preço, terá que pagar bem mais caro em relação a tarifa convencional, pois, o preço da energia elétrica no horário de ponta é bem mais elevado.
-  </ModalText>
+        </ModalText>
       </ModalContainer>
     );
   }

@@ -82,7 +82,6 @@ const SetTime = (props) => {
 
         <HourLabel> Frequência de utilização </HourLabel>
         <Picker
-          enabled={on24Hours ? false : true}
           selectedValue={frequencyOfUseOnWeekdays}
           style={{ width: 100 }}
           onValueChange={(itemValue, itemIndex) => setFrequencyOfUseOnWeekdays(itemValue)
@@ -146,7 +145,6 @@ const SetTime = (props) => {
 
         <HourLabel> Frequência de utilização </HourLabel>
         <Picker
-          enabled={on24Hours ? false : true}
           selectedValue={frequencyOfUseOnWeekend}
           style={{ width: 100 }}
           onValueChange={(itemValue, itemIndex) =>

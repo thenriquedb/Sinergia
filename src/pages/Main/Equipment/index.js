@@ -30,7 +30,6 @@ function Equipment(props) {
   const equipment = props.navigation.getParam('equipment');
   const action = props.navigation.getParam('action');
   const { navigation, dealership } = props;
-  console.log("equipment fora: ", equipment)
 
   // states
   const [selectedModel, setSelectedModel] = useState(equipment.model ? equipment.model : equipment.models[0]);
@@ -41,8 +40,10 @@ function Equipment(props) {
   const [useCustomEquipment, setUseCustomEquipment] = useState(equipment.useCustomEquipment ? equipment.useCustomEquipment : false);
 
   // Picker de horas - dias da semana
-  const [startTimeWeekdays, setStartTimeWeekdays] = useState(equipment.startTimeWeekdays ? equipment.startTimeWeekdays : new Date());
-  const [endTimeWeekdays, setEndTimeWeekdays] = useState(equipment.endTimeWeekdays ? equipment.endTimeWeekdays :
+  const [startTimeWeekdays, setStartTimeWeekdays] = useState(equipment.startTimeWeekdays ?
+    new Date(equipment.startTimeWeekdays) : new Date());
+  const [endTimeWeekdays, setEndTimeWeekdays] = useState(equipment.endTimeWeekdays ?
+    new Date(equipment.endTimeWeekdays) :
     () => {
       const currentHour = new Date();
       currentHour.setMinutes(currentHour.getMinutes() + 30);
@@ -51,8 +52,8 @@ function Equipment(props) {
   const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(equipment.frequencyOfUseOnWeekdays ? equipment.frequencyOfUseOnWeekdays : 1);
 
   // Picker de horas - finais de semana
-  const [startTimeWeekend, setStartTimeWeekend] = useState(equipment.startTimeWeekend ? equipment.startTimeWeekend : new Date());
-  const [endTimeWeekend, setEndTimeWeekend] = useState(equipment.endTimeWeekend ? equipment.endTimeWeekend :
+  const [startTimeWeekend, setStartTimeWeekend] = useState(equipment.startTimeWeekend ? new Date(equipment.startTimeWeekend) : new Date());
+  const [endTimeWeekend, setEndTimeWeekend] = useState(equipment.endTimeWeekend ? new Date(equipment.endTimeWeekend) :
     () => {
       const currentHour = new Date();
       currentHour.setMinutes(currentHour.getMinutes() + 30);

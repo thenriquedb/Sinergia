@@ -20,7 +20,9 @@ export function intervalsToArray(string, format) {
 }
 
 
-export function formatHour(time) {
+export function formatHour(string) {
+  const time = new Date(string);
+  console.log("time", time)
   return `${time.getHours()}:${time.getMinutes() < 10 ?
     `0${time.getMinutes()}` : time.getMinutes()}`;
 }
