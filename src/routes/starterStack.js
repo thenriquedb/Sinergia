@@ -75,7 +75,6 @@ export default StarterStack = createStackNavigator({
     },
   },
 
-
   SetRooms: {
     screen: SetRooms,
     navigationOptions: {
@@ -103,8 +102,6 @@ export default StarterStack = createStackNavigator({
       },
     },
   },
-
-
 
   Final: {
     screen: Final,

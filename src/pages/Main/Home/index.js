@@ -23,10 +23,6 @@ const Home = props => {
 
   const scrollOffset = new Animated.Value(0);
 
-  useEffect(() => {
-    console.log("HOME ROOMS: ", rooms)
-  }, [house])
-
   const reRender = () => {
     setUpdateList(!updateList);
   };

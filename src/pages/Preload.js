@@ -1,17 +1,11 @@
 import { StackActions, NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-const Preload = (props) => {
-  if (props.firstUse) {
-    props.navigation.dispatch(StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'StarterStack' })]
-    }));
+const Preload = ({ navigation, firstUse }) => {
+  if (firstUse) {
+    navigation.navigate("StarterStack")
   } else {
-    props.navigation.dispatch(StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'MainStack' })]
-    }));
+    navigation.navigate("MainStack")
   }
   return null;
 };

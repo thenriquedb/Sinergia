@@ -6,8 +6,8 @@ import MainStack from './mainStack';
 import StarterStack from './starterStack';
 import Preload from '../pages/Preload';
 
-const Routes = createStackNavigator({
-  Preload,
+const Routes = createSwitchNavigator({
+  Preload, // erro ta aqui 
   StarterStack,
   MainStack,
 }, { headerMode: 'none' });

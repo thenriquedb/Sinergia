@@ -1,6 +1,5 @@
 const INITIAL_STATE = {
   totalKw: 0,
-  flag: 'Verde',
   valueKW: 1,
   firstUse: true,
   totalKw: 0,
