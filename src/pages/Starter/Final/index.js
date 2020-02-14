@@ -17,7 +17,7 @@ const Final = props => {
   return (
     <Container>
       <WelcomeContent>
-        <TextLight fontSize='h4'> Muito bom </TextLight>
+        <TextLight fontSize='h4'> Está tudo pronto para começar! </TextLight>
       </WelcomeContent>
 
       <ContinueConfigArea>

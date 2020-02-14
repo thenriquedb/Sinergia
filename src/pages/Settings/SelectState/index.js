@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Picker, Alert } from 'react-native';
 
-import { Picker, View, Alert } from 'react-native';
 
 //redux
 import { connect } from 'react-redux'
 
 // styles
 import { Container, Label, Content, Footer, SaveBtn } from './styles';
-import { Text, TextLight } from "../../../styles/fonts";
+import { TextLight } from "../../../styles/fonts";
 import Colors from "../../../styles/colors";
 
 //util
@@ -20,8 +20,6 @@ const SelectState = (props) => {
   const [uf, setUF] = useState(props.usedUF);
   const [dealerships, setDealerships] = useState(tarifaBranca.filter(item => item.UF === props.usedUF));
   const [selectedDealership, setSelectedDealership] = useState(props.dealership);
-
-
 
   useEffect(() => {
     setDealerships(tarifaBranca.filter(item => item.UF === uf));
@@ -74,7 +72,7 @@ const SelectState = (props) => {
 
 
         {uf !== 'NONE' &&
-          <View>
+          <>
             <Label style={{ marginTop: 20 }} fontSize='h5'> Concessionária  </Label>
             <Picker
               selectedValue={selectedDealership}
@@ -83,7 +81,7 @@ const SelectState = (props) => {
                 return <Picker.Item key={value.Distribuidora} value={value} label={value.Distribuidora} />;
               })}
             </Picker>
-          </View>}
+          </>}
       </Content>
 
       <Footer>
