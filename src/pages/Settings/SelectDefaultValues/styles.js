@@ -10,12 +10,10 @@ export const Content = styled.View`
   padding: 20px 15px;
 `;
 
-
 export const InputArea = styled.View`
   width: 100%;
   margin-bottom: 20px;
 `;
-
 
 export const Footer = styled.View``;
 

@@ -6,7 +6,7 @@ import EditRoomModal from '../EditRoomModal';
 
 import { Container, BackButtonContainer, EditButtonContainer } from "./styles";
 
-const NavigationHeader = ({ room, offset, navigation }) => {
+function NavigationHeader({ room, offset, navigation }) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
   const iconAnimationConfigs = [

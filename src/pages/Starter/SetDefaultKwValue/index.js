@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
+import { Alert } from "react-native";
 import { connect } from 'react-redux'
 
-import { Alert } from "react-native";
 import Input from '../../../components/Input/index';
 import { TouchableOpacity } from "react-native";
-
 import WhereToFindKwValues from "../../../components/WhereToFindKwValues";
 
-
-// styles
 import { Container, NextPageButton, ContinueConfigArea, Content, InputArea } from './styles';
 import { TextLight, Text } from '../../../styles/fonts';
 

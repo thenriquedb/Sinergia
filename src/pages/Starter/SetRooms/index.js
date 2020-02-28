@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 
 import SimpleCardRoom from '../../../components/Cards/SimpleCardRoom';
 
-// styles
 import {
   Container,
   NextPageButton,
@@ -37,7 +36,6 @@ class SetRooms extends Component {
   };
 
   render() {
-    console.log("this.props: ", this.props.rooms)
     return (
       <Container>
         <TextLight textAlign='center' fontSize='h4'> Esta quase pronto! Agora é só cadastrar os cômodos  </TextLight>

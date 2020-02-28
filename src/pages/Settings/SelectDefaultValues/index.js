@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-
 import { TouchableOpacity, Alert } from 'react-native';
 import { connect } from 'react-redux'
 
 import Input from "../../../components/Input";
 import WhereToFindKwValues from "../../../components/WhereToFindKwValues";
-
 import RestoreButton from "./RestoreButton";
 
 import { Container, InputArea, Footer, SaveBtn, Content } from './styles';

@@ -3,18 +3,18 @@ import { Alert } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { connect } from 'react-redux'
 
+import HiddenCard from "../HiddenCard";
+
 // styles
 import { Container, Icon, IconContainer, Details } from './styles';
 import { TextLight } from '../../../styles/fonts';
 
-import HiddenCard from "../HiddenCard";
-
 import roomList from '../../../utilities/roomsList';
 
-const SimpleCardRoom = props => {
+function SimpleCardRoom(props) {
   const { room } = props;
 
-  const toggleDelete = () => {
+  function toggleDelete() {
     Alert.alert(
       'Excluir',
       `Você deseja excluir o cômodo ${room.name}? Esta ação não poderá ser desfeita futuramente.`,
@@ -49,7 +49,7 @@ const SimpleCardRoom = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteRoom: (id, type) => dispatch({ type: 'DELETE_ROOM', payload: { id } }),
+    deleteRoom: (id) => dispatch({ type: 'DELETE_ROOM', payload: { id } }),
   };
 };
 

@@ -1,15 +1,17 @@
 import React from 'react';
 
-
-import { Container, NextPageButton, ContinueConfigArea, WelcomeContent, Icon } from './styles';
+import {
+  Container,
+  NextPageButton,
+  ContinueConfigArea,
+  WelcomeContent,
+} from './styles';
 import { TextLight, Text } from '../../../styles/fonts';
 
 const Welcome = props => (
   <Container>
-
     <WelcomeContent>
       <TextLight fontSize='h4'> Bem vindo(a) ao Sinergia </TextLight>
-      {/* <Icon source={require("../../../assets/others/tarifa_branca.jpg")} /> */}
     </WelcomeContent>
 
     <ContinueConfigArea>

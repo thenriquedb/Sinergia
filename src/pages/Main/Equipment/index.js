@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Picker, Animated, Alert, ToastAndroid } from 'react-native';
+import CheckBox from "@react-native-community/checkbox";
 import { connect } from 'react-redux';
 
-import CheckBox from "@react-native-community/checkbox";
-
-// components
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ActionButton from 'react-native-action-button';
 import SetTime from "./SetTime";
@@ -40,26 +38,41 @@ function Equipment(props) {
   const [useCustomEquipment, setUseCustomEquipment] = useState(equipment.useCustomEquipment ? equipment.useCustomEquipment : false);
 
   // Picker de horas - dias da semana
-  const [startTimeWeekdays, setStartTimeWeekdays] = useState(equipment.startTimeWeekdays ?
-    new Date(equipment.startTimeWeekdays) : new Date());
-  const [endTimeWeekdays, setEndTimeWeekdays] = useState(equipment.endTimeWeekdays ?
-    new Date(equipment.endTimeWeekdays) :
-    () => {
-      const currentHour = new Date();
-      currentHour.setMinutes(currentHour.getMinutes() + 30);
-      return currentHour;
-    });
-  const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(equipment.frequencyOfUseOnWeekdays ? equipment.frequencyOfUseOnWeekdays : 1);
+  const [startTimeWeekdays, setStartTimeWeekdays] = useState(
+    equipment.startTimeWeekdays ?
+      new Date(equipment.startTimeWeekdays) :
+      new Date());
+
+  const [endTimeWeekdays, setEndTimeWeekdays] = useState(
+    equipment.endTimeWeekdays ?
+      new Date(equipment.endTimeWeekdays) :
+      () => {
+        const currentHour = new Date();
+        currentHour.setMinutes(currentHour.getMinutes() + 30);
+        return currentHour;
+      });
+
+  const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(
+    equipment.frequencyOfUseOnWeekdays ?
+      equipment.frequencyOfUseOnWeekdays : 1);
 
   // Picker de horas - finais de semana
-  const [startTimeWeekend, setStartTimeWeekend] = useState(equipment.startTimeWeekend ? new Date(equipment.startTimeWeekend) : new Date());
-  const [endTimeWeekend, setEndTimeWeekend] = useState(equipment.endTimeWeekend ? new Date(equipment.endTimeWeekend) :
-    () => {
-      const currentHour = new Date();
-      currentHour.setMinutes(currentHour.getMinutes() + 30);
-      return currentHour;
-    });
-  const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(equipment.frequencyOfUseOnWeekend ? equipment.frequencyOfUseOnWeekend : 0);
+  const [startTimeWeekend, setStartTimeWeekend] = useState(
+    equipment.startTimeWeekend ?
+      new Date(equipment.startTimeWeekend) :
+      new Date());
+
+  const [endTimeWeekend, setEndTimeWeekend] = useState(
+    equipment.endTimeWeekend ?
+      new Date(equipment.endTimeWeekend) :
+      () => {
+        const currentHour = new Date();
+        currentHour.setMinutes(currentHour.getMinutes() + 30);
+        return currentHour;
+      });
+
+  const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(
+    equipment.frequencyOfUseOnWeekend ? equipment.frequencyOfUseOnWeekend : 0);
 
   const scrollOffset = new Animated.Value(0);
 
@@ -118,10 +131,17 @@ function Equipment(props) {
 
   function toggleSaveBtn() {
     if (validateInputs()) {
-      const { kwMonthly, totalTimeOn, tarifaConvencional, tarifaBranca } = calcularTarifas(
-        quantity, power, frequencyOfUseOnWeekdays,
-        frequencyOfUseOnWeekend, dealership, startTimeWeekdays,
-        endTimeWeekdays, startTimeWeekend, endTimeWeekend, on24Hours);
+      const { kwMonthly, totalTimeOn, tarifaConvencional, tarifaBranca } =
+        calcularTarifas(quantity,
+          power,
+          frequencyOfUseOnWeekdays,
+          frequencyOfUseOnWeekend,
+          dealership,
+          startTimeWeekdays,
+          endTimeWeekdays,
+          startTimeWeekend,
+          endTimeWeekend,
+          on24Hours);
 
       const newEquipment = {
         id: equipment.id ? equipment.id : new Date().getTime().toString(),
@@ -148,13 +168,13 @@ function Equipment(props) {
           monthlyExpenses: tarifaBranca,
         },
       };
-      console.log("newEquipment: ", newEquipment)
 
       if (action == 'edit') {
         props.editEquipment(props.navigation.getParam('idRoom'), newEquipment.id, newEquipment);
       } else {
         props.addNewEquipment(props.navigation.getParam('idRoom'), newEquipment);
       }
+
       props.navigation.navigate('Room');
     };
   }
@@ -182,15 +202,15 @@ function Equipment(props) {
       <RegisteredContainer
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={Animated.event([
-          {
-            nativeEvent: {
-              contentOffset: { y: scrollOffset },
+        onScroll={Animated.event(
+          [
+            {
+              nativeEvent: {
+                contentOffset: { y: scrollOffset },
+              }
             }
-          }
-        ])
-        }
-      >
+          ]
+        )}>
 
         {equipment.models.length > 1 &&
           <>

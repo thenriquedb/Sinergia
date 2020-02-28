@@ -13,7 +13,7 @@ import {
 
 import { moneyMask, kwMask } from "../../../../../util/masks";
 
-export default function HeaderVisible(props) {
+function HeaderVisible(props) {
   const {
     offset,
     room,
@@ -143,3 +143,5 @@ export default function HeaderVisible(props) {
     </Container>
   );
 }
+
+export default HeaderVisible;

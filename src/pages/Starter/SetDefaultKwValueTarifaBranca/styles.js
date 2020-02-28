@@ -15,8 +15,6 @@ export const InputContainer = styled.View`
   margin-top:20px;
 `;
 
-
-
 export const NextPageButton = styled.TouchableOpacity`
   background-color: ${Colors.primary};
   align-items: center;
@@ -28,7 +26,6 @@ export const NextPageButton = styled.TouchableOpacity`
 `
 
 export const ContinueConfigArea = styled.View` 
-  /* flex: ${1 / 5}; */
   height: 100px;
   align-items: center;
   justify-content: center;

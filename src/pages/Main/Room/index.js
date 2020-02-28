@@ -1,6 +1,5 @@
-import React, { useEffect, useState, } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Animated } from "react-native";
-
 import { connect } from 'react-redux'
 
 import Header from "./Header";
@@ -9,7 +8,12 @@ import ActionButton from 'react-native-action-button';
 import CardEquipment from "../../../components/Cards/CardEquipment/index";
 
 import Colors from '../../../styles/colors';
-import { Container, Equipments, EquipmentsListContainer, EquipmentsList } from './styles';
+import {
+  Container,
+  Equipments,
+  EquipmentsListContainer,
+  EquipmentsList
+} from './styles';
 
 function Room(props) {
   const { navigation, room, allRooms } = props;
@@ -112,7 +116,6 @@ function Room(props) {
           </Equipments>
         )
       }
-
 
       <ActionButton
         size={55}

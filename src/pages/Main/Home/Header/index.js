@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {
   Container,
@@ -12,16 +13,23 @@ import {
   DetailLabel,
   DetailValue
 } from './styles';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { moneyMask, kwMask } from "../../../../util/masks";
 import capitalizeFirstLetter from "../../../../util/capitalizeFirstLetter";
 
 export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) {
-
   const [totalKw, setTotalKw] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [roomHigherConsumption, setRoomHigherConsumption] = useState('');
+
+  useEffect(() => {
+    setTotalKw(rooms.reduce((prevVal, elem) =>
+      prevVal + elem.totalKw, 0));
+
+    calcTotalAmount();
+
+    rooms.length > 0 && getRoomHigherConsumption();
+  });
 
   const detailsAnimationConfig = [
     {
@@ -70,16 +78,28 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
     }
   ];
 
-  useEffect(() => {
-    setTotalKw(rooms.reduce((prevVal, elem) =>
-      prevVal + elem.totalKw, 0));
+  const totalValueAnimationConfigs = [
+    {
+      fontSize: scrollOffset.interpolate({
+        inputRange: [200, 250],
+        outputRange: [22, 18],
+        extrapolate: 'clamp'
+      })
+    },
+  ];
 
-    calcTotalAmount();
+  const totalAmountAnimationConfigs = [
+    {
+      fontSize: scrollOffset.interpolate({
+        inputRange: [200, 250],
+        outputRange: [50, 40],
+        extrapolate: 'clamp'
+      })
+    },
+  ];
 
-    rooms.length > 0 && getRoomHigherConsumption();
-  });
 
-  const getRoomHigherConsumption = () => {
+  function getRoomHigherConsumption() {
     let highestExpense = rooms[0].tarifaConvencional.monthlyExpenses;
     let largestRoomSpent = rooms[0].name;
 
@@ -93,7 +113,7 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
     setRoomHigherConsumption(largestRoomSpent);
   }
 
-  const calcTotalAmount = () => {
+  function calcTotalAmount() {
     if (tarifaUsed === 'convencional') {
       setTotalAmount(rooms.reduce(
         (prevVal, elem) => prevVal + elem.tarifaConvencional.monthlyExpenses, 0),
@@ -115,28 +135,12 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
 
       <TotalConsumeKW>
         <TotalConsumeLabel
-          style={[
-            {
-              fontSize: scrollOffset.interpolate({
-                inputRange: [200, 250],
-                outputRange: [22, 18],
-                extrapolate: 'clamp'
-              })
-            },
-          ]}>
+          style={[...totalValueAnimationConfigs]}>
           Valor Total
         </TotalConsumeLabel>
 
         <TotalConsumeValue
-          style={[
-            {
-              fontSize: scrollOffset.interpolate({
-                inputRange: [200, 250],
-                outputRange: [50, 40],
-                extrapolate: 'clamp'
-              })
-            },
-          ]}>
+          style={[...totalAmountAnimationConfigs]}>
           {moneyMask(totalAmount)}
         </TotalConsumeValue>
       </TotalConsumeKW>

@@ -3,7 +3,13 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Picker, TouchableOpacity } from 'react-native';
 
 import { Text } from "../../../../styles/fonts";
-import { Container, SetOperationLabel, HourLabel, SetOperation, SelectTime } from './styles';
+import {
+  Container,
+  SetOperationLabel,
+  HourLabel,
+  SetOperation,
+  SelectTime
+} from './styles';
 
 import { formatHour } from "../../../../util/time";
 

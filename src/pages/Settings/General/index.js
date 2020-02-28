@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux'
 import { TouchableHighlight, Animated } from "react-native";
+import { connect } from 'react-redux'
 
 import {
   Container,
@@ -15,7 +15,7 @@ import {
 import SetTarifa from "../SetTarifa"
 import ufs from "../../../utilities/estados";
 
-const Settings = (props) => {
+function Settings(props) {
   const { navigation } = props;
   const [tarifaModal, setTarifaModal] = useState(false);
 

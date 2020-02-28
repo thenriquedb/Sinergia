@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Picker, Alert } from 'react-native';
-
-
-//redux
 import { connect } from 'react-redux'
 
 // styles
@@ -15,7 +12,7 @@ import states from "../../../utilities/estados"
 import tarifaBranca from "../../../utilities/tarifaBranca.json"
 import reCalcularValores from "../../../util/reCalcularValores";
 
-const SelectState = (props) => {
+function SelectState(props) {
   const { navigation } = props;
   const [uf, setUF] = useState(props.usedUF);
   const [dealerships, setDealerships] = useState(tarifaBranca.filter(item => item.UF === props.usedUF));
@@ -113,6 +110,5 @@ const mapDispatchToProps = dispatch => {
     setDealership: (dealership) => dispatch({ type: 'SET_DEALERSHIP', payload: { dealership } })
   };
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectState);

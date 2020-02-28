@@ -1,9 +1,8 @@
 import React from 'react';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // style
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Container, DeleteButton, IconContainer } from './styles';
-
 
 const HiddenCard = (progress, dragX) => {
   const scale = dragX.interpolate({

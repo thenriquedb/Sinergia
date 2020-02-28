@@ -156,6 +156,7 @@ function Help({ dealership }) {
     </Container>
   );
 };
+
 const mapStateToProps = state => ({
   dealership: state.houseReducer.dealership,
 });

@@ -2,7 +2,6 @@ import React from 'react';
 import { Alert } from "react-native";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
 import { Button } from './styles';
 
 function RestoreButton({ restoreDefaultValues }) {

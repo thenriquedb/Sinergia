@@ -10,14 +10,12 @@ import { TextBold } from '../../../../styles/fonts'
 import Colors from '../../../../styles/colors'
 import { Container, ButtonsContainer } from './styles';
 
-//util
-import roomList from "../../../../utilities/roomsList"
 
-const EditRoomModal = props => {
+function EditRoomModal(props) {
   const [newName, setNewName] = useState(props.room.name);
   const [oldName, setOldName] = useState(props.room.name);
 
-  const toggleSaveBtn = () => {
+  function toggleSaveBtn() {
     if (newName.length >= 4) {
 
       if (newName.trim() === oldName.trim()) {

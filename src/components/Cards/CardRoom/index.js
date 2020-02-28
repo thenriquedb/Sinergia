@@ -1,14 +1,12 @@
 import React from 'react';
 import { TouchableHighlight, Alert } from 'react-native';
 import { connect } from 'react-redux';
-
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
-// styles
+import HiddenCard from "../HiddenCard";
+
 import { Container, TotalPrice, Details } from './styles';
 import { TextLight, TextBold } from '../../../styles/fonts';
-
-import HiddenCard from "../HiddenCard";;
 
 import { moneyMask, kwMask } from "../../../util/masks";
 
@@ -26,7 +24,6 @@ const CardRoom = props => {
       {
         text: 'Confirmar', onPress: () => {
           props.deleteRoom(room.id);
-          props.refreshList();
         }
       },
     ],

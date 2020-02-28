@@ -15,7 +15,6 @@ export const BackButton = styled.TouchableOpacity`
 `;
 
 export const RegisteredContainer = styled(Animated.ScrollView)`
-  /* flex: 1; */
   background-color: ${Colors.white};
   border-top-left-radius: 15;
   border-top-right-radius: 15;

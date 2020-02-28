@@ -15,9 +15,10 @@ import {
 import { TextBold, Text } from "../../../../../styles/fonts";
 import { moneyMask } from "../../../../../util/masks";
 
-export default function HeaderHidden(props) {
+function HeaderHidden(props) {
   const { totalTarifaBranca, totalTarifaConvencional, offset } = props;
-  const [differenceBetweentariffs, setDifferenceBetweentariffs] = useState(totalTarifaConvencional - totalTarifaBranca);
+  const [differenceBetweentariffs, setDifferenceBetweentariffs] = useState(
+    totalTarifaConvencional - totalTarifaBranca);
 
   useEffect(() => {
     setDifferenceBetweentariffs(totalTarifaConvencional - totalTarifaBranca);
@@ -139,3 +140,4 @@ export default function HeaderHidden(props) {
     </Container>
   );
 }
+export default HeaderHidden;

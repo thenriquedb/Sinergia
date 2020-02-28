@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
-
 import { TouchableOpacity, ToastAndroid } from 'react-native';
-
-// styles
-import { Container, TarifaCard, Icon, ContinueConfigArea, Content, NextPageButton, styles } from './styles';
-import { Text, TextLight } from "../../../styles/fonts";
-import Colors from "../../../styles/colors";
 import { connect } from 'react-redux'
 
-const SelectTarifa = (props) => {
+// styles
+import {
+  Container,
+  TarifaCard,
+  Icon,
+  ContinueConfigArea,
+  Content,
+  NextPageButton,
+  styles
+} from './styles';
+import { Text, TextLight } from "../../../styles/fonts";
+import Colors from "../../../styles/colors";
+
+function SelectTarifa(props) {
   const [tarifa, setTarifa] = useState('')
 
-  const toggleNext = () => {
+  function toggleNext() {
     if (tarifa) {
       props.setTarifa(tarifa);
       tarifa === 'convencional' ? props.navigation.navigate('SetDefaultKwValue') : props.navigation.navigate('SetDefaultKwValueTarifaBranca');
@@ -29,15 +36,17 @@ const SelectTarifa = (props) => {
   return (
     <Container>
       <TextLight textAlign='center' fontSize='h4'> Qual é o seu tipo de tarifa?  </TextLight>
+
       <Content>
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() => setTarifa('convencional')}>
 
-          <TarifaCard style={tarifa === 'convencional' ? styles.SelectedTarifaCard : ''}>
+          <TarifaCard style={tarifa === 'convencional' && styles.SelectedTarifaCard}>
             <Icon
               resizeMode={"contain"}
-              source={require("../../../assets/icons/others/tarifa-convencional.png")} />
+              source={require("../../../assets/icons/others/tarifa-convencional.png")}
+            />
 
             <TextLight
               color={tarifa === 'convencional' ? Colors.primary : ''}
@@ -51,13 +60,16 @@ const SelectTarifa = (props) => {
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() => setTarifa('branca')}>
-          <TarifaCard style={tarifa === 'branca' ? styles.SelectedTarifaCard : ''}>
+
+          <TarifaCard style={tarifa === 'branca' && styles.SelectedTarifaCard}>
             <Icon
-              source={require("../../../assets/icons/others/tarifa-branca.png")} />
+              resizeMode={"contain"}
+              source={require("../../../assets/icons/others/tarifa-branca.png")}
+            />
 
             <TextLight
               fontSize={'h5'}
-              color={tarifa === 'branca' ? Colors.primary : ''}
+              color={tarifa === 'branca' && Colors.primary}
               textAlign={'center'}>
               Tarifa {'\n'}branca
             </TextLight>
@@ -76,12 +88,10 @@ const SelectTarifa = (props) => {
   )
 };
 
-
 const mapDispatchToProps = dispatch => {
   return {
     setTarifa: (tarifa) => dispatch({ type: 'SET_TARIFA', payload: { tarifa } }),
   };
 };
-
 
 export default connect(null, mapDispatchToProps)(SelectTarifa);

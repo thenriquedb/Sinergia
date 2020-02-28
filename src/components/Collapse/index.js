@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-
-import { View, Animated, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View, Animated, TouchableOpacity } from 'react-native';
 
-const Collapse = props => {
+function Collapse(props) {
   const [isVisible, setIsVisible] = useState(true);
   const { offset } = props;
-
-  function render(params) {
-    return isVisible ? props.visible : props.hidden;
-  }
 
   const arrowAnimationConfigs = [
     {
@@ -25,7 +20,8 @@ const Collapse = props => {
 
   return (
     <View>
-      {render()}
+      {isVisible ? props.visible : props.hidden}
+
       <TouchableOpacity
         style={{ alignItems: 'center' }}
         onPress={() => setIsVisible(!isVisible)}>

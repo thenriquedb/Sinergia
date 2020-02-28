@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Description, Title, Icon } from './styles';
 
-const Header = ({ offset, on24Hours, equipmentName, equipmentIcon, equipmentDescription }) => {
+function Header({ offset, equipmentName, equipmentIcon, equipmentDescription }) {
 
   const MAX_INPUT_VALUE = 380;
 

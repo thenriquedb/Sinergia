@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 
-import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  Container,
+  RadioItem,
+  RadioButtonMarked,
+  Circle,
+  RadioLabel
+} from './styles';
 
-import { Container, RadioItem, RadioButtonMarked, Circle, RadioLabel } from './styles';
-
-const RadioForm = (props) => {
+function RadioForm(props) {
   const { items, defaultValue } = props;
   const [selecedItem, setSelecedItem] = useState(items.findIndex(item => item.value === defaultValue));
 
-  const MarketItem = () => {
-    return (
-      <Circle>
-        <RadioButtonMarked>
-        </RadioButtonMarked>
-      </Circle>
-    );
-  }
+  const MarketItem = () => (
+    <Circle>
+      <RadioButtonMarked>
+      </RadioButtonMarked>
+    </Circle>
+  );
 
   return (
     <Container>

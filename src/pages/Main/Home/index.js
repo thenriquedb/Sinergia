@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Animated } from 'react-native';
 
 import ActionButton from 'react-native-action-button';
@@ -13,13 +13,8 @@ import { Container, Rooms, RoomList } from './style';
 
 const Home = props => {
   const { rooms, house, navigation, tarifaUsed } = props;
-  const [updateList, setUpdateList] = useState(false);
 
   const scrollOffset = new Animated.Value(0);
-
-  const reRender = () => {
-    setUpdateList(!updateList);
-  };
 
   return (
     <>
@@ -37,10 +32,9 @@ const Home = props => {
               data={rooms}
               showsVerticalScrollIndicator={false}
               keyExtractor={room => room.id}
-              extraData={props.house}
+              extraData={house}
               renderItem={({ item }) => (
                 <CardRoom
-                  refreshList={reRender}
                   toggleRoomCard={() => navigation.navigate('Room', { roomId: item.id })}
                   room={item} />
               )}
@@ -68,7 +62,6 @@ const Home = props => {
 
 
 const mapStateToProps = state => ({
-  house: state.houseReducer,
   rooms: state.houseReducer.rooms,
   tarifaUsed: state.houseReducer.tarifa
 });

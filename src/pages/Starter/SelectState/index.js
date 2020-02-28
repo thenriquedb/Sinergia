@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-
-import { Picker, View, ToastAndroid } from 'react-native';
-
-//redux
+import { Picker, ToastAndroid } from 'react-native';
 import { connect } from 'react-redux'
 
 // styles
@@ -14,13 +11,13 @@ import Colors from "../../../styles/colors";
 import states from "../../../utilities/estados"
 import tarifaBranca from "../../../utilities/tarifaBranca.json"
 
-const SelectState = (props) => {
+function SelectState(props) {
   const [state, setState] = useState('NONE')
   const [dealerships, setDealerships] = useState(tarifaBranca);
   const [selectedDealership, setSelectedDealership] = useState('');
 
 
-  const toggleNext = () => {
+  function toggleNext() {
     if (state != 'NONE') {
 
       setSelectedDealership(selectedDealership ? selectedDealership : dealerships[0]);
@@ -38,11 +35,10 @@ const SelectState = (props) => {
     }
   }
 
-
-
   return (
     <Container>
       <TextLight textAlign='center' fontSize='h4'> Primeiramente vamos selecionar o seu estado e sua concessionária.  </TextLight>
+
       <Content>
         <Text fontSize='h5'> Estado  </Text>
         <Picker
@@ -57,10 +53,9 @@ const SelectState = (props) => {
           })}
         </Picker>
 
-
         {state !== 'NONE' &&
-          <View>
-            <Text style={{ marginTop: 20 }} fontSize='h5'> Concessionária  </Text>
+          <>
+            <Text style={{ marginTop: 20 }} fontSize='h5'>Concessionária  </Text>
             <Picker
               selectedValue={selectedDealership}
               onValueChange={(itemValue, itemIndex) => {
@@ -70,18 +65,21 @@ const SelectState = (props) => {
                 return <Picker.Item value={value} label={value.Distribuidora} />;
               })}
             </Picker>
-          </View>}
-
+          </>
+        }
       </Content>
 
       <ContinueConfigArea>
         <NextPageButton
           style={{
-            backgroundColor: state === 'NONE' ? Colors.lightGray1 : Colors.primary,
+            backgroundColor: state === 'NONE' ?
+              Colors.lightGray1 : Colors.primary,
           }}
           onPress={() => toggleNext()}>
-          <Text
-            fontSize='h6' color={'#fff'}> Continuar </Text>
+
+          <Text fontSize='h6' color={'#fff'}>
+            Continuar
+          </Text>
         </NextPageButton>
       </ContinueConfigArea>
     </Container>
@@ -91,7 +89,10 @@ const SelectState = (props) => {
 const mapDispatchToProps = dispatch => {
   return {
     setUf: (uf) => dispatch({ type: 'SET_UF', payload: { uf } }),
-    setDealership: (dealership) => dispatch({ type: 'SET_DEALERSHIP', payload: { dealership } })
+    setDealership: (dealership) => dispatch({
+      type: 'SET_DEALERSHIP',
+      payload: { dealership }
+    })
   };
 };
 

@@ -11,13 +11,6 @@ export const WelcomeContent = styled.View`
   justify-content: center;
 `;
 
-export const Icon = styled.Image`
-  height: 100px;
-  width: 100px;
-  opacity: .2;
-`;
-
-
 export const NextPageButton = styled.TouchableOpacity`
   background-color: ${Colors.primary};
   align-items: center;

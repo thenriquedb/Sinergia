@@ -14,7 +14,7 @@ export const EquipmentContainer = styled.View`
 `;
 
 export const EquipmentCard = styled(Animated.View)`
-   padding: 6px;
+  padding: 6px;
   height: 150px;
   align-items: center;
   justify-content: center;

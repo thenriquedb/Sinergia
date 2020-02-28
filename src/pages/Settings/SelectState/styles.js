@@ -10,7 +10,6 @@ export const Content = styled.View`
   padding: 20px 15px;
 `;
 
-
 export const Label = styled.Text`
   color: #000;
   font-weight: bold;

@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import NavigationHeader from "../NavigationHeader";
-
 import Collapse from '../../../../components/Collapse/';
 import HeaderHidden from "./HeaderHidden";
 import HeaderVisible from "./HeaderVisible";
 
-const Header = (props) => {
+function Header(props) {
   const {
     room,
     navigation,

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import SettingsModal from "../../../components/SettingsModal";
 import RadioForm from "../../../components/RadioForm";
 
-const SetTarifa = (props) => {
+function SetTarifa(props) {
   const radio_props = [
     { label: 'Tarifa Convencional', value: 'convencional' },
     { label: 'Tarifa Branca', value: 'branca' }
@@ -17,7 +17,7 @@ const SetTarifa = (props) => {
     props.setTarifa(tarifa);
   }, [tarifa])
 
-  const modalContent = () => {
+  function modalContent() {
     return (
       <>
         <RadioForm

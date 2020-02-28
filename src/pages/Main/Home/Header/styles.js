@@ -14,16 +14,14 @@ export const SettingsButtonContainer = styled(Animated.View)`
   right: 0;
 `;
 
-export const SettingsButton = styled.TouchableOpacity`
-
-`;
-
+export const SettingsButton = styled.TouchableOpacity``;
 
 export const TotalConsumeLabel = styled(Animated.Text)`
   color: #fff;
   font-size: 22;
   text-transform: uppercase;
 `;
+
 export const TotalConsumeValue = styled(Animated.Text)`
   color: #fff;
   font-size: 50;
@@ -43,8 +41,8 @@ export const DetailLabel = styled.Text`
   color: #fff;
   font-size: 16;
   font-weight: bold;
-  
 `;
+
 export const DetailValue = styled.Text`
   color: #fff;
   font-size: 16;

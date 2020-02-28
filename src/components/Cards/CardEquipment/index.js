@@ -3,11 +3,11 @@ import { TouchableHighlight, Alert } from 'react-native';
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { connect } from 'react-redux'
 
+import HiddenCard from "../HiddenCard";
+
 // styles
 import { Container, Details, DetailsLabels, Icon, IconContainer, InfoContainer } from './styles';
 import { TextLight } from '../../../styles/fonts';
-
-import HiddenCard from "../HiddenCard";
 
 import { moneyMask, kwMask } from "../../../util/masks";
 

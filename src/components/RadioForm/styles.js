@@ -37,12 +37,3 @@ export const RadioLabel = styled.Text`
   font-size: 18px;
   margin-left: 5px
 `;
-
-export const CheckedCircle = styled.View`
-  width: 14px;
-  height: 14px;
-  align-items: center;
-  border-radius: 7px;
-  border-color: ${Colors.primary};
-  background-color: ${Colors.primary};
-`;

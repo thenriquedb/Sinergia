@@ -1,9 +1,9 @@
 import React from 'react';
+import Lottie from "lottie-react-native";
 
 import animation from "../../assets/splash-animation.json";
 
-import Lottie from "lottie-react-native";
-import { Container, Title, Subtitle } from './styles';
+import { Container } from './styles';
 
 const SplashScreen = () => {
   return (

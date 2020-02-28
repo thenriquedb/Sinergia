@@ -1,3 +1,4 @@
+import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../styles/colors';
 
@@ -11,8 +12,6 @@ export default StyleSheet.create({
   },
 });
 
-import styled from 'styled-components/native';
-
 export const MyInput = styled.TextInput`
   border-width: 1.5;
   font-size: 18px;
@@ -22,8 +21,8 @@ export const MyInput = styled.TextInput`
 `;
 
 export const Label = styled.Text`
-color: #000;
-font-weight: bold;
-font-size: 16px
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
 `;
 

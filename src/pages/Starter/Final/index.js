@@ -1,17 +1,19 @@
 import React from 'react';
-
 import { connect } from 'react-redux'
 
-import { Container, NextPageButton, ContinueConfigArea, WelcomeContent } from './styles';
+import {
+  Container,
+  NextPageButton,
+  ContinueConfigArea,
+  WelcomeContent
+} from './styles';
 import { TextLight, Text } from '../../../styles/fonts';
 
-
-const Final = props => {
-  const toggleStartButton = () => {
+function Final(props) {
+  function toggleStartButton() {
     props.setFirstUse();
     props.navigation.navigate('MainStack');
   }
-
 
   return (
     <Container>
@@ -27,7 +29,6 @@ const Final = props => {
     </Container>
   )
 };
-
 
 const mapDispatchToProps = dispatch => {
   return { setFirstUse: () => dispatch({ type: 'SET_FIRST_USE_STATUS' }) }
