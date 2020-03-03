@@ -98,7 +98,6 @@ export default function Header({ rooms, tarifaUsed, navigation, scrollOffset }) 
     },
   ];
 
-
   function getRoomHigherConsumption() {
     let highestExpense = rooms[0].tarifaConvencional.monthlyExpenses;
     let largestRoomSpent = rooms[0].name;

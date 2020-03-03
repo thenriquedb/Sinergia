@@ -12,7 +12,9 @@ export const MenuLabel = styled.Text`
   color: #000;
 `;
 
-export const MenuButton = styled.TouchableHighlight.attrs({ underlayColor: "#F6F6F6" })`
+export const MenuButton = styled.TouchableHighlight.attrs({
+  underlayColor: "#F6F6F6"
+})`
   padding: 20px 10px;
   justify-content: center;
   margin-bottom: 5px;

@@ -1,8 +1,7 @@
 import styled from 'styled-components/native';
 import Colors from '../../../styles/colors';
 
-export const Scroll = styled.ScrollView`
-`;
+export const Scroll = styled.ScrollView``;
 
 export const Container = styled.View`
   flex: 1;
@@ -47,7 +46,6 @@ export const Title = styled.Text`
   font-weight: bold;
   text-transform: uppercase;
   text-align: center
-
 `;
 
 export const SubTitle = styled.Text`
@@ -67,8 +65,8 @@ export const Describe = styled.Text`
 `;
 
 export const Footer = styled.View`
-  /* position: absolute; */
-  /* bottom: 0; */
+  position: absolute;
+  bottom: 0;
 `;
 
 export const FooterImage = styled.Image`
