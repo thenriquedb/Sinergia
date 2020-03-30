@@ -113,8 +113,8 @@ const SetTime = (props) => {
             <SelectTime color={on24Hours || !frequencyOfUseOnWeekend ? '#eee' : '#cccccc'}>
               <Text color={on24Hours || !frequencyOfUseOnWeekend ? '#ccc' : '#000'}> {formatHour(startTimeWeekend)} </Text>
             </SelectTime>
-
           </TouchableOpacity>
+          
           <DateTimePicker
             is24Hour={true}
             mode={'time'}

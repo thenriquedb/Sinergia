@@ -31,6 +31,10 @@ export default class NewEquipment extends Component {
       ...equipmentsList.rooms['kitchen'],
     ].sort((a, b) => {
       return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+    }).map(item => {
+      item.class = styles.SelectedEquipmentCard;
+      item.select = false;
+      return item;
     });
 
     this.state = {

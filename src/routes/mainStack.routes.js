@@ -8,7 +8,7 @@ import Room from '../pages/Main/Room';
 import NewRoom from '../pages/Main/NewRoom';
 import NewEquipment from '../pages/Main/NewEquipment';
 import Equipment from '../pages/Main/Equipment';
-import GenericWebView from '../pages/WebView';
+import CemigKWh from '../pages/CemigKWh';
 
 // Settings
 import Settings from '../pages/Settings/General';
@@ -97,9 +97,12 @@ export default (MainStack = createStackNavigator(
       },
     },
 
-    GenericWebView: {
-      screen: GenericWebView
-    }
+    CemigKWh: {
+      screen: CemigKWh,
+      navigationOptions: {
+        title: 'Valor do KWh sem impostos'
+      }
+    },
   },
   {
     defaultNavigationOptions: {

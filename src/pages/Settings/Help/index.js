@@ -22,7 +22,7 @@ import {
 
 import Colors from "../../../styles/colors";
 
-function Help({ dealership }) {
+function Help({ dealership, navigation }) {
   const [isVisible1, setTsVisible1] = useState(false);
   const [isVisible2, setTsVisible2] = useState(false);
   const [isVisible3, setTsVisible3] = useState(false);
@@ -150,6 +150,15 @@ function Help({ dealership }) {
               setIsVisible={setTsVisible4}
               content={renderModalContent4}
             />
+          </>
+        </MenuButton>
+
+        <MenuButton onPress={() => navigation.navigate('CemigKWh',
+          {
+            link: 'https://www.cemig.com.br/pt-br/atendimento/Paginas/valores_de_tarifa_e_servicos.aspx'
+          })}>
+          <>
+            <MenuLabel>Valor do KWh sem impostos </MenuLabel>
           </>
         </MenuButton>
       </ScrollView>

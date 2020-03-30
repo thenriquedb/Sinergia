@@ -712,31 +712,31 @@ export default {
       models: [
         {
           name: 'Refrigerador 1 porta',
-          power: 80,
+          power: 80 * 0.67,
           description:
             'Não deixe a porta muito tempo aberta e evite guardar panelas quentes.',
         },
         {
           name: 'Refrigerador 2 portas',
-          power: 125,
+          power: 125 * 0.67,
           description:
             'Não deixe a porta muito tempo aberta e evite guardar panelas quentes.',
         },
         {
           name: 'Refrigerador antigo (+ de 10 anos) portas',
-          power: 280,
+          power: 280 * 0.67,
           description:
             'Não deixe a porta muito tempo aberta e evite guardar panelas quentes.',
         },
         {
           name: 'Refrigerador com dispenser (água/gelo) portas',
-          power: 380,
+          power: 380 * 0.67,
           description:
             'Não deixe a porta muito tempo aberta e evite guardar panelas quentes.',
         },
         {
           name: 'Personalizado',
-          power: 215,
+          power: 215 * 0.67,
           description:
             '',
         }
@@ -945,7 +945,13 @@ export default {
         },
         models: [
           {
-            name: 'Chuveiro - 5500W',
+            name: 'Chuveiro (verão) - 3500W',
+            power: 3500,
+            description:
+              'Nos meses quentes, ajuste a chave do chuveiro para a posição verão.',
+          },
+          {
+            name: 'Chuveiro (inverno) - 5500W',
             power: 5500,
             description:
               'Nos meses quentes, ajuste a chave do chuveiro para a posição verão.',

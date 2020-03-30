@@ -72,7 +72,7 @@ function Equipment(props) {
       });
 
   const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(
-    equipment.frequencyOfUseOnWeekend ? equipment.frequencyOfUseOnWeekend : 0);
+    equipment.frequencyOfUseOnWeekend ? equipment.frequencyOfUseOnWeekend : 1);
 
   const scrollOffset = new Animated.Value(0);
 
