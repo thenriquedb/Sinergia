@@ -1,3 +1,6 @@
-export default function calcTarifaConvencional(kwMonthly, valorTarifaConvencional) {
+export default function calcTarifaConvencional(
+  kwMonthly,
+  valorTarifaConvencional,
+) {
   return kwMonthly * valorTarifaConvencional;
 }

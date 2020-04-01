@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export default {
   rooms: {
     default: [
@@ -5,7 +6,7 @@ export default {
         name: 'Lâmpada',
         icon: {
           dark: require('../assets/icons/default/dark/lamp.png'),
-          light: require('../assets/icons/default/light/lamp.png')
+          light: require('../assets/icons/default/light/lamp.png'),
         },
         description: 'Evite acender Lâmpadas durante o dia, utilize a iluminação natural.            ',
 
@@ -63,7 +64,7 @@ export default {
             power: 18,
             description:
               'Evite acender Lâmpadas durante o dia, utilize a iluminação natural.',
-          }
+          },
         ],
       },
     ],
@@ -73,7 +74,7 @@ export default {
         name: 'Computador',
         icon: {
           dark: require('../assets/icons/bedroom/dark/computer.png'),
-          light: require('../assets/icons/bedroom/light/computer.png')
+          light: require('../assets/icons/bedroom/light/computer.png'),
         },
         models: [
           {
@@ -87,14 +88,14 @@ export default {
             power: 200,
             description:
               'Pesquise modelos mais econômicos e evite deixar ligado sem necessidade.',
-          }
+          },
         ],
       },
       {
         name: 'Telefone Fixo',
         icon: {
           dark: require('../assets/icons/bedroom/dark/phone.png'),
-          light: require('../assets/icons/bedroom/light/phone.png')
+          light: require('../assets/icons/bedroom/light/phone.png'),
         }, models: [
           {
             name: 'Telefone Fixo - 5W',
@@ -107,14 +108,14 @@ export default {
             power: 5,
             description:
               '',
-          }
+          },
         ],
       },
       {
         name: 'Notebook',
         icon: {
           dark: require('../assets/icons/bedroom/dark/notebook.png'),
-          light: require('../assets/icons/bedroom/light/notebook.png')
+          light: require('../assets/icons/bedroom/light/notebook.png'),
         },
         models: [
           {
@@ -128,14 +129,14 @@ export default {
             power: 45,
             description:
               'Pesquise modelos mais econômicos e evite deixar ligado sem necessidade.',
-          }
+          },
         ],
       },
       {
         name: 'Ar condicionado',
         icon: {
           dark: require('../assets/icons/bedroom/dark/air-conditioner.png'),
-          light: require('../assets/icons/bedroom/light/air-conditioner.png')
+          light: require('../assets/icons/bedroom/light/air-conditioner.png'),
         },
         models: [
           {
@@ -161,14 +162,14 @@ export default {
             power: 1450,
             description:
               'Evite instalar o aparelho em locais com incidência de raios solares. Isso exige maior consumo para esfriar.',
-          }
+          },
         ],
       },
       {
         name: 'Carregador de celular',
         icon: {
           dark: require('../assets/icons/bedroom/dark/phone-charger.png'),
-          light: require('../assets/icons/bedroom/light/phone-charger.png')
+          light: require('../assets/icons/bedroom/light/phone-charger.png'),
         },
         models: [
           {
@@ -188,14 +189,14 @@ export default {
             power: 14,
             description:
               'Retire da tomada quando o aparelho já estiver com a carga completa.',
-          }
+          },
         ],
       },
       {
         name: 'Impressora',
         icon: {
           dark: require('../assets/icons/bedroom/dark/printer.png'),
-          light: require('../assets/icons/bedroom/light/printer.png')
+          light: require('../assets/icons/bedroom/light/printer.png'),
         },
         models: [
           {
@@ -209,14 +210,14 @@ export default {
             power: 25,
             description:
               'Evite deixar acessórios do computador ligados sem necessidade.',
-          }
+          },
         ],
       },
       {
         name: 'Micro system',
         icon: {
           dark: require('../assets/icons/bedroom/dark/microsystem.png'),
-          light: require('../assets/icons/bedroom/light/microsystem.png')
+          light: require('../assets/icons/bedroom/light/microsystem.png'),
         },
         models: [
           {
@@ -230,7 +231,7 @@ export default {
             power: 25,
             description:
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
-          }
+          },
         ],
       },
 
@@ -238,7 +239,7 @@ export default {
         name: 'Televisão',
         icon: {
           dark: require('../assets/icons/bedroom/dark/tv.png'),
-          light: require('../assets/icons/bedroom/light/tv.png')
+          light: require('../assets/icons/bedroom/light/tv.png'),
         },
         models: [
           {
@@ -270,14 +271,14 @@ export default {
             power: 350,
             description:
               'Desligue da tomada quando não for mais assistir, pois o stand-by consome energia.',
-          }
+          },
         ],
       },
       {
         name: 'Ventilador',
         icon: {
           dark: require('../assets/icons/bedroom/dark/fan.png'),
-          light: require('../assets/icons/bedroom/light/fan.png')
+          light: require('../assets/icons/bedroom/light/fan.png'),
         },
         models: [
           {
@@ -297,14 +298,14 @@ export default {
             power: 90,
             description:
               'Mantenha hélices e grades limpas para facilitar a circulação do ar',
-          }
+          },
         ],
       },
       {
         name: 'Video Game',
         icon: {
           dark: require('../assets/icons/bedroom/dark/videogame.png'),
-          light: require('../assets/icons/bedroom/light/videogame.png')
+          light: require('../assets/icons/bedroom/light/videogame.png'),
         },
         models: [
           {
@@ -354,14 +355,14 @@ export default {
             power: 100,
             description:
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
-          }
+          },
         ],
       },
       {
         name: 'DVD',
         icon: {
           dark: require('../assets/icons/bedroom/dark/dvd.png'),
-          light: require('../assets/icons/bedroom/light/dvd.png')
+          light: require('../assets/icons/bedroom/light/dvd.png'),
         },
         models: [
           {
@@ -375,14 +376,14 @@ export default {
             power: 10,
             description:
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
-          }
+          },
         ],
       },
       {
         name: 'Home theater',
         icon: {
           dark: require('../assets/icons/bedroom/dark/speaker.png'),
-          light: require('../assets/icons/bedroom/light/speaker.png')
+          light: require('../assets/icons/bedroom/light/speaker.png'),
         },
         models: [
           {
@@ -396,7 +397,7 @@ export default {
             power: 350,
             description:
               'Os equipamentos que ficam no modo stand-by podem prejudicar a economia de energia, pois continuam consumindo eletricidade.',
-          }
+          },
         ],
       },
     ],
@@ -405,7 +406,7 @@ export default {
       name: 'Batedeira',
       icon: {
         dark: require('../assets/icons/kitchen/dark/mixer.png'),
-        light: require('../assets/icons/kitchen/light/mixer.png')
+        light: require('../assets/icons/kitchen/light/mixer.png'),
       },
       models: [
         {
@@ -457,14 +458,14 @@ export default {
           power: 435,
           description:
             '',
-        }
+        },
       ],
     },
     {
       name: 'Cafeteira',
       icon: {
         dark: require('../assets/icons/kitchen/dark/coffemachine.png'),
-        light: require('../assets/icons/kitchen/light/coffemachine.png')
+        light: require('../assets/icons/kitchen/light/coffemachine.png'),
       },
       models: [
         {
@@ -478,14 +479,14 @@ export default {
           power: 1000,
           description:
             '',
-        }
+        },
       ],
     },
     {
       name: 'Exaustor Fogão',
       icon: {
         dark: require('../assets/icons/kitchen/dark/exaust.png'),
-        light: require('../assets/icons/kitchen/light/exaust.png')
+        light: require('../assets/icons/kitchen/light/exaust.png'),
       },
       models: [
         {
@@ -499,14 +500,14 @@ export default {
           power: 170,
           description:
             '',
-        }
+        },
       ],
     },
     {
       name: 'Fogão elétrico',
       icon: {
         dark: require('../assets/icons/kitchen/dark/cooker.png'),
-        light: require('../assets/icons/kitchen/light/cooker.png')
+        light: require('../assets/icons/kitchen/light/cooker.png'),
       },
       models: [
         {
@@ -520,14 +521,14 @@ export default {
           power: 1500,
           description:
             '',
-        }
+        },
       ],
     },
     {
       name: 'Forno elétrico',
       icon: {
         dark: require('../assets/icons/kitchen/dark/forno.png'),
-        light: require('../assets/icons/kitchen/light/forno.png')
+        light: require('../assets/icons/kitchen/light/forno.png'),
       },
       models: [
         {
@@ -541,14 +542,14 @@ export default {
           power: 1500,
           description:
             '',
-        }
+        },
       ],
     },
     {
       name: 'Freezer',
       icon: {
         dark: require('../assets/icons/kitchen/dark/freezer.png'),
-        light: require('../assets/icons/kitchen/light/freezer.png')
+        light: require('../assets/icons/kitchen/light/freezer.png'),
       },
       models: [
         {
@@ -562,14 +563,14 @@ export default {
           power: 200,
           description:
             'Instalar longe das fontes de calor e de preferência em local ventilado',
-        }
+        },
       ],
     },
     {
       name: 'Frigobar',
       icon: {
         dark: require('../assets/icons/kitchen/dark/frigobar.png'),
-        light: require('../assets/icons/kitchen/light/frigobar.png')
+        light: require('../assets/icons/kitchen/light/frigobar.png'),
       },
       models: [
         {
@@ -583,14 +584,14 @@ export default {
           power: 70,
           description:
             '',
-        }
+        },
       ],
     },
     {
       name: 'Lavadora de louça',
       icon: {
         dark: require('../assets/icons/kitchen/dark/dishwasher.png'),
-        light: require('../assets/icons/kitchen/light/dishwasher.png')
+        light: require('../assets/icons/kitchen/light/dishwasher.png'),
       },
       models: [
         {
@@ -604,14 +605,14 @@ export default {
           power: 1400,
           description:
             '',
-        }
+        },
       ],
     },
     {
       name: 'Liquidificador',
       icon: {
         dark: require('../assets/icons/kitchen/dark/blender.png'),
-        light: require('../assets/icons/kitchen/light/blender.png')
+        light: require('../assets/icons/kitchen/light/blender.png'),
       },
       models: [
         {
@@ -667,14 +668,14 @@ export default {
           power: 750,
           description:
             '',
-        }
+        },
       ],
     },
     {
       name: 'Microondas',
       icon: {
         dark: require('../assets/icons/kitchen/dark/microwave.png'),
-        light: require('../assets/icons/kitchen/light/microwave.png')
+        light: require('../assets/icons/kitchen/light/microwave.png'),
       },
       models: [
         {
@@ -700,53 +701,53 @@ export default {
           power: 1100,
           description:
             '',
-        }
+        },
       ],
     },
     {
       name: 'Refrigerador',
       icon: {
         dark: require('../assets/icons/kitchen/dark/geladeira.png'),
-        light: require('../assets/icons/kitchen/light/geladeira.png')
+        light: require('../assets/icons/kitchen/light/geladeira.png'),
       },
       models: [
         {
-          name: 'Refrigerador 1 porta',
-          power: 80 * 0.67,
+          name: 'Refrigerador 1 porta (80W)',
+          power: 80,
           description:
             'Não deixe a porta muito tempo aberta e evite guardar panelas quentes.',
         },
         {
-          name: 'Refrigerador 2 portas',
-          power: 125 * 0.67,
+          name: 'Refrigerador 2 portas (125W)',
+          power: 125,
           description:
             'Não deixe a porta muito tempo aberta e evite guardar panelas quentes.',
         },
         {
-          name: 'Refrigerador antigo (+ de 10 anos) portas',
-          power: 280 * 0.67,
+          name: 'Refrigerador antigo (+ de 10 anos) portas (280W)',
+          power: 280,
           description:
             'Não deixe a porta muito tempo aberta e evite guardar panelas quentes.',
         },
         {
-          name: 'Refrigerador com dispenser (água/gelo) portas',
-          power: 380 * 0.67,
+          name: 'Refrigerador com dispenser (água/gelo) portas (380W)',
+          power: 380,
           description:
             'Não deixe a porta muito tempo aberta e evite guardar panelas quentes.',
         },
         {
           name: 'Personalizado',
-          power: 215 * 0.67,
+          power: 190,
           description:
             '',
-        }
+        },
       ],
     },
     {
       name: 'Sanduicheira',
       icon: {
         dark: require('../assets/icons/kitchen/dark/sandwich.png'),
-        light: require('../assets/icons/kitchen/light/sandwich.png')
+        light: require('../assets/icons/kitchen/light/sandwich.png'),
       },
       models: [
         {
@@ -772,7 +773,7 @@ export default {
           power: 750,
           description:
             '',
-        }
+        },
       ],
     },
     ],
@@ -782,7 +783,7 @@ export default {
         name: 'Boiler',
         icon: {
           dark: require('../assets/icons/externalArea/dark/boiler.png'),
-          light: require('../assets/icons/externalArea/light/boiler.png')
+          light: require('../assets/icons/externalArea/light/boiler.png'),
         },
         models: [
           {
@@ -808,14 +809,14 @@ export default {
             power: 4000,
             description:
               '',
-          }
+          },
         ],
       },
       {
         name: 'Sauna',
         icon: {
           dark: require('../assets/icons/externalArea/dark/sauna.png'),
-          light: require('../assets/icons/externalArea/light/sauna.png')
+          light: require('../assets/icons/externalArea/light/sauna.png'),
         },
         models: [
           {
@@ -829,14 +830,14 @@ export default {
             power: 15000,
             description:
               '',
-          }
+          },
         ],
       },
       {
         name: 'Bomba d\'água',
         icon: {
           dark: require('../assets/icons/externalArea/dark/plumb.png'),
-          light: require('../assets/icons/externalArea/light/plumb.png')
+          light: require('../assets/icons/externalArea/light/plumb.png'),
         },
         models: [
           {
@@ -868,14 +869,14 @@ export default {
             power: 460,
             description:
               '',
-          }
+          },
         ],
       },
       {
         name: 'Bomba de piscina',
         icon: {
           dark: require('../assets/icons/externalArea/dark/water-pump.png'),
-          light: require('../assets/icons/externalArea/light/water-pump.png')
+          light: require('../assets/icons/externalArea/light/water-pump.png'),
         },
         models: [
           {
@@ -889,14 +890,14 @@ export default {
             power: 500,
             description:
               '',
-          }
+          },
         ],
       },
       {
         name: 'Churrasqueira elétrica',
         icon: {
           dark: require('../assets/icons/externalArea/dark/grill.png'),
-          light: require('../assets/icons/externalArea/light/grill.png')
+          light: require('../assets/icons/externalArea/light/grill.png'),
         },
         models: [
           {
@@ -910,14 +911,14 @@ export default {
             power: 3800,
             description:
               '',
-          }
+          },
         ],
       },
       {
         name: 'Cortador de grama',
         icon: {
           dark: require('../assets/icons/externalArea/dark/lawn-mower.png'),
-          light: require('../assets/icons/externalArea/light/lawn-mower.png')
+          light: require('../assets/icons/externalArea/light/lawn-mower.png'),
         },
         models: [
           {
@@ -931,7 +932,7 @@ export default {
             power: 600,
             description:
               '',
-          }
+          },
         ],
       },
     ],
@@ -941,7 +942,7 @@ export default {
         name: 'Chuveiro',
         icon: {
           dark: require('../assets/icons/bathroom/dark/shower.png'),
-          light: require('../assets/icons/bathroom/light/shower.png')
+          light: require('../assets/icons/bathroom/light/shower.png'),
         },
         models: [
           {
@@ -979,14 +980,14 @@ export default {
             power: 7200,
             description:
               'Nos meses quentes, ajuste a chave do chuveiro para a posição verão.',
-          }
+          },
         ],
       },
       {
         name: 'Depilador',
         icon: {
           dark: require('../assets/icons/bathroom/dark/depilador.png'),
-          light: require('../assets/icons/bathroom/light/depilador.png')
+          light: require('../assets/icons/bathroom/light/depilador.png'),
         },
         models: [
           {
@@ -1012,7 +1013,7 @@ export default {
             power: 5.5,
             description:
               '',
-          }
+          },
         ],
       },
 
@@ -1020,7 +1021,7 @@ export default {
         name: 'Secador de cabelo',
         icon: {
           dark: require('../assets/icons/bathroom/dark/hairdryer.png'),
-          light: require('../assets/icons/bathroom/light/hairdryer.png')
+          light: require('../assets/icons/bathroom/light/hairdryer.png'),
         },
         models: [
           {
@@ -1052,14 +1053,14 @@ export default {
             power: 1800,
             description:
               '',
-          }
+          },
         ],
       },
       {
         name: 'Torneira elétrica',
         icon: {
           dark: require('../assets/icons/bathroom/dark/sink.png'),
-          light: require('../assets/icons/bathroom/light/sink.png')
+          light: require('../assets/icons/bathroom/light/sink.png'),
         },
         models: [
           {
@@ -1079,14 +1080,14 @@ export default {
             power: 5150,
             description:
               '',
-          }
+          },
         ],
       },
       {
         name: 'Banheira',
         icon: {
           dark: require('../assets/icons/bathroom/dark/bathtub.png'),
-          light: require('../assets/icons/bathroom/light/bathtub.png')
+          light: require('../assets/icons/bathroom/light/bathtub.png'),
         },
         models: [
           {
@@ -1100,7 +1101,7 @@ export default {
             power: 6600,
             description:
               '',
-          }
+          },
         ],
       },
     ],
@@ -1110,7 +1111,7 @@ export default {
         name: 'Aspirador de pó',
         icon: {
           dark: require('../assets/icons/serviceArea/dark/vacuum-cleaner.png'),
-          light: require('../assets/icons/serviceArea/light/vacuum-cleaner.png')
+          light: require('../assets/icons/serviceArea/light/vacuum-cleaner.png'),
         },
         models: [
           {
@@ -1124,14 +1125,14 @@ export default {
             power: 600,
             description:
               '',
-          }
+          },
         ],
       },
       {
         name: 'Máquina de costura',
         icon: {
           dark: require('../assets/icons/serviceArea/dark/sewing-machine.png'),
-          light: require('../assets/icons/serviceArea/light/sewing-machine.png')
+          light: require('../assets/icons/serviceArea/light/sewing-machine.png'),
         },
         models: [
           {
@@ -1145,14 +1146,14 @@ export default {
             power: 100,
             description:
               '',
-          }
+          },
         ],
       },
       {
         name: 'Ferro de passar',
         icon: {
           dark: require('../assets/icons/serviceArea/dark/flatiron.png'),
-          light: require('../assets/icons/serviceArea/light/flatiron.png')
+          light: require('../assets/icons/serviceArea/light/flatiron.png'),
         },
         models: [
           {
@@ -1166,14 +1167,14 @@ export default {
             power: 1000,
             description:
               'Ao desligar o ferro, aproveite o seu calor para passar as roupas mais leves.',
-          }
+          },
         ],
       },
       {
         name: 'Lavadora de roupa',
         icon: {
           dark: require('../assets/icons/serviceArea/dark/washing-machine.png'),
-          light: require('../assets/icons/serviceArea/light/washing-machine.png')
+          light: require('../assets/icons/serviceArea/light/washing-machine.png'),
         },
         models: [
           {
@@ -1187,14 +1188,14 @@ export default {
             power: 500,
             description:
               'Procure usar toda a capacidade em uma mesma lavagem, evitando ligá-la muitas vezes.',
-          }
+          },
         ],
       },
       {
         name: 'Secadora de roupa',
         icon: {
           dark: require('../assets/icons/serviceArea/dark/secadora.png'),
-          light: require('../assets/icons/serviceArea/light/secadora.png')
+          light: require('../assets/icons/serviceArea/light/secadora.png'),
         },
         models: [
           {
@@ -1208,14 +1209,14 @@ export default {
             power: 3500,
             description:
               '',
-          }
+          },
         ],
       },
       {
         name: 'Tanquinho',
         icon: {
           dark: require('../assets/icons/serviceArea/dark/tanquinho.png'),
-          light: require('../assets/icons/serviceArea/light/tanquinho.png')
+          light: require('../assets/icons/serviceArea/light/tanquinho.png'),
         },
         models: [
           {
@@ -1229,7 +1230,7 @@ export default {
             power: 270,
             description:
               'Procure usar toda a capacidade em uma mesma lavagem, evitando ligá-lo muitas vezes.',
-          }
+          },
         ],
       },
     ],

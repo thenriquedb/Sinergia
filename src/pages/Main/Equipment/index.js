@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Picker, Animated, Alert, ToastAndroid } from 'react-native';
-import CheckBox from "@react-native-community/checkbox";
+import CheckBox from '@react-native-community/checkbox';
 import { connect } from 'react-redux';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ActionButton from 'react-native-action-button';
-import SetTime from "./SetTime";
-import Input from "../../../components/Input";
-import Header from "./Header";
+import SetTime from './SetTime';
+import Input from '../../../components/Input';
+import Header from './Header';
 
 //util
-import calcularTarifas from "../../../util/calcularTarifas";
+import calcularTarifas from '../../../util/calcularTarifas';
 
 // styles
 import {
@@ -18,7 +18,7 @@ import {
   BackButton,
   RegisteredContainer,
   CheckBoxArea,
-  InputArea
+  InputArea,
 } from './styles';
 
 import Colors from '../../../styles/colors';
@@ -30,55 +30,75 @@ function Equipment(props) {
   const { navigation, dealership } = props;
 
   // states
-  const [selectedModel, setSelectedModel] = useState(equipment.model ? equipment.model : equipment.models[0]);
-  const [customName, setCustomName] = useState(equipment.name ? equipment.name : equipment.models[0].name);
-  const [quantity, setQuantity] = useState(equipment.quantity ? equipment.quantity : '1');
-  const [power, setPower] = useState(equipment.power ? equipment.power : equipment.models[0].power.toString());
-  const [on24Hours, setOn24Hours] = useState(equipment.on24Hours ? true : false);
-  const [useCustomEquipment, setUseCustomEquipment] = useState(equipment.useCustomEquipment ? equipment.useCustomEquipment : false);
+  const [selectedModel, setSelectedModel] = useState(
+    equipment.model ? equipment.model : equipment.models[0],
+  );
+  const [customName, setCustomName] = useState(
+    equipment.name ? equipment.name : equipment.models[0].name,
+  );
+  const [quantity, setQuantity] = useState(
+    equipment.quantity ? equipment.quantity : '1',
+  );
+  const [power, setPower] = useState(
+    equipment.power ? equipment.power : equipment.models[0].power.toString(),
+  );
+  const [on24Hours, setOn24Hours] = useState(
+    equipment.on24Hours ? true : false,
+  );
+  const [useCustomEquipment, setUseCustomEquipment] = useState(
+    equipment.useCustomEquipment ? equipment.useCustomEquipment : false,
+  );
 
   // Picker de horas - dias da semana
   const [startTimeWeekdays, setStartTimeWeekdays] = useState(
-    equipment.startTimeWeekdays ?
-      new Date(equipment.startTimeWeekdays) :
-      new Date());
+    equipment.startTimeWeekdays
+      ? new Date(equipment.startTimeWeekdays)
+      : new Date(),
+  );
 
   const [endTimeWeekdays, setEndTimeWeekdays] = useState(
-    equipment.endTimeWeekdays ?
-      new Date(equipment.endTimeWeekdays) :
-      () => {
+    equipment.endTimeWeekdays
+      ? new Date(equipment.endTimeWeekdays)
+      : () => {
         const currentHour = new Date();
         currentHour.setMinutes(currentHour.getMinutes() + 30);
         return currentHour;
-      });
+      },
+  );
 
   const [frequencyOfUseOnWeekdays, setFrequencyOfUseOnWeekdays] = useState(
-    equipment.frequencyOfUseOnWeekdays ?
-      equipment.frequencyOfUseOnWeekdays : 1);
+    equipment.frequencyOfUseOnWeekdays ? equipment.frequencyOfUseOnWeekdays : 1,
+  );
 
   // Picker de horas - finais de semana
   const [startTimeWeekend, setStartTimeWeekend] = useState(
-    equipment.startTimeWeekend ?
-      new Date(equipment.startTimeWeekend) :
-      new Date());
+    equipment.startTimeWeekend
+      ? new Date(equipment.startTimeWeekend)
+      : new Date(),
+  );
 
   const [endTimeWeekend, setEndTimeWeekend] = useState(
-    equipment.endTimeWeekend ?
-      new Date(equipment.endTimeWeekend) :
-      () => {
+    equipment.endTimeWeekend
+      ? new Date(equipment.endTimeWeekend)
+      : () => {
         const currentHour = new Date();
         currentHour.setMinutes(currentHour.getMinutes() + 30);
         return currentHour;
-      });
+      },
+  );
 
   const [frequencyOfUseOnWeekend, setFrequencyOfUseOnWeekend] = useState(
-    equipment.frequencyOfUseOnWeekend ? equipment.frequencyOfUseOnWeekend : 1);
+    equipment.frequencyOfUseOnWeekend ? equipment.frequencyOfUseOnWeekend : 1,
+  );
 
   const scrollOffset = new Animated.Value(0);
 
   // Até meia noite
   function validateInputs() {
-    if (endTimeWeekdays <= startTimeWeekdays || endTimeWeekend <= startTimeWeekend) {
+    if (
+      endTimeWeekdays <= startTimeWeekdays ||
+      endTimeWeekend <= startTimeWeekend
+    ) {
       ToastAndroid.showWithGravityAndOffset(
         'O horário de desligamento do equipamento não pode ser menor do que o horário de início',
         ToastAndroid.SHORT,
@@ -92,10 +112,8 @@ function Equipment(props) {
     if (!power) {
       Alert.alert(
         'Potência',
-        `O campo potência não pode ficar em branco`,
-        [
-          { text: 'OK' },
-        ],
+        'O campo potência não pode ficar em branco',
+        [{ text: 'OK' }],
         { cancelable: true },
       );
       return false;
@@ -104,23 +122,18 @@ function Equipment(props) {
     if (!quantity) {
       Alert.alert(
         'Quantidade',
-        `O campo quantidade não pode ficar em branco`,
-        [
-          { text: 'OK' },
-        ],
+        'O campo quantidade não pode ficar em branco',
+        [{ text: 'OK' }],
         { cancelable: true },
       );
       return false;
     }
 
-
-    if ((!frequencyOfUseOnWeekdays && !frequencyOfUseOnWeekend) && !on24Hours) {
+    if (!frequencyOfUseOnWeekdays && !frequencyOfUseOnWeekend && !on24Hours) {
       Alert.alert(
         'Frequência de uso',
-        `Frequência de uso semanal e frequência de uso no final de semana não podem ser igual a 0 ao mesmo tempo..`,
-        [
-          { text: 'OK' },
-        ],
+        'Frequência de uso semanal e frequência de uso no final de semana não podem ser igual a 0 ao mesmo tempo..',
+        [{ text: 'OK' }],
         { cancelable: true },
       );
       return false;
@@ -131,17 +144,23 @@ function Equipment(props) {
 
   function toggleSaveBtn() {
     if (validateInputs()) {
-      const { kwMonthly, totalTimeOn, tarifaConvencional, tarifaBranca } =
-        calcularTarifas(quantity,
-          power,
-          frequencyOfUseOnWeekdays,
-          frequencyOfUseOnWeekend,
-          dealership,
-          startTimeWeekdays,
-          endTimeWeekdays,
-          startTimeWeekend,
-          endTimeWeekend,
-          on24Hours);
+      const {
+        kwMonthly,
+        totalTimeOn,
+        tarifaConvencional,
+        tarifaBranca,
+      } = calcularTarifas(
+        quantity,
+        equipment.name === 'Refrigerador' ? power * 0.67 : power,
+        frequencyOfUseOnWeekdays,
+        frequencyOfUseOnWeekend,
+        dealership,
+        startTimeWeekdays,
+        endTimeWeekdays,
+        startTimeWeekend,
+        endTimeWeekend,
+        on24Hours,
+      );
 
       const newEquipment = {
         id: equipment.id ? equipment.id : new Date().getTime().toString(),
@@ -170,26 +189,39 @@ function Equipment(props) {
       };
 
       if (action == 'edit') {
-        props.editEquipment(props.navigation.getParam('idRoom'), newEquipment.id, newEquipment);
+        props.editEquipment(
+          props.navigation.getParam('idRoom'),
+          newEquipment.id,
+          newEquipment,
+        );
       } else {
-        props.addNewEquipment(props.navigation.getParam('idRoom'), newEquipment);
+        props.addNewEquipment(
+          props.navigation.getParam('idRoom'),
+          newEquipment,
+        );
       }
 
       props.navigation.navigate('Room');
-    };
+    }
   }
 
   function selectEquipmentModel(itemValue) {
     setSelectedModel(itemValue);
     setUseCustomEquipment(itemValue.name === 'Personalizado' ? true : false);
-    setCustomName(itemValue.name === 'Personalizado' ? equipment.name : itemValue.name);
-    setPower(itemValue.power.toString())
+    setCustomName(
+      itemValue.name === 'Personalizado' ? equipment.name : itemValue.name,
+    );
+    setPower(itemValue.power.toString());
   }
 
   return (
     <Container>
-      <BackButton onPress={() => navigation.goBack()} >
-        <MaterialCommunityIcons name="arrow-left" size={28} color={Colors.white} />
+      <BackButton onPress={() => navigation.goBack()}>
+        <MaterialCommunityIcons
+          name="arrow-left"
+          size={28}
+          color={Colors.white}
+        />
       </BackButton>
 
       <Header
@@ -202,17 +234,14 @@ function Equipment(props) {
       <RegisteredContainer
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={Animated.event(
-          [
-            {
-              nativeEvent: {
-                contentOffset: { y: scrollOffset },
-              }
-            }
-          ]
-        )}>
-
-        {equipment.models.length > 1 &&
+        onScroll={Animated.event([
+          {
+            nativeEvent: {
+              contentOffset: { y: scrollOffset },
+            },
+          },
+        ])}>
+        {equipment.models.length > 1 && (
           <>
             <TextBold fontSize={'h6'}> Modelo </TextBold>
             <Picker
@@ -220,11 +249,13 @@ function Equipment(props) {
               style={{ width: 330 }}
               onValueChange={itemValue => selectEquipmentModel(itemValue)}>
               {equipment.models.map((value, key) => {
-                return <Picker.Item key={key} value={value} label={value.name} />;
+                return (
+                  <Picker.Item key={key} value={value} label={value.name} />
+                );
               })}
             </Picker>
           </>
-        }
+        )}
 
         <InputArea>
           <Input
@@ -236,7 +267,7 @@ function Equipment(props) {
 
         <InputArea>
           <Input
-            label={"Quantidade"}
+            label={'Quantidade'}
             value={quantity.replace(/[^0-9]/g, '')}
             maxLength={2}
             onChangeText={quantity => setQuantity(quantity)}
@@ -244,26 +275,23 @@ function Equipment(props) {
           />
         </InputArea>
 
-        {
-          useCustomEquipment &&
-          (
-            <InputArea>
-              <Input
-                label={"Potência (W)"}
-                value={power}
-                onChangeText={power => setPower(power)}
-                keyboardType={'numeric'}
-              />
-            </InputArea>
-          )
-        }
+        {useCustomEquipment && (
+          <InputArea>
+            <Input
+              label={'Potência (W)'}
+              value={power}
+              onChangeText={power => setPower(power)}
+              keyboardType={'numeric'}
+            />
+          </InputArea>
+        )}
 
         <CheckBoxArea>
           <CheckBox
             tintColors={{ true: Colors.primary, false: '#999' }}
             value={on24Hours}
             onValueChange={() => {
-              setOn24Hours(!on24Hours)
+              setOn24Hours(!on24Hours);
             }}
           />
           <Text> Equipamento fica ligado 24 horas </Text>
@@ -290,30 +318,38 @@ function Equipment(props) {
         size={55}
         renderIcon={() => (
           <MaterialCommunityIcons
-            name={action === 'edit' ? "pencil" : "content-save"}
+            name={action === 'edit' ? 'pencil' : 'content-save'}
             size={30}
-            color="#fff" />
+            color="#fff"
+          />
         )}
         onPress={() => toggleSaveBtn()}
         buttonColor={Colors.primary}
       />
     </Container>
   );
-};
+}
 
 const mapStateToProps = state => ({
-  dealership: state.houseReducer.dealership
+  dealership: state.houseReducer.dealership,
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    addNewEquipment: (id, newEquipment) => dispatch({
-      type: 'ADD_EQUIPMENT', payload: { id, newEquipment },
-    }),
-    editEquipment: (idRoom, idEquipment, newEquipment) => dispatch({
-      type: 'EDIT_EQUIPMENT', payload: { idRoom, idEquipment, newEquipment },
-    }),
+    addNewEquipment: (id, newEquipment) =>
+      dispatch({
+        type: 'ADD_EQUIPMENT',
+        payload: { id, newEquipment },
+      }),
+    editEquipment: (idRoom, idEquipment, newEquipment) =>
+      dispatch({
+        type: 'EDIT_EQUIPMENT',
+        payload: { idRoom, idEquipment, newEquipment },
+      }),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Equipment);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Equipment);

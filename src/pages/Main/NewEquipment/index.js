@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { FlatList, TouchableOpacity, TouchableHighlight, ToastAndroid, Animated } from 'react-native';
+import {
+  FlatList,
+  TouchableOpacity,
+  TouchableHighlight,
+  ToastAndroid,
+  Animated,
+} from 'react-native';
 
 // Lista de equipamentos
 import equipmentsList from '../../../utilities/equipmentsList';
@@ -15,7 +21,7 @@ import {
   RoomContainer,
   Footer,
   RoomCardLabel,
-  styles
+  styles,
 } from './styles';
 
 export default class NewEquipment extends Component {
@@ -23,38 +29,42 @@ export default class NewEquipment extends Component {
     super(props);
 
     const allEquipments = [
-      ...equipmentsList.rooms['default'],
-      ...equipmentsList.rooms['bedroom'],
-      ...equipmentsList.rooms['bathroom'],
-      ...equipmentsList.rooms['externalArea'],
-      ...equipmentsList.rooms['serviceArea'],
-      ...equipmentsList.rooms['kitchen'],
-    ].sort((a, b) => {
-      return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-    }).map(item => {
-      item.class = styles.SelectedEquipmentCard;
-      item.select = false;
-      return item;
-    });
+      ...equipmentsList.rooms.default,
+      ...equipmentsList.rooms.bedroom,
+      ...equipmentsList.rooms.bathroom,
+      ...equipmentsList.rooms.externalArea,
+      ...equipmentsList.rooms.serviceArea,
+      ...equipmentsList.rooms.kitchen,
+    ]
+      .sort((a, b) => {
+        return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+      })
+      .map(item => {
+        item.class = styles.SelectedEquipmentCard;
+        item.select = false;
+        return item;
+      });
 
     this.state = {
-      equipments: this.props.navigation.getParam('typeRoom') === 'other' ?
-        [...allEquipments]
-        :
-        [
-          ...equipmentsList.rooms['default'],
-          ...equipmentsList.rooms[this.props.navigation.getParam('typeRoom')],
-        ]
-          .map(item => {
-            item.class = styles.SelectedEquipmentCard;
-            item.select = false;
-            return item;
-          })
-          .sort((a, b) => {
-            return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-          }),
+      equipments:
+        this.props.navigation.getParam('typeRoom') === 'other'
+          ? [...allEquipments]
+          : [
+            ...equipmentsList.rooms.default,
+            ...equipmentsList.rooms[
+            this.props.navigation.getParam('typeRoom')
+            ],
+          ]
+            .map(item => {
+              item.class = styles.SelectedEquipmentCard;
+              item.select = false;
+              return item;
+            })
+            .sort((a, b) => {
+              return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+            }),
       selectedEquipment: -1,
-      offset: new Animated.Value(0)
+      offset: new Animated.Value(0),
     };
 
     this.RoomCard = this.RoomCard.bind(this);
@@ -65,7 +75,7 @@ export default class NewEquipment extends Component {
   componentDidMount() {
     Animated.spring(this.state.offset, {
       toValue: 1,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
   }
 
@@ -76,17 +86,20 @@ export default class NewEquipment extends Component {
         style={{ flex: 1 / 2 }}
         onPress={() => this.toggleSelectEquipment(index)}>
         <RoomCard
-          style={[item.select && item.class, {
-            transform: [
-              {
-                scale: this.state.offset.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 1]
-                })
-              }]
-          }]}>
-
-          <Icon resizeMode={"contain"} source={item.icon.dark} />
+          style={[
+            item.select && item.class,
+            {
+              transform: [
+                {
+                  scale: this.state.offset.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 1],
+                  }),
+                },
+              ],
+            },
+          ]}>
+          <Icon resizeMode={'contain'} source={item.icon.dark} />
           <RoomCardLabel
             textAlign={'center'}
             color={item.select ? Colors.primary : Colors.darkGray2}>
@@ -108,16 +121,25 @@ export default class NewEquipment extends Component {
 
     // Se o equipamento ja estiver selecionado ele sera desmarcado
     else if (this.state.selectedEquipment === index) {
-      s.equipments[s.selectedEquipment].select = !s.equipments[s.selectedEquipment].select;
+      s.equipments[s.selectedEquipment].select = !s.equipments[
+        s.selectedEquipment
+      ].select;
       s.selectedEquipment = -1;
     }
 
     // Se ja tiver um equipamento selecionado
-    else if (this.state.selectedEquipment || this.state.selectedEquipment == '0') {
-      s.equipments[s.selectedEquipment].select = !s.equipments[s.selectedEquipment].select;
+    else if (
+      this.state.selectedEquipment ||
+      this.state.selectedEquipment == '0'
+    ) {
+      s.equipments[s.selectedEquipment].select = !s.equipments[
+        s.selectedEquipment
+      ].select;
 
       s.selectedEquipment = index;
-      s.equipments[s.selectedEquipment].select = !s.equipments[s.selectedEquipment].select;
+      s.equipments[s.selectedEquipment].select = !s.equipments[
+        s.selectedEquipment
+      ].select;
     }
 
     this.setState(s);

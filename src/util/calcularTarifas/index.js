@@ -19,6 +19,7 @@ export default function calcularTarifas(
   const totalTimeOn = on24Hours
     ? 24
     : duration(startTimeWeekdays, endTimeWeekdays);
+
   const totalTimeOnWeekend = on24Hours
     ? 24
     : duration(startTimeWeekend, endTimeWeekend);
@@ -29,12 +30,14 @@ export default function calcularTarifas(
     totalTimeOn,
     frequencyOfUseOnWeekdays,
   );
+
   const kwWeekend = calcularKWMonthly(
     power,
     quantity,
     totalTimeOnWeekend,
     frequencyOfUseOnWeekend,
   );
+
   const kwMonthly = kwWeekdays + kwWeekend;
 
   const tarifaConvencional = calcTarifaConvencional(
